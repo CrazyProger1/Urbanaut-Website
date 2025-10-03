@@ -19,3 +19,4 @@ export type PaginatedAPIResponse<T> = {
 } & SuccessfulAPIResponse;
 
 export { type APIUser } from "./user";
+export type { GoogleOauthRedirectURIAPIResponse, GoogleOauthCallbackAPIResponse } from "./oauth";

@@ -4,4 +4,7 @@ export type {
   APIResponse,
   ErrorAPIResponse,
   APIUser,
+  GoogleOauthCallbackAPIResponse,
+  GoogleOauthRedirectURIAPIResponse,
 } from "./api";
+export type { Session } from "./session";
