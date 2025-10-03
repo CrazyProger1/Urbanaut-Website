@@ -13,8 +13,14 @@ export const fetchAPI = async <T>(
   endpoint: string,
   options: RequestInit & FetchAPIOptions = { expectedStatus: 200 },
 ): Promise<APIResponse & T> => {
-  const { token, expectedStatus } = options;
+  // eslint-disable-next-line prefer-const
+  let { token, expectedStatus } = options;
   options = { ...options, expectedStatus: undefined, token: undefined };
+
+  if (!expectedStatus) {
+    expectedStatus = 200;
+  }
+
   const nextHeaders = await headers();
   const clientIp =
     nextHeaders.get("x-forwarded-for")?.split(",").shift()?.trim() ||
