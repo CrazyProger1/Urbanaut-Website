@@ -4,6 +4,7 @@ import React from "react";
 import "../../styles";
 import { NextIntlClientProvider } from "next-intl";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { GOOGLE_ANALYTICS_ID } from "@/config";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -26,7 +27,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${poppins.className}`}>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        <GoogleAnalytics gaId="G-SE6ZPQVBNE" />
+        <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
       </body>
     </html>
   );
