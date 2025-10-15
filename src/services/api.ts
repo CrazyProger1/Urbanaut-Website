@@ -42,9 +42,6 @@ export const fetchAPI = async <T>(
 
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
-      next: {
-        revalidate: 60,
-      },
       ...options,
       headers: requestHeaders,
     });

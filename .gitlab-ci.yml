@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - sudo chmod +x /home/admin/urbanaut/website/deploy.sh
+    - sudo /home/admin/urbanaut/website/deploy.sh
+
+  tags:
+    - linux

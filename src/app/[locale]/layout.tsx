@@ -5,6 +5,10 @@ import "../../styles";
 import { NextIntlClientProvider } from "next-intl";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GOOGLE_ANALYTICS_ID } from "@/config";
+import { ModalProvider } from "@/components/common/modals";
+import { AuthModal } from "@/components/modules/login/modals";
+import { Header, Footer, Sidebar } from "@/components/modules/layout";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -22,13 +26,26 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+const RootLayout = async ({ children }: Props) => {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={`${poppins.className}`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+        <ModalProvider>
+          <SidebarProvider>
+            <NextIntlClientProvider>
+              <Sidebar />
+              <SidebarTrigger />
+              <Header />
+              {children}
+              <Footer />
+              <AuthModal />
+            </NextIntlClientProvider>
+            <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+          </SidebarProvider>
+        </ModalProvider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
