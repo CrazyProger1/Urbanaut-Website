@@ -53,7 +53,7 @@ export const AuthForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     let user = await login(values.email, values.password);
-    let message = "Successfully logged in!";
+    let message = "Successfully signed in!";
 
     if (!user) {
       user = await register(values.email, values.password);
