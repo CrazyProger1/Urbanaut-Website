@@ -9,9 +9,20 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarGroupLabel,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings, Map } from "lucide-react";
+import {
+  Calendar,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+  Map,
+  HeartPlus,
+  CircleDollarSign,
+  ColumnsSettingsIcon, Newspaper,
+} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import Image from "next/image";
@@ -32,6 +43,7 @@ import {
   DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PAGES } from "@/config";
+import { FaInstagram, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 
 export function NavUser(
@@ -87,19 +99,16 @@ export function NavUser(
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
                 <User />
                 Profile
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />
                 Notifications
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings />
+                Settings
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -126,6 +135,11 @@ const items = [
     icon: Map,
   },
   {
+    title: "Blog",
+    url: "#",
+    icon: Newspaper,
+  },
+  {
     title: "Calendar",
     url: "#",
     icon: Calendar,
@@ -135,10 +149,37 @@ const items = [
     url: "#",
     icon: Search,
   },
+];
+const socialNetworks = [
   {
-    title: "Settings",
+    title: "YouTube",
+    url: "https://www.youtube.com/@UrbanautOfficial",
+    icon: FaYoutube,
+  },
+  {
+    title: "Instagram",
+    url: "https://www.instagram.com/urbanautofficial/",
+    icon: FaInstagram,
+  },
+  {
+    title: "Telegram",
+    url: "https://t.me/urbanautofficial",
+    icon: FaTelegram,
+  },
+  {
+    title: "TikTok",
     url: "#",
-    icon: Settings,
+    icon: FaTiktok,
+    disabled: true,
+  },
+];
+
+const support = [
+  {
+    title: "Donate",
+    url: "#",
+    icon: CircleDollarSign,
+    disabled: true,
   },
 ];
 
@@ -169,6 +210,44 @@ export const Sidebar = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>
+            Platforms
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {socialNetworks.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild disabled={item.disabled}>
+                    <Link href={item.url} target="_blank">
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>
+            Support Us
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {support.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild disabled={item.disabled}>
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -182,7 +261,7 @@ export const Sidebar = () => {
 
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={{name: "Urbanaut", email: "urbanautdev@gmail.com", avatar: "/web-app-manifest-192x192.png"}} />
+        <NavUser user={{ name: "Urbanaut", email: "urbanautdev@gmail.com", avatar: "/web-app-manifest-192x192.png" }} />
       </SidebarFooter>
     </ShadcnSidebar>
   );
