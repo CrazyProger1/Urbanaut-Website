@@ -1,17 +1,24 @@
+"use server";
+
 import { cookies } from "next/headers";
 import { Session } from "@/types";
-import { SESSION_COOKIE_NAME } from "@/config";
+import { SESSION_OPTIONS } from "@/config";
+import { getIronSession } from "iron-session";
 
 export const setSession = async (session: Session) => {
-  const cookiesStore = await cookies();
-  cookiesStore.set(SESSION_COOKIE_NAME, JSON.stringify(session));
+  const currentSession = await getIronSession<Session>(await cookies(), SESSION_OPTIONS);
+  currentSession.user = session.user || currentSession.user;
+  currentSession.accessToken = session.accessToken || currentSession.accessToken;
+  currentSession.refreshToken = session.refreshToken || currentSession.refreshToken;
+  await currentSession.save();
+  console.log(`Session updated: ${JSON.stringify(currentSession.user)}`);
+  return currentSession;
 };
 
 export const getSession = async (): Promise<Session | undefined> => {
-  const cookiesStore = await cookies();
-  const sessionCookie = cookiesStore.get(SESSION_COOKIE_NAME)?.value;
+  const session = await getIronSession<Session>(await cookies(), SESSION_OPTIONS);
 
-  if (sessionCookie) {
-    return JSON.parse(sessionCookie) as Session;
+  if (session) {
+    return session;
   }
 };

@@ -21,7 +21,7 @@ export const GET = async (request: NextRequest) => {
 
   const user = { ...response, success: undefined };
 
-  await setSession({ user: user });
+  await setSession({ user });
 
   const locale = await getLocale();
   redirect({ href: "/", locale: locale });

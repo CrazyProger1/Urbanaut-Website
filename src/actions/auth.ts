@@ -3,17 +3,31 @@
 import { fetchAPI } from "@/services";
 import { API_ENDPOINTS } from "@/config";
 import { setSession } from "@/utils/session";
-import { APITokens } from "@/types/api";
+import { APIMeUser, APITokens } from "@/types";
 
-export const login = async (username: string, password: string) => {
-  const response = await fetchAPI<APITokens>(API_ENDPOINTS.LOGIN, {
-    body: JSON.stringify({ username, password }),
+export const login = async (email: string, password: string): Promise<APIMeUser | undefined> => {
+  const response = await fetchAPI<APITokens & { user: APIMeUser }>(API_ENDPOINTS.LOGIN, {
+    body: JSON.stringify({ email, password }),
     method: "POST",
   });
 
-  console.log(response);
+  if (response.success) {
+    await setSession({
+      accessToken: response.access_token,
+      refreshToken: response.refresh_token,
+      user: response.user,
+    });
+    return response.user;
+  }
+};
+
+export const register = async (email: string, password: string): Promise<APIMeUser | undefined> => {
+  const response = await fetchAPI<{ user: APIMeUser }>(API_ENDPOINTS.REGISTER, {
+    body: JSON.stringify({ email, password }),
+    method: "POST",
+  });
 
   if (response.success) {
-    await setSession({ accessToken: response.access_token, refreshToken: response.refresh_token });
+    return await login(email, password);
   }
 };

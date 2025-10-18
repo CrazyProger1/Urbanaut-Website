@@ -16,14 +16,15 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { login } from "@/actions";
+import { login, register } from "@/actions";
+import { usePathname, useRouter } from "@/i18n";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
+import { Spinner } from "@/components/ui/spinner";
 
 const formSchema = z.object({
-  username: z
-    .string()
-    .min(2, { message: "Username must be at least 2 characters." })
-    .max(32, { message: "Username must be at most 64 characters." })
-    .regex(/^[A-Za-z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+  email: z.string().email(),
   password: z
     .string()
     .min(12, "Password must be at least 12 characters")
@@ -35,16 +36,40 @@ const formSchema = z.object({
 });
 
 export const AuthForm = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  // const t = useTranslations()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
+    mode: "onSubmit",
   });
+  const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const result = await login(values.username, values.password);
+    let user = await login(values.email, values.password);
+    let message = "Successfully logged in!";
+
+    if (!user) {
+      user = await register(values.email, values.password);
+      message = "Successfully signed up!";
+    }
+
+    const params = new URLSearchParams(searchParams);
+    params.delete("auth");
+    const newPage = `${pathname}?${params}`;
+    router.push(newPage);
+    toast(message, {
+      position: "bottom-right",
+      type: "success",
+      theme: user?.settings.theme?.toLowerCase() || "dark",
+      autoClose: 2000,
+    });
   };
 
   return (
@@ -52,14 +77,14 @@ export const AuthForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-8">
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="crazyurbanaut" {...field} />
               </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
+              <FormDescription>Email.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -78,8 +103,8 @@ export const AuthForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
-          Sign In/Up
+        <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+          Sign In/Up {formState.isSubmitting && <Spinner />}
         </Button>
       </form>
     </Form>

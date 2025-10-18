@@ -9,6 +9,10 @@ import { ModalProvider } from "@/components/common/modals";
 import { AuthModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar } from "@/components/modules/layout";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { getSession } from "@/utils/session";
+import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+import { ToastProvider } from "@/components/common/toasts";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -26,22 +30,31 @@ type Props = {
   children: React.ReactNode;
 };
 
+export const generateStaticParams = () => {
+  return routing.locales.map((locale) => ({ locale }));
+};
+
 const RootLayout = async ({ children }: Props) => {
+  const session = await getSession();
+  setRequestLocale(session?.user?.settings.language || "en");
+
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={session?.user?.settings.theme?.toLowerCase() || "dark"}>
       <body className={`${poppins.className}`}>
         <ModalProvider>
-          <SidebarProvider>
-            <NextIntlClientProvider>
-              <Sidebar />
-              <SidebarTrigger />
-              <Header />
-              {children}
-              <Footer />
-              <AuthModal />
-            </NextIntlClientProvider>
-            <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
-          </SidebarProvider>
+          <ToastProvider>
+            <SidebarProvider>
+              <NextIntlClientProvider>
+                <Sidebar />
+                <SidebarTrigger />
+                <Header />
+                {children}
+                <Footer />
+                <AuthModal />
+              </NextIntlClientProvider>
+              <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+            </SidebarProvider>
+          </ToastProvider>
         </ModalProvider>
       </body>
     </html>
