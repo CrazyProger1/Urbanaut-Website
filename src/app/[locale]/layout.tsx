@@ -40,23 +40,23 @@ const RootLayout = async ({ children }: Props) => {
 
   return (
     <html lang="en" className={session?.user?.settings?.theme?.toLowerCase() || "dark"}>
-      <body className={`${poppins.className}`}>
-        <ModalProvider>
-          <ToastProvider>
-            <SidebarProvider>
-              <NextIntlClientProvider>
-                <Sidebar />
-                <SidebarTrigger />
-                <Header />
-                {children}
-                <Footer />
-                <AuthModal />
-              </NextIntlClientProvider>
-              <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
-            </SidebarProvider>
-          </ToastProvider>
-        </ModalProvider>
-      </body>
+    <body className={`${poppins.className}`}>
+    <ModalProvider>
+      <ToastProvider>
+        <SidebarProvider>
+          <NextIntlClientProvider>
+            <Sidebar />
+            <SidebarTrigger />
+            <Header />
+            {children}
+            <Footer />
+            <AuthModal />
+          </NextIntlClientProvider>
+          <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+        </SidebarProvider>
+      </ToastProvider>
+    </ModalProvider>
+    </body>
     </html>
   );
 };
