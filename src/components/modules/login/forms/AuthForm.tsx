@@ -57,7 +57,7 @@ export const AuthForm = () => {
             <FormItem className="w-full">
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="joshndoe_123" {...field} />
+                <Input placeholder="crazyurbanaut" {...field} />
               </FormControl>
               <FormDescription>This is your public display name.</FormDescription>
               <FormMessage />
