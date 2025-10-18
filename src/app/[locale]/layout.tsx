@@ -36,10 +36,10 @@ export const generateStaticParams = () => {
 
 const RootLayout = async ({ children }: Props) => {
   const session = await getSession();
-  setRequestLocale(session?.user?.settings.language || "en");
+  setRequestLocale(session?.user?.settings?.language || "en");
 
   return (
-    <html lang="en" className={session?.user?.settings.theme?.toLowerCase() || "dark"}>
+    <html lang="en" className={session?.user?.settings?.theme?.toLowerCase() || "dark"}>
       <body className={`${poppins.className}`}>
         <ModalProvider>
           <ToastProvider>
