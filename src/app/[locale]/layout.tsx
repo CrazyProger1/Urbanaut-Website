@@ -8,7 +8,7 @@ import { GOOGLE_ANALYTICS_ID } from "@/config";
 import { ModalProvider } from "@/components/common/modals";
 import { AuthModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar } from "@/components/modules/layout";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -40,15 +40,17 @@ const RootLayout = async ({ children }: Props) => {
 
   return (
     <html lang="en" className={session?.user?.settings?.theme?.toLowerCase() || "dark"}>
-    <body >
+    <body>
     <ModalProvider>
       <ToastProvider>
         <SidebarProvider>
           <NextIntlClientProvider>
             <Sidebar />
-            <Header />
-            {children}
-            <Footer />
+            <SidebarInset className="flex flex-col">
+              <Header />
+              {children}
+              <Footer />
+            </SidebarInset>
             <AuthModal />
           </NextIntlClientProvider>
           <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
