@@ -1,10 +1,25 @@
 import React from "react";
-import { Link } from "@/i18n";
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { Separator } from "@radix-ui/react-separator";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 
 export const Header = () => {
   return (
-    <div className="bg-background/50 flex max-h-48 flex-row items-center justify-between">
-      <Link href="?auth=true">Auth</Link>
-    </div>
+    <SidebarInset>
+      <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
+        <SidebarTrigger className="-ml-1" />
+        <Separator
+          orientation="vertical"
+          className="mr-2 data-[orientation=vertical]:h-4"
+        />
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbPage>October 2024</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </header>
+    </SidebarInset>
   );
 };

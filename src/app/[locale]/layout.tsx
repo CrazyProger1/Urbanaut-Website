@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "Urbanaut-Club — a social platform for urban explorers, diggers, and extreme tourism enthusiasts.",
 };
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-});
+// const poppins = Poppins({
+//   weight: ["300", "400", "500", "600", "700"],
+//   subsets: ["latin"],
+//   variable: "--font-poppins",
+// });
 
 type Props = {
   children: React.ReactNode;
@@ -40,13 +40,12 @@ const RootLayout = async ({ children }: Props) => {
 
   return (
     <html lang="en" className={session?.user?.settings?.theme?.toLowerCase() || "dark"}>
-    <body className={`${poppins.className}`}>
+    <body >
     <ModalProvider>
       <ToastProvider>
         <SidebarProvider>
           <NextIntlClientProvider>
             <Sidebar />
-            <SidebarTrigger />
             <Header />
             {children}
             <Footer />
