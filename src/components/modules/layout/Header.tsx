@@ -24,10 +24,10 @@ export const Header = ({ user }: Props) => {
       <div>
         {user ? <UserNavBar
           user={{
-            name: "Urbanaut",
+            name: `${user?.first_name ? user.first_name: ""}${user?.last_name ? " " + user.last_name : ""}`,
             email: user?.email || "urbanautdev@gmail.com",
             avatar: "/web-app-manifest-192x192.png",
-          }} /> : <Button asChild><Link href="?auth=true">
+          }} /> : <Button asChild><Link href="?signin=true">
           <User />Login
         </Link></Button>}
       </div>

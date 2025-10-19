@@ -22,3 +22,8 @@ export const getSession = async (): Promise<Session | undefined> => {
     return session;
   }
 };
+
+export const clearSession = async () => {
+  const session = await getIronSession<Session>(await cookies(), SESSION_OPTIONS);
+  session.destroy();
+};

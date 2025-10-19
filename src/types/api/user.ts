@@ -17,4 +17,6 @@ export type APIUser = {
 export type APIMeUser = APIUser & {
   email: string;
   settings: APISettings;
+  first_name?: string;
+  last_name?: string;
 };

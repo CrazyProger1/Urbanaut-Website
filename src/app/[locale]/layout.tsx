@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import React from "react";
 import "../../styles";
 import { NextIntlClientProvider } from "next-intl";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GOOGLE_ANALYTICS_ID } from "@/config";
 import { ModalProvider } from "@/components/common/modals";
-import { AuthModal } from "@/components/modules/login/modals";
+import { SigninModal, SignupModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar } from "@/components/modules/layout";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getSession } from "@/utils/session";
@@ -51,7 +50,8 @@ const RootLayout = async ({ children }: Props) => {
               {children}
               <Footer />
             </SidebarInset>
-            <AuthModal />
+            <SigninModal />
+            <SignupModal />
           </NextIntlClientProvider>
           <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
         </SidebarProvider>
