@@ -15,13 +15,12 @@ import {
 import {
   Calendar,
   Home,
-  Inbox,
   Search,
   Settings,
   Map,
-  HeartPlus,
   CircleDollarSign,
-  ColumnsSettingsIcon, Newspaper,
+  Newspaper,
+  Send,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
@@ -98,10 +97,18 @@ export function NavUser(
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
+              <Link href="?auth=true">
+                <DropdownMenuItem>
+                  <User />
+                  Login (Temporary)
+                </DropdownMenuItem>
+              </Link>
+              <Link href={PAGES.PROFILE}>
               <DropdownMenuItem>
                 <User />
                 Profile
               </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>
                 <Bell />
                 Notifications
@@ -179,6 +186,12 @@ const support = [
     title: "Donate",
     url: "#",
     icon: CircleDollarSign,
+    disabled: true,
+  },
+  {
+    title: "Feedback",
+    url: "#",
+    icon: Send,
     disabled: true,
   },
 ];
