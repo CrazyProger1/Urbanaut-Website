@@ -10,7 +10,7 @@ const Page = async () => {
     API_ENDPOINTS.PLACES,
   );
 
-  let places: APIPlace[] = response.success ? response.results : [];
+  const places: APIPlace[] = response.success ? response.results : [];
 
   return (
     <div className="flex w-full h-full">
