@@ -47,7 +47,7 @@ const RootLayout = async ({ children }: Props) => {
           <NextIntlClientProvider>
             <Sidebar />
             <SidebarInset className="flex flex-col">
-              <Header />
+              <Header user={session?.user} />
               {children}
               <Footer />
             </SidebarInset>
