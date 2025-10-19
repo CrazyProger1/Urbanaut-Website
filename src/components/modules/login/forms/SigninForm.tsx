@@ -48,7 +48,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let user = await login(values.email, values.password);
+    const user = await login(values.email, values.password);
     if (!user) {
       return toast("Wrong password or authentication method! Try use Oauth", {
         position: "bottom-right",

@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/actions";
+import { login, register } from "@/actions";
 import { toast } from "react-toastify";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription } from "@/components/ui/field";
@@ -48,7 +48,12 @@ export const SignupForm = ({ otherProviders }: Props) => {
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let user = await login(values.email, values.password);
+    const success = await register(values.email, values.password);
+
+    let user;
+    if (success) {
+      user = await login(values.email, values.password);
+    }
     if (!user) {
       return toast("This email is already used!", {
         position: "bottom-right",
