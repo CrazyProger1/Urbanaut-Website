@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { login, register } from "@/actions";
-import { usePathname, useRouter } from "@/i18n";
+import { Link, usePathname, useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
@@ -82,9 +82,8 @@ export const AuthForm = () => {
             <FormItem className="w-full">
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="crazyurbanaut" {...field} />
+                <Input placeholder="crazyurbanaut@gmail.com" {...field} />
               </FormControl>
-              <FormDescription>Email.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -98,7 +97,14 @@ export const AuthForm = () => {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>This is your strong password.</FormDescription>
+              <FormDescription className="text-end">
+                <Link
+                  href="#"
+                  className="text-sm hover:underline text-end"
+                >
+                  Forgot your password?
+                </Link>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

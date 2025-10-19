@@ -23,7 +23,13 @@ const LeafletDynamicMap = ({ places }: Props) => {
   }, []);
 
   return (
-    <MapContainer className="-z-0" center={position} zoom={10} style={{ height: "100%", width: "100%" }}>
+    <MapContainer
+      className="-z-0"
+      center={position}
+      zoom={10}
+      style={{ height: "100%", width: "100%" }}
+      zoomControl={false}
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
