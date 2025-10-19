@@ -5,4 +5,5 @@ export const API_ENDPOINTS = {
   REGISTER: "users/",
   LOGIN: "tokens/",
   PLACES: "places/",
+  AREAS: "areas/",
 };

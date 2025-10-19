@@ -23,3 +23,4 @@ export { type APITokens } from "./token";
 export type { GoogleOauthRedirectURIAPIResponse, GoogleOauthCallbackAPIResponse } from "./oauth";
 export type { APIPoint } from "./geo";
 export type { APIPlace } from "./place";
+export type { APIArea } from "./area";
