@@ -7,6 +7,7 @@ import {
   ContextMenuSeparator,
 } from "@/components/ui/context-menu";
 import { Plus } from "lucide-react";
+import { Link } from "@/i18n";
 
 type Props = {
   onCopyCoordinates?: () => void;

@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Leaflet, { LatLng } from "leaflet";
+import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
 import { APIPlace } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { setClipboard } from "@/utils/clipboard";
 import MapContextMenu from "./MapContextMenu";
 import { MapWatcher } from "./MapWatcher";
 import { ICONS } from "@/config";
-import PlacesLayer from "./PlacesLayer";
-import AreasLayer from "./AreasLayer";
+import { PlacesLayer } from "./PlacesLayer";
+import { AreasLayer } from "./AreasLayer";
 import { APIArea } from "@/types/api";
+import { Marker } from "react-leaflet";
+import { ToolBar } from "@/components/modules/map/bars";
 
 type Props = {
   center?: LatLng;
@@ -22,12 +24,18 @@ type Props = {
 };
 
 const DynamicMap = ({
-  center = new LatLng(50.45320424531352, 30.56808471679688),
+  center = new LatLng(50.4663775681885, 30.583190917968754),
   zoom = 5,
   areas,
   places,
 }: Props) => {
   const [currentPosition, setCurrentPosition] = useState<LatLng | undefined>();
+  const [newPlacePosition, setNewPlacePosition] = useState<LatLng | undefined>();
+  const [choosingNewPlacePosition, setChoosingNewPlacePosition] = useState(false);
+  const [newPlacePositionChosen, setNewPlacePositionChosen] = useState(false);
+  const [isPlacesVisible, setIsPlacesVisible] = useState(true);
+  const [isAreasVisible, setIsAreasVisible] = useState(true);
+  const [map, setMap] = useState<LeafletMap | null>(null);
 
   useEffect(() => {
     (async function init() {
@@ -43,6 +51,54 @@ const DynamicMap = ({
     await setClipboard(`${currentPosition?.lat}, ${currentPosition?.lng}`);
   }, [currentPosition]);
 
+  const handleCancel = useCallback(() => {
+    setNewPlacePosition(undefined);
+    setChoosingNewPlacePosition(false);
+    setNewPlacePositionChosen(false);
+  }, []);
+
+  const handleClickCoordinates = useCallback(
+    (latlng: LatLng) => {
+      if (choosingNewPlacePosition) {
+        setChoosingNewPlacePosition(false);
+        setNewPlacePositionChosen(true);
+      }
+
+      setCurrentPosition(latlng);
+    },
+    [choosingNewPlacePosition],
+  );
+
+  const handleMouseCoordinates = useCallback(
+    (latlng: LatLng) => {
+      if (choosingNewPlacePosition) {
+        setNewPlacePosition(latlng);
+      }
+    },
+    [choosingNewPlacePosition],
+  );
+
+  const handleAddPlace = () => {
+    setChoosingNewPlacePosition(true);
+    setNewPlacePositionChosen(false);
+  };
+
+  const togglePlacesVisibility = () => {
+    setIsPlacesVisible((prev) => !prev);
+  };
+
+  const toggleAreasVisibility = () => {
+    setIsAreasVisible((prev) => !prev);
+  };
+
+  const handleCenterMap = useCallback(() => {
+    if (!map) return;
+
+    navigator?.geolocation.getCurrentPosition((position) => {
+      map.setView(new LatLng(position.coords.latitude, position.coords.longitude));
+    });
+  }, [map]);
+
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
@@ -54,19 +110,29 @@ const DynamicMap = ({
           zoomControl={false}
         >
           <MapWatcher
-            onUpdateCoordinates={(latlng) => {
-              setCurrentPosition(latlng);
-            }}
+            onClickCoordinates={handleClickCoordinates}
+            onMouseCoordinates={handleMouseCoordinates}
+            onMapLoaded={setMap}
           />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-          <PlacesLayer places={places} />
-          <AreasLayer areas={areas} />
+          {isPlacesVisible && <PlacesLayer places={places} />}
+          {isAreasVisible && <AreasLayer areas={areas} />}
+          {newPlacePosition && <Marker position={newPlacePosition} />}
         </MapContainer>
       </ContextMenuTrigger>
-      <MapContextMenu onCopyCoordinates={handleCopyCoordinates} />
+      <MapContextMenu onCopyCoordinates={handleCopyCoordinates} onAddPlace={handleAddPlace} />
+      <ToolBar
+        showPlaceControls={newPlacePositionChosen}
+        isAreasVisible={isAreasVisible}
+        isPlacesVisible={isPlacesVisible}
+        onToggleAreasVisible={toggleAreasVisibility}
+        onTogglePlacesVisible={togglePlacesVisibility}
+        onCenterMap={handleCenterMap}
+        onCancel={handleCancel}
+      />
     </ContextMenu>
   );
 };

@@ -6,7 +6,7 @@ type Props = {
   places?: APIPlace[];
 };
 
-const PlacesLayer = ({ places }: Props) => {
+export const PlacesLayer = ({ places }: Props) => {
   return (
     places &&
     places.map((place) => (
@@ -16,5 +16,3 @@ const PlacesLayer = ({ places }: Props) => {
     ))
   );
 };
-
-export default PlacesLayer;

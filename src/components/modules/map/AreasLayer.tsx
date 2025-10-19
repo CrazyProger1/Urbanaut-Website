@@ -9,7 +9,7 @@ type Props = {
   areas?: APIArea[];
 };
 
-const AreasLayer = ({ areas }: Props) => {
+export const AreasLayer = ({ areas }: Props) => {
   const polygons = useMemo(() => {
     return areas?.map((area) =>
       area.polygon.map((point) => new LatLng(point.latitude, point.longitude)),
@@ -24,5 +24,3 @@ const AreasLayer = ({ areas }: Props) => {
     </>
   );
 };
-
-export default AreasLayer;
