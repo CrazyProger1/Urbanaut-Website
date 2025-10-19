@@ -1,4 +1,8 @@
 export type APITokens = {
-  access_token: string;
-  refresh_token: string;
+  access: string;
+  refresh: string;
+};
+
+export type APIAccessToken = {
+  access: string;
 };

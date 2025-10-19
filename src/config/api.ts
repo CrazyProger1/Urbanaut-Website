@@ -6,4 +6,5 @@ export const API_ENDPOINTS = {
   LOGIN: "tokens/",
   PLACES: "places/",
   AREAS: "areas/",
+  REFRESH: "tokens/refresh/",
 };

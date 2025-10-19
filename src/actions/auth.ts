@@ -2,7 +2,7 @@
 
 import { fetchAPI } from "@/services";
 import { API_ENDPOINTS } from "@/config";
-import { clearSession, setSession } from "@/utils/session";
+import { clearSession, getSession, setSession } from "@/utils/session";
 import { APIMeUser, APITokens } from "@/types";
 
 export const login = async (email: string, password: string): Promise<APIMeUser | undefined> => {
@@ -13,8 +13,8 @@ export const login = async (email: string, password: string): Promise<APIMeUser 
 
   if (response.success) {
     await setSession({
-      accessToken: response.access_token,
-      refreshToken: response.refresh_token,
+      accessToken: response.access,
+      refreshToken: response.refresh,
       user: response.user,
     });
     return response.user;
@@ -32,4 +32,17 @@ export const register = async (email: string, password: string): Promise<boolean
 
 export const logout = async () => {
   await clearSession();
+};
+
+export const refresh = async () => {
+  const session = await getSession();
+
+  const response = await fetchAPI<{ access: string }>(API_ENDPOINTS.REFRESH, {
+    body: JSON.stringify({ refresh: session?.refreshToken }),
+    method: "POST",
+  });
+
+  if (response.success) {
+    await setSession({ accessToken: response.access });
+  }
 };

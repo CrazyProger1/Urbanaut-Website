@@ -10,5 +10,7 @@ export type {
   APITokens,
   APIPlace,
   APIPoint,
+  APICreatePlace,
+  APIAccessToken,
 } from "./api";
 export type { Session, SessionUser } from "./session";

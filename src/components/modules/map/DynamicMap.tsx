@@ -15,6 +15,7 @@ import { AreasLayer } from "./AreasLayer";
 import { APIArea } from "@/types/api";
 import { Marker } from "react-leaflet";
 import { ToolBar } from "@/components/modules/map/bars";
+import { useRouter } from "@/i18n";
 
 type Props = {
   center?: LatLng;
@@ -36,6 +37,7 @@ const DynamicMap = ({
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
   const [map, setMap] = useState<LeafletMap | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     (async function init() {
@@ -99,6 +101,18 @@ const DynamicMap = ({
     });
   }, [map]);
 
+  const handleSavePlace = () => {
+    const stringPoint = `${newPlacePosition?.lat},${newPlacePosition?.lng}`;
+    setNewPlacePosition(undefined);
+    setChoosingNewPlacePosition(false);
+    setNewPlacePositionChosen(false);
+
+    const params = new URLSearchParams();
+    params.set("addplace", "true");
+    params.set("point", stringPoint);
+    router.push(`?${params}`);
+  };
+
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
@@ -132,6 +146,7 @@ const DynamicMap = ({
         onTogglePlacesVisible={togglePlacesVisibility}
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
+        onSavePlace={handleSavePlace}
       />
     </ContextMenu>
   );

@@ -3,19 +3,22 @@
 import { headers } from "next/headers";
 
 import { API_URL } from "@/config";
-import { APIResponse } from "@/types";
+import { SuccessfulAPIResponse, ErrorAPIResponse } from "@/types";
+import { getSession } from "@/utils/session";
 
 export type FetchAPIOptions = {
   expectedStatus?: number;
-  token?: string;
 };
+
 export const fetchAPI = async <T>(
   endpoint: string,
   options: RequestInit & FetchAPIOptions = { expectedStatus: 200 },
-): Promise<APIResponse & T> => {
+): Promise<(SuccessfulAPIResponse | ErrorAPIResponse) & T> => {
   // eslint-disable-next-line prefer-const
-  let { token, expectedStatus } = options;
-  options = { ...options, expectedStatus: undefined, token: undefined };
+  let { expectedStatus } = options;
+  const actualFetchOptions = { ...options, expectedStatus: undefined };
+
+  const session = await getSession();
 
   if (!expectedStatus) {
     expectedStatus = 200;
@@ -36,13 +39,13 @@ export const fetchAPI = async <T>(
     "X-Client-Referer": referer ?? "",
     "X-Client-User-Agent": userAgent ?? "",
     "X-Client-Accept-Language": acceptLanguage ?? "",
-    ...(options.headers || {}),
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(actualFetchOptions.headers || {}),
+    ...(session?.accessToken ? { Authorization: `Bearer ${session.accessToken}` } : {}),
   };
 
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
-      ...options,
+      ...actualFetchOptions,
       headers: requestHeaders,
     });
     const data = await response.json();
@@ -50,6 +53,6 @@ export const fetchAPI = async <T>(
     return { success: response.status === expectedStatus, ...data };
   } catch (error) {
     console.error(error);
-    return { success: false } as APIResponse & T;
+    return { success: false } as ErrorAPIResponse & T;
   }
 };
