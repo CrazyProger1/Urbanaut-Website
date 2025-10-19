@@ -4,4 +4,5 @@ export const API_ENDPOINTS = {
   GOOGLE_OAUTH_REDIRECT_URI: "google/oauth/uri/",
   REGISTER: "users/",
   LOGIN: "tokens/",
+  PLACES: "places/",
 };

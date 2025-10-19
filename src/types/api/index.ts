@@ -18,6 +18,8 @@ export type PaginatedAPIResponse<T> = {
   results: T[];
 } & SuccessfulAPIResponse;
 
-export { type APIUser, type APIMeUser } from "./user";
-export { type APITokens } from "./tokens";
+export type { APIUser, APIMeUser } from "./user";
+export { type APITokens } from "./token";
 export type { GoogleOauthRedirectURIAPIResponse, GoogleOauthCallbackAPIResponse } from "./oauth";
+export type { APIPoint } from "./geo";
+export type { APIPlace } from "./place";

@@ -8,5 +8,7 @@ export type {
   GoogleOauthRedirectURIAPIResponse,
   APIMeUser,
   APITokens,
+  APIPlace,
+  APIPoint,
 } from "./api";
 export type { Session, SessionUser } from "./session";

@@ -4,8 +4,12 @@ import React, { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet from "leaflet";
+import { APIPlace } from "@/types";
 
-const LeafletDynamicMap = () => {
+type Props = {
+  places?: APIPlace[];
+}
+const LeafletDynamicMap = ({ places }: Props) => {
   const position: [number, number] = [49.92051764012172, 36.42622863956798];
 
   useEffect(() => {
@@ -24,11 +28,12 @@ const LeafletDynamicMap = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={position}>
+      {places && places.map(place => (<Marker key={place.id} position={[place.point.latitude, place.point.longitude]}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          {place.name}
         </Popup>
-      </Marker>
+      </Marker>))}
+
     </MapContainer>
   );
 };
