@@ -66,12 +66,6 @@ export const UserNavBar = (
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href="?auth=true">
-                <DropdownMenuItem>
-                  <User />
-                  Login (Temporary)
-                </DropdownMenuItem>
-              </Link>
               <Link href={PAGES.PROFILE}>
                 <DropdownMenuItem>
                   <User />

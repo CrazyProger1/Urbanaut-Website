@@ -6,6 +6,6 @@ export const SESSION_OPTIONS = {
   cookieName: SESSION_COOKIE_NAME,
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
-    maxAge: 100,
+    maxAge: 24 * 60 * 60,
   },
 };
