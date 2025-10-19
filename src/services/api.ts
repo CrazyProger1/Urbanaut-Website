@@ -46,6 +46,7 @@ export const fetchAPI = async <T>(
       headers: requestHeaders,
     });
     const data = await response.json();
+    console.log("Response:", data);
     return { success: response.status === expectedStatus, ...data };
   } catch (error) {
     console.error(error);
