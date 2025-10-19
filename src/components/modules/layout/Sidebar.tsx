@@ -25,7 +25,7 @@ import React from "react";
 import Image from "next/image";
 import { Link } from "@/i18n";
 import { PAGES } from "@/config";
-import { FaInstagram, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaPatreon, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { SearchForm } from "./SearchForm";
 
 
@@ -78,14 +78,19 @@ const socialNetworks = [
     icon: FaTiktok,
     disabled: true,
   },
+  {
+    title: "Patreon",
+    url: "https://www.patreon.com/urbanaut",
+    icon: FaPatreon,
+  },
 ];
 
 const support = [
   {
     title: "Donate",
-    url: "#",
+    url: "https://www.patreon.com/c/urbanaut",
     icon: CircleDollarSign,
-    disabled: true,
+    target: "_blank",
   },
   {
     title: "Feedback",
@@ -160,10 +165,10 @@ export const Sidebar = () => {
               {support.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild disabled={item.disabled}>
-                    <a href={item.url}>
+                    <Link href={item.url} target={item.target}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
