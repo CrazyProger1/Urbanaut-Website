@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Ban, LocateFixed, MapPin, Save, Scan } from "lucide-react";
+import { Ban, LocateFixed, MapPin, Move3d, Save, Scan } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 
@@ -9,8 +9,10 @@ type Props = {
   showPlaceControls?: boolean;
   onTogglePlacesVisible?: () => void;
   onToggleAreasVisible?: () => void;
+  onToggleCoordinatesVisible?: () => void;
   isPlacesVisible?: boolean;
   isAreasVisible?: boolean;
+  isCoordinatesVisible?: boolean;
   onCenterMap?: () => void;
   onSavePlace?: () => void;
   onCancel?: () => void;
@@ -20,8 +22,10 @@ export const ToolBar = ({
   showPlaceControls,
   onTogglePlacesVisible,
   onToggleAreasVisible,
+  onToggleCoordinatesVisible,
   isPlacesVisible,
   isAreasVisible,
+  isCoordinatesVisible,
   onCenterMap,
   onSavePlace,
   onCancel,
@@ -44,6 +48,10 @@ export const ToolBar = ({
 
       <Toggle pressed={isAreasVisible} onPressedChange={onToggleAreasVisible}>
         <Scan />
+      </Toggle>
+
+      <Toggle pressed={isCoordinatesVisible} onPressedChange={onToggleCoordinatesVisible}>
+        <Move3d />
       </Toggle>
 
       {showPlaceControls && (

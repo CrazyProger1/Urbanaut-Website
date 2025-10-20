@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
 import { APIPlace } from "@/types";
@@ -14,7 +14,7 @@ import { PlacesLayer } from "./PlacesLayer";
 import { AreasLayer } from "./AreasLayer";
 import { APIArea } from "@/types/api";
 import { Marker } from "react-leaflet";
-import { ToolBar } from "@/components/modules/map/bars";
+import { ToolBar, CoordinatesBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
 
 type Props = {
@@ -30,13 +30,14 @@ const DynamicMap = ({
   areas,
   places,
 }: Props) => {
-  const [currentPosition, setCurrentPosition] = useState<LatLng | undefined>();
+  const [clickPosition, setClickPosition] = useState<LatLng | undefined>();
   const [newPlacePosition, setNewPlacePosition] = useState<LatLng | undefined>();
-  const [choosingNewPlacePosition, setChoosingNewPlacePosition] = useState(false);
+  const [isChoosingNewPlacePosition, setIsChoosingNewPlacePosition] = useState(false);
   const [newPlacePositionChosen, setNewPlacePositionChosen] = useState(false);
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
-  const [map, setMap] = useState<LeafletMap | null>(null);
+  const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
+  const [map, setMap] = useState<LeafletMap | undefined>();
   const router = useRouter();
 
   useEffect(() => {
@@ -50,38 +51,38 @@ const DynamicMap = ({
   }, []);
 
   const handleCopyCoordinates = useCallback(async () => {
-    await setClipboard(`${currentPosition?.lat}, ${currentPosition?.lng}`);
-  }, [currentPosition]);
+    await setClipboard(`${clickPosition?.lat}, ${clickPosition?.lng}`);
+  }, [clickPosition]);
 
   const handleCancel = useCallback(() => {
     setNewPlacePosition(undefined);
-    setChoosingNewPlacePosition(false);
+    setIsChoosingNewPlacePosition(false);
     setNewPlacePositionChosen(false);
   }, []);
 
   const handleClickCoordinates = useCallback(
     (latlng: LatLng) => {
-      if (choosingNewPlacePosition) {
-        setChoosingNewPlacePosition(false);
+      if (isChoosingNewPlacePosition) {
+        setIsChoosingNewPlacePosition(false);
         setNewPlacePositionChosen(true);
       }
 
-      setCurrentPosition(latlng);
+      setClickPosition(latlng);
     },
-    [choosingNewPlacePosition],
+    [isChoosingNewPlacePosition],
   );
 
   const handleMouseCoordinates = useCallback(
     (latlng: LatLng) => {
-      if (choosingNewPlacePosition) {
+      if (isChoosingNewPlacePosition) {
         setNewPlacePosition(latlng);
       }
     },
-    [choosingNewPlacePosition],
+    [isChoosingNewPlacePosition],
   );
 
   const handleAddPlace = () => {
-    setChoosingNewPlacePosition(true);
+    setIsChoosingNewPlacePosition(true);
     setNewPlacePositionChosen(false);
   };
 
@@ -91,6 +92,10 @@ const DynamicMap = ({
 
   const toggleAreasVisibility = () => {
     setIsAreasVisible((prev) => !prev);
+  };
+
+  const toggleCoordinatesVisibility = () => {
+    setIsCoordinatesVisible((prev) => !prev);
   };
 
   const handleCenterMap = useCallback(() => {
@@ -104,7 +109,7 @@ const DynamicMap = ({
   const handleSavePlace = () => {
     const stringPoint = `${newPlacePosition?.lat},${newPlacePosition?.lng}`;
     setNewPlacePosition(undefined);
-    setChoosingNewPlacePosition(false);
+    setIsChoosingNewPlacePosition(false);
     setNewPlacePositionChosen(false);
 
     const params = new URLSearchParams();
@@ -135,6 +140,7 @@ const DynamicMap = ({
           {isPlacesVisible && <PlacesLayer places={places} />}
           {isAreasVisible && <AreasLayer areas={areas} />}
           {newPlacePosition && <Marker position={newPlacePosition} />}
+          {isCoordinatesVisible && <CoordinatesBar />}
         </MapContainer>
       </ContextMenuTrigger>
       <MapContextMenu onCopyCoordinates={handleCopyCoordinates} onAddPlace={handleAddPlace} />
@@ -142,8 +148,10 @@ const DynamicMap = ({
         showPlaceControls={newPlacePositionChosen}
         isAreasVisible={isAreasVisible}
         isPlacesVisible={isPlacesVisible}
+        isCoordinatesVisible={isCoordinatesVisible}
         onToggleAreasVisible={toggleAreasVisibility}
         onTogglePlacesVisible={togglePlacesVisibility}
+        onToggleCoordinatesVisible={toggleCoordinatesVisibility}
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
         onSavePlace={handleSavePlace}
