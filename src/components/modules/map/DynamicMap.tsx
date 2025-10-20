@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
@@ -16,12 +16,15 @@ import { APIArea } from "@/types/api";
 import { Marker } from "react-leaflet";
 import { ToolBar, CoordinatesBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
+import { RulerTool, ZoomSwitch } from "@/components/modules/map/tools";
 
 type Props = {
   center?: LatLng;
   zoom?: number;
   places?: APIPlace[];
   areas?: APIArea[];
+  markerVisibilityMinimumZoomThreshold?: number;
+  areaVisibilityMinimumZoomThreshold?: number;
 };
 
 const DynamicMap = ({
@@ -29,6 +32,8 @@ const DynamicMap = ({
   zoom = 5,
   areas,
   places,
+  markerVisibilityMinimumZoomThreshold = 10,
+  areaVisibilityMinimumZoomThreshold = 10,
 }: Props) => {
   const [clickPosition, setClickPosition] = useState<LatLng | undefined>();
   const [newPlacePosition, setNewPlacePosition] = useState<LatLng | undefined>();
@@ -37,6 +42,7 @@ const DynamicMap = ({
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
   const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
+  const [isRulerActive, setIsRulerActive] = useState(false);
   const [map, setMap] = useState<LeafletMap | undefined>();
   const router = useRouter();
 
@@ -98,6 +104,10 @@ const DynamicMap = ({
     setIsCoordinatesVisible((prev) => !prev);
   };
 
+  const toggleRulerActivity = () => {
+    setIsRulerActive((prev) => !prev);
+  };
+
   const handleCenterMap = useCallback(() => {
     if (!map) return;
 
@@ -137,10 +147,19 @@ const DynamicMap = ({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-          {isPlacesVisible && <PlacesLayer places={places} />}
-          {isAreasVisible && <AreasLayer areas={areas} />}
+          {isPlacesVisible && (
+            <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
+              <PlacesLayer places={places} />
+            </ZoomSwitch>
+          )}
+          {isAreasVisible && (
+            <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
+              <AreasLayer areas={areas} />
+            </ZoomSwitch>
+          )}
           {newPlacePosition && <Marker position={newPlacePosition} />}
           {isCoordinatesVisible && <CoordinatesBar />}
+          {isRulerActive && <RulerTool />}
         </MapContainer>
       </ContextMenuTrigger>
       <MapContextMenu onCopyCoordinates={handleCopyCoordinates} onAddPlace={handleAddPlace} />
@@ -149,9 +168,11 @@ const DynamicMap = ({
         isAreasVisible={isAreasVisible}
         isPlacesVisible={isPlacesVisible}
         isCoordinatesVisible={isCoordinatesVisible}
+        isRulerActive={isRulerActive}
         onToggleAreasVisible={toggleAreasVisibility}
         onTogglePlacesVisible={togglePlacesVisibility}
         onToggleCoordinatesVisible={toggleCoordinatesVisibility}
+        onToggleRulerActive={toggleRulerActivity}
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
         onSavePlace={handleSavePlace}

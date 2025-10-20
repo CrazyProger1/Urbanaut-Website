@@ -6,6 +6,7 @@ type Props = {
   onClickCoordinates?: (latlng: LatLng) => void;
   onMouseCoordinates?: (latlng: LatLng) => void;
   onMapLoaded?: (map: LeafletMap) => void;
+  onZoomChanged?: (zoom: number) => void;
 };
 
 export const MapWatcher = ({ onClickCoordinates, onMouseCoordinates, onMapLoaded }: Props) => {

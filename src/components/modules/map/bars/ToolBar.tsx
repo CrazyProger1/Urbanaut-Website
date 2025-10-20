@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Ban, LocateFixed, MapPin, Move3d, Save, Scan } from "lucide-react";
+import { Ban, LocateFixed, MapPin, Move3d, Ruler, Save, Scan } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 
@@ -10,9 +10,11 @@ type Props = {
   onTogglePlacesVisible?: () => void;
   onToggleAreasVisible?: () => void;
   onToggleCoordinatesVisible?: () => void;
+  onToggleRulerActive?: () => void;
   isPlacesVisible?: boolean;
   isAreasVisible?: boolean;
   isCoordinatesVisible?: boolean;
+  isRulerActive?: boolean;
   onCenterMap?: () => void;
   onSavePlace?: () => void;
   onCancel?: () => void;
@@ -23,9 +25,11 @@ export const ToolBar = ({
   onTogglePlacesVisible,
   onToggleAreasVisible,
   onToggleCoordinatesVisible,
+  onToggleRulerActive,
   isPlacesVisible,
   isAreasVisible,
   isCoordinatesVisible,
+  isRulerActive,
   onCenterMap,
   onSavePlace,
   onCancel,
@@ -52,6 +56,10 @@ export const ToolBar = ({
 
       <Toggle pressed={isCoordinatesVisible} onPressedChange={onToggleCoordinatesVisible}>
         <Move3d />
+      </Toggle>
+
+      <Toggle pressed={isRulerActive} onPressedChange={onToggleRulerActive}>
+        <Ruler />
       </Toggle>
 
       {showPlaceControls && (
