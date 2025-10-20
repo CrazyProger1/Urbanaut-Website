@@ -14,9 +14,7 @@ export const AreasLayer = ({ areas }: Props) => {
   const mapBounds = useMapBounds();
 
   const polygons = useMemo(() => {
-    return areas?.map((area) =>
-      area.polygon.map((point) => new LatLng(point.latitude, point.longitude)),
-    );
+    return areas?.map((area) => area.polygon.map((point) => new LatLng(point[0], point[1])));
   }, [areas]);
 
   const visiblePolygons = useMemo(() => {

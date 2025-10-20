@@ -1,4 +1,1 @@
-export type APIPoint = {
-  latitude: number;
-  longitude: number;
-};
+export type APIPoint = [number, number];

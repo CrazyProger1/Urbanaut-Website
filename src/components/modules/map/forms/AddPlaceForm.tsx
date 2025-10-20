@@ -45,7 +45,7 @@ export const AddPlaceForm = () => {
 
     if (point) {
       const [lat, lng] = point.split(",").map(Number);
-      await createPlace({ name: values.name, point: { latitude: lat, longitude: lng } });
+      await createPlace({ name: values.name, point: [lat, lng] });
       toast("Place added successfully.", {
         type: "success",
         theme: "dark",
