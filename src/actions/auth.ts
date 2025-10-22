@@ -2,8 +2,8 @@
 
 import { fetchAPI } from "@/services";
 import { API_ENDPOINTS } from "@/config";
-import { clearSession, getSession, setSession } from "@/utils/session";
-import { APIAccessToken, APIMeUser, APITokens } from "@/types";
+import { clearSession, setSession } from "@/utils/session";
+import { APIMeUser, APITokens } from "@/types";
 
 export const login = async (email: string, password: string): Promise<APIMeUser | undefined> => {
   const response = await fetchAPI<APITokens & { user: APIMeUser }>(API_ENDPOINTS.LOGIN, {
