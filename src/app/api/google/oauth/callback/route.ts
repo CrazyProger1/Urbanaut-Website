@@ -18,7 +18,7 @@ export const GET = async (request: NextRequest) => {
     },
   );
 
-  const user = { ...response, success: undefined };
+  const user = { ...response.user, success: undefined };
 
   await setSession({ user });
 
