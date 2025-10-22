@@ -43,6 +43,7 @@ export const fetchAPI = async <T>(
       headers: requestHeaders,
     });
     const data = await response.json();
+    console.log("API Response:", data);
     return { success: response.ok, ...data };
   } catch (error) {
     console.error(error);
