@@ -18,9 +18,9 @@ export const GET = async (request: NextRequest) => {
     },
   );
 
-  const user = { ...response.user, success: undefined };
+  const user = response.user;
 
-  await setSession({ user });
+  await setSession({ user, accessToken: response.access, refreshToken: response.refresh });
 
   redirect({ href: "/?oauth-success=true", locale: user?.settings?.language || "en" });
 };

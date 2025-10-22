@@ -1,8 +1,8 @@
-import { type APIMeUser } from "@/types";
+import { type APIMeUser, APITokens } from "@/types";
 
 export type GoogleOauthRedirectURIAPIResponse = {
   redirect_uri: string;
 };
-export type GoogleOauthCallbackAPIResponse = {
+export type GoogleOauthCallbackAPIResponse = APITokens & {
   user: APIMeUser;
 };
