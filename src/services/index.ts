@@ -1,1 +1,1 @@
-export { fetchAPI } from "./api";
+export { fetchProxy, fetchAPI, fetchAuthenticated } from "./api";

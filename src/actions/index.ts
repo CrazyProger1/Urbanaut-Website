@@ -1,2 +1,2 @@
-export { login, register, logout } from "./auth";
+export { login, register, logout, refresh } from "./auth";
 export { createPlace } from "./place";

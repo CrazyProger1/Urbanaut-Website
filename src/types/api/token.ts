@@ -6,3 +6,11 @@ export type APITokens = {
 export type APIAccessToken = {
   access: string;
 };
+
+export type APITokenPayload = {
+  token_type: "refresh" | "access";
+  exp: number;
+  iat: number;
+  jti: number;
+  user_id: string;
+};

@@ -1,14 +1,13 @@
 import React from "react";
-import { fetchAPI } from "@/services";
+import { fetchAuthenticated } from "@/services/api";
 import { GoogleOauthRedirectURIAPIResponse } from "@/types";
 import { API_ENDPOINTS } from "@/config";
 import { Button } from "@/components/ui/button";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "@/i18n";
 
-
 export const GoogleAuthButton = async () => {
-  const response = await fetchAPI<GoogleOauthRedirectURIAPIResponse>(
+  const response = await fetchAuthenticated<GoogleOauthRedirectURIAPIResponse>(
     API_ENDPOINTS.GOOGLE_OAUTH_REDIRECT_URI,
   );
   return (
