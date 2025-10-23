@@ -1,33 +1,30 @@
 "use client";
 
-import {
-  Bell,
-  ChevronsUpDown,
-  LogOut, Settings,
-  User,
-} from "lucide-react";
+import { Bell, ChevronsUpDown, LogOut, Settings, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
-  DropdownMenu, DropdownMenuContent,
-  DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import { Link } from "@/i18n";
 import { PAGES } from "@/config";
-import { Button } from "@/components/ui/button";
 import { logout } from "@/actions";
 
-
-export const UserNavBar = (
-  {
-    user,
-  }: {
-    user: {
-      name: string
-      email: string
-      avatar: string
-    }
-  }) => {
+export const UserNavBar = ({
+  user,
+}: {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+}) => {
   const { isMobile } = useSidebar();
 
   return (
@@ -78,15 +75,17 @@ export const UserNavBar = (
             <Bell />
             Notifications
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings />
-            Settings
-          </DropdownMenuItem>
+          <Link href={PAGES.SETTINGS}>
+            <DropdownMenuItem>
+              <Settings />
+              Settings
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>
           <LogOut />
-            Log out
+          Log out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

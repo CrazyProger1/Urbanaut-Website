@@ -56,6 +56,8 @@
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
     --tracking-normal: 0em;
     --spacing: 0.25rem;
+
+    --drop-shadow-volume: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .dark {
@@ -162,6 +164,8 @@
     --shadow-lg: var(--shadow-lg);
     --shadow-xl: var(--shadow-xl);
     --shadow-2xl: var(--shadow-2xl);
+
+    --drop-shadow-volume: var(--drop-shadow-volume);
 }
 
 @layer base {

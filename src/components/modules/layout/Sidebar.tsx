@@ -11,15 +11,7 @@ import {
   SidebarGroupLabel,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  Calendar,
-  Home,
-  Search,
-  Map,
-  CircleDollarSign,
-  Newspaper,
-  Send,
-} from "lucide-react";
+import { Calendar, Home, Search, Map, CircleDollarSign, Newspaper, Send } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import Image from "next/image";
@@ -27,7 +19,6 @@ import { Link } from "@/i18n";
 import { PAGES } from "@/config";
 import { FaInstagram, FaPatreon, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { SearchForm } from "./SearchForm";
-
 
 const items = [
   {
@@ -103,7 +94,7 @@ const support = [
 export const Sidebar = () => {
   const sidebar = useSidebar();
   return (
-    <ShadcnSidebar collapsible="icon">
+    <ShadcnSidebar collapsible="icon" className="drop-shadow-volume">
       <SidebarContent>
         <SidebarGroup>
           <Link className="flex flex-row items-center gap-4" href="/">
@@ -114,11 +105,8 @@ export const Sidebar = () => {
               width="64"
               height="64"
             />
-            {sidebar.open && <div className="font-extrabold text-2xl">
-              Urbanaut
-            </div>}
+            {sidebar.open && <div className="text-2xl font-extrabold">Urbanaut</div>}
           </Link>
-
         </SidebarGroup>
         <Separator />
         <SidebarGroup>
@@ -138,9 +126,7 @@ export const Sidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>
-            Platforms
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>Platforms</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {socialNetworks.map((item) => (
@@ -157,9 +143,7 @@ export const Sidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>
-            Support Us
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>Support Us</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {support.map((item) => (
