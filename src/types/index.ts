@@ -12,5 +12,11 @@ export type {
   APIPoint,
   APICreatePlace,
   APIAccessToken,
+  APIRank,
+  APIAchievement,
+  APIMetric,
+  APIError,
+  APIArea,
+  APITokenPayload,
 } from "./api";
 export type { Session, SessionUser } from "./session";

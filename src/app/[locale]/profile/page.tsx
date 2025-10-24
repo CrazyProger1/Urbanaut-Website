@@ -3,66 +3,31 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Edit, LockKeyhole, MapPin, Pin, Shield, UserStar } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { GiGasMask } from "react-icons/gi";
-import { LiaUserNinjaSolid } from "react-icons/lia";
+import { Calendar, Edit, LockKeyhole, MapPin } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AchievementTable } from "@/components/modules/profile";
+import { PAGES } from "@/config";
+import { redirect } from "@/i18n";
+import { getLocale } from "next-intl/server";
+import { MetricsTable } from "@/components/modules/profile/tables";
+import { getRankShadowClass } from "@/utils/ranks";
 
 const Page = async () => {
   const session = await getSession();
 
-  const metrics = [
-    {
-      value: 47,
-      name: "Reports",
-    },
-    {
-      value: 20,
-      name: "Friends",
-    },
-    {
-      value: 1,
-      name: "Teams",
-    },
-    {
-      value: 500,
-      name: "Followers",
-    },
-    {
-      value: 300,
-      name: "Places",
-    },
-  ];
+  if (!session || !session?.user) {
+    return redirect({ href: PAGES.MAIN, locale: await getLocale() });
+  }
 
-  const achievements = [
-    {
-      color: "bg-purple-500/10",
-      icon: <GiGasMask />,
-      name: "Urbanaut",
-    },
-    {
-      color: "bg-red-500/10",
-      icon: <UserStar />,
-      name: "Moderator",
-    },
-    {
-      color: "bg-yellow-500/10",
-      icon: <Shield />,
-      name: "Safety First",
-    },
-    {
-      color: "bg-green-500/10",
-      icon: <LiaUserNinjaSolid />,
-      name: "Ninja",
-    },
-  ];
+  const { user } = session;
+  const rankClass = getRankShadowClass(user?.rank);
+
   return (
     <div className="flex flex-col gap-4 p-4">
       <Card className="drop-shadow-volume flex flex-row gap-4 p-4">
         <div className="flex min-w-64 flex-col items-center">
           <Image
-            className="drop-shadow-[3px_3px_5px_rgba(157,0,255,0.5)]"
+            className={rankClass}
             src="/web-app-manifest-192x192.png"
             width={192}
             height={192}
@@ -74,18 +39,15 @@ const Page = async () => {
           </Button>
         </div>
         <div className="flex flex-col gap-4 py-4">
-          <div className="text-lg font-bold drop-shadow-[3px_3px_5px_rgba(157,0,255,0.5)]">
-            {session?.user?.first_name} {session?.user?.last_name}
+          <div className={`text-lg font-bold ${rankClass}`}>
+            {user?.first_name} {user?.last_name}
           </div>
-          <div className="text-muted-foreground text-sm">
-            <div>@urbanadventurer</div>
-            <div>@urbanaut</div>
+          <div className="text-muted-foreground flex flex-col text-sm">
+            {user?.usernames?.map((username) => (
+              <div key={username}>@{username}</div>
+            ))}
           </div>
-          <div>
-            Some Descriptiojn Some DescriptiojnSome DescriptiojnSome DescriptiojnSome
-            DescriptiojnSome DescriptiojnSome DescriptiojnSome DescriptiojnSome DescriptiojnSome
-            DescriptiojnSome
-          </div>
+          <div>{user?.bio}</div>
           <div className="text-muted-foreground flex flex-row gap-4 text-sm font-medium">
             <div className="flex flex-row items-center gap-1">
               <Calendar size={16} />
@@ -97,24 +59,10 @@ const Page = async () => {
             </div>
           </div>
           <div className="flex flex-row gap-8">
-            {metrics.map((metric) => (
-              <div className="flex flex-col items-center" key={metric.name}>
-                <div className="text-lg font-medium">{metric.value}</div>
-                <div className="text-muted-foreground text-sm font-medium">{metric.name}</div>
-              </div>
-            ))}
+            <MetricsTable user={user} />
           </div>
           <div className="flex flex-wrap gap-2">
-            {achievements.map((achievement) => (
-              <Badge
-                variant="outline"
-                key={achievement.name}
-                className={"flex flex-row items-center " + achievement.color}
-              >
-                {achievement.icon}
-                <div className="text-muted-foreground text-sm">{achievement.name}</div>
-              </Badge>
-            ))}
+            <AchievementTable user={user} />
           </div>
         </div>
       </Card>

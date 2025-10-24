@@ -58,6 +58,12 @@
     --spacing: 0.25rem;
 
     --drop-shadow-volume: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    --drop-shadow-rank-rookie: 3px 3px 5px rgba(255, 255, 255, 0.5);
+    --drop-shadow-rank-amateur: 3px 3px 5px rgba(0, 255, 0, 0.5);
+    --drop-shadow-rank-profi: 3px 3px 5px rgba(255, 255, 0, 0.5);
+    --drop-shadow-rank-stalker: 3px 3px 5px rgba(255, 0, 0, 0.5);
+    --drop-shadow-rank-legend: 3px 3px 5px rgb(157, 0, 255, 0.5);
 }
 
 .dark {
@@ -166,6 +172,12 @@
     --shadow-2xl: var(--shadow-2xl);
 
     --drop-shadow-volume: var(--drop-shadow-volume);
+
+    --drop-shadow-rank-rookie: var(--drop-shadow-rank-rookie);
+    --drop-shadow-rank-amateur: var(--drop-shadow-rank-amateur);
+    --drop-shadow-rank-profi: var(--drop-shadow-rank-profi);
+    --drop-shadow-rank-stalker: var(--drop-shadow-rank-stalker);
+    --drop-shadow-rank-legend: var(--drop-shadow-rank-legend);
 }
 
 @layer base {

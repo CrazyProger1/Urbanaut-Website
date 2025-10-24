@@ -12,8 +12,6 @@ const intlMiddleware = createMiddleware(routing);
 const middleware = async (request: NextRequest) => {
   const session = await getSession();
 
-  const response = intlMiddleware(request);
-
   if (session && session.accessToken && session.refreshToken) {
     const decoded = jwtDecode<APITokenPayload>(session.accessToken);
     const exp = new Date(decoded.exp * 1000);
@@ -36,7 +34,7 @@ const middleware = async (request: NextRequest) => {
     }
   }
 
-  return response;
+  return intlMiddleware(request);
 };
 
 export const config = {
