@@ -24,7 +24,7 @@ const Page = async () => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <Card className="drop-shadow-volume flex flex-row gap-4 p-4">
+      <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 lg:flex-row">
         <div className="flex min-w-64 flex-col items-center">
           <Image
             className={rankClass}
@@ -38,7 +38,7 @@ const Page = async () => {
             Edit Profile
           </Button>
         </div>
-        <div className="flex flex-col gap-4 py-4">
+        <div className="flex flex-col items-center gap-4 py-4 text-center lg:items-start lg:text-left">
           <div className={`text-lg font-bold ${rankClass}`}>
             {user?.first_name} {user?.last_name}
           </div>
