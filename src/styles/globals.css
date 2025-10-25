@@ -215,3 +215,17 @@
 .button-grow:hover {
     transform: scale(1.01);
 }
+
+.leaflet-tooltip {
+    background-color: color-mix(in srgb, var(--color-background) 80%, transparent) !important;
+    color: var(--card-foreground) !important;
+    padding: var(--spacing) !important;
+    border-color: var(--color-border) !important;
+    border-radius: var(--radius) !important;
+    /*opacity: 0 !important;*/
+}
+
+.leaflet-tooltip-bottom::before {
+    border-color: #ff0000 !important;
+    opacity: 0 !important;
+}
