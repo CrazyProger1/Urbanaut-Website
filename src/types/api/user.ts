@@ -14,6 +14,7 @@ export type APISettings = {
 
 export type APIUser = {
   id: number;
+  created_at: string;
   email?: string;
   metrics?: APIMetric[];
   achievements?: APIAchievement[];

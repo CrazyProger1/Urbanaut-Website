@@ -57,13 +57,25 @@
     --tracking-normal: 0em;
     --spacing: 0.25rem;
 
+    --color-rank-rookie: 255, 255, 255;
+    --color-rank-amateur: 0, 255, 0;
+    --color-rank-profi: 255, 255, 0;
+    --color-rank-stalker: 255, 0, 0;
+    --color-rank-legend: 157, 0, 255;
+
+    --color-achievement-initiation: rgba(var(--color-rank-rookie), 0.1);
+    --color-achievement-growth: rgba(var(--color-rank-amateur), 0.1);
+    --color-achievement-mastery: rgba(var(--color-rank-profi), 0.1);
+    --color-achievement-valor: rgba(var(--color-rank-stalker), 0.1);
+    --color-achievement-transcendence: rgba(var(--color-rank-legend), 0.1);
+
     --drop-shadow-volume: 0 0 10px rgba(0, 0, 0, 0.5);
 
-    --drop-shadow-rank-rookie: 3px 3px 5px rgba(255, 255, 255, 0.5);
-    --drop-shadow-rank-amateur: 3px 3px 5px rgba(0, 255, 0, 0.5);
-    --drop-shadow-rank-profi: 3px 3px 5px rgba(255, 255, 0, 0.5);
-    --drop-shadow-rank-stalker: 3px 3px 5px rgba(255, 0, 0, 0.5);
-    --drop-shadow-rank-legend: 3px 3px 5px rgb(157, 0, 255, 0.5);
+    --drop-shadow-rank-rookie: 3px 3px 5px rgba(var(--color-rank-rookie), 0.5);
+    --drop-shadow-rank-amateur: 3px 3px 5px rgba(var(--color-rank-amateur), 0.5);
+    --drop-shadow-rank-profi: 3px 3px 5px rgba(var(--color-rank-profi), 0.5);
+    --drop-shadow-rank-stalker: 3px 3px 5px rgba(var(--color-rank-stalker), 0.5);
+    --drop-shadow-rank-legend: 3px 3px 5px rgba(var(--color-rank-legend), 0.5);
 }
 
 .dark {
@@ -178,6 +190,12 @@
     --drop-shadow-rank-profi: var(--drop-shadow-rank-profi);
     --drop-shadow-rank-stalker: var(--drop-shadow-rank-stalker);
     --drop-shadow-rank-legend: var(--drop-shadow-rank-legend);
+
+    --color-achievement-initiation: var(--color-achievement-initiation);
+    --color-achievement-growth: var(--color-achievement-growth);
+    --color-achievement-mastery: var(--color-achievement-mastery);
+    --color-achievement-valor: var(--color-achievement-valor);
+    --color-achievement-transcendence: var(--color-achievement-transcendence);
 }
 
 @layer base {

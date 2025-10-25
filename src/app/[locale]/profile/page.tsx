@@ -7,13 +7,21 @@ import { Calendar, Edit, LockKeyhole, MapPin } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES } from "@/config";
-import { redirect } from "@/i18n";
-import { getLocale } from "next-intl/server";
+import { Link, redirect } from "@/i18n";
+import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/ranks";
 
-const Page = async () => {
+type Props = {
+  searchParams: Promise<{ tab?: string }>;
+};
+
+const Page = async ({ searchParams }: Props) => {
   const session = await getSession();
+
+  const params = await searchParams;
+
+  const tab = params?.tab || "reports";
 
   if (!session || !session?.user) {
     return redirect({ href: PAGES.MAIN, locale: await getLocale() });
@@ -21,6 +29,10 @@ const Page = async () => {
 
   const { user } = session;
   const rankClass = getRankShadowClass(user?.rank);
+
+  const format = await getFormatter();
+
+  const joinedAt = Date.parse(user.created_at);
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -51,7 +63,13 @@ const Page = async () => {
           <div className="text-muted-foreground flex flex-row gap-4 text-sm font-medium">
             <div className="flex flex-row items-center gap-1">
               <Calendar size={16} />
-              <div>Joined October 2025</div>
+              <div>
+                Joined{" "}
+                {format.dateTime(joinedAt, {
+                  year: "numeric",
+                  month: "long",
+                })}
+              </div>
             </div>
             <div className="flex flex-row items-center gap-1">
               <MapPin size={16} />
@@ -77,8 +95,8 @@ const Page = async () => {
           <TabsTrigger value="achivements" className="w-full">
             Achievements
           </TabsTrigger>
-          <TabsTrigger value="saved" className="w-full">
-            Saved
+          <TabsTrigger value="friends" className="w-full">
+            Friends
           </TabsTrigger>
         </TabsList>
         <TabsContent value="reports" className="drop-shadow-volume">
@@ -96,7 +114,7 @@ const Page = async () => {
             <LockKeyhole size="64" />
           </Card>
         </TabsContent>
-        <TabsContent value="saved" className="drop-shadow-volume">
+        <TabsContent value="friends" className="drop-shadow-volume">
           <Card className="flex flex-col items-center">
             <LockKeyhole size="64" />
           </Card>
