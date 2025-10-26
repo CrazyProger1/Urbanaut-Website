@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 
 type Props = {
-  showPlaceControls?: boolean;
+  showSaveControls?: boolean;
   onTogglePlacesVisible?: () => void;
   onToggleAreasVisible?: () => void;
   onToggleCoordinatesVisible?: () => void;
@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const ToolBar = ({
-  showPlaceControls,
+  showSaveControls,
   onTogglePlacesVisible,
   onToggleAreasVisible,
   onToggleCoordinatesVisible,
@@ -31,7 +31,7 @@ export const ToolBar = ({
   isCoordinatesVisible,
   isRulerActive,
   onCenterMap,
-  onSavePlace,
+  onSavePlace: onSave,
   onCancel,
 }: Props) => {
   return (
@@ -62,10 +62,10 @@ export const ToolBar = ({
         <Ruler />
       </Toggle>
 
-      {showPlaceControls && (
+      {showSaveControls && (
         <>
           <div className="mx-1 h-5 w-px bg-white/20" />
-          <Button variant="ghost" size="sm" onClick={onSavePlace}>
+          <Button variant="ghost" size="sm" onClick={onSave}>
             <Save /> Save
           </Button>
           <Button variant="destructive" size="sm" onClick={onCancel}>

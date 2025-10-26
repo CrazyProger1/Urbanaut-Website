@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { LatLng } from "leaflet";
-import { Marker, Polyline, Popup, Tooltip, useMapEvents } from "react-leaflet";
+import { Marker, Polyline, Tooltip, useMapEvents } from "react-leaflet";
 
 export const RulerTool = () => {
   const [points, setPoints] = useState<LatLng[]>([]);

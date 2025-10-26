@@ -16,7 +16,12 @@ import { APIArea } from "@/types/api";
 import { Marker } from "react-leaflet";
 import { ToolBar, CoordinatesBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
-import { RulerTool, ZoomSwitch } from "@/components/modules/map/tools";
+import {
+  AreaChoosingTool,
+  PlaceChoosingTool,
+  RulerTool,
+  ZoomSwitch,
+} from "@/components/modules/map/tools";
 
 type Props = {
   center?: LatLng;
@@ -41,6 +46,8 @@ const DynamicMap = ({
   const [newPlacePositionChosen, setNewPlacePositionChosen] = useState(false);
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
+  const [isChoosingArea, setIsChoosingArea] = useState(false);
+  const [isChoosingPlace, setIsChoosingPlace] = useState(false);
   const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
   const [isRulerActive, setIsRulerActive] = useState(false);
   const [map, setMap] = useState<LeafletMap | undefined>();
@@ -88,8 +95,9 @@ const DynamicMap = ({
   );
 
   const handleAddPlace = () => {
-    setIsChoosingNewPlacePosition(true);
-    setNewPlacePositionChosen(false);
+    setIsChoosingPlace(true);
+    // setIsChoosingNewPlacePosition(true);
+    // setNewPlacePositionChosen(false);
   };
 
   const togglePlacesVisibility = () => {
@@ -116,7 +124,7 @@ const DynamicMap = ({
     });
   }, [map]);
 
-  const handleSavePlace = () => {
+  const handleSave = () => {
     const stringPoint = `${newPlacePosition?.lat},${newPlacePosition?.lng}`;
     setNewPlacePosition(undefined);
     setIsChoosingNewPlacePosition(false);
@@ -126,6 +134,10 @@ const DynamicMap = ({
     params.set("addplace", "true");
     params.set("point", stringPoint);
     router.push(`?${params}`);
+  };
+
+  const handleAddArea = () => {
+    setIsChoosingArea(true);
   };
 
   return (
@@ -157,14 +169,19 @@ const DynamicMap = ({
               <AreasLayer areas={areas} />
             </ZoomSwitch>
           )}
-          {newPlacePosition && <Marker position={newPlacePosition} />}
           {isCoordinatesVisible && <CoordinatesBar />}
           {isRulerActive && <RulerTool />}
+          {isChoosingArea && <AreaChoosingTool />}
+          {isChoosingPlace && <PlaceChoosingTool />}
         </MapContainer>
       </ContextMenuTrigger>
-      <MapContextMenu onCopyCoordinates={handleCopyCoordinates} onAddPlace={handleAddPlace} />
+      <MapContextMenu
+        onCopyCoordinates={handleCopyCoordinates}
+        onAddPlace={handleAddPlace}
+        onAddArea={handleAddArea}
+      />
       <ToolBar
-        showPlaceControls={newPlacePositionChosen}
+        showSaveControls={newPlacePositionChosen}
         isAreasVisible={isAreasVisible}
         isPlacesVisible={isPlacesVisible}
         isCoordinatesVisible={isCoordinatesVisible}
@@ -175,7 +192,7 @@ const DynamicMap = ({
         onToggleRulerActive={toggleRulerActivity}
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
-        onSavePlace={handleSavePlace}
+        onSavePlace={handleSave}
       />
     </ContextMenu>
   );
