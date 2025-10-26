@@ -4,3 +4,8 @@ export const PAGES = {
   PROFILE: "/profile",
   SETTINGS: "/settings",
 };
+
+export const MODALS = {
+  ADD_AREA: "addarea",
+  ADD_PLACE: "addplace",
+};

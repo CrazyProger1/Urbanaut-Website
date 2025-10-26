@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
@@ -13,15 +13,17 @@ import { ICONS } from "@/config";
 import { PlacesLayer } from "./PlacesLayer";
 import { AreasLayer } from "./AreasLayer";
 import { APIArea } from "@/types/api";
-import { Marker } from "react-leaflet";
 import { ToolBar, CoordinatesBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
 import {
   AreaChoosingTool,
+  AreaChoosingToolHandle,
   PlaceChoosingTool,
+  PlaceChoosingToolHandle,
   RulerTool,
   ZoomSwitch,
 } from "@/components/modules/map/tools";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   center?: LatLng;
@@ -40,10 +42,6 @@ const DynamicMap = ({
   markerVisibilityMinimumZoomThreshold = 10,
   areaVisibilityMinimumZoomThreshold = 10,
 }: Props) => {
-  const [clickPosition, setClickPosition] = useState<LatLng | undefined>();
-  const [newPlacePosition, setNewPlacePosition] = useState<LatLng | undefined>();
-  const [isChoosingNewPlacePosition, setIsChoosingNewPlacePosition] = useState(false);
-  const [newPlacePositionChosen, setNewPlacePositionChosen] = useState(false);
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
   const [isChoosingArea, setIsChoosingArea] = useState(false);
@@ -51,7 +49,10 @@ const DynamicMap = ({
   const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
   const [isRulerActive, setIsRulerActive] = useState(false);
   const [map, setMap] = useState<LeafletMap | undefined>();
+  const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
+  const placeChoosingToolRef = useRef<PlaceChoosingToolHandle>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     (async function init() {
@@ -63,41 +64,13 @@ const DynamicMap = ({
     })();
   }, []);
 
-  const handleCopyCoordinates = useCallback(async () => {
-    await setClipboard(`${clickPosition?.lat}, ${clickPosition?.lng}`);
-  }, [clickPosition]);
-
   const handleCancel = useCallback(() => {
-    setNewPlacePosition(undefined);
-    setIsChoosingNewPlacePosition(false);
-    setNewPlacePositionChosen(false);
+    setIsChoosingPlace(false);
+    setIsChoosingArea(false);
   }, []);
-
-  const handleClickCoordinates = useCallback(
-    (latlng: LatLng) => {
-      if (isChoosingNewPlacePosition) {
-        setIsChoosingNewPlacePosition(false);
-        setNewPlacePositionChosen(true);
-      }
-
-      setClickPosition(latlng);
-    },
-    [isChoosingNewPlacePosition],
-  );
-
-  const handleMouseCoordinates = useCallback(
-    (latlng: LatLng) => {
-      if (isChoosingNewPlacePosition) {
-        setNewPlacePosition(latlng);
-      }
-    },
-    [isChoosingNewPlacePosition],
-  );
 
   const handleAddPlace = () => {
     setIsChoosingPlace(true);
-    // setIsChoosingNewPlacePosition(true);
-    // setNewPlacePositionChosen(false);
   };
 
   const togglePlacesVisibility = () => {
@@ -125,15 +98,33 @@ const DynamicMap = ({
   }, [map]);
 
   const handleSave = () => {
-    const stringPoint = `${newPlacePosition?.lat},${newPlacePosition?.lng}`;
-    setNewPlacePosition(undefined);
-    setIsChoosingNewPlacePosition(false);
-    setNewPlacePositionChosen(false);
+    const params = new URLSearchParams(searchParams);
 
-    const params = new URLSearchParams();
-    params.set("addplace", "true");
-    params.set("point", stringPoint);
-    router.push(`?${params}`);
+    if (isChoosingPlace && placeChoosingToolRef.current) {
+      setIsChoosingPlace(false);
+
+      const point = placeChoosingToolRef.current.getPoint();
+
+      if (point) {
+        params.set("addplace", "true");
+        params.set("point", `${point.lat},${point.lng}`);
+
+        router.push(`?${params}`, { scroll: false });
+      }
+    }
+
+    if (isChoosingArea && areaChoosingToolRef.current) {
+      setIsChoosingArea(false);
+
+      const points = areaChoosingToolRef.current.getPoints();
+
+      if (points) {
+        params.set("addarea", "true");
+        params.set("points", points.map((point) => `${point.lat},${point.lng}`).join(";"));
+
+        router.push(`?${params}`, { scroll: false });
+      }
+    }
   };
 
   const handleAddArea = () => {
@@ -150,11 +141,7 @@ const DynamicMap = ({
           style={{ height: "100%", width: "100%" }}
           zoomControl={false}
         >
-          <MapWatcher
-            onClickCoordinates={handleClickCoordinates}
-            onMouseCoordinates={handleMouseCoordinates}
-            onMapLoaded={setMap}
-          />
+          <MapWatcher onMapLoaded={setMap} />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -171,17 +158,13 @@ const DynamicMap = ({
           )}
           {isCoordinatesVisible && <CoordinatesBar />}
           {isRulerActive && <RulerTool />}
-          {isChoosingArea && <AreaChoosingTool />}
-          {isChoosingPlace && <PlaceChoosingTool />}
+          {isChoosingArea && <AreaChoosingTool ref={areaChoosingToolRef} />}
+          {isChoosingPlace && <PlaceChoosingTool ref={placeChoosingToolRef} />}
         </MapContainer>
       </ContextMenuTrigger>
-      <MapContextMenu
-        onCopyCoordinates={handleCopyCoordinates}
-        onAddPlace={handleAddPlace}
-        onAddArea={handleAddArea}
-      />
+      <MapContextMenu onAddPlace={handleAddPlace} onAddArea={handleAddArea} />
       <ToolBar
-        showSaveControls={newPlacePositionChosen}
+        showSaveControls={isChoosingPlace || isChoosingArea}
         isAreasVisible={isAreasVisible}
         isPlacesVisible={isPlacesVisible}
         isCoordinatesVisible={isCoordinatesVisible}

@@ -9,6 +9,7 @@ export type {
   APIMeUser,
   APITokens,
   APIPlace,
+  APICreateArea,
   APIPoint,
   APICreatePlace,
   APIAccessToken,

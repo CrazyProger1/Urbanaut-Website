@@ -6,5 +6,5 @@ export {
   SESSION_OPTIONS,
   REFRESH_DELTA_TIME,
 } from "./session";
-export { PAGES } from "./nav";
+export { PAGES, MODALS } from "./nav";
 export { ICONS } from "./assets";

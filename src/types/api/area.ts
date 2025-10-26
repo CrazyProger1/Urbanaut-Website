@@ -5,3 +5,8 @@ export type APIArea = {
   name: string;
   polygon: APIPoint[];
 };
+
+export type APICreateArea = {
+  name: string;
+  polygon: APIPoint[];
+};

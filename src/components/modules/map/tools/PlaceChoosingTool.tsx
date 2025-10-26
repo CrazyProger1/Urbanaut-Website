@@ -1,19 +1,32 @@
-import React, { useState } from "react";
+import React, { Ref, useImperativeHandle, useState } from "react";
 import { LatLng } from "leaflet";
 import { Marker, useMapEvents } from "react-leaflet";
 
-export const PlaceChoosingTool = () => {
+export type PlaceChoosingToolHandle = {
+  getPoint: () => LatLng | undefined;
+};
+
+type Props = {
+  ref?: Ref<PlaceChoosingToolHandle>;
+};
+
+export const PlaceChoosingTool = ({ ref }: Props) => {
   const [position, setPosition] = useState<LatLng>();
   const [isChoosingPosition, setIsChoosingPosition] = useState(true);
 
   useMapEvents({
-    mouseover: (event) => {
+    click: (event) => {
+      setIsChoosingPosition(false);
+      setPosition(event.latlng);
+    },
+    mousemove: (event) => {
       if (isChoosingPosition) {
         setPosition(event.latlng);
-        setIsChoosingPosition(false);
       }
     },
   });
+
+  useImperativeHandle(ref, () => ({ getPoint: () => position }), [position]);
 
   if (!position) {
     return null;

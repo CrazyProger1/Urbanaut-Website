@@ -1,15 +1,13 @@
-import { LatLng, type Map as LeafletMap } from "leaflet";
-import { useMap, useMapEvents } from "react-leaflet";
+import { type Map as LeafletMap } from "leaflet";
+import { useMap } from "react-leaflet";
 import { useEffect } from "react";
 
 type Props = {
-  onClickCoordinates?: (latlng: LatLng) => void;
-  onMouseCoordinates?: (latlng: LatLng) => void;
   onMapLoaded?: (map: LeafletMap) => void;
   onZoomChanged?: (zoom: number) => void;
 };
 
-export const MapWatcher = ({ onClickCoordinates, onMouseCoordinates, onMapLoaded }: Props) => {
+export const MapWatcher = ({ onMapLoaded }: Props) => {
   const map = useMap();
 
   useEffect(() => {
@@ -18,13 +16,5 @@ export const MapWatcher = ({ onClickCoordinates, onMouseCoordinates, onMapLoaded
     }
   }, [map, onMapLoaded]);
 
-  useMapEvents({
-    mousedown: (e) => {
-      onClickCoordinates?.(e.latlng);
-    },
-    mousemove: (e) => {
-      onMouseCoordinates?.(e.latlng);
-    },
-  });
   return null;
 };

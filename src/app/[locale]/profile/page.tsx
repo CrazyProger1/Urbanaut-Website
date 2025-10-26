@@ -7,7 +7,7 @@ import { Calendar, Edit, LockKeyhole, MapPin } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES } from "@/config";
-import { Link, redirect } from "@/i18n";
+import { redirect } from "@/i18n";
 import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/ranks";
