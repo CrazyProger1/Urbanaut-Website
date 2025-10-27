@@ -1,19 +1,17 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
-import { APIPlace } from "@/types";
+import { APIPlace, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { setClipboard } from "@/utils/clipboard";
 import MapContextMenu from "./MapContextMenu";
-import { MapWatcher } from "./MapWatcher";
-import { ICONS } from "@/config";
+import { ICONS, LAYERS } from "@/config";
 import { PlacesLayer } from "./PlacesLayer";
 import { AreasLayer } from "./AreasLayer";
 import { APIArea } from "@/types/api";
-import { ToolBar, CoordinatesBar } from "@/components/modules/map/bars";
+import { ToolBar, LayersBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
 import {
   AreaChoosingTool,
@@ -22,8 +20,10 @@ import {
   PlaceChoosingToolHandle,
   RulerTool,
   ZoomSwitch,
+  CoordinatesTool,
 } from "@/components/modules/map/tools";
 import { useSearchParams } from "next/navigation";
+import { TileLayers } from "./TileLayers";
 
 type Props = {
   center?: LatLng;
@@ -48,11 +48,13 @@ const DynamicMap = ({
   const [isChoosingPlace, setIsChoosingPlace] = useState(false);
   const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
   const [isRulerActive, setIsRulerActive] = useState(false);
-  const [map, setMap] = useState<LeafletMap | undefined>();
+  const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
   const placeChoosingToolRef = useRef<PlaceChoosingToolHandle>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [currentPrimaryLayer, setCurrentPrimaryLayer] = useState<MapLayer>(LAYERS.OSM);
+  const [currentSecondaryLayers, setCurrentSecondaryLayers] = useState<MapLayer[]>([]);
 
   useEffect(() => {
     (async function init() {
@@ -131,21 +133,33 @@ const DynamicMap = ({
     setIsChoosingArea(true);
   };
 
+  const handleSecondaryLayerToggle = (layer: MapLayer, active: boolean) => {
+    if (active) {
+      if (!currentSecondaryLayers.includes(layer)) {
+        setCurrentSecondaryLayers((prev) => [...prev, layer]);
+      }
+    } else {
+      setCurrentSecondaryLayers((prev) => prev.filter((value) => value !== layer));
+    }
+  };
+
+  const handlePrimaryLayerChange = (layer: MapLayer) => {
+    setCurrentPrimaryLayer(layer);
+  };
+
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
         <MapContainer
+          ref={setMap}
           className="-z-0"
           center={center}
           zoom={zoom}
           style={{ height: "100%", width: "100%" }}
           zoomControl={false}
         >
-          <MapWatcher onMapLoaded={setMap} />
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
+          <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
+
           {isPlacesVisible && (
             <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
               <PlacesLayer places={places} />
@@ -156,7 +170,7 @@ const DynamicMap = ({
               <AreasLayer areas={areas} />
             </ZoomSwitch>
           )}
-          {isCoordinatesVisible && <CoordinatesBar />}
+          {isCoordinatesVisible && <CoordinatesTool />}
           {isRulerActive && <RulerTool />}
           {isChoosingArea && <AreaChoosingTool ref={areaChoosingToolRef} />}
           {isChoosingPlace && <PlaceChoosingTool ref={placeChoosingToolRef} />}
@@ -176,6 +190,11 @@ const DynamicMap = ({
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
         onSavePlace={handleSave}
+      />
+      <LayersBar
+        layers={Object.values(LAYERS)}
+        onPrimaryLayerChange={handlePrimaryLayerChange}
+        onSecondaryLayerToggle={handleSecondaryLayerToggle}
       />
     </ContextMenu>
   );

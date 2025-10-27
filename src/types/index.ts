@@ -21,3 +21,4 @@ export type {
   APITokenPayload,
 } from "./api";
 export type { Session, SessionUser } from "./session";
+export type { MapLayer } from "./map";

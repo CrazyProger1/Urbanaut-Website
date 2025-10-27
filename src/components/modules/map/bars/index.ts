@@ -1,2 +1,2 @@
 export { ToolBar } from "./ToolBar";
-export { CoordinatesBar } from "./CoordinatesBar";
+export { LayersBar } from "./LayersBar";

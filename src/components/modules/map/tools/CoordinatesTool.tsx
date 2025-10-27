@@ -5,7 +5,7 @@ import { useMap, useMapEvents } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { Card } from "@/components/ui/card";
 
-export const CoordinatesBar = () => {
+export const CoordinatesTool = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState<LatLng | undefined>();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const map = useMap();

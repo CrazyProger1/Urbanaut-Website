@@ -1,0 +1,82 @@
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Layers } from "lucide-react";
+import { Toggle } from "@/components/ui/toggle";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { MapLayer } from "@/types";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
+import { LAYERS } from "@/config";
+
+type Props = {
+  layers: MapLayer[];
+  defaultPrimary?: MapLayer;
+  defaultSecondary?: MapLayer[];
+  onPrimaryLayerChange?: (layer: MapLayer) => void;
+  onSecondaryLayerToggle: (layer: MapLayer, active: boolean) => void;
+};
+
+export const LayersBar = ({
+  layers,
+  defaultPrimary = LAYERS.OSM,
+  defaultSecondary = [],
+  onPrimaryLayerChange,
+  onSecondaryLayerToggle,
+}: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="absolute right-0 flex w-full flex-col items-end gap-4 p-4">
+      <div className="flex flex-col items-end">
+        <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
+          <Toggle
+            pressed={isOpen}
+            onPressedChange={() => {
+              setIsOpen((prev) => !prev);
+            }}
+          >
+            <Layers />
+          </Toggle>
+        </Card>
+      </div>
+      {isOpen && (
+        <Card className="w-full rounded-2xl shadow-lg backdrop-blur-sm sm:w-1/2 lg:w-1/4">
+          <CardContent className="flex flex-col gap-2">
+            <RadioGroup
+              defaultValue={defaultPrimary?.value || "OSM"}
+              onValueChange={(value) => {
+                onPrimaryLayerChange?.(layers.filter((layer) => layer.value === value)[0]);
+              }}
+            >
+              {layers
+                .filter((layer) => layer.primary)
+                .map((layer) => (
+                  <div key={layer.value} className="flex items-center gap-3">
+                    <RadioGroupItem value={layer.value} id={`r-${layer.value}`} />
+                    <Label htmlFor={`r-${layer.value}`}>{layer.label}</Label>
+                  </div>
+                ))}
+            </RadioGroup>
+            <Separator />
+            <div className="flex flex-col gap-3">
+              {layers
+                .filter((layer) => !layer.primary)
+                .map((layer) => (
+                  <div key={layer.value} className="flex items-center gap-3">
+                    <Checkbox
+                      defaultChecked={defaultSecondary?.includes(layer)}
+                      onCheckedChange={(state) => onSecondaryLayerToggle?.(layer, !!state)}
+                      value={layer.value}
+                      id={`c-${layer.value}`}
+                    />
+                    <Label htmlFor={`c-${layer.value}`}>{layer.label}</Label>
+                  </div>
+                ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+};
