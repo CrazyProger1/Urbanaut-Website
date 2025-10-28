@@ -19,9 +19,9 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
-import { toast } from "react-toastify";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -50,12 +50,7 @@ export const AddPlaceForm = () => {
     if (point) {
       const [lat, lng] = point.split(",").map(Number);
       await createPlace({ name: values.name, point: [lat, lng] });
-      toast("Place added successfully.", {
-        type: "success",
-        theme: "dark",
-        position: "bottom-right",
-        autoClose: 3000,
-      });
+      toast.success("Place added successfully.");
       params.delete("point");
       params.delete("addplace");
       router.push(`?${params}`);

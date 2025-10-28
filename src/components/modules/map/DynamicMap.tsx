@@ -24,6 +24,7 @@ import {
 } from "@/components/modules/map/tools";
 import { useSearchParams } from "next/navigation";
 import { TileLayers } from "./TileLayers";
+import { toast } from "sonner";
 
 type Props = {
   center?: LatLng;
@@ -176,7 +177,13 @@ const DynamicMap = ({
           {isChoosingPlace && <PlaceChoosingTool ref={placeChoosingToolRef} />}
         </MapContainer>
       </ContextMenuTrigger>
-      <MapContextMenu onAddPlace={handleAddPlace} onAddArea={handleAddArea} />
+      <MapContextMenu
+        onAddPlace={handleAddPlace}
+        onAddArea={handleAddArea}
+        onCopyCoordinates={() => {
+          toast.success("Coordinates copied into buffer.");
+        }}
+      />
       <ToolBar
         showSaveControls={isChoosingPlace || isChoosingArea}
         isAreasVisible={isAreasVisible}

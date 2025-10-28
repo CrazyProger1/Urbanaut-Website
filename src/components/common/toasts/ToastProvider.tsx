@@ -1,17 +1,19 @@
 "use client";
 
 import React from "react";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "sonner";
+import { APITheme } from "@/types/api/user";
 
 type Props = {
   children: React.ReactNode;
+  theme?: APITheme;
 };
 
-export const ToastProvider = ({ children }: Props) => {
+export const ToastProvider = ({ children, theme = "DARK" }: Props) => {
   return (
     <>
       {children}
-      <ToastContainer />
+      <Toaster position="bottom-right" richColors theme={theme === "DARK" ? "dark" : "light"} />
     </>
   );
 };

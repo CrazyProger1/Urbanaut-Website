@@ -37,27 +37,29 @@ const RootLayout = async ({ children }: Props) => {
   const session = await getSession();
   setRequestLocale(session?.user?.settings?.language || "en");
 
+  const theme = session?.user?.settings?.theme || "DARK";
+
   return (
-    <html lang="en" className={session?.user?.settings?.theme?.toLowerCase() || "dark"}>
-    <body>
-    <ModalProvider>
-      <ToastProvider>
-        <SidebarProvider>
-          <NextIntlClientProvider>
-            <Sidebar />
-            <SidebarInset className="flex flex-col">
-              <Header user={session?.user} />
-              {children}
-              <Footer />
-            </SidebarInset>
-            <SigninModal />
-            <SignupModal />
-          </NextIntlClientProvider>
-          <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
-        </SidebarProvider>
-      </ToastProvider>
-    </ModalProvider>
-    </body>
+    <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
+      <body>
+        <ModalProvider>
+          <ToastProvider theme={theme}>
+            <SidebarProvider>
+              <NextIntlClientProvider>
+                <Sidebar />
+                <SidebarInset className="flex flex-col">
+                  <Header user={session?.user} />
+                  {children}
+                  <Footer />
+                </SidebarInset>
+                <SigninModal />
+                <SignupModal />
+              </NextIntlClientProvider>
+              <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+            </SidebarProvider>
+          </ToastProvider>
+        </ModalProvider>
+      </body>
     </html>
   );
 };

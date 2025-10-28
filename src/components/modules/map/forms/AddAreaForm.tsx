@@ -19,10 +19,10 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createArea } from "@/actions";
-import { toast } from "react-toastify";
 import { APIPoint } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -55,13 +55,7 @@ export const AddAreaForm = () => {
       });
 
       await createArea({ ...values, polygon: polygon });
-
-      toast("Area added successfully.", {
-        type: "success",
-        theme: "dark",
-        position: "bottom-right",
-        autoClose: 3000,
-      });
+      toast.success("Area added successfully.");
       params.delete("points");
       params.delete("addarea");
       router.push(`?${params}`);

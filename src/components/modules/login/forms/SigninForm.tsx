@@ -1,7 +1,15 @@
 "use client";
 
 import React from "react";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link, usePathname, useRouter } from "@/i18n";
 import { Button } from "@/components/ui/button";
@@ -11,9 +19,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/actions";
-import { toast } from "react-toastify";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription } from "@/components/ui/field";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -29,7 +37,7 @@ const formSchema = z.object({
 
 type Props = {
   otherProviders?: React.ReactNode[];
-}
+};
 
 export const SigninForm = ({ otherProviders }: Props) => {
   const router = useRouter();
@@ -50,33 +58,21 @@ export const SigninForm = ({ otherProviders }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const user = await login(values.email, values.password);
     if (!user) {
-      return toast("Wrong password or authentication method! Try use Oauth", {
-        position: "bottom-right",
-        type: "error",
-        theme: "dark",
-        autoClose: 2000,
-      });
+      return toast.error("Wrong password or authentication method! Try use Oauth");
     }
 
     const params = new URLSearchParams(searchParams);
     params.delete("signin");
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
-    toast("Successfully signed in!", {
-      position: "bottom-right",
-      type: "success",
-      theme: user?.settings.theme?.toLowerCase() || "dark",
-      autoClose: 2000,
-    });
+    toast.success("Successfully signed in!");
   };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Here you can easily login into your account 😉
-        </CardDescription>
+        <CardDescription>Here you can easily login into your account 😉</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <Form {...form}>
@@ -104,10 +100,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
                     <Input {...field} />
                   </FormControl>
                   <FormDescription className="text-end">
-                    <Link
-                      href="#"
-                      className="text-sm hover:underline text-end"
-                    >
+                    <Link href="#" className="text-end text-sm hover:underline">
                       Forgot your password?
                     </Link>
                   </FormDescription>
@@ -132,4 +125,3 @@ export const SigninForm = ({ otherProviders }: Props) => {
     </Card>
   );
 };
-
