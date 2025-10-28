@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
-import { usePathname, useRouter } from "@/i18n";
+import { useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,9 +20,12 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
 import { toast } from "react-toastify";
+import { Textarea } from "@/components/ui/textarea";
+import { TagsSelect } from "./TagsSelect";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
+  description: z.string().max(1000).min(0),
 });
 
 export const AddPlaceForm = () => {
@@ -33,6 +36,7 @@ export const AddPlaceForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      description: "",
     },
     mode: "onSubmit",
   });
@@ -79,6 +83,20 @@ export const AddPlaceForm = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <TagsSelect />
             <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
               Save {formState.isSubmitting && <Spinner />}
             </Button>

@@ -195,6 +195,8 @@ const DynamicMap = ({
         layers={Object.values(LAYERS)}
         onPrimaryLayerChange={handlePrimaryLayerChange}
         onSecondaryLayerToggle={handleSecondaryLayerToggle}
+        defaultPrimary={currentPrimaryLayer || LAYERS.OSM}
+        defaultSecondary={currentSecondaryLayers}
       />
     </ContextMenu>
   );

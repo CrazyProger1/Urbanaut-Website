@@ -21,9 +21,12 @@ import { Button } from "@/components/ui/button";
 import { createArea } from "@/actions";
 import { toast } from "react-toastify";
 import { APIPoint } from "@/types";
+import { Textarea } from "@/components/ui/textarea";
+import { TagsSelect } from "./TagsSelect";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
+  description: z.string().max(1000).min(0),
 });
 
 export const AddAreaForm = () => {
@@ -34,6 +37,7 @@ export const AddAreaForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      description: "",
     },
     mode: "onSubmit",
   });
@@ -50,7 +54,7 @@ export const AddAreaForm = () => {
         return [lat, lng];
       });
 
-      await createArea({ name: values.name, polygon: polygon });
+      await createArea({ ...values, polygon: polygon });
 
       toast("Area added successfully.", {
         type: "success",
@@ -58,8 +62,8 @@ export const AddAreaForm = () => {
         position: "bottom-right",
         autoClose: 3000,
       });
-      params.delete("point");
-      params.delete("addplace");
+      params.delete("points");
+      params.delete("addarea");
       router.push(`?${params}`);
     }
   };
@@ -85,6 +89,20 @@ export const AddAreaForm = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <TagsSelect />
             <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
               Save {formState.isSubmitting && <Spinner />}
             </Button>
