@@ -12,36 +12,24 @@ import {
   TagsValue,
 } from "@/components/ui/shadcn-io/tags";
 import { CheckIcon } from "lucide-react";
+import { APITag } from "@/types";
 
-type Props = {};
+type Props = {
+  tags?: APITag[];
+};
 
-const tags = [
-  { id: "react", label: "React" },
-  { id: "typescript", label: "TypeScript" },
-  { id: "javascript", label: "JavaScript" },
-  { id: "nextjs", label: "Next.js" },
-  { id: "vuejs", label: "Vue.js" },
-  { id: "angular", label: "Angular" },
-  { id: "svelte", label: "Svelte" },
-  { id: "nodejs", label: "Node.js" },
-  { id: "python", label: "Python" },
-  { id: "ruby", label: "Ruby" },
-  { id: "java", label: "Java" },
-  { id: "csharp", label: "C#" },
-  { id: "php", label: "PHP" },
-  { id: "go", label: "Go" },
-];
+export const TagsSelect = ({ tags }: Props) => {
+  const [selected, setSelected] = useState<APITag[]>([]);
 
-export const TagsSelect = ({}: Props) => {
-  const [selected, setSelected] = useState<string[]>([]);
-  const handleRemove = (value: string) => {
+  const handleRemove = (value: APITag) => {
     if (!selected.includes(value)) {
       return;
     }
     console.log(`removed: ${value}`);
     setSelected((prev) => prev.filter((v) => v !== value));
   };
-  const handleSelect = (value: string) => {
+
+  const handleSelect = (value: APITag) => {
     if (selected.includes(value)) {
       handleRemove(value);
       return;
@@ -55,8 +43,8 @@ export const TagsSelect = ({}: Props) => {
       <Tags>
         <TagsTrigger>
           {selected.map((tag) => (
-            <TagsValue key={tag} onRemove={() => handleRemove(tag)}>
-              {tags.find((t) => t.id === tag)?.label}
+            <TagsValue key={tag.tag} onRemove={() => handleRemove(tag)}>
+              #{tag.tag}
             </TagsValue>
           ))}
         </TagsTrigger>
@@ -65,10 +53,10 @@ export const TagsSelect = ({}: Props) => {
           <TagsList>
             <TagsEmpty />
             <TagsGroup>
-              {tags.map((tag) => (
-                <TagsItem key={tag.id} onSelect={handleSelect} value={tag.id}>
-                  {tag.label}
-                  {selected.includes(tag.id) && (
+              {tags?.map((tag) => (
+                <TagsItem key={tag.id} onSelect={() => handleSelect(tag)} value={tag.tag}>
+                  #{tag.tag}
+                  {selected.includes(tag) && (
                     <CheckIcon className="text-muted-foreground" size={14} />
                   )}
                 </TagsItem>

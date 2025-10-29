@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createArea } from "@/actions";
-import { APIPoint } from "@/types";
+import { APIPoint, APITag } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
 import { toast } from "sonner";
@@ -29,7 +29,11 @@ const formSchema = z.object({
   description: z.string().max(1000).min(0),
 });
 
-export const AddAreaForm = () => {
+type Props = {
+  tags?: APITag[];
+};
+
+export const AddAreaForm = ({ tags }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -96,7 +100,7 @@ export const AddAreaForm = () => {
                 </FormItem>
               )}
             />
-            <TagsSelect />
+            <TagsSelect tags={tags} />
             <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
               Save {formState.isSubmitting && <Spinner />}
             </Button>

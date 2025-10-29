@@ -18,6 +18,7 @@ export type {
   APIMetric,
   APIError,
   APIArea,
+  APITag,
   APITokenPayload,
 } from "./api";
 export type { Session, SessionUser } from "./session";

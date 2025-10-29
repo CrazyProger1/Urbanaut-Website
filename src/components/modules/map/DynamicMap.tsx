@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
-import { APIPlace, MapLayer } from "@/types";
+import { APIPlace, APITag, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS } from "@/config";

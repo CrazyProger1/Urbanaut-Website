@@ -22,13 +22,18 @@ import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
 import { toast } from "sonner";
+import { APITag } from "@/types";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
   description: z.string().max(1000).min(0),
 });
 
-export const AddPlaceForm = () => {
+type Props = {
+  tags?: APITag[];
+};
+
+export const AddPlaceForm = ({ tags }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -91,7 +96,7 @@ export const AddPlaceForm = () => {
                 </FormItem>
               )}
             />
-            <TagsSelect />
+            <TagsSelect tags={tags} />
             <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
               Save {formState.isSubmitting && <Spinner />}
             </Button>

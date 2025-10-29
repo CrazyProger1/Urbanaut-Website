@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 
 import { API_URL } from "@/config";
-import { ErrorAPIResponse, SuccessfulAPIResponse } from "@/types";
+import { APIResponse, ErrorAPIResponse } from "@/types";
 
 export type FetchAPIOptions = {
   accessToken?: string;
@@ -12,7 +12,7 @@ export type FetchAPIOptions = {
 export const fetchAPI = async <T>(
   endpoint: string,
   options?: RequestInit & FetchAPIOptions,
-): Promise<(SuccessfulAPIResponse | ErrorAPIResponse) & T> => {
+): Promise<APIResponse & T> => {
   options = options || {};
 
   const { accessToken } = options;
