@@ -3,13 +3,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Leaflet, { LatLng, type Map as LeafletMap } from "leaflet";
-import { APIPlace, APITag, MapLayer } from "@/types";
+import L, { LatLng, type Map as LeafletMap } from "leaflet";
+import { APIPlace, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS } from "@/config";
-import { PlacesLayer } from "./PlacesLayer";
-import { AreasLayer } from "./AreasLayer";
 import { APIArea } from "@/types/api";
 import { ToolBar, LayersBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
@@ -23,7 +21,7 @@ import {
   CoordinatesTool,
 } from "@/components/modules/map/tools";
 import { useSearchParams } from "next/navigation";
-import { TileLayers } from "./TileLayers";
+import { TileLayers, PlacesLayer, AreasLayer } from "./layers";
 import { toast } from "sonner";
 
 type Props = {
@@ -45,6 +43,7 @@ const DynamicMap = ({
 }: Props) => {
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
+  const [isHeatmapVisible, setIsHeatmapVisible] = useState(true);
   const [isChoosingArea, setIsChoosingArea] = useState(false);
   const [isChoosingPlace, setIsChoosingPlace] = useState(false);
   const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
@@ -59,7 +58,7 @@ const DynamicMap = ({
 
   useEffect(() => {
     (async function init() {
-      Leaflet.Icon.Default.mergeOptions({
+      L.Icon.Default.mergeOptions({
         iconRetinaUrl: ICONS.MARKER_ICON_RETINA,
         iconUrl: ICONS.MARKER_ICON,
         shadowUrl: ICONS.MARKER_SHADOW,
@@ -160,7 +159,6 @@ const DynamicMap = ({
           zoomControl={false}
         >
           <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
-
           {isPlacesVisible && (
             <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
               <PlacesLayer places={places} />

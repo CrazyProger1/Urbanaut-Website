@@ -1,5 +1,5 @@
 import { useMap, useMapEvents } from "react-leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LatLngBounds } from "leaflet";
 
 export const useMapBounds = () => {
@@ -14,6 +14,14 @@ export const useMapBounds = () => {
       setCurrentMapBounds(map.getBounds());
     },
   });
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+
+    setCurrentMapBounds(map.getBounds());
+  }, [map]);
 
   return currentMapBounds;
 };
