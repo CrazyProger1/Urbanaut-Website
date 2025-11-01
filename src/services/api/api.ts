@@ -42,6 +42,7 @@ export const fetchAPI = async <T>(
       ...actualFetchOptions,
       headers: requestHeaders,
     });
+    console.log("API Response Status:", response.status);
     const data = await response.json();
     console.log(`API ${endpoint} Response:`, data);
     return { success: response.ok, ...data };

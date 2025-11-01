@@ -37,6 +37,7 @@ export const HeatmapLayer = ({ places }: Props) => {
 
   useEffect(() => {
     const points = visiblePoints?.map((point) => [point.lat, point.lng, 1]);
+    // @ts-ignore
     const heat = L.heatLayer(points, heatOptions).addTo(map);
   }, [visiblePoints]);
 

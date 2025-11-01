@@ -43,7 +43,6 @@ const DynamicMap = ({
 }: Props) => {
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
-  const [isHeatmapVisible, setIsHeatmapVisible] = useState(true);
   const [isChoosingArea, setIsChoosingArea] = useState(false);
   const [isChoosingPlace, setIsChoosingPlace] = useState(false);
   const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);

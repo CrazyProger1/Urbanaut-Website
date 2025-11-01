@@ -12,6 +12,7 @@ import { getSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
+import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -19,11 +20,11 @@ export const metadata: Metadata = {
     "Urbanaut-Club — a social platform for urban explorers, diggers, and extreme tourism enthusiasts.",
 };
 
-// const poppins = Poppins({
-//   weight: ["300", "400", "500", "600", "700"],
-//   subsets: ["latin"],
-//   variable: "--font-poppins",
-// });
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+});
 
 type Props = {
   children: React.ReactNode;

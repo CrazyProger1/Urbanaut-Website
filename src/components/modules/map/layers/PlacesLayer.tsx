@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
 import { APIPlace } from "@/types";
-import { Marker, Popup } from "react-leaflet";
+import { Marker } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { useMapBounds } from "@/components/modules/map/hooks";
+import { useRouter } from "@/i18n";
 
 type Props = {
   places?: APIPlace[];
@@ -10,6 +11,7 @@ type Props = {
 
 export const PlacesLayer = ({ places }: Props) => {
   const mapBounds = useMapBounds();
+  const router = useRouter();
 
   const visiblePlaces: APIPlace[] = useMemo(() => {
     if (!places || !mapBounds) return [];
@@ -19,9 +21,15 @@ export const PlacesLayer = ({ places }: Props) => {
   return (
     visiblePlaces &&
     visiblePlaces.map((place) => (
-      <Marker key={place.id} position={[place.point[0], place.point[1]]}>
-        <Popup>{place.name}</Popup>
-      </Marker>
+      <Marker
+        key={place.id}
+        position={[place.point[0], place.point[1]]}
+        eventHandlers={{
+          click: () => {
+            router.push(`/map?place=${place.id}`, { scroll: false });
+          },
+        }}
+      />
     ))
   );
 };

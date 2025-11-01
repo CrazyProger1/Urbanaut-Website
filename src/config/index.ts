@@ -9,3 +9,4 @@ export {
 export { PAGES, MODALS } from "./nav";
 export { ICONS } from "./assets";
 export { LAYERS } from "./map";
+export { STUBS, ALTS } from "./media";
