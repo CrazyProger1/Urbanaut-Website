@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   PLACES: "places/",
   PLACE: "places/[id]",
   AREAS: "areas/",
+  AREA: "areas/[id]",
   REFRESH: "tokens/refresh/",
   TAGS: "tags/",
 };

@@ -10,7 +10,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useRouter } from "@/i18n";
-import { APIPlace } from "@/types";
+import { APIArea } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
@@ -20,11 +20,11 @@ import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
 
 type Props = {
-  place: APIPlace;
+  area: APIArea;
 };
 
-export function PlaceSheet({ place }: Props) {
-  const { description, name, tags, point } = place;
+export function AreaSheet({ area }: Props) {
+  const { description, name, tags, polygon } = area;
 
   const router = useRouter();
 
@@ -38,7 +38,7 @@ export function PlaceSheet({ place }: Props) {
       <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
-          <SheetDescription>Place</SheetDescription>
+          <SheetDescription>Area</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
           <GallerySection />
@@ -46,7 +46,6 @@ export function PlaceSheet({ place }: Props) {
           {tags && <TagsSection tags={tags} />}
           <TimelineSection />
           <StateSection />
-          <LocationSection point={`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`} />
         </div>
         <SheetFooter>
           <Button type="submit">Edit</Button>

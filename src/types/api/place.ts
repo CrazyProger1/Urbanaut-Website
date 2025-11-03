@@ -12,3 +12,9 @@ export type APICreatePlace = {
   name: string;
   point: APIPoint;
 };
+
+export type APIPlaceFilters = {
+  name?: string;
+  area?: number;
+  tags?: string;
+};

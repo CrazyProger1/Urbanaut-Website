@@ -1,1 +1,9 @@
-export { fetchAPI, fetchAuthenticated, getPlaces, getTags, getAreas, getPlace } from "./api";
+export {
+  fetchAPI,
+  fetchAuthenticated,
+  getPlaces,
+  getTags,
+  getAreas,
+  getPlace,
+  getArea,
+} from "./api";
