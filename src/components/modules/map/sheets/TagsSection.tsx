@@ -1,6 +1,7 @@
 import React from "react";
 import { Tag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "@/i18n";
 
 type Props = {
   tags: string[];
@@ -15,9 +16,11 @@ export const TagsSection = ({ tags }: Props) => {
       </div>
       <div className="flex flex-wrap gap-1">
         {tags?.map((tag) => (
-          <Badge variant="outline" className="text-muted-foreground text-sm">
-            <Tag /> {tag}
-          </Badge>
+          <Link key={tag} href={`?tags=${tag}`}>
+            <Badge variant="outline" className="text-muted-foreground text-sm">
+              <Tag /> {tag}
+            </Badge>
+          </Link>
         ))}
       </div>
     </div>

@@ -4,7 +4,7 @@ export const requireRefresh = (response: ErrorAPIResponse | SuccessfulAPIRespons
   return !response.success && response?.errors?.[0]?.code === "token_not_valid";
 };
 
-export const builtURLSearchParams = <T>(
+export const buildURLSearchParams = <T>(
   params?: Record<string, string | number | string[] | number[] | undefined | null>,
   keys?: (keyof T)[],
 ) => {
@@ -14,7 +14,14 @@ export const builtURLSearchParams = <T>(
     if (keys && !key.includes(key)) {
       return;
     }
-    searchParams.set(key, String(value));
+
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        searchParams.append(key, String(item));
+      });
+    } else {
+      searchParams.set(key, String(value));
+    }
   });
   return searchParams;
 };
