@@ -1,17 +1,24 @@
-"use client";
-
 import React, { useMemo } from "react";
 import { APIArea } from "@/types/api";
-import { Polygon } from "react-leaflet";
+import { Polygon, useMap } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { useMapBounds } from "@/components/modules/map/hooks";
 
 type Props = {
   areas?: APIArea[];
+  enabledZoomOnClick?: boolean;
+  zoomOnClick?: number;
+  onSelect?: (area: APIArea) => void;
 };
 
-export const AreasLayer = ({ areas }: Props) => {
+export const AreasLayer = ({
+  areas,
+  onSelect,
+  enabledZoomOnClick = false,
+  zoomOnClick = 15,
+}: Props) => {
   const mapBounds = useMapBounds();
+  const map = useMap();
 
   const polygons = useMemo(() => {
     return areas?.map((area) => area.polygon.map((point) => new LatLng(point[0], point[1])));
@@ -26,7 +33,20 @@ export const AreasLayer = ({ areas }: Props) => {
   return (
     <>
       {visiblePolygons.map((polygon, index) => (
-        <Polygon key={index} positions={polygon} />
+        <Polygon
+          key={index}
+          positions={polygon}
+          eventHandlers={{
+            click: (event) => {
+              if (enabledZoomOnClick) {
+                map.setView(event.latlng, zoomOnClick);
+              }
+              if (onSelect && areas && polygons) {
+                onSelect(areas[polygons.indexOf(polygon)]);
+              }
+            },
+          }}
+        />
       ))}
     </>
   );

@@ -1,9 +1,10 @@
 import React from "react";
 import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { APIPoint } from "@/types";
 
 type Props = {
-  point?: string;
+  point?: APIPoint;
   address?: string;
 };
 
@@ -19,7 +20,8 @@ export const LocationSection = ({ point, address }: Props) => {
         <div className="flex flex-row gap-1 text-sm">
           {point && (
             <div>
-              Coordinates: <Badge variant="outline">{point}</Badge>
+              Coordinates:{" "}
+              <Badge variant="outline">{`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`}</Badge>
             </div>
           )}
         </div>

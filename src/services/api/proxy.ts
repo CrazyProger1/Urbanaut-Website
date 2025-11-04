@@ -1,6 +1,6 @@
 // import { ErrorAPIResponse, SuccessfulAPIResponse } from "@/types";
 // import { API_ENDPOINTS, PROXY_URL } from "@/config";
-// import { NextRequest, NextResponse } from "next/server";
+// import { NextRequest, NextResponse } from "next/next";
 // import { getSession, setSession } from "@/utils/session";
 // import { fetchAPI } from "@/services/api/api";
 // import { requireRefresh } from "@/utils/api";

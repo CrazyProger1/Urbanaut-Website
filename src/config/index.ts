@@ -6,7 +6,7 @@ export {
   SESSION_OPTIONS,
   REFRESH_DELTA_TIME,
 } from "./session";
-export { PAGES, MODALS } from "./nav";
+export { PAGES, QUERIES } from "./nav";
 export { ICONS } from "./assets";
 export { LAYERS } from "./map";
 export { STUBS, ALTS } from "./media";

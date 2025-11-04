@@ -1,7 +1,4 @@
-"use client";
-
 import {
-  Sheet,
   SheetClose,
   SheetContent,
   SheetDescription,
@@ -9,15 +6,15 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { useRouter } from "@/i18n";
 import { APIArea } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
 import { TimelineSection } from "./TimelineSection";
 import { StateSection } from "./StateSection";
-import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
+import { QUERIES } from "@/config";
+import { Sheet } from "@/components/ui/next/sheet";
 
 type Props = {
   area: APIArea;
@@ -26,15 +23,8 @@ type Props = {
 export function AreaSheet({ area }: Props) {
   const { description, name, tags, polygon } = area;
 
-  const router = useRouter();
-
-  const handleToggle = (open: boolean) => {
-    if (!open) {
-      router.push("/map");
-    }
-  };
   return (
-    <Sheet open={true} onOpenChange={handleToggle}>
+    <Sheet open={true} query={QUERIES.AREA_SHEET}>
       <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>

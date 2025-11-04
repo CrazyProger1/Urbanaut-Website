@@ -1,7 +1,4 @@
-"use client";
-
 import {
-  Sheet,
   SheetClose,
   SheetContent,
   SheetDescription,
@@ -9,7 +6,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { useRouter } from "@/i18n";
 import { APIPlace } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
@@ -18,23 +14,18 @@ import { TimelineSection } from "./TimelineSection";
 import { StateSection } from "./StateSection";
 import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
+import { Sheet } from "@/components/ui/next/sheet";
+import { QUERIES } from "@/config";
 
 type Props = {
   place: APIPlace;
 };
 
 export function PlaceSheet({ place }: Props) {
-  const { description, name, tags, point } = place;
+  const { description, name, tags, point, created_at, abandoned_at, built_at } = place;
 
-  const router = useRouter();
-
-  const handleToggle = (open: boolean) => {
-    if (!open) {
-      router.push("/map");
-    }
-  };
   return (
-    <Sheet open={true} onOpenChange={handleToggle}>
+    <Sheet open={true} query={QUERIES.PLACE_SHEET}>
       <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
@@ -43,10 +34,10 @@ export function PlaceSheet({ place }: Props) {
         <div className="flex flex-col gap-4 p-4">
           <GallerySection />
           {description && <DescriptionSection description={description} />}
-          {tags && <TagsSection tags={tags} />}
-          <TimelineSection />
+          {!!tags?.length && <TagsSection tags={tags} />}
+          {(created_at || abandoned_at || built_at) && <TimelineSection />}
           <StateSection />
-          <LocationSection point={`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`} />
+          <LocationSection point={point} />
         </div>
         <SheetFooter>
           <Button type="submit">Edit</Button>

@@ -5,6 +5,9 @@ export type APIPlace = {
   name: string;
   description?: string;
   point: APIPoint;
+  built_at?: string;
+  abandoned_at?: string;
+  created_at?: string;
   tags?: string[];
 };
 

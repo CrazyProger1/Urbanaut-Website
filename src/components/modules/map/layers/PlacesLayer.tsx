@@ -1,17 +1,24 @@
 import React, { useMemo } from "react";
 import { APIPlace } from "@/types";
-import { Marker } from "react-leaflet";
+import { Marker, useMap } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { useMapBounds } from "@/components/modules/map/hooks";
-import { useRouter } from "@/i18n";
 
 type Props = {
   places?: APIPlace[];
+  enabledZoomOnClick?: boolean;
+  zoomOnClick?: number;
+  onSelect?: (place: APIPlace) => void;
 };
 
-export const PlacesLayer = ({ places }: Props) => {
+export const PlacesLayer = ({
+  places,
+  enabledZoomOnClick = false,
+  zoomOnClick = 15,
+  onSelect,
+}: Props) => {
   const mapBounds = useMapBounds();
-  const router = useRouter();
+  const map = useMap();
 
   const visiblePlaces: APIPlace[] = useMemo(() => {
     if (!places || !mapBounds) return [];
@@ -25,8 +32,11 @@ export const PlacesLayer = ({ places }: Props) => {
         key={place.id}
         position={[place.point[0], place.point[1]]}
         eventHandlers={{
-          click: () => {
-            router.push(`/map?place=${place.id}`, { scroll: false });
+          click: (event) => {
+            if (enabledZoomOnClick) {
+              map.setView(event.latlng, zoomOnClick);
+            }
+            onSelect?.(place);
           },
         }}
       />

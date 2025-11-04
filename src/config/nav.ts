@@ -5,7 +5,9 @@ export const PAGES = {
   SETTINGS: "/settings",
 };
 
-export const MODALS = {
-  ADD_AREA: "addarea",
-  ADD_PLACE: "addplace",
+export const QUERIES = {
+  AREA_MODAL: "addarea",
+  PLACE_MODAL: "addplace",
+  AREA_SHEET: "area",
+  PLACE_SHEET: "place",
 };

@@ -7,7 +7,7 @@ import L, { LatLng, type Map as LeafletMap } from "leaflet";
 import { APIPlace, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
-import { ICONS, LAYERS } from "@/config";
+import { ICONS, LAYERS, PAGES, QUERIES } from "@/config";
 import { APIArea } from "@/types/api";
 import { ToolBar, LayersBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
@@ -107,7 +107,7 @@ const DynamicMap = ({
       const point = placeChoosingToolRef.current.getPoint();
 
       if (point) {
-        params.set("addplace", "true");
+        params.set(QUERIES.PLACE_MODAL, "true");
         params.set("point", `${point.lat},${point.lng}`);
 
         router.push(`?${params}`, { scroll: false });
@@ -120,7 +120,7 @@ const DynamicMap = ({
       const points = areaChoosingToolRef.current.getPoints();
 
       if (points) {
-        params.set("addarea", "true");
+        params.set(QUERIES.AREA_MODAL, "true");
         params.set("points", points.map((point) => `${point.lat},${point.lng}`).join(";"));
 
         router.push(`?${params}`, { scroll: false });
@@ -146,6 +146,24 @@ const DynamicMap = ({
     setCurrentPrimaryLayer(layer);
   };
 
+  const handlePlaceSelect = useCallback(
+    (place: APIPlace) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(QUERIES.PLACE_SHEET, String(place.id));
+      router.push(`${PAGES.MAP}?${params}`, { scroll: false });
+    },
+    [searchParams],
+  );
+
+  const handleAreaSelect = useCallback(
+    (area: APIArea) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(QUERIES.AREA_SHEET, String(area.id));
+      router.push(`${PAGES.MAP}?${params}`, { scroll: false });
+    },
+    [searchParams],
+  );
+
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
@@ -160,12 +178,12 @@ const DynamicMap = ({
           <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
           {isPlacesVisible && (
             <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
-              <PlacesLayer places={places} />
+              <PlacesLayer places={places} enabledZoomOnClick={true} onSelect={handlePlaceSelect} />
             </ZoomSwitch>
           )}
           {isAreasVisible && (
             <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
-              <AreasLayer areas={areas} />
+              <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />
             </ZoomSwitch>
           )}
           {isCoordinatesVisible && <CoordinatesTool />}

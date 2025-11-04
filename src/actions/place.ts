@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import { APICreatePlace } from "@/types";
 import { API_ENDPOINTS } from "@/config";
