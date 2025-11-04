@@ -35,7 +35,11 @@ export function PlaceSheet({ place }: Props) {
           <GallerySection />
           {description && <DescriptionSection description={description} />}
           {!!tags?.length && <TagsSection tags={tags} />}
-          {(created_at || abandoned_at || built_at) && <TimelineSection />}
+          <TimelineSection
+            createdAt={created_at ? new Date(created_at) : undefined}
+            builtAt={built_at ? new Date(built_at) : undefined}
+            abandonedAt={abandoned_at ? new Date(abandoned_at) : undefined}
+          />
           <StateSection />
           <LocationSection point={point} />
         </div>

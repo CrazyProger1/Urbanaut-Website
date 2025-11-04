@@ -2,6 +2,7 @@ import React from "react";
 import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { APIPoint } from "@/types";
+import { CopyToast } from "@/components/common/toasts";
 
 type Props = {
   point?: APIPoint;
@@ -21,7 +22,9 @@ export const LocationSection = ({ point, address }: Props) => {
           {point && (
             <div>
               Coordinates:{" "}
-              <Badge variant="outline">{`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`}</Badge>
+              <CopyToast clipboard={`${point[0]}, ${point[1]}`}>
+                <Badge variant="outline">{`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`}</Badge>
+              </CopyToast>
             </div>
           )}
         </div>
