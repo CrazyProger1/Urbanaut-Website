@@ -3,7 +3,7 @@ import React from "react";
 import "../../styles";
 import { NextIntlClientProvider } from "next-intl";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { GOOGLE_ANALYTICS_ID } from "@/config";
+import { GOOGLE_ANALYTICS_ID, SITE_URL } from "@/config";
 import { ModalProvider } from "@/components/common/modals";
 import { SigninModal, SignupModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar } from "@/components/modules/layout";
@@ -16,8 +16,26 @@ import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
-  description:
-    "Urbanaut-Club — a social platform for urban explorers, diggers, and extreme tourism enthusiasts.",
+  description: "Social platform for urban explorers, diggers, and extreme tourism enthusiasts.",
+  keywords: [
+    "urbex",
+    "urban",
+    "urbanaut",
+    "club",
+    "urbanaut club",
+    "exploration",
+    "diggers",
+    "stalkers",
+    "urban exploration",
+    "urbex community",
+    "abandoned places",
+    "urban explorers",
+    "extreme tourism",
+    "underground exploration",
+    "urban adventure",
+    "industrial ruins",
+  ],
+  metadataBase: new URL(SITE_URL),
 };
 
 const poppins = Poppins({

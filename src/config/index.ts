@@ -1,3 +1,5 @@
+export const SITE_URL = process.env.SITE_URL || "https://urbanaut.club";
+
 export { GOOGLE_ANALYTICS_ID } from "./google";
 export { API_URL, PROXY_URL, API_ENDPOINTS } from "./api";
 export {
