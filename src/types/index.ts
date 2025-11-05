@@ -20,6 +20,9 @@ export type {
   APIArea,
   APITag,
   APITokenPayload,
+  APISecurityLevel,
+  APIAchievementSignificance,
+  APIPreservationLevel,
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";

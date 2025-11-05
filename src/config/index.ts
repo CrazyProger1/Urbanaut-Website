@@ -1,5 +1,3 @@
-export const SITE_URL = process.env.SITE_URL || "https://urbanaut.club";
-
 export { GOOGLE_ANALYTICS_ID } from "./google";
 export { API_URL, PROXY_URL, API_ENDPOINTS } from "./api";
 export {
@@ -8,7 +6,7 @@ export {
   SESSION_OPTIONS,
   REFRESH_DELTA_TIME,
 } from "./session";
-export { PAGES, QUERIES, SIDEBAR_GROUPS } from "./nav";
+export { PAGES, QUERIES, SIDEBAR_GROUPS, URLS, SITE_URL } from "./nav";
 export { ICONS } from "./assets";
 export { LAYERS } from "./map";
 export { STUBS, ALTS, IMAGES } from "./media";

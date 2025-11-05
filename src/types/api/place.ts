@@ -1,4 +1,6 @@
 import { APIPoint } from "./geo";
+import { APISecurityLevel } from "@/types";
+import { APIPreservationLevel } from "@/types";
 
 export type APIPlace = {
   id: number;
@@ -9,6 +11,8 @@ export type APIPlace = {
   abandoned_at?: string;
   created_at?: string;
   tags?: string[];
+  security?: APISecurityLevel;
+  preservation?: APIPreservationLevel;
 };
 
 export type APICreatePlace = {

@@ -12,6 +12,17 @@ export const PAGES = {
   CALENDAR: "/calendar",
 };
 
+export const SITE_URL = process.env.SITE_URL || "https://urbanaut.club";
+
+export const URLS = {
+  SITE: SITE_URL,
+  YOU_TUBE: "https://www.youtube.com/@UrbanautOfficial",
+  INSTAGRAM: "https://www.instagram.com/urbanautofficial/",
+  TELEGRAM: "https://t.me/urbanautofficial",
+  TIKTOK: "https://www.tiktok.com/urbanautofficial/",
+  PATREON: "https://www.patreon.com/urbanaut",
+};
+
 export const QUERIES = {
   AREA_MODAL: "addarea",
   PLACE_MODAL: "addplace",
@@ -49,32 +60,32 @@ export const SIDEBAR_MAIN: SidebarItem[] = [
 export const SIDEBAR_PLATFORMS: SidebarItem[] = [
   {
     title: "YouTube",
-    url: "https://www.youtube.com/@UrbanautOfficial",
+    url: URLS.YOU_TUBE,
     icon: FaYoutube,
     target: "_blank",
   },
   {
     title: "Instagram",
-    url: "https://www.instagram.com/urbanautofficial/",
+    url: URLS.INSTAGRAM,
     icon: FaInstagram,
     target: "_blank",
   },
   {
     title: "Telegram",
-    url: "https://t.me/urbanautofficial",
+    url: URLS.TELEGRAM,
     icon: FaTelegram,
     target: "_blank",
   },
   {
     title: "TikTok",
-    url: "#",
+    url: URLS.TIKTOK,
     icon: FaTiktok,
     disabled: true,
     target: "_blank",
   },
   {
     title: "Patreon",
-    url: "https://www.patreon.com/urbanaut",
+    url: URLS.PATREON,
     icon: FaPatreon,
     target: "_blank",
   },
@@ -82,7 +93,7 @@ export const SIDEBAR_PLATFORMS: SidebarItem[] = [
 export const SIDEBAR_SUPPORT: SidebarItem[] = [
   {
     title: "Donate",
-    url: "https://www.patreon.com/c/urbanaut",
+    url: URLS.PATREON,
     icon: CircleDollarSign,
     target: "_blank",
   },

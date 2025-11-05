@@ -22,7 +22,17 @@ type Props = {
 };
 
 export function PlaceSheet({ place }: Props) {
-  const { description, name, tags, point, created_at, abandoned_at, built_at } = place;
+  const {
+    description,
+    name,
+    tags,
+    point,
+    created_at,
+    abandoned_at,
+    built_at,
+    security,
+    preservation,
+  } = place;
 
   return (
     <Sheet open={true} query={QUERIES.PLACE_SHEET}>
@@ -40,7 +50,7 @@ export function PlaceSheet({ place }: Props) {
             builtAt={built_at ? new Date(built_at) : undefined}
             abandonedAt={abandoned_at ? new Date(abandoned_at) : undefined}
           />
-          <StateSection />
+          <StateSection security={security} preservation={preservation} />
           <LocationSection point={point} />
         </div>
         <SheetFooter>

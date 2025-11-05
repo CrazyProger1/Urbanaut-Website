@@ -89,6 +89,7 @@
     --color-difficulty-hard: rgba(var(--color-base-hard), 0.1);
     --color-difficulty-impossible: rgba(var(--color-base-impossible), 0.1);
 
+    --color-preservation-none: rgba(var(--color-base-none), 0.1);
     --color-preservation-low: rgba(var(--color-base-hard), 0.1);
     --color-preservation-medium: rgba(var(--color-base-medium), 0.1);
     --color-preservation-high: rgba(var(--color-base-easy), 0.1);
@@ -227,8 +228,9 @@
     --color-difficulty-hard: var(--color-difficulty-hard);
     --color-difficulty-impossible: var(--color-difficulty-impossible);
 
+    --color-preservation-none: var(--color-preservation-none);
     --color-preservation-low: var(--color-preservation-low);
-    --color-preservation-medium:var(--color-preservation-medium);
+    --color-preservation-medium: var(--color-preservation-medium);
     --color-preservation-high: var(--color-preservation-high);
     --color-preservation-awesome: var(--color-preservation-awesome);
 }

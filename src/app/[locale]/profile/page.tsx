@@ -10,7 +10,7 @@ import { PAGES } from "@/config";
 import { redirect } from "@/i18n";
 import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
-import { getRankShadowClass } from "@/utils/ranks";
+import { getRankShadowClass } from "@/utils/css";
 
 type Props = {
   searchParams: Promise<{ tab?: string }>;
