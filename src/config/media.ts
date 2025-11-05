@@ -4,4 +4,9 @@ export const STUBS = {
 
 export const ALTS = {
   PLACE_PHOTO: "Place photo",
+  LOGO_PHOTO: "Logo photo",
+};
+
+export const IMAGES = {
+  LOGO: "/web-app-manifest-192x192.png",
 };

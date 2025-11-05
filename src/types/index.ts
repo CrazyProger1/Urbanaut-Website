@@ -23,3 +23,4 @@ export type {
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";
+export type { SidebarItem } from "./ui";

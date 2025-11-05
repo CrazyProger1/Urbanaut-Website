@@ -8,100 +8,27 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarGroupLabel,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Calendar, Home, Search, Map, CircleDollarSign, Newspaper, Send } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import Image from "next/image";
-import { Link } from "@/i18n";
-import { PAGES } from "@/config";
-import { FaInstagram, FaPatreon, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
-import { SearchForm } from "./SearchForm";
-
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Map",
-    url: PAGES.MAP,
-    icon: Map,
-  },
-  {
-    title: "Blog",
-    url: "#",
-    icon: Newspaper,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-];
-const socialNetworks = [
-  {
-    title: "YouTube",
-    url: "https://www.youtube.com/@UrbanautOfficial",
-    icon: FaYoutube,
-  },
-  {
-    title: "Instagram",
-    url: "https://www.instagram.com/urbanautofficial/",
-    icon: FaInstagram,
-  },
-  {
-    title: "Telegram",
-    url: "https://t.me/urbanautofficial",
-    icon: FaTelegram,
-  },
-  {
-    title: "TikTok",
-    url: "#",
-    icon: FaTiktok,
-    disabled: true,
-  },
-  {
-    title: "Patreon",
-    url: "https://www.patreon.com/urbanaut",
-    icon: FaPatreon,
-  },
-];
-
-const support = [
-  {
-    title: "Donate",
-    url: "https://www.patreon.com/c/urbanaut",
-    icon: CircleDollarSign,
-    target: "_blank",
-  },
-  {
-    title: "Feedback",
-    url: "#",
-    icon: Send,
-    disabled: true,
-  },
-];
+import { Link, usePathname } from "@/i18n";
+import { ALTS, IMAGES, PAGES, SIDEBAR_GROUPS } from "@/config";
 
 export const Sidebar = () => {
   const sidebar = useSidebar();
+  const pathname = usePathname();
+
   return (
     <ShadcnSidebar collapsible="icon" className="drop-shadow-volume">
       <SidebarContent>
         <SidebarGroup>
-          <Link className="flex flex-row items-center gap-4" href="/">
+          <Link className="flex flex-row items-center gap-4" href={PAGES.MAIN}>
             <Image
               className="cursor-pointer"
-              src="/web-app-manifest-192x192.png"
-              alt="logo"
+              src={IMAGES.LOGO}
+              alt={ALTS.LOGO_PHOTO}
               width="64"
               height="64"
             />
@@ -109,56 +36,24 @@ export const Sidebar = () => {
           </Link>
         </SidebarGroup>
         <Separator />
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>Platforms</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {socialNetworks.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild disabled={item.disabled}>
-                    <Link href={item.url} target="_blank">
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>Support Us</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {support.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild disabled={item.disabled}>
-                    <Link href={item.url} target={item.target}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {SIDEBAR_GROUPS.map((section, index) => (
+          <SidebarGroup key={`${section.title}-${index}`}>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {section.items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild isActive={pathname === item.url}>
+                      <Link href={item.url} target={item.target}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
     </ShadcnSidebar>
   );
