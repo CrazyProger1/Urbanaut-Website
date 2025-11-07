@@ -12,3 +12,4 @@ export const API_ENDPOINTS = {
   REFRESH: "tokens/refresh/",
   TAGS: "tags/",
 };
+
