@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import { fetchAPI } from "@/services";
 import { API_ENDPOINTS } from "@/config";

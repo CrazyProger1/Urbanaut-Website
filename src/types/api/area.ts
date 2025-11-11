@@ -11,4 +11,5 @@ export type APIArea = {
 export type APICreateArea = {
   name: string;
   polygon: APIPoint[];
+  tags?: string[];
 };

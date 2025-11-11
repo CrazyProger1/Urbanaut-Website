@@ -18,6 +18,8 @@ export type APIPlace = {
 export type APICreatePlace = {
   name: string;
   point: APIPoint;
+  tags?: string[];
+  is_private?: boolean;
 };
 
 export type APIPlaceFilters = {

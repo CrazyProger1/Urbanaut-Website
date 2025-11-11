@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Label } from "@/components/ui/label";
+import React from "react";
 import {
   Tags,
   TagsContent,
@@ -12,59 +11,38 @@ import {
   TagsValue,
 } from "@/components/ui/shadcn-io/tags";
 import { CheckIcon } from "lucide-react";
-import { APITag } from "@/types";
 
 type Props = {
-  tags?: APITag[];
+  tags: string[];
+  selected?: string[];
+  onRemove?: (tag: string) => void;
+  onSelect?: (tag: string) => void;
 };
 
-export const TagsSelect = ({ tags }: Props) => {
-  const [selected, setSelected] = useState<APITag[]>([]);
-
-  const handleRemove = (value: APITag) => {
-    if (!selected.includes(value)) {
-      return;
-    }
-    console.log(`removed: ${value}`);
-    setSelected((prev) => prev.filter((v) => v !== value));
-  };
-
-  const handleSelect = (value: APITag) => {
-    if (selected.includes(value)) {
-      handleRemove(value);
-      return;
-    }
-    console.log(`selected: ${value}`);
-    setSelected((prev) => [...prev, value]);
-  };
+export const TagsSelect = ({ tags, selected, onSelect, onRemove }: Props) => {
   return (
-    <div className="flex w-full flex-col gap-2">
-      <Label>Tags</Label>
-      <Tags>
-        <TagsTrigger>
-          {selected.map((tag) => (
-            <TagsValue key={tag.tag} onRemove={() => handleRemove(tag)}>
-              #{tag.tag}
-            </TagsValue>
-          ))}
-        </TagsTrigger>
-        <TagsContent>
-          <TagsInput placeholder="Search tag..." />
-          <TagsList>
-            <TagsEmpty />
-            <TagsGroup>
-              {tags?.map((tag) => (
-                <TagsItem key={tag.id} onSelect={() => handleSelect(tag)} value={tag.tag}>
-                  #{tag.tag}
-                  {selected.includes(tag) && (
-                    <CheckIcon className="text-muted-foreground" size={14} />
-                  )}
-                </TagsItem>
-              ))}
-            </TagsGroup>
-          </TagsList>
-        </TagsContent>
-      </Tags>
-    </div>
+    <Tags>
+      <TagsTrigger>
+        {selected?.map((tag) => (
+          <TagsValue key={tag} onRemove={() => onRemove?.(tag)}>
+            #{tag}
+          </TagsValue>
+        ))}
+      </TagsTrigger>
+      <TagsContent>
+        <TagsInput placeholder="Search tag..." />
+        <TagsList>
+          <TagsEmpty />
+          <TagsGroup>
+            {tags.map((tag) => (
+              <TagsItem key={tag} onSelect={() => onSelect?.(tag)} value={tag}>
+                #{tag}
+                {tags.includes(tag) && <CheckIcon className="text-muted-foreground" size={14} />}
+              </TagsItem>
+            ))}
+          </TagsGroup>
+        </TagsList>
+      </TagsContent>
+    </Tags>
   );
 };

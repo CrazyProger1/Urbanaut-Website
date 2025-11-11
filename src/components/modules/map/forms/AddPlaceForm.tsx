@@ -20,13 +20,17 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
-import { TagsSelect } from "./TagsSelect";
 import { toast } from "sonner";
 import { APITag } from "@/types";
+import { Label } from "@/components/ui/label";
+import { CheckBoxToggle } from "@/components/common/toggles";
+import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
   description: z.string().max(1000).min(0),
+  is_private: z.boolean(),
+  tags: z.array(z.string()),
 });
 
 type Props = {
@@ -42,19 +46,37 @@ export const AddPlaceForm = ({ tags }: Props) => {
     defaultValues: {
       name: "",
       description: "",
+      is_private: false,
+      tags: [],
     },
     mode: "onSubmit",
   });
 
+  const selected = form.watch("tags");
+
+  const handleSelect = (tag: string) => {
+    if (!selected.includes(tag)) {
+      form.setValue("tags", [...selected, tag]);
+    }
+  };
+
+  const handleRemove = (tag: string) => {
+    form.setValue(
+      "tags",
+      selected.filter((t) => t !== tag),
+    );
+  };
+
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { tags, name, is_private } = values;
     const point = searchParams.get("point");
     const params = new URLSearchParams(searchParams);
 
     if (point) {
       const [lat, lng] = point.split(",").map(Number);
-      await createPlace({ name: values.name, point: [lat, lng] });
+      await createPlace({ name, point: [lat, lng], tags, is_private });
       toast.success("Place added successfully.");
       params.delete("point");
       params.delete("addplace");
@@ -96,7 +118,40 @@ export const AddPlaceForm = ({ tags }: Props) => {
                 </FormItem>
               )}
             />
-            <TagsSelect tags={tags} />
+            <FormField
+              control={form.control}
+              name="tags"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <Label>Tags</Label>
+                  <TagsSelect
+                    tags={tags?.map((tag) => tag.tag) || []}
+                    selected={field.value}
+                    onSelect={handleSelect}
+                    onRemove={handleRemove}
+                  />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="is_private"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <CheckBoxToggle
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title="Private"
+                      description="Will this area be private for others?"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
               Save {formState.isSubmitting && <Spinner />}
             </Button>
