@@ -20,7 +20,7 @@ type Props = {
   area: APIArea;
 };
 
-export function AreaSheet({ area }: Props) {
+export const AreaSheet = ({ area }: Props) => {
   const { description, name, tags, polygon } = area;
 
   return (
@@ -38,7 +38,7 @@ export function AreaSheet({ area }: Props) {
           <StateSection />
         </div>
         <SheetFooter>
-          <Button type="submit">Edit</Button>
+          <Button type="submit">Suggest Correction</Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

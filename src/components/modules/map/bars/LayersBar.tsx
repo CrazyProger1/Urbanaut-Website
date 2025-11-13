@@ -8,6 +8,7 @@ import { MapLayer } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { LAYERS } from "@/config";
+import { SearchBar } from "./SearchBar";
 
 type Props = {
   layers: MapLayer[];
@@ -27,7 +28,7 @@ export const LayersBar = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="absolute right-0 flex w-full flex-col items-end gap-4 p-4">
+    <div className="absolute top-4 right-4 flex flex-col">
       <div className="flex flex-col items-end">
         <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
           <Toggle
@@ -41,7 +42,7 @@ export const LayersBar = ({
         </Card>
       </div>
       {isOpen && (
-        <Card className="w-full rounded-2xl shadow-lg backdrop-blur-sm sm:w-1/2 lg:w-1/4">
+        <Card className="bg-background/80 mt-4 w-full rounded-2xl shadow-lg backdrop-blur-sm">
           <CardContent className="flex flex-col gap-2">
             <RadioGroup
               defaultValue={defaultPrimary?.value || "OSM"}

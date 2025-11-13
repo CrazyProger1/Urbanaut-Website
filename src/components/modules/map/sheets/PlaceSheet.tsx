@@ -21,7 +21,7 @@ type Props = {
   place: APIPlace;
 };
 
-export function PlaceSheet({ place }: Props) {
+export const PlaceSheet = ({ place }: Props) => {
   const {
     description,
     name,
@@ -54,7 +54,7 @@ export function PlaceSheet({ place }: Props) {
           <LocationSection point={point} />
         </div>
         <SheetFooter>
-          <Button type="submit">Edit</Button>
+          <Button type="submit">Suggest Correction</Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

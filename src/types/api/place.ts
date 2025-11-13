@@ -26,4 +26,5 @@ export type APIPlaceFilters = {
   name?: string;
   area?: number;
   tags?: string;
+  query?: string;
 };

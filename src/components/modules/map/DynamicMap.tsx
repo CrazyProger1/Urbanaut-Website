@@ -9,7 +9,7 @@ import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS, PAGES, QUERIES } from "@/config";
 import { APIArea } from "@/types/api";
-import { ToolBar, LayersBar } from "@/components/modules/map/bars";
+import { ToolBar, LayersBar, SearchBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
 import {
   AreaChoosingTool,
@@ -167,6 +167,16 @@ const DynamicMap = ({
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
+        <div className="relative z-[9999]">
+          <SearchBar />
+          <LayersBar
+            layers={Object.values(LAYERS)}
+            onPrimaryLayerChange={handlePrimaryLayerChange}
+            onSecondaryLayerToggle={handleSecondaryLayerToggle}
+            defaultPrimary={currentPrimaryLayer || LAYERS.OSM}
+            defaultSecondary={currentSecondaryLayers}
+          />
+        </div>
         <MapContainer
           ref={setMap}
           className="-z-0"
@@ -212,13 +222,6 @@ const DynamicMap = ({
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
         onSavePlace={handleSave}
-      />
-      <LayersBar
-        layers={Object.values(LAYERS)}
-        onPrimaryLayerChange={handlePrimaryLayerChange}
-        onSecondaryLayerToggle={handleSecondaryLayerToggle}
-        defaultPrimary={currentPrimaryLayer || LAYERS.OSM}
-        defaultSecondary={currentSecondaryLayers}
       />
     </ContextMenu>
   );
