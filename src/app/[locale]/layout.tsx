@@ -13,6 +13,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
+import { FeedbackModal } from "@/components/modules/feedback/modals";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -73,6 +74,7 @@ const RootLayout = async ({ children }: Props) => {
                 </SidebarInset>
                 <SigninModal />
                 <SignupModal />
+                <FeedbackModal />
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
             </SidebarProvider>

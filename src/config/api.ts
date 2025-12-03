@@ -11,5 +11,5 @@ export const API_ENDPOINTS = {
   AREA: "areas/[id]",
   REFRESH: "tokens/refresh/",
   TAGS: "tags/",
+  FEEDBACKS: "feedbacks/",
 };
-

@@ -203,7 +203,7 @@ const DynamicMap = ({
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
-        <div className="relative z-[9998]">
+        <div className="relative z-50">
           <SearchBar />
           <LayersBar
             layers={Object.values(LAYERS)}

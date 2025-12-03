@@ -1,7 +1,11 @@
 import React from "react";
 import { getTags, getPlace, getArea } from "@/services";
 import { Map } from "@/components/modules/map";
-import { AddPlaceModal, AddAreaModal } from "@/components/modules/map/modals";
+import {
+  AddPlaceModal,
+  AddAreaModal,
+  SuggestCorrectionModal,
+} from "@/components/modules/map/modals";
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
 import { MapPageFilters } from "@/types/map";
 
@@ -37,6 +41,7 @@ const Page = async ({ searchParams }: Props) => {
       <Map filters={params} />
       <AddPlaceModal tags={tags} />
       <AddAreaModal tags={tags} />
+      <SuggestCorrectionModal />
       {currentPlace && <PlaceSheet place={currentPlace} />}
       {currentArea && <AreaSheet area={currentArea} />}
     </div>

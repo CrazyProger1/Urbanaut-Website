@@ -36,3 +36,4 @@ export type { APIArea, APICreateArea, APIAreaFilters } from "./area";
 export type { APITag } from "./tag";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";
+export type { APICreateFeedback } from "./feedback";

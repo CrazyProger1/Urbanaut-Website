@@ -28,6 +28,7 @@ export const QUERIES = {
   PLACE_MODAL: "addplace",
   AREA_SHEET: "area",
   PLACE_SHEET: "place",
+  FEEDBACK_MODAL: "feedback",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
@@ -99,7 +100,7 @@ export const SIDEBAR_SUPPORT: SidebarItem[] = [
   },
   {
     title: "Feedback",
-    url: "#",
+    url: `?${QUERIES.FEEDBACK_MODAL}=true`,
     icon: Send,
     disabled: true,
   },

@@ -25,6 +25,7 @@ export type {
   APIPreservationLevel,
   APIPlaceFilters,
   APIAreaFilters,
+  APICreateFeedback,
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";
