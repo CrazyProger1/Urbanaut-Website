@@ -1,3 +1,4 @@
+"use server";
 import { fetchAuthenticated } from "./auth";
 import { API_ENDPOINTS } from "@/config";
 import { APIPlace, ErrorAPIResponse, SuccessfulAPIResponse, PaginatedAPIResponse } from "@/types";

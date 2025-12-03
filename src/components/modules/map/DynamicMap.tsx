@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L, { LatLng, type Map as LeafletMap } from "leaflet";
+import L, { bounds, LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
 import { APIPlace, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
@@ -23,12 +23,14 @@ import {
 import { useSearchParams } from "next/navigation";
 import { TileLayers, PlacesLayer, AreasLayer } from "./layers";
 import { toast } from "sonner";
+import { MapPageFilters } from "@/types/map";
+import { getAreas, getPlaces } from "@/actions";
+import { useMapBounds } from "@/components/modules/map/hooks";
 
 type Props = {
   center?: LatLng;
   zoom?: number;
-  places?: APIPlace[];
-  areas?: APIArea[];
+  filters?: MapPageFilters;
   markerVisibilityMinimumZoomThreshold?: number;
   areaVisibilityMinimumZoomThreshold?: number;
 };
@@ -36,10 +38,9 @@ type Props = {
 const DynamicMap = ({
   center = new LatLng(50.4663775681885, 30.583190917968754),
   zoom = 5,
-  areas,
-  places,
   markerVisibilityMinimumZoomThreshold = 10,
   areaVisibilityMinimumZoomThreshold = 10,
+  filters,
 }: Props) => {
   const [isPlacesVisible, setIsPlacesVisible] = useState(true);
   const [isAreasVisible, setIsAreasVisible] = useState(true);
@@ -54,6 +55,41 @@ const DynamicMap = ({
   const searchParams = useSearchParams();
   const [currentPrimaryLayer, setCurrentPrimaryLayer] = useState<MapLayer>(LAYERS.OSM);
   const [currentSecondaryLayers, setCurrentSecondaryLayers] = useState<MapLayer[]>([]);
+  const [places, setPlaces] = useState<APIPlace[]>([]);
+  const [areas, setAreas] = useState<APIArea[]>([]);
+  const [currentMapBounds, setCurrentMapBounds] = useState<LatLngBounds>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const placesResponse = await getPlaces(filters);
+      const areasResponse = await getAreas();
+
+      if (placesResponse.success) {
+        setPlaces(placesResponse.results);
+      }
+      if (areasResponse.success) {
+        setAreas(areasResponse.results);
+      }
+    };
+    fetchData();
+  }, [filters, currentMapBounds]);
+
+  useEffect(() => {
+    if (!map) return;
+
+    const updateBounds = () => {
+      const bounds = map.getBounds();
+      setCurrentMapBounds(bounds);
+    };
+
+    map.addEventListener("zoomend", updateBounds);
+    map.addEventListener("moveend", updateBounds);
+
+    return () => {
+      map.removeEventListener("zoomend", updateBounds);
+      map.removeEventListener("moveend", updateBounds);
+    };
+  }, [map]);
 
   useEffect(() => {
     (async function init() {
@@ -167,7 +203,7 @@ const DynamicMap = ({
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
-        <div className="relative z-[9999]">
+        <div className="relative z-[9998]">
           <SearchBar />
           <LayersBar
             layers={Object.values(LAYERS)}

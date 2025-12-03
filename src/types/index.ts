@@ -23,6 +23,8 @@ export type {
   APISecurityLevel,
   APIAchievementSignificance,
   APIPreservationLevel,
+  APIPlaceFilters,
+  APIAreaFilters,
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";

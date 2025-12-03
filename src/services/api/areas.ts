@@ -1,8 +1,17 @@
+"use server";
 import { fetchAuthenticated } from "./auth";
 import { API_ENDPOINTS } from "@/config";
-import { APIArea, ErrorAPIResponse, PaginatedAPIResponse, SuccessfulAPIResponse } from "@/types";
+import {
+  APIArea,
+  APIAreaFilters,
+  ErrorAPIResponse,
+  PaginatedAPIResponse,
+  SuccessfulAPIResponse,
+} from "@/types";
 
-export const getAreas = async (): Promise<PaginatedAPIResponse<APIArea>> => {
+export const getAreas = async (
+  filters?: APIAreaFilters,
+): Promise<PaginatedAPIResponse<APIArea>> => {
   return fetchAuthenticated(API_ENDPOINTS.AREAS);
 };
 

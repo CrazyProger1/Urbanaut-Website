@@ -37,7 +37,7 @@ export const TagsSelect = ({ tags, selected, onSelect, onRemove }: Props) => {
             {tags.map((tag) => (
               <TagsItem key={tag} onSelect={() => onSelect?.(tag)} value={tag}>
                 #{tag}
-                {tags.includes(tag) && <CheckIcon className="text-muted-foreground" size={14} />}
+                {selected?.includes(tag) && <CheckIcon className="text-muted-foreground" size={14} />}
               </TagsItem>
             ))}
           </TagsGroup>

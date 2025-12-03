@@ -32,7 +32,7 @@ export type { APITokens, APIAccessToken, APITokenPayload } from "./token";
 export type { GoogleOauthRedirectURIAPIResponse, GoogleOauthCallbackAPIResponse } from "./oauth";
 export type { APIPoint } from "./geo";
 export type { APIPlace, APICreatePlace, APIPlaceFilters } from "./place";
-export type { APIArea, APICreateArea } from "./area";
+export type { APIArea, APICreateArea, APIAreaFilters } from "./area";
 export type { APITag } from "./tag";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";

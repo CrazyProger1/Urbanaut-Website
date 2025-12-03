@@ -1,3 +1,3 @@
 export { login, register, logout } from "./auth";
-export { createPlace } from "./place";
-export { createArea } from "./area";
+export { createPlace, getPlaces } from "./place";
+export { createArea, getAreas } from "./area";
