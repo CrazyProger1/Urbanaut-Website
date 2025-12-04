@@ -29,7 +29,7 @@ export const TagsSelect = ({ tags, selected, onSelect, onRemove }: Props) => {
           </TagsValue>
         ))}
       </TagsTrigger>
-      <TagsContent>
+      <TagsContent className="z-[9999]">
         <TagsInput placeholder="Search tag..." />
         <TagsList>
           <TagsEmpty />

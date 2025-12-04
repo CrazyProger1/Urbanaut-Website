@@ -8,7 +8,6 @@ import { MapLayer } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { LAYERS } from "@/config";
-import { SearchBar } from "./SearchBar";
 
 type Props = {
   layers: MapLayer[];

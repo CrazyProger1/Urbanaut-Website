@@ -25,7 +25,6 @@ import { TileLayers, PlacesLayer, AreasLayer } from "./layers";
 import { toast } from "sonner";
 import { MapPageFilters } from "@/types/map";
 import { getAreas, getPlaces } from "@/actions";
-import { useMapBounds } from "@/components/modules/map/hooks";
 
 type Props = {
   center?: LatLng;

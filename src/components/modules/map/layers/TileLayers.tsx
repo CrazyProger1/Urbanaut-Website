@@ -8,9 +8,9 @@ type Props = {
 
 export const TileLayers = ({ layers }: Props) => {
   return (
-    <div>
-      {layers.map((layer) => (
-        <TileLayer key={layer.value} url={layer.url} attribution={layer.attribution} />
+    <div key={JSON.stringify(layers)}>
+      {layers.map(({value, url, attribution}) => (
+        <TileLayer key={value} url={url} attribution={attribution} />
       ))}
     </div>
   );
