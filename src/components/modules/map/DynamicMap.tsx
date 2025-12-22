@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L, { bounds, LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
+import L, { LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
 import { APIPlace, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
@@ -25,6 +25,7 @@ import { TileLayers, PlacesLayer, AreasLayer } from "./layers";
 import { toast } from "sonner";
 import { MapPageFilters } from "@/types/map";
 import { getAreas, getPlaces } from "@/actions";
+import { useMapStore } from "@/stores";
 
 type Props = {
   center?: LatLng;
@@ -41,12 +42,20 @@ const DynamicMap = ({
   areaVisibilityMinimumZoomThreshold = 10,
   filters,
 }: Props) => {
-  const [isPlacesVisible, setIsPlacesVisible] = useState(true);
-  const [isAreasVisible, setIsAreasVisible] = useState(true);
-  const [isChoosingArea, setIsChoosingArea] = useState(false);
-  const [isChoosingPlace, setIsChoosingPlace] = useState(false);
-  const [isCoordinatesVisible, setIsCoordinatesVisible] = useState(false);
-  const [isRulerActive, setIsRulerActive] = useState(false);
+  const {
+    isAreasVisible,
+    isPlacesVisible,
+    isChoosingPlace,
+    isChoosingArea,
+    isRulerActive,
+    isCoordinatesVisible,
+    toggleAreasVisibility,
+    togglePlacesVisibility,
+    toggleChoosingPlace,
+    toggleChoosingArea,
+    toggleRulerActivity,
+    toggleCoordinatesVisibility,
+  } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
   const placeChoosingToolRef = useRef<PlaceChoosingToolHandle>(null);
@@ -101,28 +110,12 @@ const DynamicMap = ({
   }, []);
 
   const handleCancel = useCallback(() => {
-    setIsChoosingPlace(false);
-    setIsChoosingArea(false);
+    toggleChoosingArea(false);
+    toggleChoosingPlace(false);
   }, []);
 
   const handleAddPlace = () => {
-    setIsChoosingPlace(true);
-  };
-
-  const togglePlacesVisibility = () => {
-    setIsPlacesVisible((prev) => !prev);
-  };
-
-  const toggleAreasVisibility = () => {
-    setIsAreasVisible((prev) => !prev);
-  };
-
-  const toggleCoordinatesVisibility = () => {
-    setIsCoordinatesVisible((prev) => !prev);
-  };
-
-  const toggleRulerActivity = () => {
-    setIsRulerActive((prev) => !prev);
+    toggleChoosingPlace(true);
   };
 
   const handleCenterMap = useCallback(() => {
@@ -137,7 +130,7 @@ const DynamicMap = ({
     const params = new URLSearchParams(searchParams);
 
     if (isChoosingPlace && placeChoosingToolRef.current) {
-      setIsChoosingPlace(false);
+      toggleChoosingPlace(false);
 
       const point = placeChoosingToolRef.current.getPoint();
 
@@ -150,7 +143,7 @@ const DynamicMap = ({
     }
 
     if (isChoosingArea && areaChoosingToolRef.current) {
-      setIsChoosingArea(false);
+      toggleChoosingArea(false);
 
       const points = areaChoosingToolRef.current.getPoints();
 
@@ -164,7 +157,7 @@ const DynamicMap = ({
   };
 
   const handleAddArea = () => {
-    setIsChoosingArea(true);
+    toggleChoosingArea(true);
   };
 
   const handleSecondaryLayerToggle = (layer: MapLayer, active: boolean) => {
