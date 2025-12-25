@@ -24,7 +24,6 @@ export const CoordinatesTool = () => {
     if (!mapContainer) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      console.log("mousemove", e.clientX, e.clientY);
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 

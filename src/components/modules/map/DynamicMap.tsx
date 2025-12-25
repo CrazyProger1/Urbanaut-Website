@@ -250,6 +250,7 @@ const DynamicMap = ({
         onCenterMap={handleCenterMap}
         onCancel={handleCancel}
         onSavePlace={handleSave}
+        tooltip="Tap any point on the screen to see the coordinates"
       />
     </ContextMenu>
   );
