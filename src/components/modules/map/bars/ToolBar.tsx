@@ -65,43 +65,44 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
         )}
       >
         {tooltips && tooltips.length > 0 && (
-          <div className="flex flex-col pb-1 w-full">
+          <div className="flex w-0 min-w-full flex-col pb-1">
             <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={setIsTooltipsExpanded} />
             {isTooltipsExpanded && <ToolBarTooltipContainer tooltips={tooltips} />}
           </div>
         )}
 
-        <div className="flex flex-row gap-1">
-          <Button variant="ghost" onClick={onCenterMap}>
-            <LocateFixed />
-          </Button>
+        <div className="flex flex-col gap-1 md:flex-row">
+          <div className="flex flex-row gap-1">
+            <Button variant="ghost" onClick={onCenterMap}>
+              <LocateFixed />
+            </Button>
 
-          <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
-            <MapPin />
-          </Toggle>
+            <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
+              <MapPin />
+            </Toggle>
 
-          <Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>
-            <Scan />
-          </Toggle>
+            <Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>
+              <Scan />
+            </Toggle>
 
-          <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
-            <Move3d />
-          </Toggle>
+            <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
+              <Move3d />
+            </Toggle>
 
-          <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
-            <Ruler />
-          </Toggle>
+            <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
+              <Ruler />
+            </Toggle>
+          </div>
 
           {(isChoosingArea || isChoosingPlace) && (
-            <>
-              <div className="mx-1 h-5 w-px bg-white/20" />
+            <div className="flex flex-col gap-1 border-t border-white/20 pt-1 md:flex-row md:border-t-0 md:border-l md:pl-1">
               <Button variant="ghost" size="sm" onClick={onSave}>
                 <Save /> Save
               </Button>
               <Button variant="destructive" size="sm" onClick={handleCancel}>
                 <Ban /> Cancel
               </Button>
-            </>
+            </div>
           )}
         </div>
       </Card>

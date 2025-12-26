@@ -7,7 +7,7 @@ type Props = {
 
 export const ToolBarTooltip = ({ tooltip }: Props) => {
   return (
-    <div className="flex flex-row gap-2 items-center first:border-t border-b p-1">
+    <div className="flex flex-row gap-2 items-center first:border-t border-b p-1 border-white/20">
       <div>
         <CircleAlert />
       </div>
