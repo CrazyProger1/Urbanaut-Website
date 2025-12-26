@@ -7,5 +7,5 @@ type Props = {
 };
 
 export const ToolBarTooltipsToggle = ({ value, onToggle }: Props) => {
-  return <div onClick={() => onToggle(!value)}>{value ? <ChevronDown /> : <ChevronUp />}</div>;
+  return <div className="w-full flex flex-col items-center" onClick={() => onToggle(!value)}>{value ? <ChevronDown /> : <ChevronUp />}</div>;
 };

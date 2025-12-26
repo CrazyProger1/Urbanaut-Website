@@ -55,7 +55,7 @@ export const CoordinatesTool = () => {
       style={{
         left: `${mousePosition.x}px`,
         top: `${mousePosition.y}px`,
-        transition: "none", // Ensures no lag behind cursor
+        transition: "none",
       }}
     >
       <div className="font-mono text-xs">

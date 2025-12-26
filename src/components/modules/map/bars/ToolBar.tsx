@@ -65,7 +65,7 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
         )}
       >
         {tooltips && tooltips.length > 0 && (
-          <div className="flex flex-col items-center pb-1">
+          <div className="flex flex-col pb-1 w-full">
             <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={setIsTooltipsExpanded} />
             {isTooltipsExpanded && <ToolBarTooltipContainer tooltips={tooltips} />}
           </div>
