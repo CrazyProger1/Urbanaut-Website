@@ -7,13 +7,5 @@ type Props = {
 };
 
 export const ToolBarTooltipsToggle = ({ value, onToggle }: Props) => {
-  return (
-    <div>
-      {value ? (
-        <ChevronDown onClick={() => onToggle(!value)} />
-      ) : (
-        <ChevronUp onClick={() => onToggle(!value)} />
-      )}
-    </div>
-  );
+  return <div onClick={() => onToggle(!value)}>{value ? <ChevronDown /> : <ChevronUp />}</div>;
 };
