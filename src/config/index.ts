@@ -10,3 +10,4 @@ export { PAGES, QUERIES, SIDEBAR_GROUPS, URLS, SITE_URL } from "./nav";
 export { ICONS } from "./assets";
 export { LAYERS } from "./map";
 export { STUBS, ALTS, IMAGES } from "./media";
+export { PLACEHOLDERS } from "./i18n";

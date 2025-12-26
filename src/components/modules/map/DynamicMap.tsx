@@ -7,7 +7,7 @@ import L, { LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
 import { APIPlace, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
-import { ICONS, LAYERS, PAGES, QUERIES } from "@/config";
+import { ICONS, LAYERS, PAGES, PLACEHOLDERS, QUERIES } from "@/config";
 import { APIArea } from "@/types/api";
 import { ToolBar, LayersBar, SearchBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
@@ -105,10 +105,6 @@ const DynamicMap = ({
     })();
   }, []);
 
-  const handleAddPlace = () => {
-    toggleChoosingPlace(true);
-  };
-
   const handleCenterMap = useCallback(() => {
     if (!map) return;
 
@@ -145,10 +141,6 @@ const DynamicMap = ({
         router.push(`?${params}`, { scroll: false });
       }
     }
-  };
-
-  const handleAddArea = () => {
-    toggleChoosingArea(true);
   };
 
   const handleSecondaryLayerToggle = (layer: MapLayer, active: boolean) => {
@@ -222,10 +214,8 @@ const DynamicMap = ({
         </MapContainer>
       </ContextMenuTrigger>
       <MapContextMenu
-        onAddPlace={handleAddPlace}
-        onAddArea={handleAddArea}
         onCopyCoordinates={() => {
-          toast.success("Coordinates copied into buffer.");
+          toast.success(PLACEHOLDERS.COORDINATES_COPIED_TOAST);
         }}
       />
       <ToolBar
