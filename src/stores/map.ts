@@ -7,6 +7,7 @@ type MapState = {
   isChoosingPlace: boolean;
   isCoordinatesVisible: boolean;
   isRulerActive: boolean;
+  tooltips: string[];
 };
 
 type MapDispatch = {
@@ -16,6 +17,9 @@ type MapDispatch = {
   toggleChoosingPlace: (choosing?: boolean) => void;
   toggleCoordinatesVisibility: (visible?: boolean) => void;
   toggleRulerActivity: (active?: boolean) => void;
+  addTooltip: (text: string) => void;
+  removeTooltip: (text: string) => void;
+  clearTooltips: () => void;
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
@@ -25,6 +29,7 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   isChoosingPlace: false,
   isCoordinatesVisible: false,
   isRulerActive: false,
+  tooltips: [],
 
   toggleAreasVisibility: (visible) => {
     if (visible === undefined) {
@@ -62,5 +67,19 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
       active = !get().isRulerActive;
     }
     set({ isRulerActive: active });
+  },
+  addTooltip: (text) => {
+    const currentTooltips = get().tooltips;
+
+    if (!currentTooltips.includes(text)) {
+      set({ tooltips: [text, ...currentTooltips] });
+    }
+  },
+  removeTooltip: (text) => {
+    const currentTooltips = get().tooltips;
+    set({ tooltips: currentTooltips.filter((t) => t !== text) });
+  },
+  clearTooltips: () => {
+    set({ tooltips: [] });
   },
 }));

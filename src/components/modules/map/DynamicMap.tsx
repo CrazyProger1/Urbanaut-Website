@@ -49,12 +49,8 @@ const DynamicMap = ({
     isChoosingArea,
     isRulerActive,
     isCoordinatesVisible,
-    toggleAreasVisibility,
-    togglePlacesVisibility,
     toggleChoosingPlace,
     toggleChoosingArea,
-    toggleRulerActivity,
-    toggleCoordinatesVisibility,
   } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
@@ -107,11 +103,6 @@ const DynamicMap = ({
         shadowUrl: ICONS.MARKER_SHADOW,
       });
     })();
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    toggleChoosingArea(false);
-    toggleChoosingPlace(false);
   }, []);
 
   const handleAddPlace = () => {
@@ -238,19 +229,8 @@ const DynamicMap = ({
         }}
       />
       <ToolBar
-        showSaveControls={isChoosingPlace || isChoosingArea}
-        isAreasVisible={isAreasVisible}
-        isPlacesVisible={isPlacesVisible}
-        isCoordinatesVisible={isCoordinatesVisible}
-        isRulerActive={isRulerActive}
-        onToggleAreasVisible={toggleAreasVisibility}
-        onTogglePlacesVisible={togglePlacesVisibility}
-        onToggleCoordinatesVisible={toggleCoordinatesVisibility}
-        onToggleRulerActive={toggleRulerActivity}
         onCenterMap={handleCenterMap}
-        onCancel={handleCancel}
         onSavePlace={handleSave}
-        tooltip="Tap any point on the screen to see the coordinates"
       />
     </ContextMenu>
   );

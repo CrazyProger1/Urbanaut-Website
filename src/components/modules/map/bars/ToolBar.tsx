@@ -1,135 +1,104 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import {
-  Ban,
-  ChevronDown,
-  ChevronUp,
-  CircleAlert,
-  LocateFixed,
-  MapPin,
-  Move3d,
-  Ruler,
-  Save,
-  Scan,
-} from "lucide-react";
+import { Ban, LocateFixed, MapPin, Move3d, Ruler, Save, Scan } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
-import { toast } from "sonner";
-import { AnimatePresence , motion} from "framer-motion";
+import { ToolBarTooltipsToggle } from "./ToolBarTooltipsToggle";
+import { ToolBarTooltipContainer } from "./ToolBarTooltipContainer";
+import { useMapStore } from "@/stores";
 
 type Props = {
-  showSaveControls?: boolean;
-  onTogglePlacesVisible?: () => void;
-  onToggleAreasVisible?: () => void;
-  onToggleCoordinatesVisible?: () => void;
-  onToggleRulerActive?: () => void;
-  isPlacesVisible?: boolean;
-  isAreasVisible?: boolean;
-  isCoordinatesVisible?: boolean;
-  isRulerActive?: boolean;
-  tooltip?: string;
   onCenterMap?: () => void;
   onSavePlace?: () => void;
-  onCancel?: () => void;
 };
 
-export const ToolBar = ({
-  showSaveControls,
-  onTogglePlacesVisible,
-  onToggleAreasVisible,
-  onToggleCoordinatesVisible,
-  onToggleRulerActive,
-  isPlacesVisible,
-  isAreasVisible,
-  isCoordinatesVisible,
-  isRulerActive,
-  tooltip,
-  onCenterMap,
-  onSavePlace: onSave,
-  onCancel,
-}: Props) => {
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
+  const {
+    tooltips,
+    isAreasVisible,
+    isCoordinatesVisible,
+    isPlacesVisible,
+    isChoosingPlace,
+    isChoosingArea,
+    isRulerActive,
+    addTooltip,
+    removeTooltip,
+    toggleChoosingArea,
+    toggleChoosingPlace,
+    toggleCoordinatesVisibility,
+    togglePlacesVisibility,
+    toggleAreasVisibility,
+    toggleRulerActivity,
+  } = useMapStore();
+  const [isTooltipsExpanded, setIsTooltipsExpanded] = useState(false);
+
+  const handleCancel = useCallback(() => {
+    toggleChoosingArea(false);
+    toggleChoosingPlace(false);
+  }, []);
+
+  useEffect(() => {
+    if (isRulerActive) {
+      addTooltip("Build your route and measure the distance by tapping any point on the map.");
+    } else {
+      removeTooltip("Build your route and measure the distance by tapping any point on the map.");
+    }
+  }, [isRulerActive]);
+
+  useEffect(() => {
+    if (isCoordinatesVisible) {
+      addTooltip("Tap any point on the map to determine the coordinates.");
+    } else {
+      removeTooltip("Tap any point on the map to determine the coordinates.");
+    }
+  }, [isCoordinatesVisible])
 
   return (
     <div className={cn("absolute bottom-4 left-1/2 -translate-x-1/2")}>
-      {/*<div className="text-sm text-black">{tooltip}</div>*/}
-
       <Card
         className={cn(
-          "px-2 pt-0 pb-1 shadow-lg",
-          "bg-background/80 flex max-w-fit flex-col items-center gap-1 rounded-2xl backdrop-blur-sm",
+          "px-2 py-1 shadow-lg",
+          tooltips && tooltips.length > 0 && "pt-0",
+          "bg-background/80 flex max-w-fit flex-col items-center gap-0 rounded-2xl backdrop-blur-sm",
         )}
       >
-        {isTooltipVisible ? (
-          <ChevronDown onClick={() => setIsTooltipVisible(false)} />
-        ) : (
-          <ChevronUp onClick={() => setIsTooltipVisible(true)} />
+        {tooltips && tooltips.length > 0 && (
+          <div className="flex flex-col items-center pb-1">
+            <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={setIsTooltipsExpanded} />
+            {isTooltipsExpanded && <ToolBarTooltipContainer tooltips={tooltips} />}
+          </div>
         )}
 
-        <AnimatePresence>
-          {tooltip && isTooltipVisible && (
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: -8, // Чуть выше
-                scaleY: 0.8, // Сжат по высоте
-                transformOrigin: "top", // Важно! Раскрывается от верхнего края
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scaleY: 1,
-              }}
-              exit={{
-                opacity: 0,
-                y: -8,
-                scaleY: 0.8,
-              }}
-              transition={{
-                duration: 0.25,
-                ease: "easeOut",
-              }}
-              className="flex border-spacing-1 flex-row items-center gap-2 border-y"
-            >
-              <div className="flex-shrink-0">
-                <CircleAlert />
-              </div>
-              <div className="flex max-w-fit flex-col items-center rounded-2xl pb-1 text-sm">
-                {tooltip}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
         <div className="flex flex-row gap-1">
           <Button variant="ghost" onClick={onCenterMap}>
             <LocateFixed />
           </Button>
 
-          <Toggle pressed={isPlacesVisible} onPressedChange={onTogglePlacesVisible}>
+          <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
             <MapPin />
           </Toggle>
 
-          <Toggle pressed={isAreasVisible} onPressedChange={onToggleAreasVisible}>
+          <Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>
             <Scan />
           </Toggle>
 
-          <Toggle pressed={isCoordinatesVisible} onPressedChange={onToggleCoordinatesVisible}>
+          <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
             <Move3d />
           </Toggle>
 
-          <Toggle pressed={isRulerActive} onPressedChange={onToggleRulerActive}>
+          <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
             <Ruler />
           </Toggle>
 
-          {showSaveControls && (
+          {(isChoosingArea || isChoosingPlace) && (
             <>
               <div className="mx-1 h-5 w-px bg-white/20" />
               <Button variant="ghost" size="sm" onClick={onSave}>
                 <Save /> Save
               </Button>
-              <Button variant="destructive" size="sm" onClick={onCancel}>
+              <Button variant="destructive" size="sm" onClick={handleCancel}>
                 <Ban /> Cancel
               </Button>
             </>
