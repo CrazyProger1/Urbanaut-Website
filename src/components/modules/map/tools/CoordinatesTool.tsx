@@ -24,16 +24,14 @@ export const CoordinatesTool = () => {
 
       if (cardRef.current) {
         const { offsetWidth, offsetHeight } = cardRef.current;
-        const padding = 15; // Distance from the cursor
+        const padding = 0;
 
-        // Check right boundary
         if (x + offsetWidth + padding > window.innerWidth) {
           x = x - offsetWidth - padding;
         } else {
           x = x + padding;
         }
 
-        // Check bottom boundary
         if (y + offsetHeight + padding > window.innerHeight) {
           y = y - offsetHeight - padding;
         } else {
