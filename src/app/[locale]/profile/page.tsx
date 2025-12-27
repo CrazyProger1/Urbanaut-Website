@@ -11,6 +11,7 @@ import { redirect } from "@/i18n";
 import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/css";
+import { EditProfileModal } from "@/components/modules/profile/modals/EditProfileModal";
 
 type Props = {
   searchParams: Promise<{ tab?: string }>;
@@ -36,6 +37,7 @@ const Page = async ({ searchParams }: Props) => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
+      <EditProfileModal/>
       <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 lg:flex-row">
         <div className="flex min-w-64 flex-col items-center">
           <Image
@@ -110,7 +112,7 @@ const Page = async ({ searchParams }: Props) => {
           </Card>
         </TabsContent>
         <TabsContent value="achivements" className="drop-shadow-volume">
-          <Card className="items-center disabled flex flex-col">
+          <Card className="disabled flex flex-col items-center">
             <Lock size="64" />
           </Card>
         </TabsContent>

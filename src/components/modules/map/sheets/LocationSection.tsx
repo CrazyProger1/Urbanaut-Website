@@ -18,12 +18,12 @@ export const LocationSection = ({ point, address }: Props) => {
       </div>
 
       <div className="flex flex-col gap-1 text-sm">
-        <div className="flex flex-row gap-1 text-sm">
+        <div className="flex flex-row gap-1 text-sm items-center">
           {point && (
             <div>
               Coordinates:{" "}
               <CopyToast clipboard={`${point[0]}, ${point[1]}`}>
-                <Badge variant="outline">{`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`}</Badge>
+                <Badge variant="tertiary">{`${point[0].toFixed(8)}, ${point[1].toFixed(8)}`}</Badge>
               </CopyToast>
             </div>
           )}

@@ -63,37 +63,37 @@
     --color-base-hard: 255, 0, 0;
     --color-base-impossible: 157, 0, 255;
 
-    --color-achievement-initiation: rgba(var(--color-base-none), 0.1);
-    --color-achievement-growth: rgba(var(--color-base-easy), 0.1);
-    --color-achievement-mastery: rgba(var(--color-base-medium), 0.1);
-    --color-achievement-valor: rgba(var(--color-base-hard), 0.1);
-    --color-achievement-transcendence: rgba(var(--color-base-impossible), 0.1);
+    --color-achievement-initiation: rgba(var(--color-base-none), 0.3);
+    --color-achievement-growth: rgba(var(--color-base-easy), 0.3);
+    --color-achievement-mastery: rgba(var(--color-base-medium), 0.3);
+    --color-achievement-valor: rgba(var(--color-base-hard), 0.3);
+    --color-achievement-transcendence: rgba(var(--color-base-impossible), 0.3);
 
     --drop-shadow-volume: 0 0 10px rgba(0, 0, 0, 0.5);
 
-    --drop-shadow-rank-rookie: 3px 3px 5px rgba(var(--color-base-none), 0.1);
-    --drop-shadow-rank-amateur: 3px 3px 5px rgba(var(--color-base-easy), 0.1);
-    --drop-shadow-rank-profi: 3px 3px 5px rgba(var(--color-base-medium), 0.1);
-    --drop-shadow-rank-stalker: 3px 3px 5px rgba(var(--color-base-hard), 0.1);
-    --drop-shadow-rank-legend: 3px 3px 5px rgba(var(--color-base-impossible), 0.1);
+    --drop-shadow-rank-rookie: 3px 3px 5px rgba(var(--color-base-none), 0.3);
+    --drop-shadow-rank-amateur: 3px 3px 5px rgba(var(--color-base-easy), 0.3);
+    --drop-shadow-rank-profi: 3px 3px 5px rgba(var(--color-base-medium), 0.3);
+    --drop-shadow-rank-stalker: 3px 3px 5px rgba(var(--color-base-hard), 0.3);
+    --drop-shadow-rank-legend: 3px 3px 5px rgba(var(--color-base-impossible), 0.3);
 
-    --color-security-none: rgba(var(--color-base-none), 0.1);
-    --color-security-easy: rgba(var(--color-base-easy), 0.1);
-    --color-security-medium: rgba(var(--color-base-medium), 0.1);
-    --color-security-hard: rgba(var(--color-base-hard), 0.1);
-    --color-security-impossible: rgba(var(--color-base-impossible), 0.1);
+    --color-security-none: rgba(var(--color-base-none), 0.3);
+    --color-security-easy: rgba(var(--color-base-easy), 0.3);
+    --color-security-medium: rgba(var(--color-base-medium), 0.3);
+    --color-security-hard: rgba(var(--color-base-hard), 0.3);
+    --color-security-impossible: rgba(var(--color-base-impossible), 0.3);
 
-    --color-difficulty-newbie: rgba(var(--color-base-none), 0.1);
-    --color-difficulty-easy: rgba(var(--color-base-easy), 0.1);
-    --color-difficulty-medium: rgba(var(--color-base-medium), 0.1);
-    --color-difficulty-hard: rgba(var(--color-base-hard), 0.1);
-    --color-difficulty-impossible: rgba(var(--color-base-impossible), 0.1);
+    --color-difficulty-newbie: rgba(var(--color-base-none), 0.3);
+    --color-difficulty-easy: rgba(var(--color-base-easy), 0.3);
+    --color-difficulty-medium: rgba(var(--color-base-medium), 0.3);
+    --color-difficulty-hard: rgba(var(--color-base-hard), 0.3);
+    --color-difficulty-impossible: rgba(var(--color-base-impossible), 0.3);
 
-    --color-preservation-none: rgba(var(--color-base-none), 0.1);
-    --color-preservation-low: rgba(var(--color-base-hard), 0.1);
-    --color-preservation-medium: rgba(var(--color-base-medium), 0.1);
-    --color-preservation-high: rgba(var(--color-base-easy), 0.1);
-    --color-preservation-awesome: rgba(var(--color-base-impossible), 0.1);
+    --color-preservation-none: rgba(var(--color-base-none), 0.3);
+    --color-preservation-low: rgba(var(--color-base-hard), 0.3);
+    --color-preservation-medium: rgba(var(--color-base-medium), 0.3);
+    --color-preservation-high: rgba(var(--color-base-easy), 0.3);
+    --color-preservation-awesome: rgba(var(--color-base-impossible), 0.3);
 
 }
 

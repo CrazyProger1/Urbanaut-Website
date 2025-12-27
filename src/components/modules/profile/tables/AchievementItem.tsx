@@ -17,7 +17,7 @@ export const AchievementItem = ({ achievement }: Props) => {
       className={`flex flex-row items-center ${colorClass}`}
     >
       <DynamicIcon name={achievement.icon} />
-      <div className="text-muted-foreground text-sm">{achievement.name}</div>
+      <div className="text-sm">{achievement.name}</div>
     </Badge>
   );
 };

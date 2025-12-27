@@ -19,7 +19,7 @@ export const URLS = {
   YOU_TUBE: "https://www.youtube.com/@UrbanautOfficial",
   INSTAGRAM: "https://www.instagram.com/urbanautofficial/",
   TELEGRAM: "https://t.me/urbanautofficial",
-  TIKTOK: "https://www.tiktok.com/urbanautofficial/",
+  TIKTOK: "https://www.tiktok.com/@urbanautofficial",
   PATREON: "https://www.patreon.com/urbanaut",
 };
 
@@ -29,6 +29,7 @@ export const QUERIES = {
   AREA_SHEET: "area",
   PLACE_SHEET: "place",
   FEEDBACK_MODAL: "feedback",
+  EDIT_PROFILE_MODAL: "edit",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
@@ -79,7 +80,6 @@ export const SIDEBAR_PLATFORMS: SidebarItem[] = [
     title: "TikTok",
     url: URLS.TIKTOK,
     icon: FaTiktok,
-    disabled: true,
     target: "_blank",
   },
   {
