@@ -36,6 +36,7 @@ export const SIDEBAR_MAIN: SidebarItem[] = [
     title: "Home",
     url: PAGES.MAIN,
     icon: Home,
+    disabled: true,
   },
   {
     title: "Map",
@@ -46,16 +47,13 @@ export const SIDEBAR_MAIN: SidebarItem[] = [
     title: "Blog",
     url: PAGES.BLOG,
     icon: Newspaper,
+    disabled: true,
   },
   {
     title: "Calendar",
     url: PAGES.CALENDAR,
     icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    disabled: true,
   },
 ];
 export const SIDEBAR_PLATFORMS: SidebarItem[] = [

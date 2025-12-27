@@ -15,6 +15,8 @@ import React from "react";
 import Image from "next/image";
 import { Link, usePathname } from "@/i18n";
 import { ALTS, IMAGES, PAGES, SIDEBAR_GROUPS } from "@/config";
+import { Lock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const Sidebar = () => {
   const sidebar = useSidebar();
@@ -41,12 +43,24 @@ export const Sidebar = () => {
             <SidebarGroupContent>
               <SidebarMenu>
                 {section.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={pathname === item.url}>
-                      <Link href={item.url} target={item.target}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </Link>
+                  <SidebarMenuItem className="cursor-pointer" key={item.title}>
+                    <SidebarMenuButton
+                      className={cn(item.disabled && "disabled")}
+                      asChild
+                      isActive={pathname === item.url}
+                    >
+                      {item.disabled ? (
+                        <div className="flex">
+                          <item.icon />
+                          <span>{item.title}</span>
+                          <Lock className="ml-auto" />
+                        </div>
+                      ) : (
+                        <Link href={item.url} target={item.target}>
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </Link>
+                      )}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
