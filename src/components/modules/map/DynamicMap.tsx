@@ -21,7 +21,7 @@ import {
   CoordinatesTool,
 } from "@/components/modules/map/tools";
 import { useSearchParams } from "next/navigation";
-import { TileLayers, PlacesLayer, AreasLayer } from "./layers";
+import { TileLayers, PlacesLayer, AreasLayer, ClusteringLayer } from "./layers";
 import { toast } from "sonner";
 import { MapPageFilters } from "@/types/map";
 import { getAreas, getPlaces } from "@/actions";
@@ -198,9 +198,15 @@ const DynamicMap = ({
         >
           <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
           {isPlacesVisible && (
-            <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
-              <PlacesLayer places={places} enabledZoomOnClick={true} onSelect={handlePlaceSelect} />
-            </ZoomSwitch>
+            // <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
+              <ClusteringLayer>
+                <PlacesLayer
+                  places={places}
+                  enabledZoomOnClick={true}
+                  onSelect={handlePlaceSelect}
+                />
+              </ClusteringLayer>
+            // </ZoomSwitch>
           )}
           {isAreasVisible && (
             <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
@@ -218,10 +224,7 @@ const DynamicMap = ({
           toast.success(PLACEHOLDERS.COORDINATES_COPIED_TOAST);
         }}
       />
-      <ToolBar
-        onCenterMap={handleCenterMap}
-        onSavePlace={handleSave}
-      />
+      <ToolBar onCenterMap={handleCenterMap} onSavePlace={handleSave} />
     </ContextMenu>
   );
 };
