@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Edit, Lock, MapPin } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AchievementTable } from "@/components/modules/profile";
-import { PAGES } from "@/config";
-import { redirect } from "@/i18n";
+import { PAGES, QUERIES } from "@/config";
+import { Link, redirect } from "@/i18n";
 import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/css";
@@ -37,7 +37,7 @@ const Page = async ({ searchParams }: Props) => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <EditProfileModal/>
+      <EditProfileModal user={user} />
       <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 lg:flex-row">
         <div className="flex min-w-64 flex-col items-center">
           <Image
@@ -47,9 +47,11 @@ const Page = async ({ searchParams }: Props) => {
             height={192}
             alt="Profile"
           />
-          <Button variant="outline">
-            <Edit />
-            Edit Profile
+          <Button variant="outline" asChild>
+            <Link href={`${PAGES.PROFILE}?${QUERIES.EDIT_PROFILE_MODAL}=true`}>
+              <Edit />
+              Edit Profile
+            </Link>
           </Button>
         </div>
         <div className="flex flex-col items-center gap-4 py-4 text-center lg:items-start lg:text-left">
