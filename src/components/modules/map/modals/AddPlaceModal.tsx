@@ -1,7 +1,13 @@
 import React from "react";
-import { ModalPortal, StopPropagation } from "@/components/common/modals";
-import { AddPlaceForm } from "../forms";
+import {
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
+import { AddPlaceForm } from "../forms";
 import { APITag } from "@/types";
 
 type Props = {
@@ -10,10 +16,16 @@ type Props = {
 
 export const AddPlaceModal = ({ tags }: Props) => {
   return (
-    <ModalPortal query={QUERIES.PLACE_MODAL}>
-      <StopPropagation className="sm:w-1/2 md:w-1/3">
+    <Modal query={QUERIES.PLACE_MODAL}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Create new place</DialogTitle>
+          <DialogDescription>
+            Here you can easily create new place
+          </DialogDescription>
+        </DialogHeader>
         <AddPlaceForm tags={tags} />
-      </StopPropagation>
-    </ModalPortal>
+      </DialogContent>
+    </Modal>
   );
 };

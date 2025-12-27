@@ -30,6 +30,8 @@ export const QUERIES = {
   PLACE_SHEET: "place",
   FEEDBACK_MODAL: "feedback",
   EDIT_PROFILE_MODAL: "edit",
+  SIGNIN_MODAL: "signin",
+  SIGNUP_MODAL: "signup",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

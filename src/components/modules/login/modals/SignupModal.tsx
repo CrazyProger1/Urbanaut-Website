@@ -1,14 +1,27 @@
 import React from "react";
-import { ModalPortal, StopPropagation } from "@/components/common/modals";
+import {
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Modal } from "@/components/ui/next/modal";
+import { QUERIES } from "@/config";
 import { SignupForm } from "../forms";
 import { GoogleAuthButton } from "../google";
 
 export const SignupModal = () => {
   return (
-    <ModalPortal query="signup">
-      <StopPropagation className="sm:w-1/2 md:w-1/3">
+    <Modal query={QUERIES.SIGNUP_MODAL}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Create new account</DialogTitle>
+          <DialogDescription>
+            Here you can easily create your account in one click
+          </DialogDescription>
+        </DialogHeader>
         <SignupForm otherProviders={[<GoogleAuthButton key="google" />]} />
-      </StopPropagation>
-    </ModalPortal>
+      </DialogContent>
+    </Modal>
   );
 };

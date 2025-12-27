@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
 import { useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
@@ -86,79 +85,70 @@ export const AddAreaForm = ({ tags }: Props) => {
     }
   };
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create new area</CardTitle>
-        <CardDescription>Here you can easily create new area ❤️</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Chornobyl disaster zone" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="tags"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <Label>Tags</Label>
-                  <TagsSelect
-                    tags={tags?.map((tag) => tag.tag) || []}
-                    selected={field.value}
-                    onSelect={handleSelect}
-                    onRemove={handleRemove}
-                  />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="is_private"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <CheckBoxToggle
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      title="Private"
-                      description="Will this area be private for others?"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-              Save {formState.isSubmitting && <Spinner />}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Chornobyl disaster zone" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <FormItem>
+              <Label>Tags</Label>
+              <TagsSelect
+                tags={tags?.map((tag) => tag.tag) || []}
+                selected={field.value}
+                onSelect={handleSelect}
+                onRemove={handleRemove}
+              />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_private"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <CheckBoxToggle
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  title="Private"
+                  description="Will this area be private for others?"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+          Save {formState.isSubmitting && <Spinner />}
+        </Button>
+      </form>
+    </Form>
   );
 };

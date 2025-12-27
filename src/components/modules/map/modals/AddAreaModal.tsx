@@ -1,7 +1,13 @@
 import React from "react";
-import { ModalPortal, StopPropagation } from "@/components/common/modals";
-import { AddAreaForm } from "@/components/modules/map/forms";
+import {
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
+import { AddAreaForm } from "@/components/modules/map/forms";
 import { APITag } from "@/types";
 
 type Props = {
@@ -10,10 +16,16 @@ type Props = {
 
 export const AddAreaModal = ({ tags }: Props) => {
   return (
-    <ModalPortal query={QUERIES.AREA_MODAL}>
-      <StopPropagation className="sm:w-1/2 md:w-1/3">
+    <Modal query={QUERIES.AREA_MODAL}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Create new area</DialogTitle>
+          <DialogDescription>
+            Here you can easily create new area
+          </DialogDescription>
+        </DialogHeader>
         <AddAreaForm tags={tags} />
-      </StopPropagation>
-    </ModalPortal>
+      </DialogContent>
+    </Modal>
   );
 };

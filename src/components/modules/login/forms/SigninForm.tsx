@@ -19,9 +19,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/actions";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
+import { QUERIES } from "@/config";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -69,59 +69,52 @@ export const SigninForm = ({ otherProviders }: Props) => {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>Here you can easily login into your account 😉</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-8">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="crazyurbanaut@gmail.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormDescription className="text-end">
-                    <Link href="#" className="text-end text-sm hover:underline">
-                      Forgot your password?
-                    </Link>
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Field>
-              <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-                Sign In {formState.isSubmitting && <Spinner />}
-              </Button>
-              {otherProviders?.map((provider, i) => (
-                <React.Fragment key={i}>{provider}</React.Fragment>
-              ))}
-              <FieldDescription className="text-center">
-                Don&apos;t have an account? <Link href="?signup=true">Sign up</Link>
-              </FieldDescription>
-            </Field>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="crazyurbanaut@gmail.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormDescription className="text-end">
+                <Link href="#" className="text-end text-sm hover:underline">
+                  Forgot your password?
+                </Link>
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Field>
+          <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+            Sign In {formState.isSubmitting && <Spinner />}
+          </Button>
+          {otherProviders?.map((provider, i) => (
+            <React.Fragment key={i}>{provider}</React.Fragment>
+          ))}
+          <FieldDescription className="text-center">
+            Don&apos;t have an account?{" "}
+            <Link href={`?${QUERIES.SIGNUP_MODAL}=true`}>Sign up</Link>
+          </FieldDescription>
+        </Field>
+      </form>
+    </Form>
   );
 };
