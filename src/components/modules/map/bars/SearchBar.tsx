@@ -13,8 +13,8 @@ export const SearchBar = () => {
   const [isAIActive, setIsAIActive] = useState(false);
 
   return (
-    <div className="absolute top-4 left-4 flex flex-row gap-4">
-      <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
+    <div className="absolute top-4 left-4 flex flex-col md:flex-row gap-4">
+      <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm max-w-fit">
         <Toggle
           pressed={isOpen}
           onPressedChange={() => {

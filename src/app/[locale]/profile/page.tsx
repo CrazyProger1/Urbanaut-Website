@@ -3,7 +3,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Edit, LockKeyhole, MapPin } from "lucide-react";
+import { Calendar, Edit, Lock, MapPin } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES } from "@/config";
@@ -100,23 +100,23 @@ const Page = async ({ searchParams }: Props) => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="reports" className="drop-shadow-volume">
-          <Card className="flex flex-col items-center">
-            <LockKeyhole size="64" />
+          <Card className="disabled flex flex-col items-center">
+            <Lock size="64" />
           </Card>
         </TabsContent>
         <TabsContent value="places" className="drop-shadow-volume">
-          <Card className="flex flex-col items-center">
-            <LockKeyhole size="64" />
+          <Card className="disabled flex flex-col items-center">
+            <Lock size="64" />
           </Card>
         </TabsContent>
         <TabsContent value="achivements" className="drop-shadow-volume">
-          <Card className="flex flex-col items-center">
-            <LockKeyhole size="64" />
+          <Card className="items-center disabled flex flex-col">
+            <Lock size="64" />
           </Card>
         </TabsContent>
         <TabsContent value="friends" className="drop-shadow-volume">
-          <Card className="flex flex-col items-center">
-            <LockKeyhole size="64" />
+          <Card className="disabled flex flex-col items-center">
+            <Lock size="64" />
           </Card>
         </TabsContent>
       </Tabs>

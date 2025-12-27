@@ -8,6 +8,7 @@ import { Toggle } from "@/components/ui/toggle";
 import { ToolBarTooltipsToggle } from "./ToolBarTooltipsToggle";
 import { ToolBarTooltipContainer } from "./ToolBarTooltipContainer";
 import { useMapStore } from "@/stores";
+import { Mobile } from "@/components/common/utils";
 
 type Props = {
   onCenterMap?: () => void;
@@ -53,24 +54,24 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
     } else {
       removeTooltip("Tap any point on the map to determine the coordinates.");
     }
-  }, [isCoordinatesVisible])
+  }, [isCoordinatesVisible]);
 
   return (
     <div className={cn("absolute bottom-4 left-1/2 -translate-x-1/2")}>
       <Card
         className={cn(
           "px-2 py-1 shadow-lg",
-          tooltips && tooltips.length > 0 && "pt-0",
           "bg-background/80 flex max-w-fit flex-col items-center gap-0 rounded-2xl backdrop-blur-sm",
         )}
       >
-        {tooltips && tooltips.length > 0 && (
-          <div className="flex w-0 min-w-full flex-col pb-1">
-            <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={setIsTooltipsExpanded} />
-            {isTooltipsExpanded && <ToolBarTooltipContainer tooltips={tooltips} />}
-          </div>
-        )}
-
+        <Mobile className="min-w-full">
+          {tooltips && tooltips.length > 0 && (
+            <div className="flex w-0 min-w-full flex-col pb-1">
+              <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={setIsTooltipsExpanded} />
+              {isTooltipsExpanded && <ToolBarTooltipContainer tooltips={tooltips} />}
+            </div>
+          )}
+        </Mobile>
         <div className="flex flex-col gap-1 md:flex-row">
           <div className="flex flex-row gap-1">
             <Button variant="ghost" onClick={onCenterMap}>
