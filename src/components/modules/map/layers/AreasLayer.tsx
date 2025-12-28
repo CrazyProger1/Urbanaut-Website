@@ -34,6 +34,8 @@ export const AreasLayer = ({
     <>
       {visiblePolygons.map((polygon, index) => (
         <Polygon
+          fillColor="green"
+          color="green"
           key={index}
           positions={polygon}
           eventHandlers={{

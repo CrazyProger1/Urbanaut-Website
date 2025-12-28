@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Edit, Lock, MapPin } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AchievementTable } from "@/components/modules/profile";
-import { PAGES, QUERIES } from "@/config";
+import { PAGES, QUERIES, SITE_URL } from "@/config";
 import { Link, redirect } from "@/i18n";
 import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/css";
 import { EditProfileModal } from "@/components/modules/profile/modals/EditProfileModal";
+import { CopyToast } from "@/components/common/toasts";
 
 type Props = {
   searchParams: Promise<{ tab?: string }>;
@@ -60,7 +61,11 @@ const Page = async ({ searchParams }: Props) => {
           </div>
           <div className="text-muted-foreground flex flex-col text-sm">
             {user?.usernames?.map((username) => (
-              <div key={username}>@{username}</div>
+              <CopyToast clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
+                <div className="cursor-pointer hover:underline select-none" key={username}>
+                  @{username}
+                </div>
+              </CopyToast>
             ))}
           </div>
           <div>{user?.bio}</div>

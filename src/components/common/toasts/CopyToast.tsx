@@ -9,14 +9,15 @@ type Props = {
   className?: string;
   clipboard?: string;
   children?: React.ReactNode;
+  message?: string;
 };
 
-export const CopyToast = ({ className, clipboard, children }: Props) => {
+export const CopyToast = ({ className, clipboard, children, message = "Copied to clipboard!" }: Props) => {
   return (
     <span
-      className={cn(className, "cursor-pointer")}
+      className={cn(className, "cursor-pointer select-none")}
       onClick={() => {
-        toast.success("Copied to clipboard!");
+        toast.success(message);
         if (clipboard) {
           setClipboard(clipboard);
         }

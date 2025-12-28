@@ -208,9 +208,9 @@ const DynamicMap = ({
             // </ZoomSwitch>
           )}
           {isAreasVisible && (
-            <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
+            // <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
               <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />
-            </ZoomSwitch>
+            // </ZoomSwitch>
           )}
           {isCoordinatesVisible && <CoordinatesTool />}
           {isRulerActive && <RulerTool />}
