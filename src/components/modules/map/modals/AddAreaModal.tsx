@@ -8,10 +8,10 @@ import {
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
 import { AddAreaForm } from "@/components/modules/map/forms";
-import { APITag } from "@/types";
+import { APIListTag } from "@/types";
 
 type Props = {
-  tags?: APITag[];
+  tags?: APIListTag[];
 };
 
 export const AddAreaModal = ({ tags }: Props) => {

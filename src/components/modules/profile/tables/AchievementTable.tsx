@@ -1,10 +1,9 @@
 import React from "react";
-import { APIUser } from "@/types";
+import { APICurrentUser } from "@/types";
 import { AchievementItem } from "./AchievementItem";
-import { APIAchievement } from "@/types/api";
 
 type Props = {
-  user: APIUser;
+  user: APICurrentUser;
 };
 
 export const AchievementTable = ({ user }: Props) => {

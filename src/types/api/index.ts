@@ -25,15 +25,23 @@ export type PaginatedAPIResponse<T> = {
   results: T[];
 } & SuccessfulAPIResponse;
 
-export type { APIUser, APIMeUser, APIRank } from "./user";
-export type { APIMetric } from "./metric";
-export type { APIAchievement, APIAchievementSignificance } from "./achivement";
+export type {
+  APICurrentUser,
+  APIUpdateUser,
+  APICreateUser,
+  APIRetrieveSettings,
+  APIUpdateSettings,
+  APITheme,
+  APIRank,
+} from "./user";
+export type { APIRetrieveMetric } from "./metric";
+export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
 export type { APITokens, APIAccessToken, APITokenPayload } from "./token";
 export type { GoogleOauthRedirectURIAPIResponse, GoogleOauthCallbackAPIResponse } from "./oauth";
 export type { APIPoint } from "./geo";
-export type { APIPlace, APICreatePlace, APIPlaceFilters } from "./place";
-export type { APIArea, APICreateArea, APIAreaFilters } from "./area";
-export type { APITag } from "./tag";
+export type { APIListPlace, APIRetrievePlace, APICreatePlace, APIPlaceFilters } from "./place";
+export type { APIListArea, APIRetrieveArea, APICreateArea, APIAreaFilters } from "./area";
+export type { APIListTag } from "./tag";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";
 export type { APICreateFeedback } from "./feedback";

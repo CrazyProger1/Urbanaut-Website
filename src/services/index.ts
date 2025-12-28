@@ -1,9 +1,15 @@
 export {
   fetchAPI,
   fetchAuthenticated,
+  login,
+  register,
   getPlaces,
+  getPlace,
+  createPlace,
   getTags,
   getAreas,
-  getPlace,
   getArea,
+  createArea,
+  updateUser,
+  createFeedback,
 } from "./api";

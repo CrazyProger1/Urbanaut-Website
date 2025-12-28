@@ -4,11 +4,10 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L, { LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
-import { APIPlace, MapLayer } from "@/types";
+import { APIListPlace, APIListArea, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS, PAGES, PLACEHOLDERS, QUERIES } from "@/config";
-import { APIArea } from "@/types/api";
 import { ToolBar, LayersBar, SearchBar } from "@/components/modules/map/bars";
 import { useRouter } from "@/i18n";
 import {
@@ -59,8 +58,8 @@ const DynamicMap = ({
   const searchParams = useSearchParams();
   const [currentPrimaryLayer, setCurrentPrimaryLayer] = useState<MapLayer>(LAYERS.OSM);
   const [currentSecondaryLayers, setCurrentSecondaryLayers] = useState<MapLayer[]>([]);
-  const [places, setPlaces] = useState<APIPlace[]>([]);
-  const [areas, setAreas] = useState<APIArea[]>([]);
+  const [places, setPlaces] = useState<APIListPlace[]>([]);
+  const [areas, setAreas] = useState<APIListArea[]>([]);
   const [currentMapBounds, setCurrentMapBounds] = useState<LatLngBounds>();
 
   useEffect(() => {
@@ -158,7 +157,7 @@ const DynamicMap = ({
   };
 
   const handlePlaceSelect = useCallback(
-    (place: APIPlace) => {
+    (place: APIListPlace) => {
       const params = new URLSearchParams(searchParams);
       params.set(QUERIES.PLACE_SHEET, String(place.id));
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });
@@ -167,7 +166,7 @@ const DynamicMap = ({
   );
 
   const handleAreaSelect = useCallback(
-    (area: APIArea) => {
+    (area: APIListArea) => {
       const params = new URLSearchParams(searchParams);
       params.set(QUERIES.AREA_SHEET, String(area.id));
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });

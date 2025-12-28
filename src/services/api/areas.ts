@@ -2,8 +2,10 @@
 import { fetchAuthenticated } from "./auth";
 import { API_ENDPOINTS } from "@/config";
 import {
-  APIArea,
+  APIListArea,
+  APIRetrieveArea,
   APIAreaFilters,
+  APICreateArea,
   ErrorAPIResponse,
   PaginatedAPIResponse,
   SuccessfulAPIResponse,
@@ -11,12 +13,19 @@ import {
 
 export const getAreas = async (
   filters?: APIAreaFilters,
-): Promise<PaginatedAPIResponse<APIArea>> => {
+): Promise<PaginatedAPIResponse<APIListArea>> => {
   return fetchAuthenticated(API_ENDPOINTS.AREAS);
 };
 
 export const getArea = async (
   id: number | string,
-): Promise<(SuccessfulAPIResponse & APIArea) | ErrorAPIResponse> => {
+): Promise<(SuccessfulAPIResponse & APIRetrieveArea) | ErrorAPIResponse> => {
   return fetchAuthenticated(API_ENDPOINTS.AREA.replace("[id]", String(id)));
+};
+
+export const createArea = async (area: APICreateArea) => {
+  return await fetchAuthenticated(API_ENDPOINTS.AREAS, {
+    body: JSON.stringify(area),
+    method: "POST",
+  });
 };

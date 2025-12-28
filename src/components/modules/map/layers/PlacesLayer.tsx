@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import { APIPlace } from "@/types";
+import { APIListPlace } from "@/types";
 import { Marker, useMap } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { useMapBounds } from "@/components/modules/map/hooks";
 
 type Props = {
-  places?: APIPlace[];
+  places?: APIListPlace[];
   enabledZoomOnClick?: boolean;
   zoomOnClick?: number;
-  onSelect?: (place: APIPlace) => void;
+  onSelect?: (place: APIListPlace) => void;
 };
 
 export const PlacesLayer = ({
@@ -20,7 +20,7 @@ export const PlacesLayer = ({
   const mapBounds = useMapBounds();
   const map = useMap();
 
-  const visiblePlaces: APIPlace[] = useMemo(() => {
+  const visiblePlaces: APIListPlace[] = useMemo(() => {
     if (!places || !mapBounds) return [];
     return places.filter((place) => mapBounds.contains(new LatLng(place.point[0], place.point[1])));
   }, [places, mapBounds]);

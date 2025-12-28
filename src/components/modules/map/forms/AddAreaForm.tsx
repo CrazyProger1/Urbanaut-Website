@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createArea } from "@/actions";
-import { APIPoint, APITag } from "@/types";
+import { APIPoint, APIListTag } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
 import { toast } from "sonner";
@@ -33,7 +33,7 @@ const formSchema = z.object({
 });
 
 type Props = {
-  tags?: APITag[];
+  tags?: APIListTag[];
 };
 
 export const AddAreaForm = ({ tags }: Props) => {

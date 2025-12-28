@@ -1,5 +1,7 @@
 export { fetchAPI } from "./api";
-export { fetchAuthenticated } from "./auth";
+export { fetchAuthenticated, login, register } from "./auth";
 export { getTags } from "./tags";
-export { getPlaces, getPlace } from "./places";
-export { getAreas, getArea } from "./areas";
+export { getPlaces, getPlace, createPlace } from "./places";
+export { getAreas, getArea, createArea } from "./areas";
+export { updateUser } from "./users";
+export { createFeedback } from "./feedbacks";

@@ -1,15 +1,11 @@
 "use server";
 
-import { fetchAPI } from "@/services";
-import { API_ENDPOINTS } from "@/config";
+import * as services from "@/services";
 import { clearSession, setSession } from "@/utils/session";
-import { APIMeUser, APITokens } from "@/types";
+import { APICurrentUser } from "@/types";
 
-export const login = async (email: string, password: string): Promise<APIMeUser | undefined> => {
-  const response = await fetchAPI<APITokens & { user: APIMeUser }>(API_ENDPOINTS.LOGIN, {
-    body: JSON.stringify({ email, password }),
-    method: "POST",
-  });
+export const login = async (email: string, password: string): Promise<APICurrentUser | undefined> => {
+  const response = await services.login(email, password);
 
   if (response.success) {
     await setSession({
@@ -22,11 +18,7 @@ export const login = async (email: string, password: string): Promise<APIMeUser 
 };
 
 export const register = async (email: string, password: string): Promise<boolean> => {
-  const response = await fetchAPI<{ user: APIMeUser }>(API_ENDPOINTS.REGISTER, {
-    body: JSON.stringify({ email, password }),
-    method: "POST",
-  });
-
+  const response = await services.register(email, password);
   return response.success;
 };
 

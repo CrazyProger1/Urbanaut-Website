@@ -1,11 +1,11 @@
 import React from "react";
-import { APIAchievement } from "@/types/api";
+import { APIRetrieveAchievement } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { getAchievementColorClass } from "@/utils/css";
 
 type Props = {
-  achievement: APIAchievement;
+  achievement: APIRetrieveAchievement;
 };
 
 export const AchievementItem = ({ achievement }: Props) => {

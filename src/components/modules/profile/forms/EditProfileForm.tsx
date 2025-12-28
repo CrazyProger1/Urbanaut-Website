@@ -21,15 +21,18 @@ import { toast } from "sonner";
 import { QUERIES } from "@/config";
 import { DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { SessionUser } from "@/types";
+import { Textarea } from "@/components/ui/textarea";
+import { updateUser } from "@/actions";
 
 const formSchema = z.object({
-  firstName: z.string().min(1, "First name is required").max(50),
-  lastName: z.string().max(50),
+  first_name: z.string().min(3, "First name is required").max(150),
+  last_name: z.string().max(150),
   username: z
     .string()
     .min(3, "Username must be at least 3 characters")
-    .max(30, "Username must be at most 30 characters")
+    .max(150, "Username must be at most 150 characters")
     .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+  bio: z.string().max(250),
 });
 
 type Props = {
@@ -44,9 +47,10 @@ export const EditProfileForm = ({ user }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: user?.first_name ?? "",
-      lastName: user?.last_name ?? "",
+      first_name: user?.first_name ?? "",
+      last_name: user?.last_name ?? "",
       username: user?.usernames?.[0] ?? "",
+      bio: user?.bio ?? "",
     },
     mode: "onSubmit",
   });
@@ -54,8 +58,7 @@ export const EditProfileForm = ({ user }: Props) => {
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // TODO: Implement profile update action
-    console.log(values);
+    await updateUser(values);
 
     const params = new URLSearchParams(searchParams);
     params.delete(QUERIES.EDIT_PROFILE_MODAL);
@@ -66,34 +69,32 @@ export const EditProfileForm = ({ user }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First Name or Pseudo</FormLabel>
-                <FormControl>
-                  <Input placeholder="John" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Doe" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="first_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>First Name or Pseudo</FormLabel>
+              <FormControl>
+                <Input placeholder="John" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="last_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Last Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="username"
@@ -102,6 +103,19 @@ export const EditProfileForm = ({ user }: Props) => {
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Bio</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

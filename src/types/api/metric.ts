@@ -1,4 +1,4 @@
-export type APIMetric = {
+export type APIRetrieveMetric = {
   name: string;
   value: number;
 };

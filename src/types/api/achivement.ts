@@ -7,10 +7,10 @@ export type APIAchievementSignificance =
   | "VALOR"
   | "TRANSCENDENCE";
 
-export type APIAchievement = {
+export type APIRetrieveAchievement = {
   id: number;
   name: string;
+  weight: number;
   icon: IconName;
-  weight?: number;
-  significance?: APIAchievementSignificance;
+  significance: APIAchievementSignificance;
 };

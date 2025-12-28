@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { APIPlace } from "@/types";
+import { APIRetrievePlace } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
@@ -18,7 +18,7 @@ import { Sheet } from "@/components/ui/next/sheet";
 import { QUERIES } from "@/config";
 
 type Props = {
-  place: APIPlace;
+  place: APIRetrievePlace;
 };
 
 export const PlaceSheet = ({ place }: Props) => {

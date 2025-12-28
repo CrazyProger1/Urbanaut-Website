@@ -1,10 +1,26 @@
 import { getSession } from "@/utils/session";
 import { fetchAPI } from "@/services";
+import { API_ENDPOINTS } from "@/config";
+import { APICurrentUser, APITokens } from "@/types";
 
 export const fetchAuthenticated = async <T>(endpoint: string, options?: RequestInit) => {
   const session = await getSession();
   return await fetchAPI<T>(endpoint, {
     accessToken: session?.accessToken,
     ...options,
+  });
+};
+
+export const login = async (email: string, password: string) => {
+  return await fetchAPI<APITokens & { user: APICurrentUser }>(API_ENDPOINTS.LOGIN, {
+    body: JSON.stringify({ email, password }),
+    method: "POST",
+  });
+};
+
+export const register = async (email: string, password: string) => {
+  return await fetchAPI<{ user: APICurrentUser }>(API_ENDPOINTS.REGISTER, {
+    body: JSON.stringify({ email, password }),
+    method: "POST",
   });
 };

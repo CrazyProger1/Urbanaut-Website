@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import { APIArea } from "@/types/api";
+import { APIListArea } from "@/types";
 import { Polygon, useMap } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { useMapBounds } from "@/components/modules/map/hooks";
 
 type Props = {
-  areas?: APIArea[];
+  areas?: APIListArea[];
   enabledZoomOnClick?: boolean;
   zoomOnClick?: number;
-  onSelect?: (area: APIArea) => void;
+  onSelect?: (area: APIListArea) => void;
 };
 
 export const AreasLayer = ({

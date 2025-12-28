@@ -1,6 +1,6 @@
-import { APIMeUser } from "@/types/api";
+import { APICurrentUser } from "@/types/api";
 
-export type SessionUser = APIMeUser;
+export type SessionUser = APICurrentUser;
 
 export type Session = {
   accessToken?: string;

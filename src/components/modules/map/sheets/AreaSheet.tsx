@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { APIArea } from "@/types";
+import { APIRetrieveArea } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
@@ -17,7 +17,7 @@ import { QUERIES } from "@/config";
 import { Sheet } from "@/components/ui/next/sheet";
 
 type Props = {
-  area: APIArea;
+  area: APIRetrieveArea;
 };
 
 export const AreaSheet = ({ area }: Props) => {
