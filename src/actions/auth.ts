@@ -4,7 +4,10 @@ import * as services from "@/services";
 import { clearSession, setSession } from "@/utils/session";
 import { APICurrentUser } from "@/types";
 
-export const login = async (email: string, password: string): Promise<APICurrentUser | undefined> => {
+export const login = async (
+  email: string,
+  password: string,
+): Promise<APICurrentUser | undefined> => {
   const response = await services.login(email, password);
 
   if (response.success) {
@@ -17,8 +20,12 @@ export const login = async (email: string, password: string): Promise<APICurrent
   }
 };
 
-export const register = async (email: string, password: string): Promise<boolean> => {
-  const response = await services.register(email, password);
+export const register = async (
+  email: string,
+  password: string,
+  code?: string,
+): Promise<boolean> => {
+  const response = await services.register(email, password, code);
   return response.success;
 };
 

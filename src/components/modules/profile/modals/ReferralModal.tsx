@@ -1,5 +1,5 @@
 import React from "react";
-import { QUERIES, SITE_URL } from "@/config";
+import { PAGES, QUERIES, SITE_URL } from "@/config";
 import {
   DialogContent,
   DialogDescription,
@@ -33,9 +33,9 @@ export const ReferralModal = async () => {
         <div className="flex flex-col gap-4">
           {codes.map((code) => (
             <div className="flex flex-row gap-2">
-              <Input type="url" value={`${SITE_URL}/r/${code}`} readOnly />
+              <Input type="url" value={`${SITE_URL}${PAGES.REFERRAL}/${code.code}`} readOnly />
               <Button variant="outline" asChild>
-                <CopyToast>
+                <CopyToast clipboard={`${SITE_URL}${PAGES.REFERRAL}/${code.code}`}>
                   <Copy />
                 </CopyToast>
               </Button>

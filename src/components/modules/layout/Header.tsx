@@ -6,6 +6,7 @@ import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
 import { User } from "lucide-react";
+import { QUERIES } from "@/config";
 
 type Props = {
   user?: SessionUser;
@@ -27,7 +28,7 @@ export const Header = ({ user }: Props) => {
           />
         ) : (
           <Button asChild>
-            <Link href="?signin=true">
+            <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>
               <User />
               Login
             </Link>

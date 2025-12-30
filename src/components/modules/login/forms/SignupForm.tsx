@@ -56,7 +56,8 @@ export const SignupForm = ({ otherProviders }: Props) => {
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const success = await register(values.email, values.password);
+    const code = searchParams.get("code") ?? undefined;
+    const success = await register(values.email, values.password, code);
 
     let user;
     if (success) {
@@ -115,8 +116,7 @@ export const SignupForm = ({ otherProviders }: Props) => {
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            Already have an account?{" "}
-            <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>Sign in</Link>
+            Already have an account? <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>Sign in</Link>
           </FieldDescription>
         </Field>
       </form>
