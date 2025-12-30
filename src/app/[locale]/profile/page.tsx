@@ -3,7 +3,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Edit, Lock, MapPin } from "lucide-react";
+import { Calendar, Edit, Link2, Lock, MapPin, Settings, Share2, Users } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES, QUERIES, SITE_URL } from "@/config";
@@ -11,7 +11,7 @@ import { Link, redirect } from "@/i18n";
 import { getFormatter, getLocale } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/css";
-import { EditProfileModal } from "@/components/modules/profile/modals/EditProfileModal";
+import { EditProfileModal, ReferralModal } from "@/components/modules/profile/modals";
 import { CopyToast } from "@/components/common/toasts";
 
 type Props = {
@@ -26,6 +26,7 @@ const Page = async ({ searchParams }: Props) => {
   const tab = params?.tab || "reports";
 
   if (!session || !session?.user) {
+    // TODO: move into middleware
     return redirect({ href: PAGES.MAIN, locale: await getLocale() });
   }
 
@@ -39,6 +40,7 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <EditProfileModal user={user} />
+      <ReferralModal />
       <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 lg:flex-row">
         <div className="flex min-w-64 flex-col items-center">
           <Image
@@ -48,12 +50,28 @@ const Page = async ({ searchParams }: Props) => {
             height={192}
             alt="Profile"
           />
-          <Button variant="outline" asChild>
-            <Link href={`${PAGES.PROFILE}?${QUERIES.EDIT_PROFILE_MODAL}=true`}>
-              <Edit />
-              Edit Profile
-            </Link>
-          </Button>
+          <div className="flex flex-row gap-1">
+            <Button variant="outline" asChild>
+              <Link href={`${PAGES.PROFILE}?${QUERIES.EDIT_PROFILE_MODAL}=true`}>
+                <Edit />
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href={PAGES.SETTINGS}>
+                <Settings />
+              </Link>
+            </Button>
+            <CopyToast clipboard="DSad">
+              <Button variant="outline">
+                <Share2 />
+              </Button>
+            </CopyToast>
+            <Button variant="outline" asChild>
+              <Link href={`${PAGES.PROFILE}?${QUERIES.REFERRAL_PROFILE_MODAL}=true`}>
+                <Users />
+              </Link>
+            </Button>
+          </div>
         </div>
         <div className="flex flex-col items-center gap-4 py-4 text-center lg:items-start lg:text-left">
           <div className={`text-lg font-bold ${rankClass}`}>
@@ -61,8 +79,8 @@ const Page = async ({ searchParams }: Props) => {
           </div>
           <div className="text-muted-foreground flex flex-col text-sm">
             {user?.usernames?.map((username) => (
-              <CopyToast clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
-                <div className="cursor-pointer hover:underline select-none" key={username}>
+              <CopyToast key={username} clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
+                <div className="cursor-pointer select-none hover:underline" key={username}>
                   @{username}
                 </div>
               </CopyToast>

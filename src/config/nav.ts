@@ -30,6 +30,7 @@ export const QUERIES = {
   PLACE_SHEET: "place",
   FEEDBACK_MODAL: "feedback",
   EDIT_PROFILE_MODAL: "edit",
+  REFERRAL_PROFILE_MODAL: "referral",
   SIGNIN_MODAL: "signin",
   SIGNUP_MODAL: "signup",
 };

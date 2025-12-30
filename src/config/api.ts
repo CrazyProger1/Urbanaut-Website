@@ -14,4 +14,6 @@ export const API_ENDPOINTS = {
   REFRESH: "tokens/refresh/",
   TAGS: "tags/",
   FEEDBACKS: "feedbacks/",
+  REFERRAL_CODES: "referrals/",
+  APPLY_REFERRAL_CODE: "referrals/[code]/apply/",
 };

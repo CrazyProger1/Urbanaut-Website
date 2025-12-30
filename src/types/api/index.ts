@@ -45,3 +45,4 @@ export type { APIListTag } from "./tag";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";
 export type { APICreateFeedback } from "./feedback";
+export type { APIListReferralCode } from "./referrals";

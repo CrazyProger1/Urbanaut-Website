@@ -12,4 +12,5 @@ export {
   createArea,
   updateUser,
   createFeedback,
+  getReferralCodes,
 } from "./api";
