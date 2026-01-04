@@ -20,17 +20,19 @@ import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { APIListTag } from "@/types";
+import { APIListTag, APIPreservationLevel } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
 import { validateResponse } from "@/utils/api";
+import { PreservationSelect } from "@/components/modules/map/forms/PreservationSelect";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
   description: z.string().max(1000).min(0),
   is_private: z.boolean(),
   tags: z.array(z.string()),
+  preservation_level: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
 });
 
 type Props = {
@@ -48,6 +50,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
       description: "",
       is_private: false,
       tags: [],
+      preservation_level: "MEDIUM",
     },
     mode: "onSubmit",
   });
@@ -144,6 +147,16 @@ export const AddPlaceForm = ({ tags }: Props) => {
                 />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="preservation_level"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Preservation Level</FormLabel>
+              <PreservationSelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
         />

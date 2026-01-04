@@ -42,14 +42,19 @@ export const getSecurityColorClass = (security?: APISecurityLevel) => {
 };
 
 export const getPreservationColorClass = (preservation?: APIPreservationLevel) => {
-  return cn(
-    preservation === "NONE" && "bg-preservation-none border-preservation-none  text-foreground",
-    preservation === "LOW" && "bg-preservation-low border-preservation-low  text-foreground",
-    preservation === "MEDIUM" &&
-      "bg-preservation-medium border-preservation-medium  text-foreground",
-    preservation === "HIGH" && "bg-preservation-high border-preservation-high  text-foreground",
-    preservation === "AWESOME" &&
-      "bg-preservation-awesome border-preservation-awesome  text-foreground",
-    !preservation && "bg-preservation-none border-preservation-none  text-foreground",
-  );
+  switch (preservation) {
+    case "NONE":
+      return "bg-preservation-none border-preservation-none text-foreground hover:bg-preservation-none-hover dark:bg-preservation-none dark:hover:bg-preservation-none-hover";
+    case "LOW":
+      return "bg-preservation-low border-preservation-low text-foreground hover:bg-preservation-low-hover dark:bg-preservation-low dark:hover:bg-preservation-low-hover";
+    case "MEDIUM":
+      return "bg-preservation-medium border-preservation-medium text-foreground hover:bg-preservation-medium-hover dark:bg-preservation-medium dark:hover:bg-preservation-medium-hover";
+    case "HIGH":
+      return "bg-preservation-high border-preservation-high text-foreground hover:bg-preservation-high-hover dark:bg-preservation-high dark:hover:bg-preservation-high-hover";
+    case "AWESOME":
+      return "bg-preservation-awesome border-preservation-awesome text-foreground hover:bg-preservation-awesome-hover dark:bg-preservation-awesome dark:hover:bg-preservation-awesome-hover";
+    default:
+      return "bg-preservation-none border-preservation-none text-foreground hover:bg-preservation-none-hover dark:bg-preservation-none dark:hover:bg-preservation-none-hover";
+  }
 };
+

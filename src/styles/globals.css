@@ -95,6 +95,11 @@
     --color-preservation-high: rgba(var(--color-base-easy), 0.3);
     --color-preservation-awesome: rgba(var(--color-base-impossible), 0.3);
 
+    --color-preservation-none-hover: rgba(var(--color-base-none), 0.4);
+    --color-preservation-low-hover: rgba(var(--color-base-hard), 0.4);
+    --color-preservation-medium-hover: rgba(var(--color-base-medium), 0.4);
+    --color-preservation-high-hover: rgba(var(--color-base-easy), 0.4);
+    --color-preservation-awesome-hover: rgba(var(--color-base-impossible), 0.4);
 }
 
 .dark {
@@ -233,6 +238,12 @@
     --color-preservation-medium: var(--color-preservation-medium);
     --color-preservation-high: var(--color-preservation-high);
     --color-preservation-awesome: var(--color-preservation-awesome);
+
+    --color-preservation-none-hover: var(--color-preservation-none-hover);
+    --color-preservation-low-hover: var(--color-preservation-low-hover);
+    --color-preservation-medium-hover: var(--color-preservation-medium-hover);
+    --color-preservation-high-hover: var(--color-preservation-high-hover);
+    --color-preservation-awesome-hover: var(--color-preservation-awesome-hover);
 }
 
 @layer base {
