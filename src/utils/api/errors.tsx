@@ -9,7 +9,7 @@ export const validateResponse = (
   if (!response.success) {
     const items: string[] = [];
 
-    response.errors.forEach(({ code, detail }: APIError) => {
+    response?.errors?.forEach(({ code, detail }: APIError) => {
       if (SHOW_TOAST_ONLY_CODES.includes(code || "permission_denied")) {
         items.push(detail || "");
       }
@@ -20,9 +20,9 @@ export const validateResponse = (
           description: (
             <ul className="list-disc pl-4">
               {items.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
           ),
         });
       } else {

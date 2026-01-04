@@ -38,6 +38,7 @@ export type APICreatePlace = {
   abandoned_at?: string;
   area?: number;
   is_private?: boolean;
+  preservation?: APIPreservationLevel;
 };
 
 export type APIPlaceFilters = APIMapBounds & {

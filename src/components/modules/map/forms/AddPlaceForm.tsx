@@ -32,7 +32,7 @@ const formSchema = z.object({
   description: z.string().max(1000).min(0),
   is_private: z.boolean(),
   tags: z.array(z.string()),
-  preservation_level: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
+  preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
 });
 
 type Props = {
@@ -50,7 +50,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
       description: "",
       is_private: false,
       tags: [],
-      preservation_level: "MEDIUM",
+      preservation: "MEDIUM",
     },
     mode: "onSubmit",
   });
@@ -73,13 +73,19 @@ export const AddPlaceForm = ({ tags }: Props) => {
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { tags, name, is_private } = values;
+    const { tags, name, is_private, preservation } = values;
     const point = searchParams.get("point");
     const params = new URLSearchParams(searchParams);
 
     if (point) {
       const [lat, lng] = point.split(",").map(Number);
-      const response = await createPlace({ name, point: [lat, lng], tags, is_private });
+      const response = await createPlace({
+        name,
+        point: [lat, lng],
+        tags,
+        is_private,
+        preservation,
+      });
 
       if (validateResponse(response)) {
         toast.success("Place added successfully.");
@@ -152,7 +158,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
         />
         <FormField
           control={form.control}
-          name="preservation_level"
+          name="preservation"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Preservation Level</FormLabel>
