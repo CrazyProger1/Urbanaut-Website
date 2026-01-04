@@ -22,14 +22,14 @@ import {
 import { useSearchParams } from "next/navigation";
 import { TileLayers, PlacesLayer, AreasLayer, ClusteringLayer } from "./layers";
 import { toast } from "sonner";
-import { MapPageFilters } from "@/types/map";
+import { MapPageParams } from "@/types/map";
 import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
 
 type Props = {
   center?: LatLng;
   zoom?: number;
-  filters?: MapPageFilters;
+  filters?: MapPageParams;
   markerVisibilityMinimumZoomThreshold?: number;
   areaVisibilityMinimumZoomThreshold?: number;
 };

@@ -3,6 +3,7 @@ import { Flame } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { APIPreservationLevel, APISecurityLevel } from "@/types";
 import { getPreservationColorClass, getSecurityColorClass } from "@/utils/css";
+import { Link } from "@/i18n";
 
 type Props = {
   security?: APISecurityLevel;
@@ -28,7 +29,11 @@ export const StateSection = ({ security, preservation }: Props) => {
         {/*</div>*/}
         <div>
           Preservation:{" "}
-          <Badge className={getPreservationColorClass(preservation)}>{preservation}</Badge>
+          <Link href={`?preservation=${preservation}`}>
+            <Badge className={`${getPreservationColorClass(preservation)} cursor-pointer`}>
+              {preservation}
+            </Badge>
+          </Link>
         </div>
       </div>
     </div>

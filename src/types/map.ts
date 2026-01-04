@@ -1,4 +1,4 @@
-import { APIPlaceFilters } from "@/types/api";
+import { APIPlaceFilters, APIPreservationLevel } from "@/types/api";
 
 export type MapLayer = {
   label: string;
@@ -8,7 +8,9 @@ export type MapLayer = {
   attribution: string;
 };
 
-export type MapPageFilters = APIPlaceFilters & {
+export type MapPageParams = APIPlaceFilters & {
   place: string;
   area: string;
+  preservation: APIPreservationLevel;
 };
+

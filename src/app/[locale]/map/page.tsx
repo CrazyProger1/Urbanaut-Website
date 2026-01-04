@@ -7,10 +7,10 @@ import {
   SuggestCorrectionModal,
 } from "@/components/modules/map/modals";
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
-import { MapPageFilters } from "@/types/map";
+import { MapPageParams } from "@/types/map";
 
 type Props = {
-  searchParams: Promise<MapPageFilters>;
+  searchParams: Promise<MapPageParams>;
 };
 
 const Page = async ({ searchParams }: Props) => {

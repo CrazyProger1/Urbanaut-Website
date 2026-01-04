@@ -16,6 +16,7 @@ import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/next/sheet";
 import { QUERIES } from "@/config";
+import { MapPageParams } from "@/types/map";
 
 type Props = {
   place: APIRetrievePlace;
@@ -36,7 +37,7 @@ export const PlaceSheet = ({ place }: Props) => {
 
   return (
     <Sheet open={true} query={QUERIES.PLACE_SHEET}>
-      <SheetContent className="overflow-y-auto !w-full sm:!w-3/4">
+      <SheetContent className="!w-full overflow-y-auto sm:!w-3/4">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
           <SheetDescription>Place</SheetDescription>
@@ -62,4 +63,4 @@ export const PlaceSheet = ({ place }: Props) => {
       </SheetContent>
     </Sheet>
   );
-}
+};
