@@ -38,7 +38,7 @@ const Page = async ({ searchParams }: Props) => {
   const joinedAt = Date.parse(user.created_at);
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-1 flex-col gap-4 p-4">
       <EditProfileModal user={user} />
       <ReferralModal />
       <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 lg:flex-row">
@@ -111,7 +111,7 @@ const Page = async ({ searchParams }: Props) => {
           </div>
         </div>
       </Card>
-      <Tabs defaultValue="reports" className="flex flex-col gap-4">
+      <Tabs defaultValue="reports" className="flex flex-1 flex-col gap-4">
         <TabsList className="w-full">
           <TabsTrigger value="reports" className="w-full">
             Reports
@@ -126,23 +126,23 @@ const Page = async ({ searchParams }: Props) => {
             Friends
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="reports" className="drop-shadow-volume">
-          <Card className="disabled flex flex-col items-center">
+        <TabsContent value="reports" className="drop-shadow-volume flex flex-1 flex-col">
+          <Card className="disabled flex flex-1 flex-col items-center justify-center p-4">
             <Lock size="64" />
           </Card>
         </TabsContent>
-        <TabsContent value="places" className="drop-shadow-volume">
-          <Card className="disabled flex flex-col items-center">
+        <TabsContent value="places" className="drop-shadow-volume flex flex-1 flex-col">
+          <Card className="disabled flex flex-1 flex-col items-center justify-center p-4">
             <Lock size="64" />
           </Card>
         </TabsContent>
-        <TabsContent value="achivements" className="drop-shadow-volume">
-          <Card className="disabled flex flex-col items-center">
+        <TabsContent value="achivements" className="drop-shadow-volume flex flex-1 flex-col">
+          <Card className="disabled flex flex-1 flex-col items-center justify-center p-4">
             <Lock size="64" />
           </Card>
         </TabsContent>
-        <TabsContent value="friends" className="drop-shadow-volume">
-          <Card className="disabled flex flex-col items-center">
+        <TabsContent value="friends" className="drop-shadow-volume flex flex-1 flex-col">
+          <Card className="disabled flex flex-1 flex-col items-center justify-center p-4">
             <Lock size="64" />
           </Card>
         </TabsContent>
