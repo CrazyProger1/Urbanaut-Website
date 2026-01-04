@@ -24,6 +24,7 @@ import { APIListTag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
+import { validateResponse } from "@/utils/api";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -75,11 +76,14 @@ export const AddPlaceForm = ({ tags }: Props) => {
 
     if (point) {
       const [lat, lng] = point.split(",").map(Number);
-      await createPlace({ name, point: [lat, lng], tags, is_private });
-      toast.success("Place added successfully.");
-      params.delete("point");
-      params.delete("addplace");
-      router.push(`?${params}`);
+      const response = await createPlace({ name, point: [lat, lng], tags, is_private });
+
+      if (validateResponse(response)) {
+        toast.success("Place added successfully.");
+        params.delete("point");
+        params.delete("addplace");
+        router.push(`?${params}`);
+      }
     }
   };
   return (

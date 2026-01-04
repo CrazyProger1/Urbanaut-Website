@@ -18,7 +18,9 @@ export const getPlace = async (
   return fetchAuthenticated(API_ENDPOINTS.PLACE.replace("[id]", String(id)));
 };
 
-export const createPlace = async (place: APICreatePlace) => {
+export const createPlace = async (
+  place: APICreatePlace,
+): Promise<(SuccessfulAPIResponse & APIRetrievePlace) | ErrorAPIResponse> => {
   return await fetchAuthenticated(API_ENDPOINTS.PLACES, {
     body: JSON.stringify(place),
     method: "POST",
