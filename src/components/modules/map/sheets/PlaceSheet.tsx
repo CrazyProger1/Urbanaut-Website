@@ -36,7 +36,7 @@ export const PlaceSheet = ({ place }: Props) => {
 
   return (
     <Sheet open={true} query={QUERIES.PLACE_SHEET}>
-      <SheetContent className="overflow-y-auto">
+      <SheetContent className="overflow-y-auto !w-full sm:!w-3/4">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
           <SheetDescription>Place</SheetDescription>
