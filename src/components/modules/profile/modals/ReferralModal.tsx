@@ -32,7 +32,7 @@ export const ReferralModal = async () => {
         </DialogHeader>
         <div className="flex flex-col gap-4">
           {codes.map((code) => (
-            <div className="flex flex-row gap-2">
+            <div key={code.code} className="flex flex-row gap-2">
               <Input type="url" value={`${SITE_URL}${PAGES.REFERRAL}/${code.code}`} readOnly />
               <Button variant="outline" asChild>
                 <CopyToast clipboard={`${SITE_URL}${PAGES.REFERRAL}/${code.code}`}>

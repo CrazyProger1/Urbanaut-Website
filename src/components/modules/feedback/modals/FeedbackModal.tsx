@@ -1,14 +1,24 @@
 import React from "react";
 import { QUERIES } from "@/config";
-import { ModalPortal, StopPropagation } from "@/components/common/modals";
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Modal } from "@/components/ui/next/modal";
 import { FeedbackForm } from "@/components/modules/feedback/forms";
 
 export const FeedbackModal = () => {
   return (
-    <ModalPortal query={QUERIES.FEEDBACK_MODAL}>
-      <StopPropagation className="sm:w-1/2 md:w-1/3">
+    <Modal query={QUERIES.FEEDBACK_MODAL}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Feedback</DialogTitle>
+          <DialogDescription>Here you can easily leave feedback ❤️</DialogDescription>
+        </DialogHeader>
         <FeedbackForm />
-      </StopPropagation>
-    </ModalPortal>
+      </DialogContent>
+    </Modal>
   );
 };

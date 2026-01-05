@@ -23,7 +23,7 @@ import { usePathname } from "@/i18n";
 import { QUERIES } from "@/config";
 
 const formSchema = z.object({
-  content: z.string().max(5000).min(2),
+  content: z.string().max(5000).min(5),
 });
 
 export const FeedbackForm = () => {
@@ -50,33 +50,25 @@ export const FeedbackForm = () => {
   const { formState } = form;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Feedback</CardTitle>
-        <CardDescription>Here you can easily leave feedback ❤️</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-8">
-            <FormField
-              control={form.control}
-              name="content"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Feedback</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-              Send {formState.isSubmitting && <Spinner />}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-8">
+        <FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel>Feedback</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+          Send {formState.isSubmitting && <Spinner />}
+        </Button>
+      </form>
+    </Form>
   );
 };

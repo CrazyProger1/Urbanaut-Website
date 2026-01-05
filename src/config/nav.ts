@@ -104,7 +104,6 @@ export const SIDEBAR_SUPPORT: SidebarItem[] = [
     title: "Feedback",
     url: `?${QUERIES.FEEDBACK_MODAL}=true`,
     icon: Send,
-    disabled: true,
   },
 ];
 

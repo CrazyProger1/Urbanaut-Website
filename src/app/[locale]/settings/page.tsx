@@ -15,17 +15,6 @@ const Page = () => {
           <p>Card Footer</p>
         </CardFooter>
       </Card>
-      <Card className="flex-1">
-        <CardHeader>
-          <CardTitle>UI</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
     </div>
   );
 };
