@@ -62,7 +62,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const code = searchParams.get("code") ?? undefined;
-    const success = await register(values.email, values.password, code);
+    const success = await register(values.email, values.password, code, values.country);
 
     let user;
     if (success) {

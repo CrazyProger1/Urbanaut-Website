@@ -24,8 +24,9 @@ export const register = async (
   email: string,
   password: string,
   code?: string,
+  country?: string,
 ): Promise<boolean> => {
-  const response = await services.register(email, password, code);
+  const response = await services.register(email, password, code, country);
   return response.success;
 };
 

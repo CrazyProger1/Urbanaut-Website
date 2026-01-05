@@ -18,9 +18,9 @@ export const login = async (email: string, password: string) => {
   });
 };
 
-export const register = async (email: string, password: string, code?: string) => {
+export const register = async (email: string, password: string, code?: string, country?: string) => {
   return await fetchAPI<{ user: APICurrentUser }>(API_ENDPOINTS.REGISTER, {
-    body: JSON.stringify({ email, password, code }),
+    body: JSON.stringify({ email, password, code, country }),
     method: "POST",
   });
 };
