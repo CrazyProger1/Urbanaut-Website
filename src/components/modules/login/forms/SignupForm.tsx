@@ -22,8 +22,9 @@ import { login, register } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
-import { CountrySelect } from "@/components/modules/login/forms/CountrySelect";
+import { CountrySelect } from "./CountrySelect";
 import { APIListCountry } from "@/types/api";
+import { BirthDateSelector } from "./BirthDateSelector";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -36,6 +37,9 @@ const formSchema = z.object({
     .regex(/[0-9]/, "Password must contain a number")
     .regex(/[!@#$%^&*()_\-+=<>?]/, "Password must contain a special character"),
   country: z.string().max(2),
+  first_name: z.string().max(150),
+  last_name: z.string().max(150),
+  born_at: z.date().optional(),
 });
 
 type Props = {
@@ -55,6 +59,9 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
       email: "",
       password: "",
       country: "",
+      first_name: "",
+      last_name: "",
+      born_at: undefined,
     },
     mode: "onSubmit",
   });
@@ -62,7 +69,11 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const code = searchParams.get("code") ?? undefined;
-    const success = await register(values.email, values.password, code, values.country);
+    const success = await register({
+      ...values,
+      born_at: values.born_at?.toISOString().split('T')[0],
+      code,
+    });
 
     let user;
     if (success) {
@@ -82,6 +93,51 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <FormField
+          control={form.control}
+          name="first_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>First Name or Pseudo</FormLabel>
+              <FormControl>
+                <Input placeholder="John" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="last_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Last Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Country</FormLabel>
+              <CountrySelect value={field.value} onChange={field.onChange} countries={countries} />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="born_at"
+          render={({ field }) => (
+            <BirthDateSelector value={field.value} onChange={field.onChange} />
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
@@ -113,16 +169,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="country"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Country</FormLabel>
-              <CountrySelect value={field.value} onChange={field.onChange} countries={countries} />
-            </FormItem>
-          )}
-        />
+
         <Field>
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
             Sign Up {formState.isSubmitting && <Spinner />}

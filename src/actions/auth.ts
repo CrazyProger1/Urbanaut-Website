@@ -2,7 +2,7 @@
 
 import * as services from "@/services";
 import { clearSession, setSession } from "@/utils/session";
-import { APICurrentUser } from "@/types";
+import { APICreateUser, APICurrentUser } from "@/types";
 
 export const login = async (
   email: string,
@@ -20,13 +20,8 @@ export const login = async (
   }
 };
 
-export const register = async (
-  email: string,
-  password: string,
-  code?: string,
-  country?: string,
-): Promise<boolean> => {
-  const response = await services.register(email, password, code, country);
+export const register = async (user: APICreateUser): Promise<boolean> => {
+  const response = await services.register(user);
   return response.success;
 };
 

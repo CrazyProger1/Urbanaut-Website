@@ -42,4 +42,10 @@ export type APIUpdateUser = {
 export type APICreateUser = {
   email?: string;
   password: string;
+  code?: string;
+  country?: string;
+  first_name?: string;
+  last_name?: string;
+  bio?: string;
+  born_at?: string;
 };
