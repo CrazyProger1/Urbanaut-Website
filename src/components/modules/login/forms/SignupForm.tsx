@@ -22,6 +22,8 @@ import { login, register } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
+import { CountrySelect } from "@/components/modules/login/forms/CountrySelect";
+import { APIListCountry } from "@/types/api";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -33,13 +35,15 @@ const formSchema = z.object({
     .regex(/[A-Z]/, "Password must contain an uppercase letter")
     .regex(/[0-9]/, "Password must contain a number")
     .regex(/[!@#$%^&*()_\-+=<>?]/, "Password must contain a special character"),
+  country: z.string().max(2),
 });
 
 type Props = {
+  countries: APIListCountry[];
   otherProviders?: React.ReactNode[];
 };
 
-export const SignupForm = ({ otherProviders }: Props) => {
+export const SignupForm = ({ otherProviders, countries }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -50,6 +54,7 @@ export const SignupForm = ({ otherProviders }: Props) => {
     defaultValues: {
       email: "",
       password: "",
+      country: "",
     },
     mode: "onSubmit",
   });
@@ -105,6 +110,16 @@ export const SignupForm = ({ otherProviders }: Props) => {
                 </Link>
               </FormDescription>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Country</FormLabel>
+              <CountrySelect value={field.value} onChange={field.onChange} countries={countries} />
             </FormItem>
           )}
         />

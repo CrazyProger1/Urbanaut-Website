@@ -14,6 +14,8 @@ import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
+import { getCountries } from "@/services/api/geo";
+import { APIListCountry } from "@/types/api";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -59,6 +61,9 @@ const RootLayout = async ({ children }: Props) => {
 
   const theme = session?.user?.settings?.theme || "DARK";
 
+  const response = await getCountries();
+  const countries = response.success ? response.results : [];
+
   return (
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
       <body>
@@ -73,7 +78,7 @@ const RootLayout = async ({ children }: Props) => {
                   <Footer />
                 </SidebarInset>
                 <SigninModal />
-                <SignupModal />
+                <SignupModal countries={countries} />
                 <FeedbackModal />
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
