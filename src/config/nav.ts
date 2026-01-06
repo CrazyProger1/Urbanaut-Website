@@ -34,6 +34,7 @@ export const QUERIES = {
   REFERRAL_PROFILE_MODAL: "referral",
   SIGNIN_MODAL: "signin",
   SIGNUP_MODAL: "signup",
+  FILTERS_MODAL: "filters",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

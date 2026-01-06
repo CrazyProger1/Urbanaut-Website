@@ -5,6 +5,7 @@ import {
   AddPlaceModal,
   AddAreaModal,
   SuggestCorrectionModal,
+  FiltersModal,
 } from "@/components/modules/map/modals";
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
 import { MapPageParams } from "@/types/map";
@@ -42,6 +43,7 @@ const Page = async ({ searchParams }: Props) => {
       <AddPlaceModal tags={tags} />
       <AddAreaModal tags={tags} />
       <SuggestCorrectionModal />
+      <FiltersModal />
       {currentPlace && <PlaceSheet place={currentPlace} />}
       {currentArea && <AreaSheet area={currentArea} />}
     </div>

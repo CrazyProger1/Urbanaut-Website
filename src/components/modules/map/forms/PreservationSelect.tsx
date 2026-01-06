@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -13,7 +13,7 @@ import { getPreservationColorClass } from "@/utils/css";
 import { APIPreservationLevel } from "@/types";
 
 type Props = {
-  value: APIPreservationLevel;
+  value?: APIPreservationLevel;
   onChange: (value: APIPreservationLevel) => void;
 };
 
@@ -50,7 +50,7 @@ export const PreservationSelect = ({ value, onChange }: Props) => {
           </SelectContent>
         </Select>
       </FormControl>
-      <p className="text-muted-foreground text-sm">{PRESERVATION_DESCRIPTIONS[value]}</p>
+      <p className="text-muted-foreground text-sm">{PRESERVATION_DESCRIPTIONS[value || "MEDIUM"]}</p>
       <FormMessage />
     </>
   );

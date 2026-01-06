@@ -39,7 +39,18 @@ const formSchema = z.object({
   country: z.string().max(2),
   first_name: z.string().max(150),
   last_name: z.string().max(150),
-  born_at: z.date().optional(),
+  born_at: z.date().optional().refine(
+    (date) => {
+      if (!date) return true;
+      if (date > new Date()) return false;
+      const today = new Date();
+      const tenYearsAgo = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+      return date <= tenYearsAgo;
+    },
+    {
+      message: "Birth date must be in the past and you must be at least 10 years old",
+    }
+  ),
 });
 
 type Props = {
@@ -71,7 +82,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     const code = searchParams.get("code") ?? undefined;
     const success = await register({
       ...values,
-      born_at: values.born_at?.toISOString().split('T')[0],
+      born_at: values.born_at?.toISOString().split("T")[0],
       code,
     });
 
@@ -134,7 +145,10 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           control={form.control}
           name="born_at"
           render={({ field }) => (
-            <BirthDateSelector value={field.value} onChange={field.onChange} />
+            <FormItem>
+              <BirthDateSelector value={field.value} onChange={field.onChange} />
+              <FormMessage />
+            </FormItem>
           )}
         />
 

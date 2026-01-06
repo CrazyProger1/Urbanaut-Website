@@ -20,12 +20,12 @@ export const BirthDateSelector = ({ value, onChange }: Props) => {
     if (date) {
       onChange?.(date);
     }
-  }, [date]);
+  }, [date, onChange]);
 
   return (
     <div className="flex flex-col gap-2">
       <Label htmlFor="date" className="px-1">
-        Date of birth
+        Date Of Birth
       </Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>

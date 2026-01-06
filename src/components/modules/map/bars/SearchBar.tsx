@@ -7,14 +7,16 @@ import { Filter, Layers, Search, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
+import { useRouter } from "@/i18n";
+import { PAGES, QUERIES } from "@/config";
 
 export const SearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAIActive, setIsAIActive] = useState(false);
-
+  const router = useRouter();
   return (
-    <div className="absolute top-4 left-4 flex flex-col md:flex-row gap-4">
-      <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm max-w-fit">
+    <div className="absolute top-4 left-4 flex flex-col gap-4 md:flex-row">
+      <Card className="bg-background/80 max-w-fit items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
         <Toggle
           pressed={isOpen}
           onPressedChange={() => {
@@ -37,7 +39,13 @@ export const SearchBar = () => {
               <Search />
             </Button>
           </form>
-          <Toggle>
+          <Toggle
+            onPressedChange={(value) => {
+              if (value) {
+                router.push(`?${QUERIES.FILTERS_MODAL}=true`);
+              }
+            }}
+          >
             <Filter />
           </Toggle>
           <Toggle onPressedChange={setIsAIActive}>
