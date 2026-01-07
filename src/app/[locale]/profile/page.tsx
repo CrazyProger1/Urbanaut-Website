@@ -31,6 +31,8 @@ const Page = async ({ searchParams }: Props) => {
   }
 
   const { user } = session;
+  const { settings } = user;
+  const { country } = settings;
   const rankClass = getRankShadowClass(user?.rank);
 
   const format = await getFormatter();
@@ -98,10 +100,12 @@ const Page = async ({ searchParams }: Props) => {
                 })}
               </div>
             </div>
-            <div className="flex flex-row items-center gap-1">
-              <MapPin size={16} />
-              <div>Ukraine</div>
-            </div>
+            {country && (
+              <div className="flex flex-row items-center gap-1">
+                <MapPin size={16} />
+                <div>{country.name}</div>
+              </div>
+            )}
           </div>
           <div className="flex flex-row gap-8">
             <MetricsTable user={user} />

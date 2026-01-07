@@ -4,3 +4,8 @@ export type APIListCountry = {
   tld: string;
   name: string;
 };
+
+export type APIRetrieveCountry = {
+  tld: string;
+  name: string;
+};

@@ -1,6 +1,7 @@
 import { Locale } from "@/i18n";
 import { APIRetrieveMetric } from "@/types/api/metric";
 import { APIRetrieveAchievement } from "@/types/api/achivement";
+import { APIRetrieveCountry } from "@/types/api/geo";
 
 export type APITheme = "DARK" | "LIGHT";
 
@@ -10,6 +11,7 @@ export type APIRetrieveSettings = {
   language: Locale;
   is_notifications_enabled: boolean;
   theme: APITheme;
+  country?: APIRetrieveCountry;
 };
 
 export type APIUpdateSettings = {
