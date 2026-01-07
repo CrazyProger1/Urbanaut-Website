@@ -1,19 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Filter, Layers, Search, Sparkles } from "lucide-react";
+import { Filter, Search, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
-import { useRouter } from "@/i18n";
-import { PAGES, QUERIES } from "@/config";
+import { Link } from "@/i18n";
+import { useModalOpenLink } from "@/hooks/useModalOpenLink";
+import { QUERIES } from "@/config";
+import { useSearchParams } from "next/navigation";
 
 export const SearchBar = () => {
+  const params = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [isAIActive, setIsAIActive] = useState(false);
-  const router = useRouter();
+  const openFilterModalLink = useModalOpenLink(QUERIES.FILTERS_MODAL);
+  const [isFiltersActive, setIsFiltersActive] = useState(false);
+
+  useEffect(() => {
+    setIsFiltersActive(params.size > 0);
+  }, [params]);
+
   return (
     <div className="absolute top-4 left-4 flex flex-col gap-4 md:flex-row">
       <Card className="bg-background/80 max-w-fit items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
@@ -39,15 +48,11 @@ export const SearchBar = () => {
               <Search />
             </Button>
           </form>
-          <Toggle
-            onPressedChange={(value) => {
-              if (value) {
-                router.push(`?${QUERIES.FILTERS_MODAL}=true`);
-              }
-            }}
-          >
-            <Filter />
-          </Toggle>
+          <Link href={openFilterModalLink} scroll={false}>
+            <Toggle pressed={isFiltersActive}>
+              <Filter />
+            </Toggle>
+          </Link>
           <Toggle onPressedChange={setIsAIActive}>
             <Sparkles />
           </Toggle>
