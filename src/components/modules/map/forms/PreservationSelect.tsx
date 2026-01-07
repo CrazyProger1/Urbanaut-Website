@@ -50,7 +50,9 @@ export const PreservationSelect = ({ value, onChange }: Props) => {
           </SelectContent>
         </Select>
       </FormControl>
-      <p className="text-muted-foreground text-sm">{PRESERVATION_DESCRIPTIONS[value || "MEDIUM"]}</p>
+      <p className="text-muted-foreground text-sm">
+        {PRESERVATION_DESCRIPTIONS[value || "MEDIUM"]}
+      </p>
       <FormMessage />
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PreservationSelect } from "./PreservationSelect";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -8,10 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "@/i18n";
+import { Link, useRouter } from "@/i18n";
 import { Label } from "@/components/ui/label";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
-import { APIListTag } from "@/types";
+import { APIListTag, APIPreservationLevel } from "@/types";
+import { PAGES, QUERIES } from "@/config";
+import { useSearchParams } from "next/navigation";
+import { builtParamsFromRecord } from "@/utils/params";
+import { usePreservedParamsLink } from "@/hooks";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
@@ -23,46 +27,41 @@ type Props = {
 };
 
 export const FiltersForm = ({ tags }: Props) => {
+  const params = useSearchParams();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      preservation: undefined,
-      tags: [],
+      preservation: params.get("preservation") as APIPreservationLevel,
+      tags: params.getAll("tags"),
     },
     mode: "onSubmit",
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const params = new URLSearchParams();
+  const { watch } = form;
 
-    Object.entries(values).map(([key, value]) => {
-      if (value) {
-        if (Array.isArray(value)) {
-          value.map((subvalue) => {
-            params.append(key, subvalue);
-          });
-        } else {
-          params.set(key, value);
-        }
-      }
+  const values = watch();
+
+  const applyFiltersLink = usePreservedParamsLink({ ...values, [QUERIES.FILTERS_MODAL]: false });
+
+  const onSubmit = async () => {
+    router.push(applyFiltersLink, {
+      scroll: false,
     });
-
-    router.push(`?${params}`, { scroll: false });
   };
 
-  const selected = form.watch("tags");
+  const selectedTags = values.tags;
 
   const handleSelect = (tag: string) => {
-    if (!selected.includes(tag)) {
-      form.setValue("tags", [...selected, tag]);
+    if (!selectedTags.includes(tag)) {
+      form.setValue("tags", [...selectedTags, tag]);
     }
   };
 
   const handleRemove = (tag: string) => {
     form.setValue(
       "tags",
-      selected.filter((t) => t !== tag),
+      selectedTags.filter((t) => t !== tag),
     );
   };
 
@@ -98,6 +97,9 @@ export const FiltersForm = ({ tags }: Props) => {
         />
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
           Apply {formState.isSubmitting && <Spinner />}
+        </Button>
+        <Button className="w-full" variant="secondary" asChild>
+          <Link href={PAGES.MAP}>Clear Filters</Link>
         </Button>
       </form>
     </Form>

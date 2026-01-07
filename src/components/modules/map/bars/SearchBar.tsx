@@ -11,16 +11,21 @@ import { Link } from "@/i18n";
 import { useModalOpenLink } from "@/hooks/useModalOpenLink";
 import { QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
+import { usePreservedParamsLink } from "@/hooks";
+
+const FILTER_PARAMS = new Set(["preservation", "tags"]);
 
 export const SearchBar = () => {
   const params = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [isAIActive, setIsAIActive] = useState(false);
   const openFilterModalLink = useModalOpenLink(QUERIES.FILTERS_MODAL);
+  const [query, setQuery] = useState("");
+  const searchLink = usePreservedParamsLink({ query: query });
   const [isFiltersActive, setIsFiltersActive] = useState(false);
 
   useEffect(() => {
-    setIsFiltersActive(params.size > 0);
+    setIsFiltersActive(FILTER_PARAMS.intersection(new Set(params.keys())).size > 0);
   }, [params]);
 
   return (
@@ -42,17 +47,26 @@ export const SearchBar = () => {
             "px-2 py-1 shadow-lg",
           )}
         >
-          <form className="flex flex-row gap-1">
-            <Input name={isAIActive ? "ai_query" : "query"} type="text" />
-            <Button type="submit" variant="ghost">
-              <Search />
+          <div className="flex flex-row gap-1">
+            <Input
+              name={isAIActive ? "ai_query" : "query"}
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <Button type="submit" variant="ghost" asChild>
+              <Link href={searchLink}>
+                <Search />
+              </Link>
             </Button>
-          </form>
-          <Link href={openFilterModalLink} scroll={false}>
-            <Toggle pressed={isFiltersActive}>
+          </div>
+
+          <Toggle pressed={isFiltersActive} asChild>
+            <Link href={openFilterModalLink} scroll={false}>
               <Filter />
-            </Toggle>
-          </Link>
+            </Link>
+          </Toggle>
+
           <Toggle onPressedChange={setIsAIActive}>
             <Sparkles />
           </Toggle>
