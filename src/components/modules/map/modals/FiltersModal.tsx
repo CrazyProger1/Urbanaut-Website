@@ -3,15 +3,19 @@ import { QUERIES } from "@/config";
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { FiltersForm } from "@/components/modules/map/forms";
+import { APIListTag } from "@/types";
 
-export const FiltersModal = () => {
+type Props = {
+  tags?: APIListTag[];
+};
+export const FiltersModal = ({ tags }: Props) => {
   return (
     <Modal query={QUERIES.FILTERS_MODAL}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Filters</DialogTitle>
         </DialogHeader>
-        <FiltersForm />
+        <FiltersForm tags={tags} />
       </DialogContent>
     </Modal>
   );

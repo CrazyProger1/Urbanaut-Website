@@ -43,7 +43,7 @@ const Page = async ({ searchParams }: Props) => {
       <AddPlaceModal tags={tags} />
       <AddAreaModal tags={tags} />
       <SuggestCorrectionModal />
-      <FiltersModal />
+      <FiltersModal tags={tags} />
       {currentPlace && <PlaceSheet place={currentPlace} />}
       {currentArea && <AreaSheet area={currentArea} />}
     </div>
