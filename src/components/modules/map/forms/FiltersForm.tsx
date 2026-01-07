@@ -32,7 +32,7 @@ export const FiltersForm = ({ tags }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      preservation: params.get("preservation") as APIPreservationLevel,
+      preservation: (params.get("preservation") as APIPreservationLevel) || undefined,
       tags: params.getAll("tags"),
     },
     mode: "onSubmit",

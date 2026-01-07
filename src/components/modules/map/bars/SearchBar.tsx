@@ -22,6 +22,7 @@ export const SearchBar = () => {
   const openFilterModalLink = useModalOpenLink(QUERIES.FILTERS_MODAL);
   const [query, setQuery] = useState("");
   const searchLink = usePreservedParamsLink({ query: query });
+  const aiSearchLink = usePreservedParamsLink({ ai_query: query });
   const [isFiltersActive, setIsFiltersActive] = useState(false);
 
   useEffect(() => {
@@ -48,14 +49,9 @@ export const SearchBar = () => {
           )}
         >
           <div className="flex flex-row gap-1">
-            <Input
-              name={isAIActive ? "ai_query" : "query"}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+            <Input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
             <Button type="submit" variant="ghost" asChild>
-              <Link href={searchLink}>
+              <Link href={isAIActive ? aiSearchLink : searchLink}>
                 <Search />
               </Link>
             </Button>
