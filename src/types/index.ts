@@ -33,6 +33,8 @@ export type {
   APIAreaFilters,
   APICreateFeedback,
   APIListReferralCode,
+  APIRetrieveUser,
+  APIListCountry,
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";

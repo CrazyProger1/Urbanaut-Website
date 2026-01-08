@@ -1,9 +1,9 @@
 import React from "react";
-import { APICurrentUser } from "@/types";
+import { APIRetrieveUser } from "@/types";
 import { AchievementItem } from "./AchievementItem";
 
 type Props = {
-  user: APICurrentUser;
+  user: APIRetrieveUser;
 };
 
 export const AchievementTable = ({ user }: Props) => {

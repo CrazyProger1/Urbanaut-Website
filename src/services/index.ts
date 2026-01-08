@@ -13,4 +13,5 @@ export {
   updateUser,
   createFeedback,
   getReferralCodes,
+  getUserByUsername,
 } from "./api";

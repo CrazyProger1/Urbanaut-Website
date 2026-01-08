@@ -28,6 +28,7 @@ export type PaginatedAPIResponse<T> = {
 export type {
   APICurrentUser,
   APIUpdateUser,
+  APIRetrieveUser,
   APICreateUser,
   APIRetrieveSettings,
   APIUpdateSettings,

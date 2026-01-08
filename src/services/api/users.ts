@@ -1,4 +1,10 @@
-import { APICurrentUser, APIUpdateUser, ErrorAPIResponse, SuccessfulAPIResponse } from "@/types";
+import {
+  APICurrentUser,
+  APIRetrieveUser,
+  APIUpdateUser,
+  ErrorAPIResponse,
+  SuccessfulAPIResponse,
+} from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS } from "@/config";
 
@@ -9,4 +15,10 @@ export const updateUser = async (
     method: "PATCH",
     body: JSON.stringify(user),
   });
+};
+
+export const getUserByUsername = (
+  username: string,
+): Promise<(SuccessfulAPIResponse & APIRetrieveUser) | ErrorAPIResponse> => {
+  return fetchAuthenticated(API_ENDPOINTS.USER_BY_USERNAME.replace("[username]", username));
 };

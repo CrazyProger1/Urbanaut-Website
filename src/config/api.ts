@@ -6,6 +6,7 @@ export const API_ENDPOINTS = {
   REGISTER: "users/",
   USERS: "users/",
   USER: "users/[id]/",
+  USER_BY_USERNAME: "users/by_username/[username]",
   LOGIN: "tokens/",
   PLACES: "places/",
   PLACE: "places/[id]/",
