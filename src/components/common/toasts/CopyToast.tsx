@@ -12,11 +12,18 @@ type Props = {
   message?: string;
 };
 
-export const CopyToast = ({ className, clipboard, children, message = "Copied to clipboard!" }: Props) => {
+export const CopyToast = ({
+  className,
+  clipboard,
+  children,
+  message = "Copied to clipboard!",
+}: Props) => {
   return (
     <span
       className={cn(className, "cursor-pointer select-none")}
-      onClick={() => {
+      onClick={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
         toast.success(message);
         if (clipboard) {
           setClipboard(clipboard);

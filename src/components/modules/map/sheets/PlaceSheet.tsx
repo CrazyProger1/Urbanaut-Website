@@ -16,7 +16,7 @@ import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/next/sheet";
 import { QUERIES } from "@/config";
-import { MapPageParams } from "@/types/map";
+import { ContributorsSection } from "./ContributorsSection";
 
 type Props = {
   place: APIRetrievePlace;
@@ -33,6 +33,7 @@ export const PlaceSheet = ({ place }: Props) => {
     built_at,
     security,
     preservation,
+    created_by,
   } = place;
 
   return (
@@ -53,6 +54,7 @@ export const PlaceSheet = ({ place }: Props) => {
           />
           <StateSection security={security} preservation={preservation} />
           <LocationSection point={point} />
+          <ContributorsSection creator={created_by} />
         </div>
         <SheetFooter>
           <Button type="submit">Suggest Correction</Button>
