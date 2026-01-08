@@ -8,7 +8,7 @@ type Props = {
 
 export const MetricsTable = ({ user }: Props) => {
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-wrap justify-center gap-4">
       {user?.metrics?.map((metric) => (
         <MetricItem key={metric.name} metric={metric} />
       ))}
