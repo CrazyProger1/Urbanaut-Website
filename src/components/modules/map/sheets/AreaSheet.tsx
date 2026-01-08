@@ -37,7 +37,7 @@ export const AreaSheet = ({ area }: Props) => {
           {tags && <TagsSection tags={tags} />}
           <TimelineSection />
           <StateSection />
-          <ContributorsSection creator={created_by} />
+          {created_by && <ContributorsSection creator={created_by} />}
         </div>
         <SheetFooter>
           <Button type="submit">Suggest Correction</Button>

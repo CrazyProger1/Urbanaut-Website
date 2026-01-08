@@ -20,33 +20,35 @@ export const ContributorsSection = ({ creator }: Props) => {
         <div className="font-semibold">Contributors</div>
       </div>
       <div>
-        <Link href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}>
-          <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg">
-            <div className="absolute top-1 right-2 text-xs text-muted-foreground">creator</div>
-            <Avatar className="h-16 w-16 rounded-lg">
-              <AvatarImage
-                className={getRankShadowClass(creator?.rank)}
-                src={"/web-app-manifest-192x192.png"}
-                alt={creator?.first_name}
-              />
-              <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col leading-tight">
-              <span className={`truncate font-bold ${getRankShadowClass(creator?.rank)}`}>
-                {creator?.first_name} {creator?.last_name}
-              </span>
-              <div className="text-muted-foreground flex flex-col text-sm">
-                {creator?.usernames?.map((username) => (
-                  <CopyToast key={username} clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
-                    <div className="cursor-pointer select-none hover:underline" key={username}>
-                      @{username}
-                    </div>
-                  </CopyToast>
-                ))}
+        {creator && (
+          <Link href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}>
+            <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg">
+              <div className="text-muted-foreground absolute top-1 right-2 text-xs">creator</div>
+              <Avatar className="h-16 w-16 rounded-lg">
+                <AvatarImage
+                  className={getRankShadowClass(creator?.rank)}
+                  src={"/web-app-manifest-192x192.png"}
+                  alt={creator?.first_name}
+                />
+                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col leading-tight">
+                <span className={`truncate font-bold ${getRankShadowClass(creator?.rank)}`}>
+                  {creator?.first_name} {creator?.last_name}
+                </span>
+                <div className="text-muted-foreground flex flex-col text-sm">
+                  {creator?.usernames?.map((username) => (
+                    <CopyToast key={username} clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
+                      <div className="cursor-pointer select-none hover:underline" key={username}>
+                        @{username}
+                      </div>
+                    </CopyToast>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        )}
       </div>
     </div>
   );

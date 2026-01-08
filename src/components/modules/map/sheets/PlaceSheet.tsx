@@ -54,7 +54,7 @@ export const PlaceSheet = ({ place }: Props) => {
           />
           <StateSection security={security} preservation={preservation} />
           <LocationSection point={point} />
-          <ContributorsSection creator={created_by} />
+          {created_by && <ContributorsSection creator={created_by} />}
         </div>
         <SheetFooter>
           <Button type="submit">Suggest Correction</Button>
