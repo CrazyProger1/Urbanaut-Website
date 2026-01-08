@@ -1,6 +1,6 @@
-import { ErrorAPIResponse, SuccessfulAPIResponse } from "@/types";
+import { APIErrorResponse, APISuccessfulResponse } from "@/types";
 
-export const requireRefresh = (response: ErrorAPIResponse | SuccessfulAPIResponse): boolean => {
+export const requireRefresh = (response: APIErrorResponse | APISuccessfulResponse): boolean => {
   return !response.success && response?.errors?.[0]?.code === "token_not_valid";
 };
 

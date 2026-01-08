@@ -1,11 +1,11 @@
 "use server";
 
-import { PaginatedAPIResponse } from "@/types";
+import { APIPaginatedResponse } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS } from "@/config";
 import { APIListCountry } from "@/types/api";
 
-export const getCountries = async (): Promise<PaginatedAPIResponse<APIListCountry>> => {
+export const getCountries = async (): Promise<APIPaginatedResponse<APIListCountry>> => {
   const params = new URLSearchParams();
   params.set("limit", "300");
 

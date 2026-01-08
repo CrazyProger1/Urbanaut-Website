@@ -2,6 +2,7 @@ import { APIPoint } from "./geo";
 import { APISecurityLevel } from "@/types";
 import { APIPreservationLevel } from "@/types";
 import { APIMapBounds } from "@/types/api/map";
+import { APIListUser } from "@/types/api/user";
 
 export type APIListPlace = {
   id: number;
@@ -23,7 +24,7 @@ export type APIRetrievePlace = {
   is_private: boolean;
   created_at: string;
   updated_at: string;
-  created_by?: string;
+  created_by?: APIListUser;
   area?: number;
 };
 

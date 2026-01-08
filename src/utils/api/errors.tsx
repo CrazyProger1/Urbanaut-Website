@@ -1,8 +1,8 @@
-import { APIError, ErrorAPIResponse, SuccessfulAPIResponse } from "@/types";
+import { APIError, APIErrorResponse, APISuccessfulResponse } from "@/types";
 import { toast } from "sonner";
 
 export const validateResponse = (
-  response: ErrorAPIResponse | SuccessfulAPIResponse,
+  response: APIErrorResponse | APISuccessfulResponse,
   message: string = "An error occurred",
 ): boolean => {
   const SHOW_TOAST_ONLY_CODES = ["permission_denied"];

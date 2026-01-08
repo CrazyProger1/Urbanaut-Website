@@ -6,20 +6,20 @@ import {
   APIRetrieveArea,
   APIAreaFilters,
   APICreateArea,
-  ErrorAPIResponse,
-  PaginatedAPIResponse,
-  SuccessfulAPIResponse,
+  APIErrorResponse,
+  APIPaginatedResponse,
+  APISuccessfulResponse,
 } from "@/types";
 
 export const getAreas = async (
   filters?: APIAreaFilters,
-): Promise<PaginatedAPIResponse<APIListArea>> => {
+): Promise<APIPaginatedResponse<APIListArea>> => {
   return fetchAuthenticated(API_ENDPOINTS.AREAS);
 };
 
 export const getArea = async (
   id: number | string,
-): Promise<(SuccessfulAPIResponse & APIRetrieveArea) | ErrorAPIResponse> => {
+): Promise<(APISuccessfulResponse & APIRetrieveArea) | APIErrorResponse> => {
   return fetchAuthenticated(API_ENDPOINTS.AREA.replace("[id]", String(id)));
 };
 

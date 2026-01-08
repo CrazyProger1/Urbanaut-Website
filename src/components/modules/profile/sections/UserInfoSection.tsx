@@ -27,7 +27,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
 
   const rankClass = getRankShadowClass(user?.rank);
   return (
-    <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 lg:flex-row">
+    <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 select-none lg:flex-row">
       <div className="flex min-w-64 flex-col items-center">
         <Image
           className={rankClass}
@@ -74,7 +74,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
             </CopyToast>
           ))}
         </div>
-        <div>{user?.bio}</div>
+        <div className="select-text">{user?.bio}</div>
         <div className="text-muted-foreground flex flex-row gap-4 text-sm font-medium">
           <div className="flex flex-row items-center gap-1">
             <Calendar size={16} />

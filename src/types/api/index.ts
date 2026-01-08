@@ -2,7 +2,7 @@ export type APIResponse = {
   success: boolean;
 };
 
-export type SuccessfulAPIResponse = {
+export type APISuccessfulResponse = {
   success: true;
 } & APIResponse;
 
@@ -12,18 +12,18 @@ export type APIError = {
   attr?: string;
 };
 
-export type ErrorAPIResponse = {
+export type APIErrorResponse = {
   success: false;
   message?: string;
   errors: APIError[];
 } & APIResponse;
 
-export type PaginatedAPIResponse<T> = {
+export type APIPaginatedResponse<T> = {
   next?: string;
   previous?: string;
   count: number;
   results: T[];
-} & SuccessfulAPIResponse;
+} & APISuccessfulResponse;
 
 export type {
   APICurrentUser,
@@ -34,11 +34,12 @@ export type {
   APIUpdateSettings,
   APITheme,
   APIRank,
+  APIListUser,
 } from "./user";
 export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
 export type { APITokens, APIAccessToken, APITokenPayload } from "./token";
-export type { GoogleOauthRedirectURIAPIResponse, GoogleOauthCallbackAPIResponse } from "./oauth";
+export type { APIGoogleOauthRedirectURIResponse, APIGoogleOauthCallbackResponse } from "./oauth";
 export type { APIPoint, APIListCountry } from "./geo";
 export type { APIListPlace, APIRetrievePlace, APICreatePlace, APIPlaceFilters } from "./place";
 export type { APIListArea, APIRetrieveArea, APICreateArea, APIAreaFilters } from "./area";

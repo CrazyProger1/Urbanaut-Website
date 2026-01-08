@@ -52,6 +52,14 @@ export type APIRetrieveUser = {
   rank?: APIRank;
 };
 
+export type APIListUser = {
+  id: string;
+  usernames: string[];
+  first_name?: string;
+  last_name?: string;
+  rank?: APIRank;
+};
+
 export type APIUpdateUser = {
   email?: string;
   first_name?: string;

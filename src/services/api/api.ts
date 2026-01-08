@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 
 import { API_URL } from "@/config";
-import { APIResponse, ErrorAPIResponse } from "@/types";
+import { APIResponse, APIErrorResponse } from "@/types";
 
 export type FetchAPIOptions = {
   accessToken?: string;
@@ -48,6 +48,6 @@ export const fetchAPI = async <T>(
     return { success: response.ok, ...data };
   } catch (error) {
     console.error(error);
-    return { success: false } as ErrorAPIResponse & T;
+    return { success: false } as APIErrorResponse & T;
   }
 };

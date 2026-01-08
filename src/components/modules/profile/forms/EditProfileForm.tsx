@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { usePathname, useRouter } from "@/i18n";
+import { Link, usePathname, useRouter } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useSearchParams } from "next/navigation";
@@ -23,6 +23,8 @@ import { DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { SessionUser } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { updateUser } from "@/actions";
+import { Field } from "@/components/ui/field";
+import { usePreservedParamsLink } from "@/hooks";
 
 const formSchema = z.object({
   first_name: z.string().min(3, "First name is required").max(150),
@@ -56,6 +58,8 @@ export const EditProfileForm = ({ user }: Props) => {
   });
 
   const { formState } = form;
+
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.EDIT_PROFILE_MODAL]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await updateUser(values);
@@ -121,16 +125,14 @@ export const EditProfileForm = ({ user }: Props) => {
             </FormItem>
           )}
         />
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" variant="outline">
-              Cancel
-            </Button>
-          </DialogClose>
-          <Button type="submit" disabled={formState.isSubmitting}>
-            Save changes {formState.isSubmitting && <Spinner />}
+        <Field className="flex flex-col">
+          <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+            Save {formState.isSubmitting && <Spinner />}
           </Button>
-        </DialogFooter>
+          <Button className="w-full" type="button" variant="outline" asChild>
+            <Link href={closeModalLink}>Cancel</Link>
+          </Button>
+        </Field>
       </form>
     </Form>
   );

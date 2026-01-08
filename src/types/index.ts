@@ -1,10 +1,10 @@
 export type {
-  PaginatedAPIResponse,
-  SuccessfulAPIResponse,
+  APIPaginatedResponse,
+  APISuccessfulResponse,
   APIResponse,
-  ErrorAPIResponse,
-  GoogleOauthCallbackAPIResponse,
-  GoogleOauthRedirectURIAPIResponse,
+  APIErrorResponse,
+  APIGoogleOauthCallbackResponse,
+  APIGoogleOauthRedirectURIResponse,
   APICurrentUser,
   APIUpdateUser,
   APICreateUser,
@@ -35,6 +35,7 @@ export type {
   APIListReferralCode,
   APIRetrieveUser,
   APIListCountry,
+  APIListUser,
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";

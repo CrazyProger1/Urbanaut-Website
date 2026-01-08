@@ -23,7 +23,7 @@ export const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <ShadcnSidebar collapsible="icon" className="drop-shadow-volume">
+    <ShadcnSidebar collapsible="icon" className="drop-shadow-volume select-none">
       <SidebarContent>
         <SidebarGroup>
           <Link className="flex flex-row items-center gap-4" href={PAGES.MAIN}>

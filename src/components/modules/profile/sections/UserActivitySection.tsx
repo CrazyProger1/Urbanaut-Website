@@ -10,7 +10,7 @@ type Props = {
 
 export const UserActivitySection = ({ user }: Props) => {
   return (
-    <Tabs defaultValue="reports" className="flex flex-1 flex-col gap-4">
+    <Tabs defaultValue="reports" className="flex flex-1 flex-col gap-4 select-none">
       <TabsList className="w-full">
         <TabsTrigger value="reports" className="w-full">
           Reports
