@@ -5,6 +5,7 @@ import { getUserByUsername } from "@/services";
 type Props = {
   params: Promise<{ username: string }>;
 };
+
 const Page = async ({ params }: Props) => {
   const { username } = await params;
   const response = await getUserByUsername(username);

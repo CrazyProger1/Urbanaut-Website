@@ -48,7 +48,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
                 <Settings />
               </Link>
             </Button>
-            <CopyToast clipboard="DSad">
+            <CopyToast clipboard={`${SITE_URL}${PAGES.PROFILE}/${user.usernames?.[0]}`}>
               <Button variant="outline">
                 <Share2 />
               </Button>
