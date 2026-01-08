@@ -15,17 +15,18 @@ import { StateSection } from "./StateSection";
 import { Button } from "@/components/ui/button";
 import { QUERIES } from "@/config";
 import { Sheet } from "@/components/ui/next/sheet";
+import { ContributorsSection } from "@/components/modules/map/sheets/ContributorsSection";
 
 type Props = {
   area: APIRetrieveArea;
 };
 
 export const AreaSheet = ({ area }: Props) => {
-  const { description, name, tags, polygon } = area;
+  const { description, name, tags, created_by } = area;
 
   return (
     <Sheet open={true} query={QUERIES.AREA_SHEET}>
-      <SheetContent className="overflow-y-auto !w-full sm:!w-3/4">
+      <SheetContent className="!w-full overflow-y-auto sm:!w-3/4">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
           <SheetDescription>Area</SheetDescription>
@@ -36,6 +37,7 @@ export const AreaSheet = ({ area }: Props) => {
           {tags && <TagsSection tags={tags} />}
           <TimelineSection />
           <StateSection />
+          <ContributorsSection creator={created_by} />
         </div>
         <SheetFooter>
           <Button type="submit">Suggest Correction</Button>
@@ -46,4 +48,4 @@ export const AreaSheet = ({ area }: Props) => {
       </SheetContent>
     </Sheet>
   );
-}
+};

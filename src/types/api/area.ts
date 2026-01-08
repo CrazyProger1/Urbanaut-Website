@@ -1,4 +1,4 @@
-import { APIPoint } from "@/types";
+import { APIListUser, APIPoint } from "@/types";
 import { APIMapBounds } from "@/types/api/map";
 
 export type APIListArea = {
@@ -18,7 +18,7 @@ export type APIRetrieveArea = {
   is_private: boolean;
   created_at: string;
   updated_at: string;
-  created_by?: string;
+  created_by?: APIListUser;
   parent?: number;
 };
 
