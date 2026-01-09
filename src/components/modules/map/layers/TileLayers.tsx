@@ -10,7 +10,7 @@ export const TileLayers = ({ layers }: Props) => {
   return (
     <div key={JSON.stringify(layers)}>
       {layers.map(({value, url, attribution}) => (
-        <TileLayer key={value} url={url} attribution={attribution} />
+        <TileLayer key={value} url={url} attribution={attribution} noWrap />
       ))}
     </div>
   );

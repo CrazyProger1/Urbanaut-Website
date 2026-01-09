@@ -4,6 +4,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L, { LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
+
+// World bounds to prevent panning outside the map
+const WORLD_BOUNDS = new LatLngBounds(
+  [-85.051129, -180], // Southwest corner
+  [85.051129, 180]    // Northeast corner
+);
+
 import { APIListPlace, APIListArea, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
@@ -213,11 +220,13 @@ const DynamicMap = ({
         </div>
         <MapContainer
           ref={setMap}
+          minZoom={3}
           className="-z-0"
           center={center}
           zoom={zoom}
           style={{ height: "100%", width: "100%" }}
           zoomControl={false}
+          maxBounds={WORLD_BOUNDS}
         >
           <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
           {isPlacesVisible && (
