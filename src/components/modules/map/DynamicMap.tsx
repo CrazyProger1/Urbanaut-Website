@@ -50,6 +50,11 @@ const DynamicMap = ({
     isCoordinatesVisible,
     toggleChoosingPlace,
     toggleChoosingArea,
+    currentMapBounds,
+    currentMapCenter,
+    currentMapZoom,
+    updateCurrentMapMeasures,
+    loadMapMeasures,
   } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
@@ -60,7 +65,23 @@ const DynamicMap = ({
   const [currentSecondaryLayers, setCurrentSecondaryLayers] = useState<MapLayer[]>([]);
   const [places, setPlaces] = useState<APIListPlace[]>([]);
   const [areas, setAreas] = useState<APIListArea[]>([]);
-  const [currentMapBounds, setCurrentMapBounds] = useState<LatLngBounds>();
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+    const measures = loadMapMeasures();
+
+    if (!measures) {
+      return;
+    }
+
+    const { center, zoom } = measures;
+
+    if (center && zoom) {
+      map.setView(center, zoom);
+    }
+  }, [map]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,11 +99,12 @@ const DynamicMap = ({
   }, [filters, currentMapBounds]);
 
   useEffect(() => {
-    if (!map) return;
+    if (!map) {
+      return;
+    }
 
     const updateBounds = () => {
-      const bounds = map.getBounds();
-      setCurrentMapBounds(bounds);
+      updateCurrentMapMeasures(map.getBounds(), map.getCenter(), map.getZoom());
     };
 
     map.addEventListener("zoomend", updateBounds);
@@ -105,7 +127,9 @@ const DynamicMap = ({
   }, []);
 
   const handleCenterMap = useCallback(() => {
-    if (!map) return;
+    if (!map) {
+      return;
+    }
 
     navigator?.geolocation.getCurrentPosition((position) => {
       map.setView(new LatLng(position.coords.latitude, position.coords.longitude));
@@ -198,18 +222,14 @@ const DynamicMap = ({
           <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
           {isPlacesVisible && (
             // <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
-              <ClusteringLayer>
-                <PlacesLayer
-                  places={places}
-                  enabledZoomOnClick={true}
-                  onSelect={handlePlaceSelect}
-                />
-              </ClusteringLayer>
+            <ClusteringLayer>
+              <PlacesLayer places={places} enabledZoomOnClick={true} onSelect={handlePlaceSelect} />
+            </ClusteringLayer>
             // </ZoomSwitch>
           )}
           {isAreasVisible && (
             // <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
-              <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />
+            <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />
             // </ZoomSwitch>
           )}
           {isCoordinatesVisible && <CoordinatesTool />}

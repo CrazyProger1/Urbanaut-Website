@@ -21,7 +21,9 @@ export const ContributorsSection = ({ creator }: Props) => {
       </div>
       <div>
         {creator && (
-          <Link href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}>
+          <Link
+            href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}
+          >
             <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg">
               <div className="text-muted-foreground absolute top-1 right-2 text-xs">creator</div>
               <Avatar className="h-16 w-16 rounded-lg">

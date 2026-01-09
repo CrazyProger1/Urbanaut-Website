@@ -1,4 +1,5 @@
 import { create } from "zustand/react";
+import { LatLngBounds, LatLng, bounds } from "leaflet";
 
 type MapState = {
   isPlacesVisible: boolean;
@@ -8,6 +9,9 @@ type MapState = {
   isCoordinatesVisible: boolean;
   isRulerActive: boolean;
   tooltips: string[];
+  currentMapBounds?: LatLngBounds;
+  currentMapCenter?: LatLng;
+  currentMapZoom?: number;
 };
 
 type MapDispatch = {
@@ -20,6 +24,11 @@ type MapDispatch = {
   addTooltip: (text: string) => void;
   removeTooltip: (text: string) => void;
   clearTooltips: () => void;
+  setCurrentMapBounds: (bounds: LatLngBounds) => void;
+  setCurrentMapCenter: (center: LatLng) => void;
+  setCurrentMapZoom: (zoom: number) => void;
+  updateCurrentMapMeasures: (bounds?: LatLngBounds, center?: LatLng, zoom?: number) => void;
+  loadMapMeasures: () => { center: LatLng; zoom: number; bounds: LatLngBounds } | undefined;
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
@@ -81,5 +90,41 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   },
   clearTooltips: () => {
     set({ tooltips: [] });
+  },
+  setCurrentMapBounds: (bounds) => {
+    set({ currentMapBounds: bounds });
+  },
+  setCurrentMapCenter: (center: LatLng) => {
+    set({ currentMapCenter: center });
+  },
+  setCurrentMapZoom: (zoom: number) => {
+    set({ currentMapZoom: zoom });
+  },
+  updateCurrentMapMeasures: (bounds, center, zoom) => {
+    set({ currentMapCenter: center, currentMapBounds: bounds, currentMapZoom: zoom });
+    localStorage.setItem(
+      "map",
+      JSON.stringify({
+        bounds,
+        center,
+        zoom,
+      }),
+    );
+  },
+  loadMapMeasures: () => {
+    const measures = localStorage.getItem("map");
+
+    if (measures) {
+      const { bounds, center, zoom } = JSON.parse(measures);
+      if (bounds && center && zoom) {
+        set({ currentMapCenter: center, currentMapBounds: bounds, currentMapZoom: zoom });
+
+        return {
+          bounds,
+          center,
+          zoom,
+        };
+      }
+    }
   },
 }));
