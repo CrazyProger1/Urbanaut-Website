@@ -41,4 +41,21 @@ export const LAYERS: { [key: string]: MapLayer } = {
       'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
     primary: true,
   },
+  DarkMatter: {
+    label: "Dark Matter",
+    value: "DarkMatter",
+    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    primary: true,
+  },
+  MtbMap: {
+    label: "MTB Map",
+    value: "MtbMap",
+    url: "http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &amp; USGS',
+    primary: true,
+  },
+
 };
