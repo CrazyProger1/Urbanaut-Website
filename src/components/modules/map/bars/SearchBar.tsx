@@ -13,7 +13,7 @@ import { QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 
-const FILTER_PARAMS = new Set(["preservation", "tags"]);
+const FILTER_PARAMS = new Set(["preservation", "tags", "country"]);
 
 export const SearchBar = () => {
   const params = useSearchParams();

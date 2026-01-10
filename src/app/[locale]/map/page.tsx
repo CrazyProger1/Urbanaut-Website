@@ -9,6 +9,7 @@ import {
 } from "@/components/modules/map/modals";
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
 import { MapPageParams } from "@/types/map";
+import { getCountries } from "@/services/api/geo";
 
 type Props = {
   searchParams: Promise<MapPageParams>;
@@ -37,13 +38,16 @@ const Page = async ({ searchParams }: Props) => {
       currentArea = areaResponse;
     }
   }
+  const countriesResponse = await getCountries();
+  const countries = countriesResponse.success ? countriesResponse.results : [];
+
   return (
     <div className="flex h-full w-full">
       <Map filters={params} />
       <AddPlaceModal tags={tags} />
       <AddAreaModal tags={tags} />
       <SuggestCorrectionModal />
-      <FiltersModal tags={tags} />
+      <FiltersModal tags={tags} countries={countries} />
       {currentPlace && <PlaceSheet place={currentPlace} />}
       {currentArea && <AreaSheet area={currentArea} />}
     </div>

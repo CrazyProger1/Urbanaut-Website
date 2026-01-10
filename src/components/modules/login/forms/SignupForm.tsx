@@ -54,7 +54,7 @@ const formSchema = z.object({
 });
 
 type Props = {
-  countries: APIListCountry[];
+  countries?: APIListCountry[];
   otherProviders?: React.ReactNode[];
 };
 
@@ -137,7 +137,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Country</FormLabel>
-              <CountrySelect value={field.value} onChange={field.onChange} countries={countries} />
+              <CountrySelect value={field.value} onChange={field.onChange} countries={countries || []} />
             </FormItem>
           )}
         />

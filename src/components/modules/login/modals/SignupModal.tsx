@@ -12,7 +12,7 @@ import { GoogleAuthButton } from "../google";
 import { APIListCountry } from "@/types/api";
 
 type Props = {
-  countries: APIListCountry[];
+  countries?: APIListCountry[];
 };
 
 export const SignupModal = ({ countries }: Props) => {

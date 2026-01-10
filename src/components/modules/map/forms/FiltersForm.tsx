@@ -11,22 +11,24 @@ import { Button } from "@/components/ui/button";
 import { Link, useRouter } from "@/i18n";
 import { Label } from "@/components/ui/label";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
-import { APIListTag, APIPreservationLevel } from "@/types";
+import { APIListCountry, APIListTag, APIPreservationLevel } from "@/types";
 import { PAGES, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
-import { builtParamsFromRecord } from "@/utils/params";
 import { usePreservedParamsLink } from "@/hooks";
+import { CountrySelect } from "@/components/modules/login/forms/CountrySelect";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
   tags: z.array(z.string()),
+  country: z.string().max(2),
 });
 
 type Props = {
   tags?: APIListTag[];
+  countries?: APIListCountry[];
 };
 
-export const FiltersForm = ({ tags }: Props) => {
+export const FiltersForm = ({ tags, countries }: Props) => {
   const params = useSearchParams();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -91,6 +93,20 @@ export const FiltersForm = ({ tags }: Props) => {
                 selected={field.value}
                 onSelect={handleSelect}
                 onRemove={handleRemove}
+              />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Country</FormLabel>
+              <CountrySelect
+                value={field.value}
+                onChange={field.onChange}
+                countries={countries || []}
               />
             </FormItem>
           )}
