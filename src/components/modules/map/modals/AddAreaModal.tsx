@@ -16,7 +16,7 @@ type Props = {
 
 export const AddAreaModal = ({ tags }: Props) => {
   return (
-    <Modal query={QUERIES.AREA_MODAL}>
+    <Modal query={QUERIES.AREA_ADDING_MODAL}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Create new area</DialogTitle>

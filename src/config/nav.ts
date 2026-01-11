@@ -25,8 +25,8 @@ export const URLS = {
 };
 
 export const QUERIES = {
-  AREA_MODAL: "addarea",
-  PLACE_MODAL: "addplace",
+  AREA_ADDING_MODAL: "addarea",
+  PLACE_ADDING_MODAL: "addplace",
   AREA_SHEET: "area",
   PLACE_SHEET: "place",
   FEEDBACK_MODAL: "feedback",
@@ -34,7 +34,8 @@ export const QUERIES = {
   REFERRAL_PROFILE_MODAL: "referral",
   SIGNIN_MODAL: "signin",
   SIGNUP_MODAL: "signup",
-  FILTERS_MODAL: "filters",
+  MAP_FILTERS_MODAL: "filters",
+  MAP_SELECTED_POINT: "point",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

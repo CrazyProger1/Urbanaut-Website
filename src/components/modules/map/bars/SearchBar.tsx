@@ -27,7 +27,7 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   const params = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [isAIActive, setIsAIActive] = useState(false);
-  const openFilterModalLink = useModalOpenLink(QUERIES.FILTERS_MODAL);
+  const openFilterModalLink = useModalOpenLink(QUERIES.MAP_FILTERS_MODAL);
   const [query, setQuery] = useState("");
   const searchLink = usePreservedParamsLink({ query: query, ai_query: "", point: "" });
   const aiSearchLink = usePreservedParamsLink({ ai_query: query, query: "", point: "" });
@@ -43,7 +43,7 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
       const term =
         params.get("query") ||
         params.get("ai_query") ||
-        params.get("point") ||
+        params.get(QUERIES.MAP_SELECTED_POINT) ||
         loadLastSearchTerm();
       setQuery(term || "");
     }

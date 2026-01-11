@@ -26,6 +26,7 @@ import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
 import { validateResponse } from "@/utils/api";
 import { PreservationSelect } from "@/components/modules/map/forms/PreservationSelect";
+import { QUERIES } from "@/config";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -74,7 +75,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { tags, name, is_private, preservation } = values;
-    const point = searchParams.get("point");
+    const point = searchParams.get(QUERIES.MAP_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
 
     if (point) {
@@ -89,8 +90,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
 
       if (validateResponse(response)) {
         toast.success("Place added successfully.");
-        params.delete("point");
-        params.delete("addplace");
+        params.delete(QUERIES.MAP_SELECTED_POINT);
+        params.delete(QUERIES.PLACE_ADDING_MODAL);
         router.push(`?${params}`);
       }
     }

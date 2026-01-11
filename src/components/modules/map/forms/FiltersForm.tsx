@@ -44,7 +44,7 @@ export const FiltersForm = ({ tags, countries }: Props) => {
 
   const values = watch();
 
-  const applyFiltersLink = usePreservedParamsLink({ ...values, [QUERIES.FILTERS_MODAL]: false });
+  const applyFiltersLink = usePreservedParamsLink({ ...values, [QUERIES.MAP_FILTERS_MODAL]: false });
 
   const onSubmit = async () => {
     router.push(applyFiltersLink, {

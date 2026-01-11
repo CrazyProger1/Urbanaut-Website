@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Marker, useMap } from "react-leaflet";
 import L, { LatLng } from "leaflet";
-import { ICONS } from "@/config";
+import { ICONS, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { parseCoordinates } from "@/utils/map";
 
@@ -11,10 +11,10 @@ export const SearchCoordinatesTool = () => {
   const map = useMap();
 
   useEffect(() => {
-    const point = parseCoordinates(params.get("point") || "");
+    const point = parseCoordinates(params.get(QUERIES.MAP_SELECTED_POINT) || "");
+    setCoordinates(point);
 
     if (point) {
-      setCoordinates(point);
       map?.setView(point, 15);
     }
   }, [params]);

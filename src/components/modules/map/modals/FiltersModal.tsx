@@ -11,7 +11,7 @@ type Props = {
 };
 export const FiltersModal = ({ tags, countries }: Props) => {
   return (
-    <Modal query={QUERIES.FILTERS_MODAL}>
+    <Modal query={QUERIES.MAP_FILTERS_MODAL}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Filters</DialogTitle>

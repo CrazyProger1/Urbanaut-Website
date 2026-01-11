@@ -16,7 +16,7 @@ type Props = {
 
 export const AddPlaceModal = ({ tags }: Props) => {
   return (
-    <Modal query={QUERIES.PLACE_MODAL}>
+    <Modal query={QUERIES.PLACE_ADDING_MODAL}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Create new place</DialogTitle>
