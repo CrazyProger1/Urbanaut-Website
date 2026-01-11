@@ -12,6 +12,7 @@ import { useModalOpenLink } from "@/hooks/useModalOpenLink";
 import { QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
+import { ClickToast } from "@/components/common/toasts";
 
 const FILTER_PARAMS = new Set(["preservation", "tags", "country"]);
 
@@ -63,9 +64,11 @@ export const SearchBar = () => {
             </Link>
           </Toggle>
 
-          <Toggle onPressedChange={setIsAIActive}>
-            <Sparkles />
-          </Toggle>
+          <ClickToast message={isAIActive ? "AI mode disabled" : "AI mode enabled"}>
+            <Toggle onPressedChange={setIsAIActive}>
+              <Sparkles />
+            </Toggle>
+          </ClickToast>
         </Card>
       )}
     </div>
