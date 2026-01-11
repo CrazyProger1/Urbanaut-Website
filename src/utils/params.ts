@@ -3,7 +3,7 @@ export type ParamRecord = Record<
   string | string[] | number | number[] | boolean | undefined
 >;
 
-export const builtParamsFromRecord = (params: ParamRecord, base?: URLSearchParams) => {
+export const buildParamsFromRecord = (params: ParamRecord, base?: URLSearchParams) => {
   const newParams = new URLSearchParams(base);
 
   if (params) {

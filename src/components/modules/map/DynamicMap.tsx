@@ -34,6 +34,7 @@ import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
 import { SearchCoordinatesTool } from "@/components/modules/map/tools/SearchCoordinatesTool";
 import { setClipboard } from "@/utils/clipboard";
+import { buildParamsFromRecord } from "@/utils/params";
 
 type Props = {
   center?: LatLng;
@@ -213,8 +214,11 @@ const DynamicMap = ({
 
   const handlePlaceSelect = useCallback(
     (place: APIListPlace) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(QUERIES.PLACE_SHEET, String(place.id));
+      const params = buildParamsFromRecord(
+        { [QUERIES.PLACE_SHEET]: String(place.id), point: "" },
+        searchParams,
+      );
+
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });
     },
     [searchParams],
@@ -222,8 +226,10 @@ const DynamicMap = ({
 
   const handleAreaSelect = useCallback(
     (area: APIListArea) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(QUERIES.AREA_SHEET, String(area.id));
+      const params = buildParamsFromRecord(
+        { [QUERIES.AREA_SHEET]: String(area.id), point: "" },
+        searchParams,
+      );
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });
     },
     [searchParams],

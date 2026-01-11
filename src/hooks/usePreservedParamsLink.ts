@@ -1,7 +1,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname } from "@/i18n";
-import { builtParamsFromRecord, ParamRecord } from "@/utils/params";
+import { buildParamsFromRecord, ParamRecord } from "@/utils/params";
 
 export const usePreservedParamsLink = (newParams?: ParamRecord) => {
   const currentParams = useSearchParams();
@@ -9,7 +9,7 @@ export const usePreservedParamsLink = (newParams?: ParamRecord) => {
   const [url, setUrl] = useState(pathname);
 
   useEffect(() => {
-    const params = builtParamsFromRecord(newParams || {}, currentParams);
+    const params = buildParamsFromRecord(newParams || {}, currentParams);
     if (params) {
       setUrl(`${pathname}?${params}`);
     }
