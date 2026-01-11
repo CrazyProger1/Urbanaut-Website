@@ -14,6 +14,8 @@ type MapState = {
   currentMapZoom?: number;
   searchCoordinates?: LatLng;
   lastSearchTerm?: string;
+  lastMouseCoordinates?: LatLng;
+  lastRightClickCoordinates?: LatLng;
 };
 
 type MapDispatch = {
@@ -35,6 +37,8 @@ type MapDispatch = {
   clearSearchCoordinates: () => void;
   setLastSearchTerm: (term: string) => void;
   loadLastSearchTerm: () => string | undefined;
+  setLastMouseCoordinates: (coordinates: LatLng) => void;
+  setLastRightClickCoordinates: (coordinates: LatLng) => void;
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
@@ -147,5 +151,11 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
     const term = localStorage.getItem("map-search-term") || undefined;
     set({ lastSearchTerm: term });
     return term;
+  },
+  setLastMouseCoordinates: (coordinates) => {
+    set({ lastMouseCoordinates: coordinates });
+  },
+  setLastRightClickCoordinates: (coordinates) => {
+    set({ lastRightClickCoordinates: coordinates });
   },
 }));

@@ -33,6 +33,7 @@ import { MapPageParams } from "@/types/map";
 import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
 import { SearchCoordinatesTool } from "@/components/modules/map/tools/SearchCoordinatesTool";
+import { setClipboard } from "@/utils/clipboard";
 
 type Props = {
   center?: LatLng;
@@ -66,6 +67,8 @@ const DynamicMap = ({
     clearSearchCoordinates,
     updateCurrentMapMeasures,
     loadMapMeasures,
+    setLastRightClickCoordinates,
+    lastRightClickCoordinates,
   } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
@@ -77,6 +80,24 @@ const DynamicMap = ({
   const [places, setPlaces] = useState<APIListPlace[]>([]);
   const [areas, setAreas] = useState<APIListArea[]>([]);
 
+  useEffect(() => {
+    if (!map) return;
+
+    const container = map.getContainer();
+
+    const handleContextMenu = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const point = L.point(e.clientX - rect.left, e.clientY - rect.top);
+      const latlng = map.containerPointToLatLng(point);
+      setLastRightClickCoordinates(latlng);
+    };
+
+    container.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      container.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, [map]);
   useEffect(() => {
     if (!map) {
       return;
@@ -260,6 +281,9 @@ const DynamicMap = ({
       <MapContextMenu
         onCopyCoordinates={() => {
           toast.success(PLACEHOLDERS.COORDINATES_COPIED_TOAST);
+          if (lastRightClickCoordinates) {
+            setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
+          }
         }}
       />
       <ToolBar onCenterMap={handleCenterMap} onSavePlace={handleSave} />
