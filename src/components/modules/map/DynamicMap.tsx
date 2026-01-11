@@ -128,7 +128,7 @@ const DynamicMap = ({
       }
     };
     fetchData();
-  }, [filters, currentMapBounds]);
+  }, [filters]);
 
   useEffect(() => {
     if (!map) {

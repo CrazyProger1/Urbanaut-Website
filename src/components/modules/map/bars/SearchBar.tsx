@@ -85,7 +85,12 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
           )}
         >
           <div className="flex flex-row gap-1">
-            <Input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+            <Input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
             <Button type="submit" variant="ghost" onClick={handleSearch}>
               <Search />
             </Button>
