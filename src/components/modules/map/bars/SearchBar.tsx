@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 import { Link } from "@/i18n";
 import { useModalOpenLink } from "@/hooks/useModalOpenLink";
-import { COORDINATES_REGEX, QUERIES } from "@/config";
+import { QUERIES } from "@/config";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { ClickToast } from "@/components/common/toasts";
