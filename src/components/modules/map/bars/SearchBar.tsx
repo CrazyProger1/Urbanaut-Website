@@ -9,26 +9,57 @@ import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 import { Link } from "@/i18n";
 import { useModalOpenLink } from "@/hooks/useModalOpenLink";
-import { QUERIES } from "@/config";
-import { useSearchParams } from "next/navigation";
+import { COORDINATES_REGEX, QUERIES } from "@/config";
+import { useRouter, useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { ClickToast } from "@/components/common/toasts";
+import { LatLng } from "leaflet";
+import { useMapStore } from "@/stores";
 
 const FILTER_PARAMS = new Set(["preservation", "tags", "country"]);
 
-export const SearchBar = () => {
+type Props = {
+  onSearchByCoordinates?: (coordinates: LatLng) => void;
+};
+
+export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   const params = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [isAIActive, setIsAIActive] = useState(false);
   const openFilterModalLink = useModalOpenLink(QUERIES.FILTERS_MODAL);
   const [query, setQuery] = useState("");
-  const searchLink = usePreservedParamsLink({ query: query });
-  const aiSearchLink = usePreservedParamsLink({ ai_query: query });
+  const searchLink = usePreservedParamsLink({ query: query, ai_query: "" });
+  const aiSearchLink = usePreservedParamsLink({ ai_query: query, query: "" });
   const [isFiltersActive, setIsFiltersActive] = useState(false);
+  const router = useRouter();
+  const { setLastSearchTerm, loadLastSearchTerm, lastSearchTerm } = useMapStore();
 
   useEffect(() => {
     setIsFiltersActive(FILTER_PARAMS.intersection(new Set(params.keys())).size > 0);
+
+    if (!query) {
+      const term = params.get("query") || params.get("ai_query") || loadLastSearchTerm();
+      setQuery(term || "");
+    }
   }, [params]);
+
+  const handleSearch = () => {
+    setLastSearchTerm(query);
+    if (COORDINATES_REGEX.test(query)) {
+      const result = COORDINATES_REGEX.exec(query);
+
+      if (result) {
+        const [input, x1, x2, y1, y2] = result;
+        onSearchByCoordinates?.(new LatLng(Number(`${x1}${x2}`), Number(`${y1}${y2}`)));
+      }
+    } else {
+      if (isAIActive) {
+        router.push(aiSearchLink);
+      } else {
+        router.push(searchLink);
+      }
+    }
+  };
 
   return (
     <div className="absolute top-4 left-4 flex flex-col gap-4 md:flex-row">
@@ -51,10 +82,8 @@ export const SearchBar = () => {
         >
           <div className="flex flex-row gap-1">
             <Input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
-            <Button type="submit" variant="ghost" asChild>
-              <Link href={isAIActive ? aiSearchLink : searchLink}>
-                <Search />
-              </Link>
+            <Button type="submit" variant="ghost" onClick={handleSearch}>
+              <Search />
             </Button>
           </div>
 

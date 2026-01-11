@@ -11,3 +11,4 @@ export { ICONS } from "./assets";
 export { LAYERS } from "./map";
 export { STUBS, ALTS, IMAGES } from "./media";
 export { PLACEHOLDERS } from "./i18n";
+export { COORDINATES_REGEX } from "./geo";

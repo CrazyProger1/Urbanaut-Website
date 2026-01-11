@@ -1,0 +1,1 @@
+export const COORDINATES_REGEX = /^-?(90|[0-8]?\d)(\.\d+)?, *-?(180|1[0-7]\d|\d?\d)(\.\d+)?$/;

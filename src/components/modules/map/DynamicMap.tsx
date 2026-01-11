@@ -8,7 +8,7 @@ import L, { LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
 // World bounds to prevent panning outside the map
 const WORLD_BOUNDS = new LatLngBounds(
   [-85.051129, -180], // Southwest corner
-  [85.051129, 180]    // Northeast corner
+  [85.051129, 180], // Northeast corner
 );
 
 import { APIListPlace, APIListArea, MapLayer } from "@/types";
@@ -32,6 +32,7 @@ import { toast } from "sonner";
 import { MapPageParams } from "@/types/map";
 import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
+import { SearchCoordinatesTool } from "@/components/modules/map/tools/SearchCoordinatesTool";
 
 type Props = {
   center?: LatLng;
@@ -59,7 +60,10 @@ const DynamicMap = ({
     toggleChoosingArea,
     currentMapBounds,
     currentMapCenter,
+    searchCoordinates,
     currentMapZoom,
+    setSearchCoordinates,
+    clearSearchCoordinates,
     updateCurrentMapMeasures,
     loadMapMeasures,
   } = useMapStore();
@@ -126,9 +130,9 @@ const DynamicMap = ({
   useEffect(() => {
     (async function init() {
       L.Icon.Default.mergeOptions({
-        iconRetinaUrl: ICONS.MARKER_ICON_RETINA,
-        iconUrl: ICONS.MARKER_ICON,
-        shadowUrl: ICONS.MARKER_SHADOW,
+        iconRetinaUrl: ICONS.PLACE_MARKER_ICON_RETINA,
+        iconUrl: ICONS.PLACE_MARKER_ICON,
+        shadowUrl: ICONS.PLACE_MARKER_SHADOW,
       });
     })();
   }, []);
@@ -205,11 +209,16 @@ const DynamicMap = ({
     [searchParams],
   );
 
+  const handleSearchByCoordinates = (coordinates: LatLng) => {
+    setSearchCoordinates(coordinates);
+    map?.setView(coordinates, 15);
+  };
+
   return (
     <ContextMenu>
       <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
         <div className="relative z-50">
-          <SearchBar />
+          <SearchBar onSearchByCoordinates={handleSearchByCoordinates} />
           <LayersBar
             layers={Object.values(LAYERS)}
             onPrimaryLayerChange={handlePrimaryLayerChange}
@@ -245,6 +254,7 @@ const DynamicMap = ({
           {isRulerActive && <RulerTool />}
           {isChoosingArea && <AreaChoosingTool ref={areaChoosingToolRef} />}
           {isChoosingPlace && <PlaceChoosingTool ref={placeChoosingToolRef} />}
+          {searchCoordinates && <SearchCoordinatesTool />}
         </MapContainer>
       </ContextMenuTrigger>
       <MapContextMenu

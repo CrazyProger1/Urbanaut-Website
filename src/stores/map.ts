@@ -12,6 +12,8 @@ type MapState = {
   currentMapBounds?: LatLngBounds;
   currentMapCenter?: LatLng;
   currentMapZoom?: number;
+  searchCoordinates?: LatLng;
+  lastSearchTerm?: string;
 };
 
 type MapDispatch = {
@@ -29,6 +31,10 @@ type MapDispatch = {
   setCurrentMapZoom: (zoom: number) => void;
   updateCurrentMapMeasures: (bounds?: LatLngBounds, center?: LatLng, zoom?: number) => void;
   loadMapMeasures: () => { center: LatLng; zoom: number; bounds: LatLngBounds } | undefined;
+  setSearchCoordinates: (coordinates: LatLng) => void;
+  clearSearchCoordinates: () => void;
+  setLastSearchTerm: (term: string) => void;
+  loadLastSearchTerm: () => string | undefined;
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
@@ -103,7 +109,7 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   updateCurrentMapMeasures: (bounds, center, zoom) => {
     set({ currentMapCenter: center, currentMapBounds: bounds, currentMapZoom: zoom });
     localStorage.setItem(
-      "map",
+      "map-measures",
       JSON.stringify({
         bounds,
         center,
@@ -112,7 +118,7 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
     );
   },
   loadMapMeasures: () => {
-    const measures = localStorage.getItem("map");
+    const measures = localStorage.getItem("map-measures");
 
     if (measures) {
       const { bounds, center, zoom } = JSON.parse(measures);
@@ -126,5 +132,20 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
         };
       }
     }
+  },
+  setSearchCoordinates: (coordinates) => {
+    set({ searchCoordinates: coordinates });
+  },
+  clearSearchCoordinates: () => {
+    set({ searchCoordinates: undefined });
+  },
+  setLastSearchTerm: (term) => {
+    set({ lastSearchTerm: term });
+    localStorage.setItem("map-search-term", term);
+  },
+  loadLastSearchTerm: () => {
+    const term = localStorage.getItem("map-search-term") || undefined;
+    set({ lastSearchTerm: term });
+    return term;
   },
 }));
