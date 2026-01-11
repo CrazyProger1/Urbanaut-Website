@@ -1,15 +1,23 @@
-import React, { useMemo } from "react";
-import { useMapStore } from "@/stores";
-import { Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+import React, { useEffect, useMemo, useState } from "react";
+import { Marker, useMap } from "react-leaflet";
+import L, { LatLng } from "leaflet";
 import { ICONS } from "@/config";
+import { useSearchParams } from "next/navigation";
+import { parseCoordinates } from "@/utils/map";
 
 export const SearchCoordinatesTool = () => {
-  const { searchCoordinates } = useMapStore();
+  const params = useSearchParams();
+  const [coordinates, setCoordinates] = useState<LatLng>();
+  const map = useMap();
 
-  if (!searchCoordinates) {
-    return null;
-  }
+  useEffect(() => {
+    const point = parseCoordinates(params.get("point") || "");
+
+    if (point) {
+      setCoordinates(point);
+      map?.setView(point, 15);
+    }
+  }, [params]);
 
   const icon = useMemo(() => {
     return L.icon({
@@ -23,5 +31,9 @@ export const SearchCoordinatesTool = () => {
     });
   }, []);
 
-  return <Marker position={searchCoordinates} icon={icon} />;
+  if (!coordinates) {
+    return null;
+  }
+
+  return <Marker position={coordinates} icon={icon} />;
 };

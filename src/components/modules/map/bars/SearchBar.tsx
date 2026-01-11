@@ -13,13 +13,14 @@ import { COORDINATES_REGEX, QUERIES } from "@/config";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { ClickToast } from "@/components/common/toasts";
-import { LatLng } from "leaflet";
 import { useMapStore } from "@/stores";
+import { LatLng } from "leaflet";
+import { parseCoordinates } from "@/utils/map";
 
 const FILTER_PARAMS = new Set(["preservation", "tags", "country"]);
 
 type Props = {
-  onSearchByCoordinates?: (coordinates: LatLng) => void;
+  onSearchByCoordinates?: (point: LatLng) => void;
 };
 
 export const SearchBar = ({ onSearchByCoordinates }: Props) => {
@@ -28,36 +29,39 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   const [isAIActive, setIsAIActive] = useState(false);
   const openFilterModalLink = useModalOpenLink(QUERIES.FILTERS_MODAL);
   const [query, setQuery] = useState("");
-  const searchLink = usePreservedParamsLink({ query: query, ai_query: "" });
-  const aiSearchLink = usePreservedParamsLink({ ai_query: query, query: "" });
+  const searchLink = usePreservedParamsLink({ query: query, ai_query: "", point: "" });
+  const aiSearchLink = usePreservedParamsLink({ ai_query: query, query: "", point: "" });
+  const pointSearchLink = usePreservedParamsLink({ point: query, ai_query: "", query: "" });
   const [isFiltersActive, setIsFiltersActive] = useState(false);
   const router = useRouter();
-  const { setLastSearchTerm, loadLastSearchTerm, lastSearchTerm } = useMapStore();
+  const { setLastSearchTerm, loadLastSearchTerm } = useMapStore();
 
   useEffect(() => {
     setIsFiltersActive(FILTER_PARAMS.intersection(new Set(params.keys())).size > 0);
 
     if (!query) {
-      const term = params.get("query") || params.get("ai_query") || loadLastSearchTerm();
+      const term =
+        params.get("query") ||
+        params.get("ai_query") ||
+        params.get("point") ||
+        loadLastSearchTerm();
       setQuery(term || "");
     }
   }, [params]);
 
   const handleSearch = () => {
     setLastSearchTerm(query);
-    if (COORDINATES_REGEX.test(query)) {
-      const result = COORDINATES_REGEX.exec(query);
+    const coordinates = parseCoordinates(query);
 
-      if (result) {
-        const [input, x1, x2, y1, y2] = result;
-        onSearchByCoordinates?.(new LatLng(Number(`${x1}${x2}`), Number(`${y1}${y2}`)));
-      }
+    if (coordinates) {
+      onSearchByCoordinates?.(coordinates);
+      return router.push(pointSearchLink);
+    }
+
+    if (isAIActive) {
+      router.push(aiSearchLink);
     } else {
-      if (isAIActive) {
-        router.push(aiSearchLink);
-      } else {
-        router.push(searchLink);
-      }
+      router.push(searchLink);
     }
   };
 

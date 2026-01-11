@@ -60,11 +60,6 @@ const DynamicMap = ({
     toggleChoosingPlace,
     toggleChoosingArea,
     currentMapBounds,
-    currentMapCenter,
-    searchCoordinates,
-    currentMapZoom,
-    setSearchCoordinates,
-    clearSearchCoordinates,
     updateCurrentMapMeasures,
     loadMapMeasures,
     setLastRightClickCoordinates,
@@ -230,9 +225,8 @@ const DynamicMap = ({
     [searchParams],
   );
 
-  const handleSearchByCoordinates = (coordinates: LatLng) => {
-    setSearchCoordinates(coordinates);
-    map?.setView(coordinates, 15);
+  const handleSearchByCoordinates = (point: LatLng) => {
+    map?.setView(point, 15);
   };
 
   return (
@@ -275,7 +269,7 @@ const DynamicMap = ({
           {isRulerActive && <RulerTool />}
           {isChoosingArea && <AreaChoosingTool ref={areaChoosingToolRef} />}
           {isChoosingPlace && <PlaceChoosingTool ref={placeChoosingToolRef} />}
-          {searchCoordinates && <SearchCoordinatesTool />}
+          <SearchCoordinatesTool />
         </MapContainer>
       </ContextMenuTrigger>
       <MapContextMenu
