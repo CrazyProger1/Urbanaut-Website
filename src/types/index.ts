@@ -36,6 +36,7 @@ export type {
   APIRetrieveUser,
   APIListCountry,
   APIListUser,
+  APIListCity,
 } from "./api";
 export type { Session, SessionUser } from "./session";
 export type { MapLayer } from "./map";

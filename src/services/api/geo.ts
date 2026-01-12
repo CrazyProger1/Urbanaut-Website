@@ -1,6 +1,6 @@
 "use server";
 
-import { APIPaginatedResponse } from "@/types";
+import { APIListCity, APIPaginatedResponse } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS } from "@/config";
 import { APIListCountry } from "@/types/api";
@@ -10,4 +10,8 @@ export const getCountries = async (): Promise<APIPaginatedResponse<APIListCountr
   params.set("limit", "300");
 
   return fetchAuthenticated(`${API_ENDPOINTS.COUNTRIES}?${params}`);
+};
+
+export const getCities = async (): Promise<APIPaginatedResponse<APIListCity>> => {
+  return fetchAuthenticated(API_ENDPOINTS.CITIES);
 };

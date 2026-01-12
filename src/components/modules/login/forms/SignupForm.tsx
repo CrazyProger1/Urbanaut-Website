@@ -22,7 +22,7 @@ import { login, register } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
-import { CountrySelect } from "./CountrySelect";
+import { CountrySelect } from "@/components/modules/common/selects";
 import { APIListCountry } from "@/types/api";
 import { BirthDateSelector } from "./BirthDateSelector";
 
@@ -39,18 +39,21 @@ const formSchema = z.object({
   country: z.string().max(2),
   first_name: z.string().max(150),
   last_name: z.string().max(150),
-  born_at: z.date().optional().refine(
-    (date) => {
-      if (!date) return true;
-      if (date > new Date()) return false;
-      const today = new Date();
-      const tenYearsAgo = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
-      return date <= tenYearsAgo;
-    },
-    {
-      message: "Birth date must be in the past and you must be at least 10 years old",
-    }
-  ),
+  born_at: z
+    .date()
+    .optional()
+    .refine(
+      (date) => {
+        if (!date) return true;
+        if (date > new Date()) return false;
+        const today = new Date();
+        const tenYearsAgo = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+        return date <= tenYearsAgo;
+      },
+      {
+        message: "Birth date must be in the past and you must be at least 10 years old",
+      },
+    ),
 });
 
 type Props = {
@@ -137,7 +140,11 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Country</FormLabel>
-              <CountrySelect value={field.value} onChange={field.onChange} countries={countries || []} />
+              <CountrySelect
+                value={field.value}
+                onChange={field.onChange}
+                countries={countries || []}
+              />
             </FormItem>
           )}
         />

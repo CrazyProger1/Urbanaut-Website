@@ -6,3 +6,4 @@ export { getAreas, getArea, createArea } from "./areas";
 export { updateUser, getUserByUsername } from "./users";
 export { createFeedback } from "./feedbacks";
 export { getReferralCodes } from "./referrals";
+export { getCities, getCountries } from "./geo";

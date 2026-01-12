@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PreservationSelect } from "./PreservationSelect";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -11,26 +11,37 @@ import { Button } from "@/components/ui/button";
 import { Link, useRouter } from "@/i18n";
 import { Label } from "@/components/ui/label";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
-import { APIListCountry, APIListTag, APIPreservationLevel, APISecurityLevel } from "@/types";
+import {
+  APIListCity,
+  APIListCountry,
+  APIListTag,
+  APIPreservationLevel,
+  APISecurityLevel,
+} from "@/types";
 import { PAGES, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
-import { CountrySelect } from "@/components/modules/login/forms/CountrySelect";
+import { CountrySelect } from "@/components/modules/common/selects";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
+import { CitySelect } from "@/components/modules/map/forms/CitySelect";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
   security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]).optional(),
   tags: z.array(z.string()),
   country: z.string().max(2).optional(),
+  city: z.string().optional(),
 });
 
 type Props = {
   tags?: APIListTag[];
   countries?: APIListCountry[];
+  cities?: APIListCity[];
+  onSearchCityAction?: (term: string) => void;
+  onLoadMoreCitiesAction?: () => void;
 };
 
-export const FiltersForm = ({ tags, countries }: Props) => {
+export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, onSearchCityAction }: Props) => {
   const params = useSearchParams();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,6 +50,8 @@ export const FiltersForm = ({ tags, countries }: Props) => {
       preservation: (params.get("preservation") as APIPreservationLevel) || undefined,
       security: (params.get("security") as APISecurityLevel) || undefined,
       tags: params.getAll("tags"),
+      country: params.get("country") || undefined,
+      city: params.get("city") || undefined,
     },
     mode: "onSubmit",
   });
@@ -74,6 +87,8 @@ export const FiltersForm = ({ tags, countries }: Props) => {
   };
 
   const { formState } = form;
+
+  const { country } = watch();
 
   return (
     <Form {...form}>
@@ -127,6 +142,24 @@ export const FiltersForm = ({ tags, countries }: Props) => {
             </FormItem>
           )}
         />
+        {country && (
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>City</FormLabel>
+                <CitySelect
+                  cities={cities || []}
+                  value={field.value}
+                  onChange={field.onChange}
+                  onLoadMore={onLoadMoreCitiesAction}
+                  onSearch={onSearchCityAction}
+                />
+              </FormItem>
+            )}
+          />
+        )}
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
           Apply {formState.isSubmitting && <Spinner />}
         </Button>

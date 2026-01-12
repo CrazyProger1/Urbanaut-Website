@@ -14,4 +14,6 @@ export {
   createFeedback,
   getReferralCodes,
   getUserByUsername,
+  getCities,
+  getCountries,
 } from "./api";
