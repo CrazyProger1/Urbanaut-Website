@@ -34,6 +34,7 @@ export const PlaceSheet = ({ place }: Props) => {
     security,
     preservation,
     created_by,
+    photos,
   } = place;
 
   return (
@@ -44,7 +45,7 @@ export const PlaceSheet = ({ place }: Props) => {
           <SheetDescription>Place</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
-          <GallerySection />
+          {!!photos?.length && <GallerySection photos={photos} />}
           {description && <DescriptionSection description={description} />}
           {!!tags?.length && <TagsSection tags={tags} />}
           <TimelineSection

@@ -60,7 +60,6 @@ const DynamicMap = ({
     isCoordinatesVisible,
     toggleChoosingPlace,
     toggleChoosingArea,
-    currentMapBounds,
     updateCurrentMapMeasures,
     loadMapMeasures,
     setLastRightClickCoordinates,

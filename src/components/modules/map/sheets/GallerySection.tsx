@@ -1,32 +1,36 @@
 import React from "react";
 import Image from "next/image";
-import { ALTS, STUBS } from "@/config";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ALTS } from "@/config";
+import { APIListFile } from "@/types/api/media";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 type Props = {
-  photos?: string[];
+  photos?: APIListFile[];
 };
 
 const GallerySection = ({ photos }: Props) => {
   return (
-    <div className="relative h-60 w-full">
-      <Image className="rounded-2xl" src={STUBS.PLACE_PHOTO} alt={ALTS.PLACE_PHOTO} fill={true} />
-      <div>
-        <button
-          type="button"
-          className="absolute top-1/2 left-0.5 -translate-y-1/2 cursor-pointer hover:text-white"
-        >
-          <ChevronLeft size={64} />
-        </button>
-
-        <button
-          type="button"
-          className="absolute top-1/2 right-0.5 -translate-y-1/2 cursor-pointer hover:text-white"
-        >
-          <ChevronRight size={64} />
-        </button>
-      </div>
-    </div>
+    <Carousel>
+      <CarouselContent>
+        {photos?.map(({ src, id }) => (
+          <CarouselItem key={id}>
+            <div className="p-1">
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image src={src} alt={ALTS.PLACE_PHOTO} fill className="rounded-2xl object-cover" />
+              </div>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="right-auto! left-4!" />
+      <CarouselNext className="right-4! left-auto!" />
+    </Carousel>
   );
 };
 

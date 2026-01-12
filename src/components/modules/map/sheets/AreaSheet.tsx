@@ -33,6 +33,7 @@ export const AreaSheet = ({ area }: Props) => {
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
           <GallerySection />
+
           {description && <DescriptionSection description={description} />}
           {tags && <TagsSection tags={tags} />}
           <TimelineSection />

@@ -3,6 +3,9 @@ import { APISecurityLevel } from "@/types";
 import { APIPreservationLevel } from "@/types";
 import { APIMapBounds } from "@/types/api/map";
 import { APIListUser } from "@/types/api/user";
+import { APIListFile } from "@/types/api/media";
+
+export type APIListPlaceFile = APIListFile;
 
 export type APIListPlace = {
   id: number;
@@ -25,6 +28,7 @@ export type APIRetrievePlace = {
   created_at: string;
   updated_at: string;
   created_by?: APIListUser;
+  photos: APIListPlaceFile[];
   area?: number;
 };
 
