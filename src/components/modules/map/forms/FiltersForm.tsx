@@ -11,16 +11,18 @@ import { Button } from "@/components/ui/button";
 import { Link, useRouter } from "@/i18n";
 import { Label } from "@/components/ui/label";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
-import { APIListCountry, APIListTag, APIPreservationLevel } from "@/types";
+import { APIListCountry, APIListTag, APIPreservationLevel, APISecurityLevel } from "@/types";
 import { PAGES, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { CountrySelect } from "@/components/modules/login/forms/CountrySelect";
+import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
+  security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]).optional(),
   tags: z.array(z.string()),
-  country: z.string().max(2),
+  country: z.string().max(2).optional(),
 });
 
 type Props = {
@@ -35,6 +37,7 @@ export const FiltersForm = ({ tags, countries }: Props) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       preservation: (params.get("preservation") as APIPreservationLevel) || undefined,
+      security: (params.get("security") as APISecurityLevel) || undefined,
       tags: params.getAll("tags"),
     },
     mode: "onSubmit",
@@ -44,7 +47,10 @@ export const FiltersForm = ({ tags, countries }: Props) => {
 
   const values = watch();
 
-  const applyFiltersLink = usePreservedParamsLink({ ...values, [QUERIES.MAP_FILTERS_MODAL]: false });
+  const applyFiltersLink = usePreservedParamsLink({
+    ...values,
+    [QUERIES.MAP_FILTERS_MODAL]: false,
+  });
 
   const onSubmit = async () => {
     router.push(applyFiltersLink, {
@@ -79,6 +85,16 @@ export const FiltersForm = ({ tags, countries }: Props) => {
             <FormItem>
               <FormLabel>Preservation Level</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="security"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Security Level</FormLabel>
+              <SecuritySelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
         />

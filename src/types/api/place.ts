@@ -44,6 +44,7 @@ export type APICreatePlace = {
   area?: number;
   is_private?: boolean;
   preservation?: APIPreservationLevel;
+  security?: APISecurityLevel;
 };
 
 export type APIPlaceFilters = APIMapBounds & {

@@ -17,7 +17,7 @@ import { useMapStore } from "@/stores";
 import { LatLng } from "leaflet";
 import { parseCoordinates } from "@/utils/map";
 
-const FILTER_PARAMS = new Set(["preservation", "tags", "country"]);
+const FILTER_PARAMS = new Set(["preservation", "security", "tags", "country"]);
 
 type Props = {
   onSearchByCoordinates?: (point: LatLng) => void;

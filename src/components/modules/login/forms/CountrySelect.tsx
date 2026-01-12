@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   countries: APIListCountry[];
-  value: string;
+  value?: string;
   onChange: (value: string) => void;
 };
 

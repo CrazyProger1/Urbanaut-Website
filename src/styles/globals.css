@@ -83,6 +83,12 @@
     --color-security-hard: rgba(var(--color-base-hard), 0.3);
     --color-security-impossible: rgba(var(--color-base-impossible), 0.3);
 
+    --color-security-none-hover: rgba(var(--color-base-none), 0.4);
+    --color-security-easy-hover: rgba(var(--color-base-easy), 0.4);
+    --color-security-medium-hover: rgba(var(--color-base-medium), 0.4);
+    --color-security-hard-hover: rgba(var(--color-base-hard), 0.4);
+    --color-security-impossible-hover: rgba(var(--color-base-impossible), 0.4);
+
     --color-difficulty-newbie: rgba(var(--color-base-none), 0.3);
     --color-difficulty-easy: rgba(var(--color-base-easy), 0.3);
     --color-difficulty-medium: rgba(var(--color-base-medium), 0.3);
@@ -226,6 +232,12 @@
     --color-security-medium: var(--color-security-medium);
     --color-security-hard: var(--color-security-hard);
     --color-security-impossible: var(--color-security-impossible);
+
+    --color-security-none-hover: var(--color-security-none-hover);
+    --color-security-easy-hover: var(--color-security-easy-hover);
+    --color-security-medium-hover: var(--color-security-medium-hover);
+    --color-security-hard-hover: var(--color-security-hard-hover);
+    --color-security-impossible-hover: var(--color-security-impossible-hover);
 
     --color-difficulty-newbie: var(--color-difficulty-newbie);
     --color-difficulty-easy: var(--color-difficulty-easy);

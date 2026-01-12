@@ -30,17 +30,21 @@ export const getAchievementColorClass = (significance?: APIAchievementSignifican
 };
 
 export const getSecurityColorClass = (security?: APISecurityLevel) => {
-  return cn(
-    security === "NONE" && "bg-security-none border-security-none  text-foreground",
-    security === "EASY" && "bg-security-easy border-security-easy  text-foreground",
-    security === "MEDIUM" && "bg-security-medium border-security-medium  text-foreground",
-    security === "HARD" && "bg-security-hard border-security-hard  text-foreground",
-    security === "IMPOSSIBLE" &&
-      "bg-security-impossible border-security-impossible  text-foreground",
-    !security && "bg-security-none border-security-none  text-foreground",
-  );
+  switch (security) {
+    case "NONE":
+      return "bg-security-none border-security-none text-foreground hover:bg-security-none-hover dark:bg-security-none dark:hover:bg-security-none-hover";
+    case "EASY":
+      return "bg-security-easy border-security-easy text-foreground hover:bg-security-easy-hover dark:bg-security-easy dark:hover:bg-security-easy-hover";
+    case "MEDIUM":
+      return "bg-security-medium border-security-medium text-foreground hover:bg-security-medium-hover dark:bg-security-medium dark:hover:bg-security-medium-hover";
+    case "HARD":
+      return "bg-security-hard border-security-hard text-foreground hover:bg-security-hard-hover dark:bg-security-hard dark:hover:bg-security-hard-hover";
+    case "IMPOSSIBLE":
+      return "bg-security-impossible border-security-impossible text-foreground hover:bg-security-impossible-hover dark:bg-security-impossible dark:hover:bg-security-impossible-hover";
+    default:
+      return "bg-security-none border-security-none text-foreground hover:bg-security-none-hover dark:bg-security-none dark:hover:bg-security-none-hover";
+  }
 };
-
 export const getPreservationColorClass = (preservation?: APIPreservationLevel) => {
   switch (preservation) {
     case "NONE":
@@ -57,4 +61,3 @@ export const getPreservationColorClass = (preservation?: APIPreservationLevel) =
       return "bg-preservation-none border-preservation-none text-foreground hover:bg-preservation-none-hover dark:bg-preservation-none dark:hover:bg-preservation-none-hover";
   }
 };
-

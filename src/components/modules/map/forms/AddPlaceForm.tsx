@@ -27,6 +27,7 @@ import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
 import { validateResponse } from "@/utils/api";
 import { PreservationSelect } from "@/components/modules/map/forms/PreservationSelect";
 import { QUERIES } from "@/config";
+import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -34,6 +35,7 @@ const formSchema = z.object({
   is_private: z.boolean(),
   tags: z.array(z.string()),
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
+  security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]),
 });
 
 type Props = {
@@ -52,6 +54,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
       is_private: false,
       tags: [],
       preservation: "MEDIUM",
+      security: "NONE",
     },
     mode: "onSubmit",
   });
@@ -74,7 +77,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
   const { formState } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { tags, name, is_private, preservation } = values;
+    const { tags, name, is_private, preservation, security } = values;
     const point = searchParams.get(QUERIES.MAP_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
 
@@ -86,6 +89,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
         tags,
         is_private,
         preservation,
+        security,
       });
 
       if (validateResponse(response)) {
@@ -150,7 +154,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
                   checked={field.value}
                   onCheckedChange={field.onChange}
                   title="Private"
-                  description="Will this place be private for others?"
+                  description="If enabled, this place will be visible only to you."
                 />
               </FormControl>
               <FormMessage />
@@ -164,6 +168,16 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <FormItem>
               <FormLabel>Preservation Level</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="security"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Security Level</FormLabel>
+              <SecuritySelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
         />

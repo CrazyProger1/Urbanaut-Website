@@ -19,7 +19,10 @@ export const StateSection = ({ security, preservation }: Props) => {
       </div>
       <div className="flex flex-col gap-1 text-sm">
         <div>
-          Security: <Badge className={getSecurityColorClass(security)}>{security}</Badge>
+          Security:{" "}
+          <Link href={`?security=${security}`}>
+            <Badge className={getSecurityColorClass(security)}>{security}</Badge>
+          </Link>
         </div>
         {/*<div>*/}
         {/*  Difficulty:{" "}*/}
