@@ -11,13 +11,13 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { FormControl } from "@/components/ui/form";
-import { APIListCountry } from "@/types/api";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Country } from "@/types";
 
 type Props = {
-  countries: APIListCountry[];
+  countries: Country[];
   value?: string;
   onChange: (value: string) => void;
 };

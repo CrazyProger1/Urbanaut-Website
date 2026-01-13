@@ -11,7 +11,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { FormControl } from "@/components/ui/form";
-import { APIListCity } from "@/types/api";
+import { APIListCity } from "@/types/services/api";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";

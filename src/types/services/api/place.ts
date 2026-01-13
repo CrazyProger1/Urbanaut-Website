@@ -1,9 +1,9 @@
 import { APIPoint } from "./geo";
 import { APISecurityLevel } from "@/types";
 import { APIPreservationLevel } from "@/types";
-import { APIMapBounds } from "@/types/api/map";
-import { APIListUser } from "@/types/api/user";
-import { APIListFile } from "@/types/api/media";
+import { APIMapBounds } from "@/types/services/api/map";
+import { APIListUser } from "@/types/services/api/user";
+import { APIListFile } from "@/types/services/api/media";
 
 export type APIListPlaceFile = APIListFile;
 

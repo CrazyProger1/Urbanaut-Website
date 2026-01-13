@@ -37,13 +37,4 @@ export type {
   APIListCountry,
   APIListUser,
   APIListCity,
-} from "./services"; // Service-level types (api)
-export type {
-  MapLayer,
-  MapPageParams,
-  SidebarGroup,
-  SidebarItem,
-  Country,
-  City,
-} from "./components"; // Component-level types
-export type { Session, SessionUser } from "./session"; // Other global types
+} from "./api";

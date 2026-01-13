@@ -1,4 +1,4 @@
-import { APICurrentUser } from "@/types/api";
+import { APICurrentUser } from "@/types/services/api";
 
 export type SessionUser = APICurrentUser;
 

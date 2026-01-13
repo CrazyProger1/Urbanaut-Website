@@ -1,7 +1,7 @@
 import { Calendar, CircleDollarSign, Home, Map, Newspaper, Search, Send } from "lucide-react";
 import { FaInstagram, FaPatreon, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { SidebarItem } from "@/types";
-import { SidebarGroup } from "@/types/ui";
+import { SidebarGroup } from "@/types/components/sidebar";
 
 export const PAGES = {
   MAIN: "/",

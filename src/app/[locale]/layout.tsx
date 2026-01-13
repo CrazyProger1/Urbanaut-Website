@@ -15,7 +15,7 @@ import { ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { getCountries } from "@/services/api/geo";
-import { APIListCountry } from "@/types/api";
+import { APIListCountry } from "@/types/services/api";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",

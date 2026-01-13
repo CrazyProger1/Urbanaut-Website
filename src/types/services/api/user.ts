@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n";
-import { APIRetrieveMetric } from "@/types/api/metric";
-import { APIRetrieveAchievement } from "@/types/api/achivement";
-import { APIRetrieveCountry } from "@/types/api/geo";
+import { APIRetrieveMetric } from "@/types/services/api/metric";
+import { APIRetrieveAchievement } from "@/types/services/api/achivement";
+import { APIRetrieveCountry } from "@/types/services/api/geo";
 
 export type APITheme = "DARK" | "LIGHT";
 

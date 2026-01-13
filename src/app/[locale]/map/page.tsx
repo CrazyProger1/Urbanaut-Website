@@ -8,7 +8,7 @@ import {
   FiltersModal,
 } from "@/components/modules/map/modals";
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
-import { MapPageParams } from "@/types/map";
+import { MapPageParams } from "@/types/components/map";
 
 type Props = {
   searchParams: Promise<MapPageParams>;

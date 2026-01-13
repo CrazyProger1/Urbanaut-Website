@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ALTS } from "@/config";
-import { APIListFile } from "@/types/api/media";
+import { APIListFile } from "@/types/services/api/media";
 import {
   Carousel,
   CarouselContent,

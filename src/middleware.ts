@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { routing } from "./i18n/routing";
 import { NextRequest } from "next/server";
 import { getSession, setSession } from "@/utils/session";
-import { APITokenPayload } from "@/types/api";
+import { APITokenPayload } from "@/types/services/api";
 import { API_ENDPOINTS, REFRESH_DELTA_TIME } from "@/config";
 import { fetchAPI } from "@/services";
 

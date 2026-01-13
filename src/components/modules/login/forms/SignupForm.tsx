@@ -23,7 +23,7 @@ import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
 import { CountrySelect } from "@/components/modules/common/selects";
-import { APIListCountry } from "@/types/api";
+import { APIListCountry } from "@/types/services/api";
 import { BirthDateSelector } from "./BirthDateSelector";
 
 const formSchema = z.object({

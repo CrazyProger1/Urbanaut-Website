@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Toaster } from "sonner";
-import { APITheme } from "@/types/api/user";
+import { APITheme } from "@/types/services/api/user";
 
 type Props = {
   children: React.ReactNode;

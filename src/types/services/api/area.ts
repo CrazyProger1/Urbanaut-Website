@@ -1,5 +1,5 @@
 import { APIListUser, APIPoint } from "@/types";
-import { APIMapBounds } from "@/types/api/map";
+import { APIMapBounds } from "@/types/services/api/map";
 
 export type APIListArea = {
   id: number;

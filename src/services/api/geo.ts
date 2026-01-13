@@ -3,7 +3,7 @@
 import { APIListCity, APIPaginatedResponse } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS } from "@/config";
-import { APIListCountry } from "@/types/api";
+import { APIListCountry } from "@/types/services/api";
 
 export const getCountries = async (): Promise<APIPaginatedResponse<APIListCountry>> => {
   const params = new URLSearchParams();

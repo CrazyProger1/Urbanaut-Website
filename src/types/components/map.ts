@@ -1,4 +1,4 @@
-import { APIPlaceFilters, APIPreservationLevel } from "@/types/api";
+import { APIPlaceFilters, APIPreservationLevel } from "@/types/services/api";
 
 export type MapLayer = {
   label: string;

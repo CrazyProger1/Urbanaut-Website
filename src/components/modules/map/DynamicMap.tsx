@@ -29,7 +29,7 @@ import {
 import { useSearchParams } from "next/navigation";
 import { TileLayers, PlacesLayer, AreasLayer, ClusteringLayer } from "./layers";
 import { toast } from "sonner";
-import { MapPageParams } from "@/types/map";
+import { MapPageParams } from "@/types/components/map";
 import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
 import { SearchCoordinatesTool } from "@/components/modules/map/tools/SearchCoordinatesTool";
