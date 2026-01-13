@@ -1,5 +1,5 @@
 import React from "react";
-import { APIListUser } from "@/types";
+import { UserCreator, UserEditor } from "@/types";
 import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/i18n";
@@ -8,8 +8,8 @@ import { getRankShadowClass } from "@/utils/css";
 import { CopyToast } from "@/components/common/toasts";
 
 type Props = {
-  creator?: APIListUser;
-  editors?: APIListUser[];
+  creator?: UserCreator;
+  editors?: UserEditor[];
 };
 
 export const ContributorsSection = ({ creator }: Props) => {

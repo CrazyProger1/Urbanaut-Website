@@ -3,12 +3,12 @@ import { QUERIES } from "@/config";
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { FiltersForm } from "@/components/modules/map/forms";
-import { APIListCity, APIListCountry, APIListTag } from "@/types";
+import { City, Country, Tag } from "@/types";
 
 type Props = {
-  countries?: APIListCountry[];
-  cities?: APIListCity[];
-  tags?: APIListTag[];
+  countries?: Country[];
+  cities?: City[];
+  tags?: Tag[];
   onSearchCityAction?: (term: string) => void;
   onLoadMoreCitiesAction?: () => void;
 };

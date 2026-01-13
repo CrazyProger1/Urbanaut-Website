@@ -1,8 +1,8 @@
 import React from "react";
-import { APIRetrieveMetric } from "@/types";
+import { UserMetric } from "@/types";
 
 type Props = {
-  metric: APIRetrieveMetric;
+  metric: UserMetric;
 };
 
 export const MetricItem = ({ metric }: Props) => {

@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { APIRetrieveArea } from "@/types";
+import { AreaDetail } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
@@ -18,7 +18,7 @@ import { Sheet } from "@/components/ui/next/sheet";
 import { ContributorsSection } from "@/components/modules/map/sheets/ContributorsSection";
 
 type Props = {
-  area: APIRetrieveArea;
+  area: AreaDetail;
 };
 
 export const AreaSheet = ({ area }: Props) => {

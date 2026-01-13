@@ -8,10 +8,10 @@ import {
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
 import { AddPlaceForm } from "../forms";
-import { APIListTag } from "@/types";
+import { Tag } from "@/types";
 
 type Props = {
-  tags?: APIListTag[];
+  tags?: Tag[];
 };
 
 export const AddPlaceModal = ({ tags }: Props) => {

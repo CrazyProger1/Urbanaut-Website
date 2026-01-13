@@ -1,11 +1,11 @@
 import React from "react";
-import { APIRetrieveUser } from "@/types";
+import { User } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Lock } from "lucide-react";
 
 type Props = {
-  user: APIRetrieveUser;
+  user: User;
 };
 
 export const UserActivitySection = ({ user }: Props) => {

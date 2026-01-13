@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createArea } from "@/actions";
-import { APIPoint, APIListTag } from "@/types";
+import { Point, Tag } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
 import { toast } from "sonner";
@@ -33,7 +33,7 @@ const formSchema = z.object({
 });
 
 type Props = {
-  tags?: APIListTag[];
+  tags?: Tag[];
 };
 
 export const AddAreaForm = ({ tags }: Props) => {
@@ -72,7 +72,7 @@ export const AddAreaForm = ({ tags }: Props) => {
     const params = new URLSearchParams(searchParams);
 
     if (points) {
-      const polygon: APIPoint[] = points.split(";").map((point) => {
+      const polygon: Point[] = points.split(";").map((point) => {
         const [lat, lng, ...rest] = point.split(",").map(Number);
         return [lat, lng];
       });

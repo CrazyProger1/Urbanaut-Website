@@ -32,6 +32,7 @@ export type {
   APICreateUser,
   APIRetrieveSettings,
   APIUpdateSettings,
+  APIRetrieveCurrentUserSettings,
   APITheme,
   APIRank,
   APIListUser,
@@ -40,11 +41,19 @@ export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
 export type { APITokens, APIAccessToken, APITokenPayload } from "./token";
 export type { APIGoogleOauthRedirectURIResponse, APIGoogleOauthCallbackResponse } from "./oauth";
-export type { APIPoint, APIListCountry, APIListCity } from "./geo";
-export type { APIListPlace, APIRetrievePlace, APICreatePlace, APIPlaceFilters } from "./place";
+export type { APIPoint, APIListCountry, APIListCity, APIRetrieveCountry } from "./geo";
+export type {
+  APIListPlace,
+  APIRetrievePlace,
+  APICreatePlace,
+  APIPlaceFilters,
+  APIListPlaceFile,
+} from "./place";
 export type { APIListArea, APIRetrieveArea, APICreateArea, APIAreaFilters } from "./area";
 export type { APIListTag } from "./tag";
+export type { APIMapBounds } from "./map";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";
 export type { APICreateFeedback } from "./feedback";
 export type { APIListReferralCode } from "./referrals";
+export type { APIListFile, APIFileType } from "./media";

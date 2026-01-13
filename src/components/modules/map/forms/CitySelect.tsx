@@ -11,13 +11,13 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { FormControl } from "@/components/ui/form";
-import { APIListCity } from "@/types/services/api";
+import { City } from "@/types";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  cities: APIListCity[];
+  cities: City[];
   value?: string;
   onLoadMore?: () => void;
   onSearch?: (term: string) => void;

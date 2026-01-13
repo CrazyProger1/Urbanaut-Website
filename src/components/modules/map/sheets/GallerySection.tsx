@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ALTS } from "@/config";
-import { APIListFile } from "@/types/services/api/media";
+import { File } from "@/types";
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 
 type Props = {
-  photos?: APIListFile[];
+  photos?: File[];
 };
 
 const GallerySection = ({ photos }: Props) => {

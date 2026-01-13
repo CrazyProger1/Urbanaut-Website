@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo } from "react";
-import { APIListPlace } from "@/types";
+import { Place } from "@/types";
 import L, { LatLng } from "leaflet";
 import "leaflet.heat";
 import { useMap } from "react-leaflet";
 import { useMapBounds } from "@/components/modules/map/hooks";
 
 type Props = {
-  places?: APIListPlace[];
+  places?: Place[];
 };
 
 const heatOptions = {

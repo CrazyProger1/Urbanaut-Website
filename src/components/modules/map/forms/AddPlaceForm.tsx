@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { APIListTag, APIPreservationLevel } from "@/types";
+import { Tag, PreservationLevel } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
@@ -39,7 +39,7 @@ const formSchema = z.object({
 });
 
 type Props = {
-  tags?: APIListTag[];
+  tags?: Tag[];
 };
 
 export const AddPlaceForm = ({ tags }: Props) => {

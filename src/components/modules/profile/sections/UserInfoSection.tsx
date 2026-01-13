@@ -10,10 +10,10 @@ import { getFormatter } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/css";
 import { CopyToast } from "@/components/common/toasts";
-import { APIRetrieveUser } from "@/types";
+import { User } from "@/types";
 
 type Props = {
-  user: APIRetrieveUser;
+  user: User;
   me?: boolean;
 };
 

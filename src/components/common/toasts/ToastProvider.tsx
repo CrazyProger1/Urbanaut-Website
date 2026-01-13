@@ -2,11 +2,11 @@
 
 import React from "react";
 import { Toaster } from "sonner";
-import { APITheme } from "@/types/services/api/user";
+import { UserTheme } from "@/types";
 
 type Props = {
   children: React.ReactNode;
-  theme?: APITheme;
+  theme?: UserTheme;
 };
 
 export const ToastProvider = ({ children, theme = "DARK" }: Props) => {

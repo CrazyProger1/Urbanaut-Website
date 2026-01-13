@@ -9,10 +9,10 @@ import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
 import { SignupForm } from "../forms";
 import { GoogleAuthButton } from "../google";
-import { APIListCountry } from "@/types/services/api";
+import { Country } from "@/types";
 
 type Props = {
-  countries?: APIListCountry[];
+  countries?: Country[];
 };
 
 export const SignupModal = ({ countries }: Props) => {

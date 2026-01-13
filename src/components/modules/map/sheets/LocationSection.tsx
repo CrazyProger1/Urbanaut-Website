@@ -1,11 +1,11 @@
 import React from "react";
 import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { APIPoint } from "@/types";
+import { Point } from "@/types";
 import { CopyToast } from "@/components/common/toasts";
 
 type Props = {
-  point?: APIPoint;
+  point?: Point;
   address?: string;
 };
 

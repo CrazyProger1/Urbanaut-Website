@@ -10,15 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getPreservationColorClass } from "@/utils/css";
-import { APIPreservationLevel } from "@/types";
+import { PreservationLevel } from "@/types";
 
 type Props = {
-  value?: APIPreservationLevel;
-  onChange: (value: APIPreservationLevel) => void;
+  value?: PreservationLevel;
+  onChange: (value: PreservationLevel) => void;
 };
 
 export const PreservationSelect = ({ value, onChange }: Props) => {
-  const PRESERVATION_LABELS: Record<APIPreservationLevel, string> = {
+  const PRESERVATION_LABELS: Record<PreservationLevel, string> = {
     NONE: "No preservation",
     LOW: "Low",
     MEDIUM: "Medium",
@@ -26,7 +26,7 @@ export const PreservationSelect = ({ value, onChange }: Props) => {
     AWESOME: "Awesome",
   };
 
-  const PRESERVATION_DESCRIPTIONS: Record<APIPreservationLevel, string> = {
+  const PRESERVATION_DESCRIPTIONS: Record<PreservationLevel, string> = {
     NONE: "Object is mostly ruined; only fragments remain.",
     LOW: "Partially destroyed; roof or walls may be missing.",
     MEDIUM: "Main structure intact; some interiors damaged.",
@@ -42,7 +42,7 @@ export const PreservationSelect = ({ value, onChange }: Props) => {
             <SelectValue placeholder="Select level" />
           </SelectTrigger>
           <SelectContent>
-            {(Object.keys(PRESERVATION_LABELS) as APIPreservationLevel[]).map((key) => (
+            {(Object.keys(PRESERVATION_LABELS) as PreservationLevel[]).map((key) => (
               <SelectItem key={key} value={key} className={getPreservationColorClass(key)}>
                 {PRESERVATION_LABELS[key]}
               </SelectItem>

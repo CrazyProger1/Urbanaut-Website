@@ -1,9 +1,9 @@
 import React from "react";
-import { APICurrentUser, APIRetrieveUser } from "@/types";
+import { User } from "@/types";
 import { MetricItem } from "./MetricItem";
 
 type Props = {
-  user: APIRetrieveUser;
+  user: User;
 };
 
 export const MetricsTable = ({ user }: Props) => {

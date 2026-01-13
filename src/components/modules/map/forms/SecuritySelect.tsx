@@ -10,15 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getPreservationColorClass, getSecurityColorClass } from "@/utils/css";
-import { APIPreservationLevel, APISecurityLevel } from "@/types";
+import { SecurityLevel } from "@/types";
 
 type Props = {
-  value?: APISecurityLevel;
-  onChange: (value: APISecurityLevel) => void;
+  value?: SecurityLevel;
+  onChange: (value: SecurityLevel) => void;
 };
 
 export const SecuritySelect = ({ value, onChange }: Props) => {
-  const SECURITY_LABELS: Record<APISecurityLevel, string> = {
+  const SECURITY_LABELS: Record<SecurityLevel, string> = {
     NONE: "None",
     EASY: "Easy",
     MEDIUM: "Medium",
@@ -26,7 +26,7 @@ export const SecuritySelect = ({ value, onChange }: Props) => {
     IMPOSSIBLE: "Impossible",
   };
 
-  const SECURITY_DESCRIPTIONS: Record<APISecurityLevel, string> = {
+  const SECURITY_DESCRIPTIONS: Record<SecurityLevel, string> = {
     NONE: "No security - anyone can enter without any effort.",
     EASY: "Very low security - basic locks, easily bypassed or forced.",
     MEDIUM: "Moderate security - standard locks, alarms, some physical barriers.",
@@ -43,7 +43,7 @@ export const SecuritySelect = ({ value, onChange }: Props) => {
             <SelectValue placeholder="Select level" />
           </SelectTrigger>
           <SelectContent>
-            {(Object.keys(SECURITY_LABELS) as APISecurityLevel[]).map((key) => (
+            {(Object.keys(SECURITY_LABELS) as SecurityLevel[]).map((key) => (
               <SelectItem key={key} value={key} className={getSecurityColorClass(key)}>
                 {SECURITY_LABELS[key]}
               </SelectItem>

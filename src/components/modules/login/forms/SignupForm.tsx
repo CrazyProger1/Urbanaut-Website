@@ -23,7 +23,7 @@ import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
 import { CountrySelect } from "@/components/modules/common/selects";
-import { APIListCountry } from "@/types/services/api";
+import { Country } from "@/types";
 import { BirthDateSelector } from "./BirthDateSelector";
 
 const formSchema = z.object({
@@ -57,7 +57,7 @@ const formSchema = z.object({
 });
 
 type Props = {
-  countries?: APIListCountry[];
+  countries?: Country[];
   otherProviders?: React.ReactNode[];
 };
 

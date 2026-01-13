@@ -1,13 +1,13 @@
 import React from "react";
 import { Flame } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { APIPreservationLevel, APISecurityLevel } from "@/types";
+import { PreservationLevel, SecurityLevel } from "@/types";
 import { getPreservationColorClass, getSecurityColorClass } from "@/utils/css";
 import { Link } from "@/i18n";
 
 type Props = {
-  security?: APISecurityLevel;
-  preservation?: APIPreservationLevel;
+  security?: SecurityLevel;
+  preservation?: PreservationLevel;
 };
 
 export const StateSection = ({ security, preservation }: Props) => {

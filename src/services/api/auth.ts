@@ -1,7 +1,7 @@
 import { getSession } from "@/utils/session";
 import { fetchAPI } from "@/services";
 import { API_ENDPOINTS } from "@/config";
-import { APICreateUser, APICurrentUser, APITokens } from "@/types";
+import { APICreateUser, APICurrentUser, APITokens, APIGoogleOauthRedirectURIResponse } from "@/types";
 
 export const fetchAuthenticated = async <T>(endpoint: string, options?: RequestInit) => {
   const session = await getSession();
@@ -23,4 +23,10 @@ export const register = async (user: APICreateUser) => {
     body: JSON.stringify(user),
     method: "POST",
   });
+};
+
+export const getGoogleOAuthRedirectUri = async () => {
+  return await fetchAuthenticated<APIGoogleOauthRedirectURIResponse>(
+    API_ENDPOINTS.GOOGLE_OAUTH_REDIRECT_URI,
+  );
 };

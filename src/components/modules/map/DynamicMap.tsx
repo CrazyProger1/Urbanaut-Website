@@ -11,7 +11,7 @@ const WORLD_BOUNDS = new LatLngBounds(
   [85.051129, 180], // Northeast corner
 );
 
-import { APIListPlace, APIListArea, MapLayer } from "@/types";
+import { Place, Area, MapLayer } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS, PAGES, PLACEHOLDERS, QUERIES } from "@/config";
@@ -72,8 +72,8 @@ const DynamicMap = ({
   const searchParams = useSearchParams();
   const [currentPrimaryLayer, setCurrentPrimaryLayer] = useState<MapLayer>(LAYERS.OSM);
   const [currentSecondaryLayers, setCurrentSecondaryLayers] = useState<MapLayer[]>([]);
-  const [places, setPlaces] = useState<APIListPlace[]>([]);
-  const [areas, setAreas] = useState<APIListArea[]>([]);
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [areas, setAreas] = useState<Area[]>([]);
 
   useEffect(() => {
     if (!map) return;
@@ -212,7 +212,7 @@ const DynamicMap = ({
   };
 
   const handlePlaceSelect = useCallback(
-    (place: APIListPlace) => {
+    (place: Place) => {
       const params = buildParamsFromRecord(
         { [QUERIES.PLACE_SHEET]: String(place.id), point: "" },
         searchParams,
@@ -224,7 +224,7 @@ const DynamicMap = ({
   );
 
   const handleAreaSelect = useCallback(
-    (area: APIListArea) => {
+    (area: Area) => {
       const params = buildParamsFromRecord(
         { [QUERIES.AREA_SHEET]: String(area.id), point: "" },
         searchParams,
