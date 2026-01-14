@@ -24,6 +24,7 @@ import { TagsSelect } from "./TagsSelect";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
+import { Lock } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -135,6 +136,7 @@ export const AddAreaForm = ({ tags }: Props) => {
             <FormItem>
               <FormControl>
                 <CheckBoxToggle
+                  icon={<Lock className="text-muted-foreground h-4 w-4" />}
                   checked={field.value}
                   onCheckedChange={field.onChange}
                   title="Private"

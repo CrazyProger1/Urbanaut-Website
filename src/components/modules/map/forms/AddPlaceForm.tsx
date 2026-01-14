@@ -22,12 +22,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Tag, PreservationLevel } from "@/types";
 import { Label } from "@/components/ui/label";
-import { CheckBoxToggle } from "@/components/common/toggles";
+import { CheckBoxToggle, SwitchToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
 import { validateResponse } from "@/utils/api";
 import { PreservationSelect } from "@/components/modules/map/forms/PreservationSelect";
 import { QUERIES } from "@/config";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
+import { Lock } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -144,23 +145,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="is_private"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <CheckBoxToggle
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  title="Private"
-                  description="If enabled, this place will be visible only to you."
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         <FormField
           control={form.control}
           name="preservation"
@@ -178,6 +163,24 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <FormItem>
               <FormLabel>Security Level</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_private"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <CheckBoxToggle
+                  icon={<Lock className="text-muted-foreground h-4 w-4" />}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  title="Private"
+                  description="If enabled, this place will be visible only to you."
+                />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

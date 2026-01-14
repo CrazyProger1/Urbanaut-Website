@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 
 type Props = React.ComponentProps<typeof CheckboxPrimitive.Root> & {
+  icon?: React.ReactNode;
   className?: string;
   checkBoxClassName?: string;
   title: string;
@@ -12,10 +13,10 @@ type Props = React.ComponentProps<typeof CheckboxPrimitive.Root> & {
 };
 
 export const CheckBoxToggle = (props: Props) => {
-  const {className, checkBoxClassName, title, description, ...rest} = props;
+  const { icon, className, checkBoxClassName, title, description, ...rest } = props;
 
   const actualClassName = cn(
-    "hover:bg-accent/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-primary/50 flex cursor-pointer items-start gap-3 rounded-lg border p-3",
+    "flex items-center justify-between hover:bg-accent/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-primary/50  cursor-pointer gap-3 rounded-lg border p-3",
     className,
   );
   const actualCheckBoxClassName = cn(
@@ -25,14 +26,14 @@ export const CheckBoxToggle = (props: Props) => {
 
   return (
     <Label className={actualClassName}>
-      <Checkbox
-        {...rest}
-        className={actualCheckBoxClassName}
-      />
-      <div className="grid gap-1.5 font-normal">
-        <p className="text-sm leading-none font-medium">{title}</p>
-        <p className="text-muted-foreground text-sm">{description}</p>
+      <div className="flex items-center gap-3">
+        {icon}
+        <div className="font-normal">
+          <p className="text-sm font-medium">{title}</p>
+          <p className="text-muted-foreground text-sm">{description}</p>
+        </div>
       </div>
+      <Checkbox {...rest} className={actualCheckBoxClassName} />
     </Label>
   );
 };

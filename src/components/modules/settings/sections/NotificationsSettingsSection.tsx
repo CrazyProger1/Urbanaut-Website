@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Bell, Mail } from "lucide-react";
+import { SwitchToggle } from "@/components/common/toggles";
 
 export const NotificationsSettingsSection = () => {
   const [pushNotifications, setPushNotifications] = useState(false);
@@ -18,34 +19,16 @@ export const NotificationsSettingsSection = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex items-center justify-between rounded-lg border border-border p-3 hover:bg-accent/50 transition-colors">
-          <div className="flex items-center gap-3">
-            <Bell className="h-4 w-4 text-muted-foreground" />
-            <div>
-              <p className="font-medium text-sm">Push notifications</p>
-              <p className="text-xs text-muted-foreground">Receive push notifications on your device</p>
-            </div>
-          </div>
-          <Switch
-            id="push-notifications"
-            checked={pushNotifications}
-            onCheckedChange={setPushNotifications}
-          />
-        </div>
-        <div className="flex items-center justify-between rounded-lg border border-border p-3 hover:bg-accent/50 transition-colors">
-          <div className="flex items-center gap-3">
-            <Mail className="h-4 w-4 text-muted-foreground" />
-            <div>
-              <p className="font-medium text-sm">Email news</p>
-              <p className="text-xs text-muted-foreground">Get the latest news and updates via email</p>
-            </div>
-          </div>
-          <Switch
-            id="email-news"
-            checked={emailNews}
-            onCheckedChange={setEmailNews}
-          />
-        </div>
+        <SwitchToggle
+          title="Push notifications"
+          description="Receive push notifications on your device"
+          icon={<Bell className="text-muted-foreground h-4 w-4" />}
+        />
+        <SwitchToggle
+          title="Email news"
+          description=" Get the latest news and updates via email"
+          icon={<Mail className="text-muted-foreground h-4 w-4" />}
+        />
       </CardContent>
     </Card>
   );
