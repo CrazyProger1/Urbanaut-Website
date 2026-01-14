@@ -1,7 +1,8 @@
-import React from "react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { UserNavBar } from "@/components/modules/layout/UserNavBar";
+import { NotificationButton } from "@/components/modules/layout/NotificationButton";
+import { ThemeToggle } from "@/components/modules/layout/ThemeToggle";
 import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
@@ -14,10 +15,22 @@ type Props = {
 
 export const Header = ({ user }: Props) => {
   return (
-    <header className="bg-background drop-shadow-volume sticky top-0 flex h-16 shrink-0 flex-row items-center justify-between gap-2 border-b px-4 select-none">
-      <SidebarTrigger className="-ml-1" />
-      <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
-      <div>
+    <header className="bg-background drop-shadow-volume sticky top-0 flex h-16 shrink-0 flex-row items-center justify-between gap-4 border-b px-4 select-none">
+      {/* Left Section */}
+      <div className="flex items-center gap-2">
+        <SidebarTrigger className="-ml-1" />
+        <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
+      </div>
+
+      {/* Center Section (spacer) */}
+      <div className="flex-1" />
+
+      {/* Right Section */}
+      <div className="flex items-center gap-2">
+        <NotificationButton />
+        <ThemeToggle />
+
+        {/* User Navigation */}
         {user ? (
           <UserNavBar
             user={{
@@ -29,7 +42,7 @@ export const Header = ({ user }: Props) => {
         ) : (
           <Button asChild>
             <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>
-              <User />
+              <User className="h-4 w-4" />
               Login
             </Link>
           </Button>

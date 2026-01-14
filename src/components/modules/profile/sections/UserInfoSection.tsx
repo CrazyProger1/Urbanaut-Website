@@ -93,12 +93,8 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
             </div>
           )}
         </div>
-        <div className="flex flex-row gap-8">
-          <MetricsTable user={user} />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <AchievementTable user={user} />
-        </div>
+        <MetricsTable user={user} />
+        <AchievementTable user={user} />
       </div>
     </Card>
   );

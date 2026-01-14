@@ -37,7 +37,7 @@ export const Sidebar = () => {
             {sidebar.open && <div className="text-2xl font-extrabold">Urbanaut</div>}
           </Link>
         </SidebarGroup>
-        <Separator />
+        {/*<Separator />*/}
         {SIDEBAR_GROUPS.map((section, index) => (
           <SidebarGroup key={`${section.title}-${index}`}>
             <SidebarGroupContent>
