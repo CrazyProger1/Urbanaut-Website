@@ -14,8 +14,8 @@ import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
+import { SettingsModal } from "@/components/modules/settings/modals";
 import { getCountries } from "@/services/api/geo";
-import { APIListCountry } from "@/types/services/api";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -80,6 +80,7 @@ const RootLayout = async ({ children }: Props) => {
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
+                <SettingsModal />
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
             </SidebarProvider>

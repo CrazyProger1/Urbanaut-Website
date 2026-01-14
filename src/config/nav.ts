@@ -7,7 +7,6 @@ export const PAGES = {
   MAIN: "/",
   MAP: "/map",
   PROFILE: "/profile",
-  SETTINGS: "/settings",
   BLOG: "/blog",
   CALENDAR: "/calendar",
   REFERRAL: "/r",
@@ -36,6 +35,7 @@ export const QUERIES = {
   SIGNUP_MODAL: "signup",
   MAP_FILTERS_MODAL: "filters",
   MAP_SELECTED_POINT: "point",
+  SETTINGS_MODAL: "settings",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

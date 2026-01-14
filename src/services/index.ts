@@ -16,4 +16,5 @@ export {
   getUserByUsername,
   getCities,
   getCountries,
+  updateSettings,
 } from "./api";

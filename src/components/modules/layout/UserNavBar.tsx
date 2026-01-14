@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import { Link } from "@/i18n";
-import { PAGES } from "@/config";
+import { PAGES, QUERIES } from "@/config";
 import { logout } from "@/actions";
 
 export const UserNavBar = ({
@@ -75,7 +75,7 @@ export const UserNavBar = ({
             <Bell />
             Notifications
           </DropdownMenuItem>
-          <Link href={PAGES.SETTINGS}>
+          <Link href={`?${QUERIES.SETTINGS_MODAL}=true`}>
             <DropdownMenuItem>
               <Settings />
               Settings

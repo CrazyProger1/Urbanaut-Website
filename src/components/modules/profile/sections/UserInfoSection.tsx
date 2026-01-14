@@ -44,7 +44,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href={PAGES.SETTINGS}>
+              <Link href={`?${QUERIES.SETTINGS_MODAL}=true`}>
                 <Settings />
               </Link>
             </Button>

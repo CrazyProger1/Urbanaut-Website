@@ -23,6 +23,7 @@ export type APIUpdateSettings = {
   language?: Locale;
   is_notifications_enabled?: boolean;
   theme?: APITheme;
+  country?: string;
 };
 
 export type APICurrentUser = {
