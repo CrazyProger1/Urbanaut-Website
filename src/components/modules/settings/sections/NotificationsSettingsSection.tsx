@@ -22,12 +22,12 @@ export const NotificationsSettingsSection = () => {
         <SwitchToggle
           title="Push notifications"
           description="Receive push notifications on your device"
-          icon={<Bell className="text-muted-foreground h-4 w-4" />}
+          icon={<Bell className="size-4" />}
         />
         <SwitchToggle
           title="Email news"
           description=" Get the latest news and updates via email"
-          icon={<Mail className="text-muted-foreground h-4 w-4" />}
+          icon={<Mail className="size-4" />}
         />
       </CardContent>
     </Card>

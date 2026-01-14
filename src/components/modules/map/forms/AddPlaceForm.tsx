@@ -173,7 +173,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <FormItem>
               <FormControl>
                 <CheckBoxToggle
-                  icon={<Lock className="text-muted-foreground h-4 w-4" />}
+                  icon={<Lock className="h-4 w-4" />}
                   checked={field.value}
                   onCheckedChange={field.onChange}
                   title="Private"

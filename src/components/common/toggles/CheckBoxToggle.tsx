@@ -16,7 +16,7 @@ export const CheckBoxToggle = (props: Props) => {
   const { icon, className, checkBoxClassName, title, description, ...rest } = props;
 
   const actualClassName = cn(
-    "flex items-center justify-between hover:bg-accent/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-primary/50  cursor-pointer gap-3 rounded-lg border p-3",
+    "border-border hover:bg-accent/50 group has-[[aria-checked=true]]:border-primary/50 has-[[aria-checked=true]]:bg-primary/50 has-[[aria-checked=true]]:text-black flex items-center justify-between rounded-lg border p-3 transition-colors",
     className,
   );
   const actualCheckBoxClassName = cn(
@@ -30,7 +30,7 @@ export const CheckBoxToggle = (props: Props) => {
         {icon}
         <div className="font-normal">
           <p className="text-sm font-medium">{title}</p>
-          <p className="text-muted-foreground text-sm">{description}</p>
+          <p className="text-muted-foreground text-sm group-has-aria-checked:text-black transition-colors">{description}</p>
         </div>
       </div>
       <Checkbox {...rest} className={actualCheckBoxClassName} />

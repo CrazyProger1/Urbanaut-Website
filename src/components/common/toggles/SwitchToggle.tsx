@@ -16,7 +16,7 @@ export const SwitchToggle = (props: Props) => {
   const { icon, title, description, className, switchClassName, ...rest } = props;
 
   const actualClassName = cn(
-    "border-border hover:bg-accent/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-primary/50 flex items-center justify-between rounded-lg border p-3 transition-colors",
+    "border-border hover:bg-accent/50 group has-[[aria-checked=true]]:border-primary/50 has-[[aria-checked=true]]:bg-primary/50 has-[[aria-checked=true]]:text-black flex items-center justify-between rounded-lg border p-3 transition-colors",
     className,
   );
 
@@ -26,7 +26,9 @@ export const SwitchToggle = (props: Props) => {
         {icon}
         <div className="font-normal">
           <p className="text-sm font-medium">{title}</p>
-          <p className="text-muted-foreground text-sm">{description}</p>
+          <p className="text-muted-foreground text-sm group-has-aria-checked:text-black transition-colors">
+            {description}
+          </p>
         </div>
       </div>
       <Switch className={switchClassName} {...rest} />
