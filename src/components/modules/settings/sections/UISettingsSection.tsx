@@ -6,6 +6,7 @@ import { LanguageSelect } from "./LanguageSelect";
 import { Globe } from "lucide-react";
 import { Locale } from "@/i18n";
 import { setLanguage } from "@/actions";
+import { CurrentUser } from "@/types";
 
 const LANGUAGES = [
   {
@@ -14,7 +15,11 @@ const LANGUAGES = [
   },
 ];
 
-export const UISettingsSection = () => {
+type Props = {
+  user: CurrentUser;
+};
+
+export const UISettingsSection = ({ user }: Props) => {
   const [language, setCurrentLanguage] = useState<string>("English");
 
   const handleLanguageChange = async (language: string) => {

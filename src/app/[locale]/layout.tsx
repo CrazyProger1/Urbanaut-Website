@@ -80,7 +80,7 @@ const RootLayout = async ({ children }: Props) => {
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
-                <SettingsModal />
+                {session?.user && <SettingsModal user={session?.user} />}
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
             </SidebarProvider>

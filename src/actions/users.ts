@@ -11,3 +11,9 @@ export const updateUser = async (user: APIUpdateUser) => {
 export const setLanguage = async (language: Locale) => {
   return await services.updateSettings({ language: language });
 };
+
+export const switchPushNotifications = async (enabled: boolean) => {
+  return await services.updateSettings({ is_notifications_enabled: enabled });
+};
+
+export const switchEmailNews = async (enabled: boolean) => {};

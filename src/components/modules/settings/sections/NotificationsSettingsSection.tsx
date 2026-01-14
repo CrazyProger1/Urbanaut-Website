@@ -2,13 +2,30 @@
 
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
 import { Bell, Mail } from "lucide-react";
 import { SwitchToggle } from "@/components/common/toggles";
+import { switchEmailNews, switchPushNotifications } from "@/actions";
+import { CurrentUser } from "@/types";
 
-export const NotificationsSettingsSection = () => {
-  const [pushNotifications, setPushNotifications] = useState(false);
+type Props = {
+  user: CurrentUser;
+};
+
+export const NotificationsSettingsSection = ({ user }: Props) => {
+  const [pushNotifications, setPushNotifications] = useState(
+    user.settings.is_notifications_enabled,
+  );
   const [emailNews, setEmailNews] = useState(false);
+
+  const handlePushNotificationsChecked = async (checked: boolean) => {
+    setPushNotifications((prev) => !prev);
+    await switchPushNotifications(checked);
+  };
+
+  const handleEmailChecked = async (checked: boolean) => {
+    setEmailNews((prev) => !prev);
+    await switchEmailNews(checked);
+  };
 
   return (
     <Card className="flex-1">
@@ -22,12 +39,16 @@ export const NotificationsSettingsSection = () => {
         <SwitchToggle
           title="Push notifications"
           description="Receive push notifications on your device"
-          icon={<Bell className="size-4" />}
+          icon={<Bell className="h-4 w-4" />}
+          checked={pushNotifications}
+          onCheckedChange={handlePushNotificationsChecked}
         />
         <SwitchToggle
           title="Email news"
           description=" Get the latest news and updates via email"
-          icon={<Mail className="size-4" />}
+          icon={<Mail className="h-4 w-4" />}
+          checked={emailNews}
+          onCheckedChange={handleEmailChecked}
         />
       </CardContent>
     </Card>
