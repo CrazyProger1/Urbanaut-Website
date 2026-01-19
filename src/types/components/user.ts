@@ -5,7 +5,9 @@ import {
   APITheme,
   APIRank,
   APIRetrieveMetric,
+  APIRetrieveNotification,
 } from "@/types/services/api";
+
 
 export type User = APIRetrieveUser;
 
@@ -20,3 +22,5 @@ export type UserTheme = APITheme;
 export type UserRank = APIRank;
 
 export type UserMetric = APIRetrieveMetric;
+
+export type Notification = APIRetrieveNotification;

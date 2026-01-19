@@ -62,6 +62,7 @@ export type {
   UserEditor,
   UserTheme,
   UserRank,
+  Notification,
   UserMetric,
 } from "./components"; // Component-level types
 export type { Session, SessionUser } from "./session"; // Other global types

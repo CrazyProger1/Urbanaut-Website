@@ -38,4 +38,5 @@ export type {
   APIListUser,
   APIListCity,
   APIObtainWebsocketToken,
+  APIRetrieveNotification,
 } from "./api";

@@ -11,6 +11,7 @@ export type {
   UserTheme,
   UserRank,
   UserMetric,
+  Notification,
 } from "./user";
 export type { Tag } from "./tag";
 export type { Achievement } from "./achievement";

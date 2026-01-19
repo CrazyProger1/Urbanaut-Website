@@ -78,3 +78,12 @@ export type APICreateUser = {
   bio?: string;
   born_at?: string;
 };
+
+export type APINotificationType = "UPDATE" | "REMINDER" | "ALERT" | "SYSTEM" | "SOCIAL";
+
+export type APIRetrieveNotification = {
+  id: number;
+  title: string;
+  content: string;
+  type: APINotificationType;
+};

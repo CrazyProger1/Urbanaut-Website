@@ -36,6 +36,7 @@ export type {
   APITheme,
   APIRank,
   APIListUser,
+  APIRetrieveNotification,
 } from "./user";
 export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
