@@ -14,3 +14,7 @@ export type APITokenPayload = {
   jti: number;
   user_id: string;
 };
+
+export type APIObtainWebsocketToken = {
+  token: string;
+};

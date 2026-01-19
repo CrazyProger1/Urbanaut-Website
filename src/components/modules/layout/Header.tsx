@@ -11,9 +11,10 @@ import { QUERIES } from "@/config";
 
 type Props = {
   user?: SessionUser;
+  websocketToken?: string;
 };
 
-export const Header = ({ user }: Props) => {
+export const Header = ({ user, websocketToken }: Props) => {
   return (
     <header className="bg-background drop-shadow-volume sticky top-0 flex h-16 shrink-0 flex-row items-center justify-between gap-4 border-b px-4 select-none">
       {/* Left Section */}
@@ -27,7 +28,7 @@ export const Header = ({ user }: Props) => {
 
       {/* Right Section */}
       <div className="flex items-center gap-2">
-        <NotificationButton />
+        {websocketToken && <NotificationButton websocketToken={websocketToken} />}
         <ThemeToggle />
 
         {/* User Navigation */}

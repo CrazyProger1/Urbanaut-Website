@@ -71,10 +71,6 @@ export const UserNavBar = ({
               Profile
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem>
-            <Bell />
-            Notifications
-          </DropdownMenuItem>
           <Link href={`?${QUERIES.SETTINGS_MODAL}=true`}>
             <DropdownMenuItem>
               <Settings />

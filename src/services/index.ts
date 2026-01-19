@@ -17,4 +17,5 @@ export {
   getCities,
   getCountries,
   updateSettings,
+  obtainWebsocketToken,
 } from "./api";

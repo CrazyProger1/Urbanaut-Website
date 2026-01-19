@@ -37,6 +37,7 @@ export type {
   APIListCountry,
   APIListUser,
   APIListCity,
+  APIObtainWebsocketToken,
 } from "./services"; // Service-level types (api)
 export type {
   MapLayer,

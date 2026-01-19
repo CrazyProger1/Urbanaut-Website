@@ -37,4 +37,5 @@ export type {
   APIListCountry,
   APIListUser,
   APIListCity,
+  APIObtainWebsocketToken,
 } from "./api";

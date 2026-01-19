@@ -39,7 +39,7 @@ export type {
 } from "./user";
 export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
-export type { APITokens, APIAccessToken, APITokenPayload } from "./token";
+export type { APITokens, APIAccessToken, APITokenPayload, APIObtainWebsocketToken } from "./token";
 export type { APIGoogleOauthRedirectURIResponse, APIGoogleOauthCallbackResponse } from "./oauth";
 export type { APIPoint, APIListCountry, APIListCity, APIRetrieveCountry } from "./geo";
 export type {

@@ -5,5 +5,6 @@ export type SessionUser = APICurrentUser;
 export type Session = {
   accessToken?: string;
   refreshToken?: string;
+  websocketToken?: string;
   user?: SessionUser;
 };

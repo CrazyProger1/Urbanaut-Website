@@ -1,5 +1,5 @@
 export { GOOGLE_ANALYTICS_ID } from "./google";
-export { API_URL, PROXY_URL, API_ENDPOINTS } from "./api";
+export { API_URL, PROXY_URL, API_ENDPOINTS, WEBSOCKET_URL } from "./api";
 export {
   SESSION_COOKIE_NAME,
   SESSION_SECRET,

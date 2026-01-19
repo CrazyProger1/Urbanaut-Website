@@ -1,5 +1,6 @@
 export const API_URL = process.env.API_URL!;
 export const PROXY_URL = process.env.PROXY_URL!;
+export const WEBSOCKET_URL = String(process.env.WEBSOCKET_URL!);
 export const API_ENDPOINTS = {
   GOOGLE_OAUTH_CALLBACK: "google/oauth/callback/",
   GOOGLE_OAUTH_REDIRECT_URI: "google/oauth/uri/",
@@ -20,4 +21,5 @@ export const API_ENDPOINTS = {
   COUNTRIES: "countries/",
   CITIES: "cities/",
   SETTINGS: "settings/",
+  WEBSOCKET_TOKENS: "ws/tokens/",
 };

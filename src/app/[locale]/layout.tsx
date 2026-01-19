@@ -8,7 +8,7 @@ import { ModalProvider } from "@/components/common/modals";
 import { SigninModal, SignupModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar } from "@/components/modules/layout";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { getSession } from "@/utils/session";
+import { getSession, setSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
@@ -16,6 +16,7 @@ import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/settings/modals";
 import { getCountries } from "@/services/api/geo";
+import { obtainWebsocketToken } from "@/services";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -57,12 +58,16 @@ export const generateStaticParams = () => {
 
 const RootLayout = async ({ children }: Props) => {
   const session = await getSession();
+
   setRequestLocale(session?.user?.settings?.language || "en");
 
   const theme = session?.user?.settings?.theme || "DARK";
 
-  const response = await getCountries();
-  const countries = response.success ? response.results : [];
+  const countriesResponse = await getCountries();
+  const countries = countriesResponse.success ? countriesResponse.results : [];
+
+  const tokenResponse = await obtainWebsocketToken();
+  const websocketToken = tokenResponse?.success ? tokenResponse.token : undefined;
 
   return (
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
@@ -73,7 +78,7 @@ const RootLayout = async ({ children }: Props) => {
               <NextIntlClientProvider>
                 <Sidebar />
                 <SidebarInset className="flex flex-col">
-                  <Header user={session?.user} />
+                  <Header user={session?.user} websocketToken={websocketToken} />
                   {children}
                   <Footer />
                 </SidebarInset>

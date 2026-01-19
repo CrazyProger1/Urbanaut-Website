@@ -5,6 +5,7 @@ import {
   APIErrorResponse,
   APISuccessfulResponse,
   APIUpdateSettings,
+  APIObtainWebsocketToken,
 } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS } from "@/config";
@@ -30,5 +31,13 @@ export const updateSettings = (
   return fetchAuthenticated(API_ENDPOINTS.SETTINGS, {
     method: "PATCH",
     body: JSON.stringify(settings),
+  });
+};
+
+export const obtainWebsocketToken = (): Promise<
+  (APISuccessfulResponse & APIObtainWebsocketToken) | APIErrorResponse
+> => {
+  return fetchAuthenticated(API_ENDPOINTS.WEBSOCKET_TOKENS, {
+    method: "POST",
   });
 };
