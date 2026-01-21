@@ -18,4 +18,5 @@ export {
   getCountries,
   updateSettings,
   obtainWebsocketToken,
+  getNotifications,
 } from "./api";

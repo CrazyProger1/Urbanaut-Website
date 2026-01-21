@@ -8,30 +8,30 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
 import { User } from "lucide-react";
 import { QUERIES } from "@/config";
+import { Notification } from "@/types";
 
 type Props = {
   user?: SessionUser;
   websocketToken?: string;
+  notifications?: Notification[];
 };
 
-export const Header = ({ user, websocketToken }: Props) => {
+export const Header = ({ user, websocketToken, notifications }: Props) => {
   return (
     <header className="bg-background drop-shadow-volume sticky top-0 flex h-16 shrink-0 flex-row items-center justify-between gap-4 border-b px-4 select-none">
-      {/* Left Section */}
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1" />
         <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
       </div>
 
-      {/* Center Section (spacer) */}
       <div className="flex-1" />
 
-      {/* Right Section */}
       <div className="flex items-center gap-2">
-        {websocketToken && <NotificationButton websocketToken={websocketToken} />}
+        {websocketToken && (
+          <NotificationButton websocketToken={websocketToken} notifications={notifications || []} />
+        )}
         <ThemeToggle />
 
-        {/* User Navigation */}
         {user ? (
           <UserNavBar
             user={{

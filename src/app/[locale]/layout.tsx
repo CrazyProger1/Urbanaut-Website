@@ -16,7 +16,7 @@ import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/settings/modals";
 import { getCountries } from "@/services/api/geo";
-import { obtainWebsocketToken } from "@/services";
+import { getNotifications, obtainWebsocketToken } from "@/services";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -69,6 +69,9 @@ const RootLayout = async ({ children }: Props) => {
   const tokenResponse = await obtainWebsocketToken();
   const websocketToken = tokenResponse?.success ? tokenResponse.token : undefined;
 
+  const notificationsResponse = await getNotifications();
+  const notifications = notificationsResponse.success ? notificationsResponse.results : [];
+
   return (
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
       <body>
@@ -78,7 +81,11 @@ const RootLayout = async ({ children }: Props) => {
               <NextIntlClientProvider>
                 <Sidebar />
                 <SidebarInset className="flex flex-col">
-                  <Header user={session?.user} websocketToken={websocketToken} />
+                  <Header
+                    user={session?.user}
+                    websocketToken={websocketToken}
+                    notifications={notifications}
+                  />
                   {children}
                   <Footer />
                 </SidebarInset>

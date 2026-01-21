@@ -22,4 +22,5 @@ export const API_ENDPOINTS = {
   CITIES: "cities/",
   SETTINGS: "settings/",
   WEBSOCKET_TOKENS: "ws/tokens/",
+  NOTIFICATIONS: "notifications/",
 };

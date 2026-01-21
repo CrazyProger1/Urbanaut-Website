@@ -61,3 +61,42 @@ export const getPreservationColorClass = (preservation?: APIPreservationLevel) =
       return "bg-preservation-none border-preservation-none text-foreground hover:bg-preservation-none-hover dark:bg-preservation-none dark:hover:bg-preservation-none-hover";
   }
 };
+
+export const getNotificationColorClass = (type: string) => {
+  switch (type) {
+    case "UPDATE":
+      return "bg-notification-update-bg border-notification-update-border";
+    case "SUCCESS":
+      return "bg-notification-success-bg border-notification-success-border";
+    case "REMINDER":
+      return "bg-notification-reminder-bg border-notification-reminder-border";
+    case "SYSTEM":
+      return "bg-notification-system-bg border-notification-system-border";
+    case "SOCIAL":
+      return "bg-notification-social-bg border-notification-social-border";
+    case "ALERT":
+      return "bg-notification-alert-bg border-notification-alert-border";
+    default:
+      return "bg-notification-default-bg border-notification-default-border";
+  }
+};
+
+export const getNotificationIconColorClass = (type: string) => {
+  switch (type) {
+    case "UPDATE":
+      return "text-notification-update-icon";
+    case "SUCCESS":
+      return "text-notification-success-icon";
+    case "REMINDER":
+      return "text-notification-reminder-icon";
+    case "SYSTEM":
+      return "text-notification-system-icon";
+    case "SOCIAL":
+      return "text-notification-social-icon";
+    case "ALERT":
+      return "text-notification-alert-icon";
+    default:
+      return "text-notification-default-icon";
+  }
+};
+

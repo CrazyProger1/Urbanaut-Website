@@ -2,7 +2,7 @@ import React from "react";
 import { Achievement } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { DynamicIcon } from "lucide-react/dynamic";
-import { getAchievementColorClass } from "@/utils/css";
+import { getAchievementColorClass } from "@/utils/classes";
 
 type Props = {
   achievement: Achievement;

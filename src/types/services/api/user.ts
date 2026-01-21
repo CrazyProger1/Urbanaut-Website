@@ -86,4 +86,13 @@ export type APIRetrieveNotification = {
   title: string;
   content: string;
   type: APINotificationType;
+  created_at: string;
+};
+
+export type APIListNotification = {
+  id: number;
+  title: string;
+  content: string;
+  type: APINotificationType;
+  created_at: string;
 };

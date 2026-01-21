@@ -7,3 +7,4 @@ export { updateUser, getUserByUsername, updateSettings, obtainWebsocketToken } f
 export { createFeedback } from "./feedbacks";
 export { getReferralCodes } from "./referrals";
 export { getCities, getCountries } from "./geo";
+export { getNotifications } from "./notifications";

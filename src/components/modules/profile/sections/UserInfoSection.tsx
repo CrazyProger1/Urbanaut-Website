@@ -8,7 +8,7 @@ import { PAGES, QUERIES, SITE_URL } from "@/config";
 import { Link } from "@/i18n";
 import { getFormatter } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
-import { getRankShadowClass } from "@/utils/css";
+import { getRankShadowClass } from "@/utils/classes";
 import { CopyToast } from "@/components/common/toasts";
 import { User } from "@/types";
 

@@ -57,12 +57,45 @@
     --tracking-normal: 0em;
     --spacing: 0.25rem;
 
+
+    /* Notification Colors */
+    --color-notification-update-bg: rgba(30, 144, 255, 0.1);
+    --color-notification-update-icon: rgba(30, 144, 255, 0.8);
+    --color-notification-update-border: rgba(30, 144, 255, 0.3);
+
+    --color-notification-success-bg: rgba(var(--color-base-easy), 0.1);
+    --color-notification-success-icon: rgba(var(--color-base-easy), 0.8);
+    --color-notification-success-border: rgba(var(--color-base-easy), 0.3);
+
+    --color-notification-reminder-bg: rgba(var(--color-base-impossible), 0.1);
+    --color-notification-reminder-icon: rgba(var(--color-base-impossible), 0.8);
+    --color-notification-reminder-border: rgba(var(--color-base-impossible), 0.3);
+
+    --color-notification-system-bg: rgba(var(--color-base-none), 0.05);
+    --color-notification-system-icon: rgba(var(--color-base-none), 0.6);
+    --color-notification-system-border: rgba(var(--color-base-none), 0.2);
+
+    --color-notification-social-bg: rgba(var(--color-base-medium), 0.1);
+    --color-notification-social-icon: rgba(var(--color-base-medium), 0.8);
+    --color-notification-social-border: rgba(var(--color-base-medium), 0.3);
+
+    --color-notification-alert-bg: rgba(var(--color-base-hard), 0.1);
+    --color-notification-alert-icon: rgba(var(--color-base-hard), 0.8);
+    --color-notification-alert-border: rgba(var(--color-base-hard), 0.3);
+
+    --color-notification-default-bg: rgba(var(--color-base-medium), 0.1);
+    --color-notification-default-icon: rgba(var(--color-base-medium), 0.8);
+    --color-notification-default-border: rgba(var(--color-base-medium), 0.3);
+
+
+    /* Base Colors */
     --color-base-none: 255, 255, 255;
     --color-base-easy: 0, 255, 0;
     --color-base-medium: 255, 255, 0;
     --color-base-hard: 255, 0, 0;
     --color-base-impossible: 157, 0, 255;
 
+    /* Achievement Colors */
     --color-achievement-initiation: rgba(var(--color-base-none), 0.3);
     --color-achievement-growth: rgba(var(--color-base-easy), 0.3);
     --color-achievement-mastery: rgba(var(--color-base-medium), 0.3);
@@ -71,12 +104,14 @@
 
     --drop-shadow-volume: 0 0 10px rgba(0, 0, 0, 0.5);
 
+    /* Rank Colors */
     --drop-shadow-rank-rookie: 3px 3px 5px rgba(var(--color-base-none), 0.3);
     --drop-shadow-rank-amateur: 3px 3px 5px rgba(var(--color-base-easy), 0.3);
     --drop-shadow-rank-profi: 3px 3px 5px rgba(var(--color-base-medium), 0.3);
     --drop-shadow-rank-stalker: 3px 3px 5px rgba(var(--color-base-hard), 0.3);
     --drop-shadow-rank-legend: 3px 3px 5px rgba(var(--color-base-impossible), 0.3);
 
+    /* Security Colors */
     --color-security-none: rgba(var(--color-base-none), 0.3);
     --color-security-easy: rgba(var(--color-base-easy), 0.3);
     --color-security-medium: rgba(var(--color-base-medium), 0.3);
@@ -89,12 +124,14 @@
     --color-security-hard-hover: rgba(var(--color-base-hard), 0.4);
     --color-security-impossible-hover: rgba(var(--color-base-impossible), 0.4);
 
+    /* Difficulty Colors */
     --color-difficulty-newbie: rgba(var(--color-base-none), 0.3);
     --color-difficulty-easy: rgba(var(--color-base-easy), 0.3);
     --color-difficulty-medium: rgba(var(--color-base-medium), 0.3);
     --color-difficulty-hard: rgba(var(--color-base-hard), 0.3);
     --color-difficulty-impossible: rgba(var(--color-base-impossible), 0.3);
 
+    /* Preservation Colors */
     --color-preservation-none: rgba(var(--color-base-none), 0.3);
     --color-preservation-low: rgba(var(--color-base-hard), 0.3);
     --color-preservation-medium: rgba(var(--color-base-medium), 0.3);
@@ -215,18 +252,21 @@
 
     --drop-shadow-volume: var(--drop-shadow-volume);
 
+    /* Rank Colors */
     --drop-shadow-rank-rookie: var(--drop-shadow-rank-rookie);
     --drop-shadow-rank-amateur: var(--drop-shadow-rank-amateur);
     --drop-shadow-rank-profi: var(--drop-shadow-rank-profi);
     --drop-shadow-rank-stalker: var(--drop-shadow-rank-stalker);
     --drop-shadow-rank-legend: var(--drop-shadow-rank-legend);
 
+    /* Achievement Colors */
     --color-achievement-initiation: var(--color-achievement-initiation);
     --color-achievement-growth: var(--color-achievement-growth);
     --color-achievement-mastery: var(--color-achievement-mastery);
     --color-achievement-valor: var(--color-achievement-valor);
     --color-achievement-transcendence: var(--color-achievement-transcendence);
 
+    /* Security Colors */
     --color-security-none: var(--color-security-none);
     --color-security-easy: var(--color-security-easy);
     --color-security-medium: var(--color-security-medium);
@@ -239,12 +279,14 @@
     --color-security-hard-hover: var(--color-security-hard-hover);
     --color-security-impossible-hover: var(--color-security-impossible-hover);
 
+    /* Difficulty Colors */
     --color-difficulty-newbie: var(--color-difficulty-newbie);
     --color-difficulty-easy: var(--color-difficulty-easy);
     --color-difficulty-medium: var(--color-difficulty-medium);
     --color-difficulty-hard: var(--color-difficulty-hard);
     --color-difficulty-impossible: var(--color-difficulty-impossible);
 
+    /* Preservation Colors */
     --color-preservation-none: var(--color-preservation-none);
     --color-preservation-low: var(--color-preservation-low);
     --color-preservation-medium: var(--color-preservation-medium);
@@ -256,6 +298,35 @@
     --color-preservation-medium-hover: var(--color-preservation-medium-hover);
     --color-preservation-high-hover: var(--color-preservation-high-hover);
     --color-preservation-awesome-hover: var(--color-preservation-awesome-hover);
+
+    /* Notification Colors */
+    --color-notification-update-bg: var(--color-notification-update-bg);
+    --color-notification-update-icon: var(--color-notification-update-icon);
+    --color-notification-update-border: var(--color-notification-update-border);
+
+    --color-notification-success-bg: var(--color-notification-success-bg);
+    --color-notification-success-icon: var(--color-notification-success-icon);
+    --color-notification-success-border: var(--color-notification-success-border);
+
+    --color-notification-reminder-bg: var(--color-notification-reminder-bg);
+    --color-notification-reminder-icon: var(--color-notification-reminder-icon);
+    --color-notification-reminder-border: var(--color-notification-reminder-border);
+
+    --color-notification-system-bg: var(--color-notification-system-bg);
+    --color-notification-system-icon: var(--color-notification-system-icon);
+    --color-notification-system-border: var(--color-notification-system-border);
+
+    --color-notification-social-bg: var(--color-notification-social-bg);
+    --color-notification-social-icon: var(--color-notification-social-icon);
+    --color-notification-social-border: var(--color-notification-social-border);
+
+    --color-notification-alert-bg: var(--color-notification-alert-bg);
+    --color-notification-alert-icon: var(--color-notification-alert-icon);
+    --color-notification-alert-border: var(--color-notification-alert-border);
+
+    --color-notification-default-bg: var(--color-notification-default-bg);
+    --color-notification-default-icon: var(--color-notification-default-icon);
+    --color-notification-default-border: var(--color-notification-default-border);
 }
 
 @layer base {
@@ -301,4 +372,20 @@
 
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #221F1F;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.25);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.14);
 }

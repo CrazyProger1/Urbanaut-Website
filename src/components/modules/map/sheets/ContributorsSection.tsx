@@ -4,7 +4,7 @@ import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/i18n";
 import { PAGES, SITE_URL } from "@/config";
-import { getRankShadowClass } from "@/utils/css";
+import { getRankShadowClass } from "@/utils/classes";
 import { CopyToast } from "@/components/common/toasts";
 
 type Props = {

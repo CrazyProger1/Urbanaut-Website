@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getPreservationColorClass, getSecurityColorClass } from "@/utils/css";
+import { getPreservationColorClass, getSecurityColorClass } from "@/utils/classes";
 import { SecurityLevel } from "@/types";
 
 type Props = {
