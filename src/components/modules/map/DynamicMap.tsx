@@ -64,6 +64,8 @@ const DynamicMap = ({
     loadMapMeasures,
     setLastRightClickCoordinates,
     lastRightClickCoordinates,
+    toggleSearchBar,
+    toggleLayersBar,
   } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
@@ -93,6 +95,7 @@ const DynamicMap = ({
       container.removeEventListener("contextmenu", handleContextMenu);
     };
   }, [map]);
+
   useEffect(() => {
     if (!map) {
       return;
@@ -240,7 +243,13 @@ const DynamicMap = ({
 
   return (
     <ContextMenu>
-      <ContextMenuTrigger style={{ height: "100%", width: "100%" }}>
+      <ContextMenuTrigger
+        style={{ height: "100%", width: "100%" }}
+        onClick={() => {
+          toggleSearchBar(false);
+          toggleLayersBar(false);
+        }}
+      >
         <div className="relative z-50">
           <SearchBar onSearchByCoordinates={handleSearchByCoordinates} />
           <LayersBar

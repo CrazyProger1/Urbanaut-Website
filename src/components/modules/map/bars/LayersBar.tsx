@@ -8,6 +8,8 @@ import { MapLayer } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { LAYERS } from "@/config";
+import { useMapStore } from "@/stores";
+import { StopPropagation } from "@/components/common/modals";
 
 type Props = {
   layers: MapLayer[];
@@ -24,23 +26,18 @@ export const LayersBar = ({
   onPrimaryLayerChange,
   onSecondaryLayerToggle,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isLayersBarOpen, toggleLayersBar } = useMapStore();
 
   return (
-    <div className="absolute top-4 right-4 flex flex-col">
+    <StopPropagation className="absolute top-4 right-4 flex flex-col">
       <div className="flex flex-col items-end">
         <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-          <Toggle
-            pressed={isOpen}
-            onPressedChange={() => {
-              setIsOpen((prev) => !prev);
-            }}
-          >
+          <Toggle pressed={isLayersBarOpen} onPressedChange={toggleLayersBar}>
             <Layers />
           </Toggle>
         </Card>
       </div>
-      {isOpen && (
+      {isLayersBarOpen && (
         <Card className="bg-background/80 mt-4 w-full rounded-2xl shadow-lg backdrop-blur-sm">
           <CardContent className="flex flex-col gap-2">
             <RadioGroup
@@ -77,6 +74,6 @@ export const LayersBar = ({
           </CardContent>
         </Card>
       )}
-    </div>
+    </StopPropagation>
   );
 };

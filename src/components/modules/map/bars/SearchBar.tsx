@@ -16,6 +16,7 @@ import { ClickToast } from "@/components/common/toasts";
 import { useMapStore } from "@/stores";
 import { LatLng } from "leaflet";
 import { parseCoordinates } from "@/utils/map";
+import { StopPropagation } from "@/components/common/modals";
 
 const FILTER_PARAMS = new Set(["preservation", "security", "tags", "country"]);
 
@@ -25,7 +26,6 @@ type Props = {
 
 export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   const params = useSearchParams();
-  const [isOpen, setIsOpen] = useState(false);
   const [isAIActive, setIsAIActive] = useState(false);
   const openFilterModalLink = useModalOpenLink(QUERIES.MAP_FILTERS_MODAL);
   const [query, setQuery] = useState("");
@@ -34,7 +34,7 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   const pointSearchLink = usePreservedParamsLink({ point: query, ai_query: "", query: "" });
   const [isFiltersActive, setIsFiltersActive] = useState(false);
   const router = useRouter();
-  const { setLastSearchTerm, loadLastSearchTerm } = useMapStore();
+  const { setLastSearchTerm, loadLastSearchTerm, isSearchBarOpen, toggleSearchBar } = useMapStore();
 
   useEffect(() => {
     setIsFiltersActive(FILTER_PARAMS.intersection(new Set(params.keys())).size > 0);
@@ -66,18 +66,13 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   };
 
   return (
-    <div className="absolute top-4 left-4 flex flex-col gap-4 md:flex-row">
+    <StopPropagation className="absolute top-4 left-4 flex flex-col gap-4 pr-4 md:flex-row">
       <Card className="bg-background/80 max-w-fit items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-        <Toggle
-          pressed={isOpen}
-          onPressedChange={() => {
-            setIsOpen((prev) => !prev);
-          }}
-        >
+        <Toggle pressed={isSearchBarOpen} onPressedChange={toggleSearchBar}>
           <Search />
         </Toggle>
       </Card>
-      {isOpen && (
+      {isSearchBarOpen && (
         <Card
           className={cn(
             "bg-background/80 flex flex-row items-center gap-1 rounded-2xl backdrop-blur-sm",
@@ -109,6 +104,6 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
           </ClickToast>
         </Card>
       )}
-    </div>
+    </StopPropagation>
   );
 };

@@ -8,6 +8,8 @@ type MapState = {
   isChoosingPlace: boolean;
   isCoordinatesVisible: boolean;
   isRulerActive: boolean;
+  isLayersBarOpen: boolean;
+  isSearchBarOpen: boolean;
   tooltips: string[];
   currentMapBounds?: LatLngBounds;
   currentMapCenter?: LatLng;
@@ -35,6 +37,8 @@ type MapDispatch = {
   setLastSearchTerm: (term: string) => void;
   loadLastSearchTerm: () => string | undefined;
   setLastRightClickCoordinates: (coordinates: LatLng) => void;
+  toggleSearchBar: (open?: boolean) => void;
+  toggleLayersBar: (open?: boolean) => void;
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
@@ -45,6 +49,8 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   isCoordinatesVisible: false,
   isRulerActive: false,
   tooltips: [],
+  isLayersBarOpen: false,
+  isSearchBarOpen: false,
 
   toggleAreasVisibility: (visible) => {
     if (visible === undefined) {
@@ -144,5 +150,19 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   },
   setLastRightClickCoordinates: (coordinates) => {
     set({ lastRightClickCoordinates: coordinates });
+  },
+  toggleLayersBar: (open) => {
+    const state = get().isLayersBarOpen;
+    if (open === undefined) {
+      open = !state;
+    }
+    set({ isLayersBarOpen: open, isSearchBarOpen: false });
+  },
+  toggleSearchBar: (open) => {
+    const state = get().isSearchBarOpen;
+    if (open === undefined) {
+      open = !state;
+    }
+    set({ isSearchBarOpen: open, isLayersBarOpen: false });
   },
 }));
