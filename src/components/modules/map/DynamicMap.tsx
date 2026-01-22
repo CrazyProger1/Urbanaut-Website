@@ -66,16 +66,23 @@ const DynamicMap = ({
     lastRightClickCoordinates,
     toggleSearchBar,
     toggleLayersBar,
+    currentSecondaryLayers,
+    currentPrimaryLayer,
+    setPrimaryLayer,
+    toggleSecondaryLayer,
+    loadLastLayers,
   } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
   const areaChoosingToolRef = useRef<AreaChoosingToolHandle>(null);
   const placeChoosingToolRef = useRef<PlaceChoosingToolHandle>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [currentPrimaryLayer, setCurrentPrimaryLayer] = useState<MapLayer>(LAYERS.OSM);
-  const [currentSecondaryLayers, setCurrentSecondaryLayers] = useState<MapLayer[]>([]);
   const [places, setPlaces] = useState<Place[]>([]);
   const [areas, setAreas] = useState<Area[]>([]);
+
+  useEffect(() => {
+    loadLastLayers();
+  }, []);
 
   useEffect(() => {
     if (!map) return;
@@ -200,20 +207,6 @@ const DynamicMap = ({
     }
   };
 
-  const handleSecondaryLayerToggle = (layer: MapLayer, active: boolean) => {
-    if (active) {
-      if (!currentSecondaryLayers.includes(layer)) {
-        setCurrentSecondaryLayers((prev) => [...prev, layer]);
-      }
-    } else {
-      setCurrentSecondaryLayers((prev) => prev.filter((value) => value !== layer));
-    }
-  };
-
-  const handlePrimaryLayerChange = (layer: MapLayer) => {
-    setCurrentPrimaryLayer(layer);
-  };
-
   const handlePlaceSelect = useCallback(
     (place: Place) => {
       const params = buildParamsFromRecord(
@@ -254,8 +247,8 @@ const DynamicMap = ({
           <SearchBar onSearchByCoordinates={handleSearchByCoordinates} />
           <LayersBar
             layers={Object.values(LAYERS)}
-            onPrimaryLayerChange={handlePrimaryLayerChange}
-            onSecondaryLayerToggle={handleSecondaryLayerToggle}
+            onPrimaryLayerChange={setPrimaryLayer}
+            onSecondaryLayerToggle={toggleSecondaryLayer}
             defaultPrimary={currentPrimaryLayer || LAYERS.OSM}
             defaultSecondary={currentSecondaryLayers}
           />

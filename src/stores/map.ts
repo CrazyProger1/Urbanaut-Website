@@ -1,5 +1,7 @@
 import { create } from "zustand/react";
 import { LatLngBounds, LatLng, bounds } from "leaflet";
+import { MapLayer } from "@/types";
+import { LAYERS } from "@/config";
 
 type MapState = {
   isPlacesVisible: boolean;
@@ -17,6 +19,8 @@ type MapState = {
   lastSearchTerm?: string;
   lastMouseCoordinates?: LatLng;
   lastRightClickCoordinates?: LatLng;
+  currentPrimaryLayer: MapLayer;
+  currentSecondaryLayers: MapLayer[];
 };
 
 type MapDispatch = {
@@ -39,6 +43,9 @@ type MapDispatch = {
   setLastRightClickCoordinates: (coordinates: LatLng) => void;
   toggleSearchBar: (open?: boolean) => void;
   toggleLayersBar: (open?: boolean) => void;
+  setPrimaryLayer: (layer: MapLayer) => void;
+  toggleSecondaryLayer: (layer: MapLayer, active: boolean) => void;
+  loadLastLayers: () => { primary: MapLayer; secondary: MapLayer[] };
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
@@ -51,6 +58,8 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   tooltips: [],
   isLayersBarOpen: false,
   isSearchBarOpen: false,
+  currentPrimaryLayer: LAYERS.OSM,
+  currentSecondaryLayers: [],
 
   toggleAreasVisibility: (visible) => {
     if (visible === undefined) {
@@ -164,5 +173,32 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
       open = !state;
     }
     set({ isSearchBarOpen: open, isLayersBarOpen: false });
+  },
+  setPrimaryLayer: (layer: MapLayer) => {
+    set({ currentPrimaryLayer: layer });
+    localStorage.setItem("map-primary-layer", JSON.stringify(layer));
+  },
+
+  toggleSecondaryLayer: (layer, active) => {
+    const layers = get().currentSecondaryLayers;
+    if (active) {
+      if (!layers.includes(layer)) {
+        const newLayers = [...layers, layer];
+        set({ currentSecondaryLayers: newLayers });
+        localStorage.setItem("map-secondary-layers", JSON.stringify(newLayers));
+      }
+    } else {
+      const newLayers = layers.filter((value) => value !== layer);
+      set({ currentSecondaryLayers: newLayers });
+      localStorage.setItem("map-secondary-layers", JSON.stringify(newLayers));
+    }
+  },
+  loadLastLayers: () => {
+    const primaryLayerRaw = localStorage.getItem("map-primary-layer");
+    const secondaryLayersRaw = localStorage.getItem("map-secondary-layers");
+    const primaryLayer = primaryLayerRaw ? JSON.parse(primaryLayerRaw) : LAYERS.OSM;
+    const secondaryLayers = secondaryLayersRaw ? JSON.parse(secondaryLayersRaw) : [];
+    set({ currentPrimaryLayer: primaryLayer, currentSecondaryLayers: secondaryLayers });
+    return { primary: primaryLayer, secondary: secondaryLayers };
   },
 }));
