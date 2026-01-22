@@ -1,39 +1,24 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import useWebSocket from "react-use-websocket";
-import { WEBSOCKET_URL } from "@/config";
+
 import { NotificationItem } from "./NotificationItem";
 import { Notification } from "@/types";
+import { useListenNotifications } from "@/hooks";
 
 type Props = {
   notifications: Notification[];
   websocketToken: string;
 };
 
-export const NotificationButton = ({
+export const NotificationBar = ({
   websocketToken,
   notifications: defaultNotifications,
 }: Props) => {
-  const [notifications, setNotifications] = useState<Notification[]>(defaultNotifications);
-
-  const { lastMessage, readyState } = useWebSocket(
-    WEBSOCKET_URL.replace("[token]", websocketToken),
-    {
-      share: true,
-    },
-  );
-
-  useEffect(() => {
-    if (!readyState || !lastMessage) return;
-    const data = JSON.parse(lastMessage?.data);
-    if (data.type === "notification") {
-      setNotifications((prev) => [data.data as Notification, ...prev]);
-    }
-  }, [lastMessage, readyState]);
+  const notifications = useListenNotifications(websocketToken, defaultNotifications);
 
   return (
     <Popover>

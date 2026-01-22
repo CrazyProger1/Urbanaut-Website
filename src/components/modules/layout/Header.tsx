@@ -1,7 +1,7 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { UserNavBar } from "@/components/modules/layout/UserNavBar";
-import { NotificationButton } from "@/components/modules/layout/NotificationButton";
+import { NotificationBar } from "@/components/modules/layout/NotificationBar";
 import { ThemeToggle } from "@/components/modules/layout/ThemeToggle";
 import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
@@ -28,7 +28,7 @@ export const Header = ({ user, websocketToken, notifications }: Props) => {
 
       <div className="flex items-center gap-2">
         {websocketToken && (
-          <NotificationButton websocketToken={websocketToken} notifications={notifications || []} />
+          <NotificationBar websocketToken={websocketToken} notifications={notifications || []} />
         )}
         <ThemeToggle />
 

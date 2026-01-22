@@ -10,3 +10,7 @@ export const ALTS = {
 export const IMAGES = {
   LOGO: "/web-app-manifest-192x192.png",
 };
+
+export const SOUNDS = {
+  NOTIFICATION: "/sounds/notification.mp3",
+};

@@ -84,7 +84,8 @@ export type APINotificationType = "UPDATE" | "REMINDER" | "ALERT" | "SYSTEM" | "
 export type APIRetrieveNotification = {
   id: number;
   title: string;
-  content: string;
+  subtitle?: string;
+  content?: string;
   type: APINotificationType;
   created_at: string;
 };
@@ -92,7 +93,8 @@ export type APIRetrieveNotification = {
 export type APIListNotification = {
   id: number;
   title: string;
-  content: string;
+  subtitle?: string;
+  content?: string;
   type: APINotificationType;
   created_at: string;
 };

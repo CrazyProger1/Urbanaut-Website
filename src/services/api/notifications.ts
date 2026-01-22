@@ -8,5 +8,5 @@ import { APIListNotification } from "@/types/services/api/user";
 export const getNotifications = async (): Promise<
   APIPaginatedResponse<APIListNotification> | APIErrorResponse
 > => {
-  return fetchAuthenticated(API_ENDPOINTS.NOTIFICATIONS);
+  return fetchAuthenticated(`${API_ENDPOINTS.NOTIFICATIONS}?providers=WEBSITE`);
 };
