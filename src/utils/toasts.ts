@@ -9,9 +9,12 @@ export const showNotificationToast = (notification: Notification, options?: Exte
     ...options,
     icon: getNotificationIcon(notification.type, getNotificationIconColorClass(notification.type)),
     classNames: {
-      toast: cn(getNotificationColorClass(notification.type), "backdrop-blur-md shadow-volume"),
-      title: "text-foreground text-sm font-semibold",
-      description: "text-muted-foreground text-xs",
+      toast: cn(
+        getNotificationColorClass(notification.type),
+        "backdrop-blur-md backdrop-brightness-50! shadow-volume!",
+      ),
+      title: "text-foreground! text-sm font-semibold!",
+      description: "text-xs",
     },
     position: "top-right",
     description: notification.subtitle,
