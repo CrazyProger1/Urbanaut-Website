@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -8,20 +8,30 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { NotificationItem } from "./NotificationItem";
 import { Notification } from "@/types";
 import { useListenNotifications } from "@/hooks";
+import { playSound } from "@/utils/sound";
+import { SOUNDS } from "@/config";
+import { showNotificationToast } from "@/utils/toasts";
 
 type Props = {
   notifications: Notification[];
   websocketToken: string;
 };
 
-export const NotificationBar = ({
-  websocketToken,
-  notifications: defaultNotifications,
-}: Props) => {
-  const notifications = useListenNotifications(websocketToken, defaultNotifications);
+export const NotificationBar = ({ websocketToken, notifications: defaultNotifications }: Props) => {
+  const notifications = useListenNotifications(
+    websocketToken,
+    defaultNotifications,
+    (notification) => {
+      playSound(SOUNDS.NOTIFICATION);
+      setHasNewNotification(true);
+      showNotificationToast(notification);
+    },
+  );
+
+  const [hasNewNotification, setHasNewNotification] = useState(false);
 
   return (
-    <Popover>
+    <Popover onOpenChange={() => setHasNewNotification(false)}>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
@@ -30,7 +40,9 @@ export const NotificationBar = ({
           title="Notifications"
         >
           <Bell className="h-5 w-5" />
-          <span className="bg-primary absolute top-1 right-1 h-2 w-2 rounded-full" />
+          {hasNewNotification && (
+            <span className="bg-primary absolute top-1 right-1 h-2 w-2 rounded-full" />
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80 p-0">

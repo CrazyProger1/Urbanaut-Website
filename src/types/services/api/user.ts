@@ -79,7 +79,7 @@ export type APICreateUser = {
   born_at?: string;
 };
 
-export type APINotificationType = "UPDATE" | "REMINDER" | "ALERT" | "SYSTEM" | "SOCIAL";
+export type APINotificationType = "UPDATE" | "REMINDER" | "ALERT" | "SYSTEM" | "SOCIAL" | "SUCCESS";
 
 export type APIRetrieveNotification = {
   id: number;

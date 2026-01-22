@@ -65,19 +65,19 @@ export const getPreservationColorClass = (preservation?: APIPreservationLevel) =
 export const getNotificationColorClass = (type: string) => {
   switch (type) {
     case "UPDATE":
-      return "bg-notification-update-bg border-notification-update-border";
+      return "bg-notification-update-bg! border-notification-update-border!";
     case "SUCCESS":
-      return "bg-notification-success-bg border-notification-success-border";
+      return "bg-notification-success-bg! border-notification-success-border!";
     case "REMINDER":
-      return "bg-notification-reminder-bg border-notification-reminder-border";
+      return "bg-notification-reminder-bg! border-notification-reminder-border!";
     case "SYSTEM":
-      return "bg-notification-system-bg border-notification-system-border";
+      return "bg-notification-system-bg! border-notification-system-border!";
     case "SOCIAL":
-      return "bg-notification-social-bg border-notification-social-border";
+      return "bg-notification-social-bg! border-notification-social-border!";
     case "ALERT":
-      return "bg-notification-alert-bg border-notification-alert-border";
+      return "bg-notification-alert-bg! border-notification-alert-border!";
     default:
-      return "bg-notification-default-bg border-notification-default-border";
+      return "bg-notification-default-bg! border-notification-default-border!";
   }
 };
 

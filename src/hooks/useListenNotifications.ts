@@ -19,7 +19,7 @@ const deduplicateNotifications = (notifications: Notification[]) => {
 export const useListenNotifications = (
   websocketToken: string,
   defaultNotifications?: Notification[],
-  enableSound: boolean = true,
+  onNotification?: (notification: Notification) => void,
 ) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -40,11 +40,8 @@ export const useListenNotifications = (
     if (!readyState || !lastMessage) return;
     const data = JSON.parse(lastMessage?.data);
     if (data.type === "notification") {
-      if (enableSound) {
-        playSound(SOUNDS.NOTIFICATION);
-      }
-
       setNotifications((prev) => [data.data as Notification, ...prev]);
+      onNotification?.(data.data as Notification);
     }
   }, [lastMessage, readyState]);
 
