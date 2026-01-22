@@ -30,7 +30,7 @@ export const Header = ({ user, websocketToken, notifications }: Props) => {
         {websocketToken && (
           <NotificationBar websocketToken={websocketToken} notifications={notifications || []} />
         )}
-        <ThemeToggle />
+        {/*<ThemeToggle />*/}
 
         {user ? (
           <UserNavBar

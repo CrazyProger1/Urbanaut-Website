@@ -45,7 +45,7 @@ export const NotificationBar = ({ websocketToken, notifications: defaultNotifica
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-0">
+      <PopoverContent className="w-80 p-0 rounded-none">
         <div className="flex max-h-96 flex-col overflow-y-auto">
           {notifications.length === 0 ? (
             <div className="text-muted-foreground p-4 text-center">No notifications</div>
