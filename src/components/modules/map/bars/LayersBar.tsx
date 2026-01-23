@@ -13,20 +13,17 @@ import { StopPropagation } from "@/components/common/modals";
 
 type Props = {
   layers: MapLayer[];
-  defaultPrimary?: MapLayer;
-  defaultSecondary?: MapLayer[];
-  onPrimaryLayerChange?: (layer: MapLayer) => void;
-  onSecondaryLayerToggle: (layer: MapLayer, active: boolean) => void;
 };
 
-export const LayersBar = ({
-  layers,
-  defaultPrimary = LAYERS.OSM,
-  defaultSecondary = [],
-  onPrimaryLayerChange,
-  onSecondaryLayerToggle,
-}: Props) => {
-  const { isLayersBarOpen, toggleLayersBar } = useMapStore();
+export const LayersBar = ({ layers }: Props) => {
+  const {
+    isLayersBarOpen,
+    toggleLayersBar,
+    currentSecondaryLayers,
+    currentPrimaryLayer,
+    setPrimaryLayer,
+    toggleSecondaryLayer,
+  } = useMapStore();
 
   return (
     <StopPropagation className="absolute top-4 right-4 flex flex-col">
@@ -41,9 +38,9 @@ export const LayersBar = ({
         <Card className="bg-background/80 mt-4 w-full rounded-2xl shadow-lg backdrop-blur-sm">
           <CardContent className="flex flex-col gap-2">
             <RadioGroup
-              defaultValue={defaultPrimary?.value || "OSM"}
+              defaultValue={currentPrimaryLayer?.value || "OSM"}
               onValueChange={(value) => {
-                onPrimaryLayerChange?.(layers.filter((layer) => layer.value === value)[0]);
+                setPrimaryLayer(layers.filter((layer) => layer.value === value)[0]);
               }}
             >
               {layers
@@ -62,8 +59,8 @@ export const LayersBar = ({
                 .map((layer) => (
                   <div key={layer.value} className="flex items-center gap-3">
                     <Checkbox
-                      defaultChecked={defaultSecondary?.includes(layer)}
-                      onCheckedChange={(state) => onSecondaryLayerToggle?.(layer, !!state)}
+                      defaultChecked={!!currentSecondaryLayers.find((l) => l.value === layer.value)}
+                      onCheckedChange={(state) => toggleSecondaryLayer(layer, !!state)}
                       value={layer.value}
                       id={`c-${layer.value}`}
                     />

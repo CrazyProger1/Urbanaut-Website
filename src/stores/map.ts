@@ -182,13 +182,13 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   toggleSecondaryLayer: (layer, active) => {
     const layers = get().currentSecondaryLayers;
     if (active) {
-      if (!layers.includes(layer)) {
+      if (!layers.find((l) => l.value === layer.value)) {
         const newLayers = [...layers, layer];
         set({ currentSecondaryLayers: newLayers });
         localStorage.setItem("map-secondary-layers", JSON.stringify(newLayers));
       }
     } else {
-      const newLayers = layers.filter((value) => value !== layer);
+      const newLayers = layers.filter((l) => l.value !== layer.value);
       set({ currentSecondaryLayers: newLayers });
       localStorage.setItem("map-secondary-layers", JSON.stringify(newLayers));
     }

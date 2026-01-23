@@ -245,13 +245,7 @@ const DynamicMap = ({
       >
         <div className="relative z-50">
           <SearchBar onSearchByCoordinates={handleSearchByCoordinates} />
-          <LayersBar
-            layers={Object.values(LAYERS)}
-            onPrimaryLayerChange={setPrimaryLayer}
-            onSecondaryLayerToggle={toggleSecondaryLayer}
-            defaultPrimary={currentPrimaryLayer || LAYERS.OSM}
-            defaultSecondary={currentSecondaryLayers}
-          />
+          <LayersBar layers={Object.values(LAYERS)} />
         </div>
         <MapContainer
           ref={setMap}
