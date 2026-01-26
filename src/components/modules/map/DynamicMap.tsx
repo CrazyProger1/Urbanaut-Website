@@ -11,7 +11,7 @@ const WORLD_BOUNDS = new LatLngBounds(
   [85.051129, 180], // Northeast corner
 );
 
-import { Place, Area, MapLayer } from "@/types";
+import { Place, Area, MapLayer, User } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS, PAGES, PLACEHOLDERS, QUERIES } from "@/config";
@@ -42,6 +42,7 @@ type Props = {
   filters?: MapPageParams;
   markerVisibilityMinimumZoomThreshold?: number;
   areaVisibilityMinimumZoomThreshold?: number;
+  user?: User;
 };
 
 const DynamicMap = ({
@@ -49,6 +50,7 @@ const DynamicMap = ({
   zoom = 5,
   markerVisibilityMinimumZoomThreshold = 10,
   areaVisibilityMinimumZoomThreshold = 10,
+  user,
   filters,
 }: Props) => {
   const {
@@ -68,8 +70,7 @@ const DynamicMap = ({
     toggleLayersBar,
     currentSecondaryLayers,
     currentPrimaryLayer,
-    setPrimaryLayer,
-    toggleSecondaryLayer,
+    removeTooltip,
     loadLastLayers,
   } = useMapStore();
   const [map, setMap] = useState<LeafletMap | null>(null);
@@ -180,8 +181,15 @@ const DynamicMap = ({
   const handleSave = () => {
     const params = new URLSearchParams(searchParams);
 
+    if (!user) {
+      params.set(QUERIES.SIGNIN_MODAL, "true");
+      router.push(`?${params}`, { scroll: false });
+      return;
+    }
+
     if (isChoosingPlace && placeChoosingToolRef.current) {
       toggleChoosingPlace(false);
+      removeTooltip(PLACEHOLDERS.PLACE_ADDING_TOOLTIP);
 
       const point = placeChoosingToolRef.current.getPoint();
 
@@ -195,6 +203,7 @@ const DynamicMap = ({
 
     if (isChoosingArea && areaChoosingToolRef.current) {
       toggleChoosingArea(false);
+      removeTooltip(PLACEHOLDERS.AREA_ADDING_TOOLTIP);
 
       const points = areaChoosingToolRef.current.getPoints();
 

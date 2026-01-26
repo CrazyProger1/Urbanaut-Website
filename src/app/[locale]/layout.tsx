@@ -16,7 +16,7 @@ import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/settings/modals";
 import { getCountries } from "@/services/api/geo";
-import { getNotifications, obtainWebsocketToken } from "@/services";
+import { getMe, getNotifications, getUserByUsername, obtainWebsocketToken } from "@/services";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -59,9 +59,11 @@ export const generateStaticParams = () => {
 const RootLayout = async ({ children }: Props) => {
   const session = await getSession();
 
-  setRequestLocale(session?.user?.settings?.language || "en");
+  const user = session?.user;
 
-  const theme = session?.user?.settings?.theme || "DARK";
+  setRequestLocale(user?.settings?.language || "en");
+
+  const theme = user?.settings?.theme || "DARK";
 
   const countriesResponse = await getCountries();
   const countries = countriesResponse.success ? countriesResponse.results : [];
@@ -82,7 +84,7 @@ const RootLayout = async ({ children }: Props) => {
                 <Sidebar />
                 <SidebarInset className="flex flex-col">
                   <Header
-                    user={session?.user}
+                    user={user}
                     websocketToken={websocketToken}
                     notifications={notifications}
                   />
@@ -92,7 +94,7 @@ const RootLayout = async ({ children }: Props) => {
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
-                {session?.user && <SettingsModal user={session?.user} />}
+                {user && <SettingsModal user={user} />}
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
             </SidebarProvider>

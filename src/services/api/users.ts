@@ -1,3 +1,5 @@
+"use server";
+
 import {
   APICurrentUser,
   APIRetrieveUser,
@@ -8,36 +10,42 @@ import {
   APIObtainWebsocketToken,
 } from "@/types";
 import { fetchAuthenticated } from "@/services";
-import { API_ENDPOINTS } from "@/config";
+import { API_ENDPOINTS, CACHE_TAGS } from "@/config";
 
 export const updateUser = async (
   user: APIUpdateUser,
 ): Promise<(APISuccessfulResponse & APICurrentUser) | APIErrorResponse> => {
-  return fetchAuthenticated(API_ENDPOINTS.USER.replace("[id]", "me"), {
+  return await fetchAuthenticated(API_ENDPOINTS.USER.replace("[id]", "me"), {
     method: "PATCH",
     body: JSON.stringify(user),
   });
 };
 
-export const getUserByUsername = (
+export const getUserByUsername = async (
   username: string,
 ): Promise<(APISuccessfulResponse & APIRetrieveUser) | APIErrorResponse> => {
-  return fetchAuthenticated(API_ENDPOINTS.USER_BY_USERNAME.replace("[username]", username));
+  return await fetchAuthenticated(API_ENDPOINTS.USER_BY_USERNAME.replace("[username]", username));
 };
 
-export const updateSettings = (
+export const updateSettings = async (
   settings: APIUpdateSettings,
 ): Promise<(APISuccessfulResponse & APIRetrieveUser) | APIErrorResponse> => {
-  return fetchAuthenticated(API_ENDPOINTS.SETTINGS, {
+  return await fetchAuthenticated(API_ENDPOINTS.SETTINGS, {
     method: "PATCH",
     body: JSON.stringify(settings),
   });
 };
 
-export const obtainWebsocketToken = (): Promise<
+export const obtainWebsocketToken = async (): Promise<
   (APISuccessfulResponse & APIObtainWebsocketToken) | APIErrorResponse
 > => {
-  return fetchAuthenticated(API_ENDPOINTS.WEBSOCKET_TOKENS, {
+  return await fetchAuthenticated(API_ENDPOINTS.WEBSOCKET_TOKENS, {
     method: "POST",
+  });
+};
+
+export const getMe = async (): Promise<(APISuccessfulResponse & APICurrentUser) | APIErrorResponse> => {
+  return await fetchAuthenticated(API_ENDPOINTS.USER.replace("[id]", "me"), {
+    next: { tags: [CACHE_TAGS.CURRENT_USER] },
   });
 };

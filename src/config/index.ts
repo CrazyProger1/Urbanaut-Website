@@ -12,3 +12,4 @@ export { LAYERS } from "./map";
 export { STUBS, ALTS, IMAGES, SOUNDS } from "./media";
 export { PLACEHOLDERS } from "./i18n";
 export { COORDINATES_REGEX } from "./geo";
+export { CACHE_TAGS } from "./cache";

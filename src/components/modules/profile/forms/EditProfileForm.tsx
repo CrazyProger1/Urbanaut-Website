@@ -19,10 +19,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
-import { DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { SessionUser } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
-import { updateUser } from "@/actions";
+import { updateCurrentUser } from "@/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 
@@ -43,8 +42,6 @@ type Props = {
 
 export const EditProfileForm = ({ user }: Props) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,11 +59,8 @@ export const EditProfileForm = ({ user }: Props) => {
   const closeModalLink = usePreservedParamsLink({ [QUERIES.EDIT_PROFILE_MODAL]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await updateUser(values);
-
-    const params = new URLSearchParams(searchParams);
-    params.delete(QUERIES.EDIT_PROFILE_MODAL);
-    router.push(`${pathname}?${params}`, { scroll: false });
+    await updateCurrentUser(values);
+    router.push(closeModalLink, { scroll: false });
     toast.success("Profile updated successfully!");
   };
 

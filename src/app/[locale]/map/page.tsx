@@ -9,6 +9,7 @@ import {
 } from "@/components/modules/map/modals";
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
 import { MapPageParams } from "@/types/components/map";
+import { getSession } from "@/utils/session";
 
 type Props = {
   searchParams: Promise<MapPageParams>;
@@ -18,6 +19,7 @@ const Page = async ({ searchParams }: Props) => {
   const params = await searchParams;
   const tagsResponse = await getTags();
   const tags = tagsResponse.success ? tagsResponse.results : [];
+  const session = await getSession();
 
   let currentPlace;
   let currentArea;
@@ -55,7 +57,7 @@ const Page = async ({ searchParams }: Props) => {
 
   return (
     <div className="flex h-full w-full">
-      <Map filters={params} />
+      <Map user={session?.user} filters={params} />
       <AddPlaceModal tags={tags} />
       <AddAreaModal tags={tags} />
       <SuggestCorrectionModal />
