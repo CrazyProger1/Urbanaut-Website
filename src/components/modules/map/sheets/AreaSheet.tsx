@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { QUERIES } from "@/config";
 import { Sheet } from "@/components/ui/next/sheet";
 import { ContributorsSection } from "@/components/modules/map/sheets/ContributorsSection";
+import { Pencil } from "lucide-react";
 
 type Props = {
   area: AreaDetail;
@@ -41,7 +42,10 @@ export const AreaSheet = ({ area }: Props) => {
           {created_by && <ContributorsSection creator={created_by} />}
         </div>
         <SheetFooter>
-          <Button type="submit">Suggest Correction</Button>
+          <Button type="submit" disabled={true}>
+            <Pencil />
+            Suggest Correction
+          </Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

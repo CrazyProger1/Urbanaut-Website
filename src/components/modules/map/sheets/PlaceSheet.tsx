@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/next/sheet";
 import { QUERIES } from "@/config";
 import { ContributorsSection } from "./ContributorsSection";
+import { Backpack, Pencil } from "lucide-react";
 
 type Props = {
   place: PlaceDetail;
@@ -58,7 +59,14 @@ export const PlaceSheet = ({ place }: Props) => {
           {created_by && <ContributorsSection creator={created_by} />}
         </div>
         <SheetFooter>
-          <Button type="submit">Suggest Correction</Button>
+          <Button type="submit" disabled={true}>
+            <Pencil />
+            Suggest Correction
+          </Button>
+          <Button type="submit" disabled={true}>
+            <Backpack />
+            Plan Expedition
+          </Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

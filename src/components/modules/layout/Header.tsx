@@ -33,13 +33,7 @@ export const Header = ({ user, websocketToken, notifications }: Props) => {
         {/*<ThemeToggle />*/}
 
         {user ? (
-          <UserNavBar
-            user={{
-              name: `${user?.first_name ? user.first_name : ""}${user?.last_name ? " " + user.last_name : ""}`,
-              email: user?.email || "urbanautdev@gmail.com",
-              avatar: "/web-app-manifest-192x192.png",
-            }}
-          />
+          <UserNavBar user={user} />
         ) : (
           <Button asChild>
             <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>

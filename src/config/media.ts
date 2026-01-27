@@ -1,10 +1,12 @@
 export const STUBS = {
   PLACE_PHOTO: "/images/stubs/place-photo.webp",
+  USER_AVATAR: "/web-app-manifest-192x192.png",
 };
 
 export const ALTS = {
   PLACE_PHOTO: "Place photo",
   LOGO_PHOTO: "Logo photo",
+  USER_AVATAR: "User Avatar",
 };
 
 export const IMAGES = {
