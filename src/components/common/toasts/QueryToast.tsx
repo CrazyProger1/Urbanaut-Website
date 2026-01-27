@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname, useRouter } from "@/i18n";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { toast } from "sonner";
 
 type Props = {
@@ -11,10 +10,19 @@ type Props = {
 };
 
 export const QueryToast = ({ query, content }: Props) => {
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [actualVisible, setActualVisible] = useState<boolean>(false);
   const [isShown, setIsShown] = useState(false);
+
+  useEffect(() => {
+    if (query) {
+      setActualVisible(searchParams.get(query) === "true");
+    } else {
+      setActualVisible(false);
+    }
+  }, [query, searchParams]);
 
   useEffect(() => {
     const handleClose = () => {
@@ -23,14 +31,15 @@ export const QueryToast = ({ query, content }: Props) => {
       router.push(`${pathname}?${params}`);
       setIsShown(false);
     };
-    if (searchParams.get(query) && !isShown) {
+
+    if (actualVisible && !isShown) {
       setIsShown(true);
       toast.success(content, { onAutoClose: handleClose, onDismiss: handleClose });
     }
     return () => {
       setIsShown(false);
     };
-  }, [query, searchParams]);
+  }, [actualVisible]);
 
   return <></>;
 };

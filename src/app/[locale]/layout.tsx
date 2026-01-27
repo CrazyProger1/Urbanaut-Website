@@ -11,7 +11,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getSession, setSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { ToastProvider } from "@/components/common/toasts";
+import { QueryToast, ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/settings/modals";
@@ -91,6 +91,7 @@ const RootLayout = async ({ children }: Props) => {
                   {children}
                   <Footer />
                 </SidebarInset>
+                <QueryToast query="oauth-success" content="Succeseful OAuth authentification!" />
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
