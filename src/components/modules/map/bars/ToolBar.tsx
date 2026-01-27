@@ -82,9 +82,9 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
               <MapPin />
             </Toggle>
 
-            <Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>
-              <Scan />
-            </Toggle>
+            {/*<Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>*/}
+            {/*  <Scan />*/}
+            {/*</Toggle>*/}
 
             <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
               <Move3d />

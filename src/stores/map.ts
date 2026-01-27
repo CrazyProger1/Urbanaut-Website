@@ -49,7 +49,7 @@ type MapDispatch = {
 };
 
 export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
-  isAreasVisible: true,
+  isAreasVisible: false,
   isPlacesVisible: true,
   isChoosingArea: false,
   isChoosingPlace: false,

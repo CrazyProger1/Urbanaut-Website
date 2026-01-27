@@ -27,14 +27,14 @@ const MapContextMenu = ({ onCopyCoordinates }: Props) => {
       >
         <Plus /> Place{" "}
       </ContextMenuItem>
-      <ContextMenuItem
-        onClick={() => {
-          toggleChoosingArea(true);
-          addTooltip(PLACEHOLDERS.AREA_ADDING_TOOLTIP);
-        }}
-      >
-        <Plus /> Area{" "}
-      </ContextMenuItem>
+      {/*<ContextMenuItem*/}
+      {/*  onClick={() => {*/}
+      {/*    toggleChoosingArea(true);*/}
+      {/*    addTooltip(PLACEHOLDERS.AREA_ADDING_TOOLTIP);*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <Plus /> Area{" "}*/}
+      {/*</ContextMenuItem>*/}
       <ContextMenuSeparator />
       <ContextMenuItem onClick={onCopyCoordinates}>Coordinates</ContextMenuItem>
     </ContextMenuContent>
