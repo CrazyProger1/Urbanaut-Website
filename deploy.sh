@@ -9,3 +9,5 @@ git checkout -- deploy.sh
 git stash
 
 git pull
+
+docker compose up --build --detach
