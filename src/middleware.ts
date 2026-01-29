@@ -21,8 +21,6 @@ const middleware = async (request: NextRequest) => {
 
     const delta = exp.getTime() - now;
 
-    const newSessionData: Session = {};
-
     if (delta <= REFRESH_DELTA_TIME) {
       const response = await fetchAPI<{ access: string }>(API_ENDPOINTS.REFRESH, {
         body: JSON.stringify({ refresh: session.refreshToken }),
@@ -33,7 +31,7 @@ const middleware = async (request: NextRequest) => {
         return;
       }
 
-      newSessionData.accessToken = response.access;
+      await setSession({accessToken: response.access})
     }
 
     await syncCurrentUser();
