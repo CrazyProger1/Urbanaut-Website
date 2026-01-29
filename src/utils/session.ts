@@ -12,7 +12,6 @@ export const setSession = async (session: Session) => {
   currentSession.refreshToken = session.refreshToken || currentSession.refreshToken;
   currentSession.websocketToken = session.websocketToken || currentSession.websocketToken;
   await currentSession.save();
-  console.log(`Session updated: ${JSON.stringify(currentSession.user)}`);
   return currentSession;
 };
 

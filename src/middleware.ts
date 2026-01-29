@@ -23,8 +23,6 @@ const middleware = async (request: NextRequest) => {
     const newSessionData: Session = {};
 
     if (delta <= REFRESH_DELTA_TIME) {
-      console.log(`Refreshing at middleware... Delta = ${delta}`);
-
       const response = await fetchAPI<{ access: string }>(API_ENDPOINTS.REFRESH, {
         body: JSON.stringify({ refresh: session.refreshToken }),
         method: "POST",
@@ -36,8 +34,6 @@ const middleware = async (request: NextRequest) => {
 
       newSessionData.accessToken = response.access;
     }
-
-    console.log("Refreshing current user...");
 
     const userResponse = await getMe();
     newSessionData.user = userResponse.success ? userResponse : undefined;
