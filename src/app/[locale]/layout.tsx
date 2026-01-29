@@ -17,6 +17,7 @@ import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
 import { getMe, getNotifications, getUserByUsername, obtainWebsocketToken } from "@/services";
+import { CookieConsent } from "@/components/ui/cookie-consent";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -82,6 +83,9 @@ const RootLayout = async ({ children }: Props) => {
             <SidebarProvider>
               <NextIntlClientProvider>
                 <Sidebar />
+                <CookieConsent
+                  variant="default"
+                />
                 <SidebarInset className="flex flex-col">
                   <Header
                     user={user}
