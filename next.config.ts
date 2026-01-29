@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [new URL("http://localhost:8001/api/v1/files/**")],
   },
+  output: "standalone",
 };
 
 const withNextIntl = createNextIntlPlugin();
