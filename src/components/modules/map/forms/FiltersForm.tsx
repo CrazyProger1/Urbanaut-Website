@@ -142,24 +142,24 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
             </FormItem>
           )}
         />
-        {country && (
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>City</FormLabel>
-                <CitySelect
-                  cities={cities || []}
-                  value={field.value}
-                  onChange={field.onChange}
-                  onLoadMore={onLoadMoreCitiesAction}
-                  onSearch={onSearchCityAction}
-                />
-              </FormItem>
-            )}
-          />
-        )}
+        {/*{country && (*/}
+        {/*  <FormField*/}
+        {/*    control={form.control}*/}
+        {/*    name="city"*/}
+        {/*    render={({ field }) => (*/}
+        {/*      <FormItem>*/}
+        {/*        <FormLabel>City</FormLabel>*/}
+        {/*        <CitySelect*/}
+        {/*          cities={cities || []}*/}
+        {/*          value={field.value}*/}
+        {/*          onChange={field.onChange}*/}
+        {/*          onLoadMore={onLoadMoreCitiesAction}*/}
+        {/*          onSearch={onSearchCityAction}*/}
+        {/*        />*/}
+        {/*      </FormItem>*/}
+        {/*    )}*/}
+        {/*  />*/}
+        {/*)}*/}
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
           Apply {formState.isSubmitting && <Spinner />}
         </Button>

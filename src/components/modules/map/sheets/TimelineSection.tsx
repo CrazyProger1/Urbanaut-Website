@@ -18,17 +18,17 @@ export const TimelineSection = ({ builtAt, abandonedAt, createdAt }: Props) => {
       </div>
       <div className="flex flex-col gap-1 text-sm">
         {builtAt && (
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex cursor-pointer flex-row items-center gap-1">
             <p>Built:</p> <Badge variant="tertiary">{localizeDate(builtAt)}</Badge>
           </div>
         )}
         {abandonedAt && (
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex cursor-pointer flex-row items-center gap-1">
             <p>Abandoned:</p> <Badge variant="tertiary">{localizeDate(abandonedAt)}</Badge>
           </div>
         )}
         {createdAt && (
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex cursor-pointer flex-row items-center gap-1">
             <p>Added:</p> <Badge variant="tertiary">{localizeDate(createdAt)}</Badge>
           </div>
         )}
