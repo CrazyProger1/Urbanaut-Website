@@ -14,7 +14,7 @@ import { routing } from "@/i18n/routing";
 import { QueryToast, ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
-import { SettingsModal } from "@/components/modules/settings/modals";
+import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
 import { getMe, getNotifications, getUserByUsername, obtainWebsocketToken } from "@/services";
 

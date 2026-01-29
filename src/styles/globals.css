@@ -95,12 +95,22 @@
     --color-base-hard: 255, 0, 0;
     --color-base-impossible: 157, 0, 255;
 
+    /* Badge Colors */
+    --color-badge-tertiary: rgba(255, 255, 255, 0.3);
+    --color-badge-tertiary-hover: rgba(255, 255, 255, 0.4);
+
     /* Achievement Colors */
     --color-achievement-initiation: rgba(var(--color-base-none), 0.3);
     --color-achievement-growth: rgba(var(--color-base-easy), 0.3);
     --color-achievement-mastery: rgba(var(--color-base-medium), 0.3);
     --color-achievement-valor: rgba(var(--color-base-hard), 0.3);
     --color-achievement-transcendence: rgba(var(--color-base-impossible), 0.3);
+
+    --color-achievement-initiation-hover: rgba(var(--color-base-none), 0.4);
+    --color-achievement-growth-hover: rgba(var(--color-base-easy), 0.4);
+    --color-achievement-mastery-hover: rgba(var(--color-base-medium), 0.4);
+    --color-achievement-valor-hover: rgba(var(--color-base-hard), 0.4);
+    --color-achievement-transcendence-hover: rgba(var(--color-base-impossible), 0.4);
 
     --drop-shadow-volume: 0 0 10px rgba(0, 0, 0, 0.5);
 
@@ -266,6 +276,12 @@
     --color-achievement-valor: var(--color-achievement-valor);
     --color-achievement-transcendence: var(--color-achievement-transcendence);
 
+    --color-achievement-initiation-hover: var(--color-achievement-initiation-hover);
+    --color-achievement-growth-hover: var(--color-achievement-growth-hover);
+    --color-achievement-mastery-hover: var(--color-achievement-mastery-hover);
+    --color-achievement-valor-hover: var(--color-achievement-valor-hover);
+    --color-achievement-transcendence-hover: var(--color-achievement-transcendence-hover);
+
     /* Security Colors */
     --color-security-none: var(--color-security-none);
     --color-security-easy: var(--color-security-easy);
@@ -298,6 +314,10 @@
     --color-preservation-medium-hover: var(--color-preservation-medium-hover);
     --color-preservation-high-hover: var(--color-preservation-high-hover);
     --color-preservation-awesome-hover: var(--color-preservation-awesome-hover);
+
+    /* Badge Colors */
+    --color-badge-tertiary: var(--color-badge-tertiary);
+    --color-badge-tertiary-hover: var(--color-badge-tertiary-hover);
 
     /* Notification Colors */
     --color-notification-update-bg: var(--color-notification-update-bg);

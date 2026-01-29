@@ -1,9 +1,14 @@
 import React from "react";
-import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
-import { NotificationsSettingsSection, UISettingsSection } from "..";
 import { CurrentUser } from "@/types";
+import { SettingsForm } from "../forms/SettingsForm";
 
 type Props = {
   user: CurrentUser;
@@ -12,14 +17,14 @@ type Props = {
 export const SettingsModal = ({ user }: Props) => {
   return (
     <Modal query={QUERIES.SETTINGS_MODAL}>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
+          <DialogDescription>
+            Manage your account settings and preferences.
+          </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-4">
-          <UISettingsSection user={user} />
-          <NotificationsSettingsSection user={user} />
-        </div>
+        <SettingsForm user={user} />
       </DialogContent>
     </Modal>
   );

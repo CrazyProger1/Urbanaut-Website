@@ -17,7 +17,7 @@ export const TagsSection = ({ tags }: Props) => {
       <div className="flex flex-wrap gap-1">
         {tags?.map((tag) => (
           <Link key={tag} href={`?tags=${tag}`}>
-            <Badge variant="tertiary">
+            <Badge className="bg-badge-tertiary hover:bg-badge-tertiary-hover" variant="tertiary">
               <Tag /> {tag}
             </Badge>
           </Link>

@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { updateCurrentUser } from "@/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
+import { Separator } from "@/components/ui/separator";
 
 const formSchema = z.object({
   first_name: z.string().min(3, "First name is required").max(150),

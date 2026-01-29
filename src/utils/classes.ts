@@ -19,13 +19,13 @@ export const getRankShadowClass = (rank?: APIRank) => {
 
 export const getAchievementColorClass = (significance?: APIAchievementSignificance) => {
   return cn(
-    significance === "INITIATION" && "bg-achievement-initiation border-achievement-initiation",
-    significance === "GROWTH" && "bg-achievement-growth border-achievement-growth",
-    significance === "MASTERY" && "bg-achievement-mastery border-achievement-mastery",
-    significance === "VALOR" && "bg-achievement-valor border-achievement-valor",
+    significance === "INITIATION" && "bg-achievement-initiation border-achievement-initiation hover:bg-achievement-initiation-hover",
+    significance === "GROWTH" && "bg-achievement-growth border-achievement-growth hover:bg-achievement-growth-hover",
+    significance === "MASTERY" && "bg-achievement-mastery border-achievement-mastery hover:bg-achievement-mastery-hover",
+    significance === "VALOR" && "bg-achievement-valor border-achievement-valor hover:bg-achievement-valor-hover",
     significance === "TRANSCENDENCE" &&
-      "bg-achievement-transcendence border-achievement-transcendence",
-    !significance && "bg-achievement-initiation border-achievement-initiation",
+      "bg-achievement-transcendence border-achievement-transcendence hover:bg-achievement-transcendence-hover",
+    !significance && "bg-achievement-initiation border-achievement-initiation hover:bg-achievement-initiation-hover",
   );
 };
 
