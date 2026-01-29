@@ -7,6 +7,7 @@ import { APITokenPayload } from "@/types/services/api";
 import { API_ENDPOINTS, REFRESH_DELTA_TIME } from "@/config";
 import { fetchAPI, getMe } from "@/services";
 import { Session } from "@/types";
+import { syncCurrentUser } from "@/actions";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -35,10 +36,7 @@ const middleware = async (request: NextRequest) => {
       newSessionData.accessToken = response.access;
     }
 
-    const userResponse = await getMe();
-    newSessionData.user = userResponse.success ? userResponse : undefined;
-
-    await setSession(newSessionData);
+    await syncCurrentUser();
   }
 
   return intlMiddleware(request);

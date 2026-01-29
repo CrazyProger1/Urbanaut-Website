@@ -1,8 +1,9 @@
 "use server";
 
 import * as services from "@/services";
-import { clearSession, setSession } from "@/utils/session";
+import { clearSession, getSession, setSession } from "@/utils/session";
 import { APICreateUser, APICurrentUser } from "@/types";
+import { getMe } from "@/services";
 
 export const login = async (
   email: string,
@@ -27,4 +28,12 @@ export const register = async (user: APICreateUser): Promise<boolean> => {
 
 export const logout = async () => {
   await clearSession();
+};
+
+export const syncCurrentUser = async () => {
+  const session = await getSession();
+  if (!session) return;
+  const userResponse = await getMe();
+  session.user = userResponse.success ? userResponse : undefined;
+  await setSession(session);
 };

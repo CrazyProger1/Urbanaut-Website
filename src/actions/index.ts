@@ -1,4 +1,4 @@
-export { login, register, logout } from "./auth";
+export { login, register, logout, syncCurrentUser } from "./auth";
 export { createPlace, getPlaces } from "./place";
 export { createArea, getAreas } from "./area";
 export {
@@ -7,4 +7,5 @@ export {
   switchEmailNews,
   switchPushNotifications,
   updateCurrentUser,
+  updateSettings,
 } from "./users";

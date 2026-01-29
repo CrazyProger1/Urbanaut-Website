@@ -10,6 +10,7 @@ export type APIRank = "ROOKIE" | "AMATEUR" | "PROFI" | "STALKER" | "LEGEND";
 export type APIRetrieveCurrentUserSettings = {
   language: Locale;
   is_notifications_enabled: boolean;
+  is_emails_enabled: boolean;
   theme: APITheme;
   country?: APIRetrieveCountry;
 };
@@ -22,6 +23,7 @@ export type APIRetrieveSettings = {
 export type APIUpdateSettings = {
   language?: Locale;
   is_notifications_enabled?: boolean;
+  is_emails_enabled?: boolean;
   theme?: APITheme;
   country?: string;
 };

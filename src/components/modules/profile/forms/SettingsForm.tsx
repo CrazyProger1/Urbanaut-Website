@@ -16,14 +16,14 @@ import { usePreservedParamsLink } from "@/hooks";
 import { Globe, Bell, Mail } from "lucide-react";
 import { LanguageSelect } from "./LanguageSelect";
 import { SwitchToggle } from "@/components/common/toggles";
-import { setLanguage, switchEmailNews, switchPushNotifications } from "@/actions";
+import { setLanguage, switchEmailNews, switchPushNotifications, updateSettings } from "@/actions";
 import { Locale } from "@/i18n";
 import { Separator } from "@/components/ui/separator";
 
 const formSchema = z.object({
   language: z.string(),
-  pushNotifications: z.boolean(),
-  emailNews: z.boolean(),
+  is_notifications_enabled: z.boolean(),
+  is_emails_enabled: z.boolean(),
 });
 
 type Props = {
@@ -37,8 +37,8 @@ export const SettingsForm = ({ user }: Props) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       language: "English",
-      pushNotifications: user.settings.is_notifications_enabled,
-      emailNews: false,
+      is_notifications_enabled: user.settings.is_notifications_enabled,
+      is_emails_enabled: user.settings.is_emails_enabled,
     },
     mode: "onSubmit",
   });
@@ -49,9 +49,10 @@ export const SettingsForm = ({ user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const languageCode = (values.language === "English" ? "en" : "en") as Locale;
-    await setLanguage(languageCode);
-    await switchPushNotifications(values.pushNotifications);
-    await switchEmailNews(values.emailNews);
+    await updateSettings({
+      ...values,
+      language: languageCode,
+    });
     router.push(closeModalLink, { scroll: false });
     toast.success("Settings updated successfully!");
   };
@@ -82,7 +83,7 @@ export const SettingsForm = ({ user }: Props) => {
         <Separator />
         <FormField
           control={form.control}
-          name="pushNotifications"
+          name="is_notifications_enabled"
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
@@ -97,7 +98,7 @@ export const SettingsForm = ({ user }: Props) => {
         />
         <FormField
           control={form.control}
-          name="emailNews"
+          name="is_emails_enabled"
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
