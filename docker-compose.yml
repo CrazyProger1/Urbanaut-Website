@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    container_name: urbanaut-website
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,9 +11,4 @@ services:
     env_file:
       - .env.production
     restart: unless-stopped
-    networks:
-      - urbanaut
 
-networks:
-  urbanaut:
-    driver: bridge
