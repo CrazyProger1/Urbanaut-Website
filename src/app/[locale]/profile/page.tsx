@@ -10,6 +10,9 @@ import {
   ReferralModal,
 } from "@/components/modules/profile";
 
+
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
   const session = await getSession();
 
