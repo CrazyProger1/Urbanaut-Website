@@ -80,7 +80,11 @@ const RootLayout = async ({ children }: Props) => {
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
       <body>
         <ModalProvider>
-          <OneSignalProvider appId={ONESIGNAL_APP_ID} />
+          <OneSignalProvider
+            appId={ONESIGNAL_APP_ID}
+            serviceWorkerPath="onesignal/OneSignalSDKWorker.js"
+            serviceWorkerParam={{ scope: "/onesignal/" }}
+          />
           <ToastProvider theme={theme}>
             <SidebarProvider>
               <NextIntlClientProvider>

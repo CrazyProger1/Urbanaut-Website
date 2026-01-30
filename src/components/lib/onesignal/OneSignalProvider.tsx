@@ -8,7 +8,9 @@ type Props = IInitObject;
 export const OneSignalProvider = (options: Props) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      OneSignal.init(options);
+      OneSignal.init({
+        ...options,
+      });
     }
   }, []);
   return null;
