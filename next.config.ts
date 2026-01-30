@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [new URL("http://localhost:8001/api/v1/files/**")],
   },
   // output: "standalone",
+  serverActions: {
+    allowedOrigins: ["urbanaut.club", "www.urbanaut.club", "localhost:3000"],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();
