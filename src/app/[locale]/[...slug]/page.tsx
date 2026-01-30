@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
+import NotFound from "@/app/[locale]/not-found";
 
 export default function CatchAll() {
-  notFound();
+  return <NotFound />;
 }
