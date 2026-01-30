@@ -5,10 +5,8 @@ import { QueryToast } from "@/components/common/toasts";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { useSearchParams, useRouter } from "next/navigation";
 import { loginOneSignal } from "@/services/lib/onesignal";
-import { usePathname } from "@/i18n";
 
 export const OauthProvider = () => {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -21,12 +19,10 @@ export const OauthProvider = () => {
 
         const params = new URLSearchParams(searchParams);
         params.delete("oauth-user");
-
-        const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
-        router.replace(newUrl);
+        router.replace(`?${params}`);
       }
     }
-  }, [searchParams, pathname, router]);
+  }, [searchParams, router]);
 
   return (
     <>
