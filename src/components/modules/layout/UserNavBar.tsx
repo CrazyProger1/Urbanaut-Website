@@ -19,6 +19,7 @@ import { getRankShadowClass } from "@/utils/classes";
 import { cn } from "@/lib/utils";
 import { CurrentUser } from "@/types";
 import { getUserFullName } from "@/utils/user";
+import { logoutOneSignal } from "@/services/lib/onesignal";
 
 type Props = {
   user: CurrentUser;
@@ -82,7 +83,12 @@ export const UserNavBar = ({ user }: Props) => {
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logout}>
+        <DropdownMenuItem
+          onClick={async () => {
+            await logout();
+            await logoutOneSignal();
+          }}
+        >
           <LogOut />
           Log out
         </DropdownMenuItem>

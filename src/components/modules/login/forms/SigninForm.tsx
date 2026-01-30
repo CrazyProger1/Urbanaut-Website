@@ -22,6 +22,8 @@ import { login } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
 import { QUERIES } from "@/config";
+import OneSignal from "react-onesignal";
+import { loginOneSignal } from "@/services/lib/onesignal";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -60,7 +62,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
     if (!user) {
       return toast.error("Wrong password or authentication method! Try use Oauth");
     }
-
+    await loginOneSignal(user.id);
     const params = new URLSearchParams(searchParams);
     params.delete("signin");
     const newPage = `${pathname}?${params}`;
@@ -110,8 +112,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            Don&apos;t have an account?{" "}
-            <Link href={`?${QUERIES.SIGNUP_MODAL}=true`}>Sign up</Link>
+            Don&apos;t have an account? <Link href={`?${QUERIES.SIGNUP_MODAL}=true`}>Sign up</Link>
           </FieldDescription>
         </Field>
       </form>
