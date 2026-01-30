@@ -22,5 +22,8 @@ export const GET = async (request: NextRequest) => {
 
   await setSession({ user, accessToken: response.access, refreshToken: response.refresh });
 
-  redirect({ href: "/?oauth-success=true", locale: user?.settings?.language || "en" });
+  redirect({
+    href: `/?oauth-success=true&oauth-user=${user.id}`,
+    locale: user?.settings?.language || "en",
+  });
 };

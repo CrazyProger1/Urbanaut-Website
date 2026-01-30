@@ -36,6 +36,7 @@ export const QUERIES = {
   MAP_FILTERS_MODAL: "filters",
   MAP_SELECTED_POINT: "point",
   SETTINGS_MODAL: "settings",
+  OAUTH_SUCCESS: "oauth-success",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

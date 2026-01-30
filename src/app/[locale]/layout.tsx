@@ -6,7 +6,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { GOOGLE_ANALYTICS_ID, ONESIGNAL_APP_ID, SITE_URL } from "@/config";
 import { ModalProvider } from "@/components/common/modals";
 import { SigninModal, SignupModal } from "@/components/modules/login/modals";
-import { Header, Footer, Sidebar } from "@/components/modules/layout";
+import { Header, Footer, Sidebar, OauthProvider } from "@/components/modules/layout";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getSession, setSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
@@ -85,6 +85,7 @@ const RootLayout = async ({ children }: Props) => {
             serviceWorkerPath="onesignal/OneSignalSDKWorker.js"
             serviceWorkerParam={{ scope: "/onesignal/" }}
           />
+          <OauthProvider />
           <ToastProvider theme={theme}>
             <SidebarProvider>
               <NextIntlClientProvider>
@@ -99,7 +100,6 @@ const RootLayout = async ({ children }: Props) => {
                   {children}
                   <Footer />
                 </SidebarInset>
-                <QueryToast query="oauth-success" content="Succeseful OAuth authentification!" />
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
