@@ -14,11 +14,9 @@ export const OauthProvider = () => {
   const closeModal = async () => {
     const id = searchParams.get(QUERIES.OAUTH_USER);
     if (id) {
-      console.log("USER ID:", id)
       await loginOneSignal(id);
     }
     router.replace(pathname);
-    console.log("Modal closed");
   };
 
   return (

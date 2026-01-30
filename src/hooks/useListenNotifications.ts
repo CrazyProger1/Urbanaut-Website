@@ -29,10 +29,8 @@ export const useListenNotifications = (
     }
   }, [defaultNotifications]);
 
-  console.log("Using websocket URL:", WEBSOCKET_URL);
-
   const { lastMessage, readyState } = useWebSocket(
-    WEBSOCKET_URL.replace("[token]", websocketToken),
+    process.env.WEBSOCKET_URL!.replace("[token]", websocketToken),
     {
       share: true,
     },

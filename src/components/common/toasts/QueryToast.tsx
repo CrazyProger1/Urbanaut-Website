@@ -29,7 +29,7 @@ export const QueryToast = ({ query, content, onClose }: Props) => {
     const handleClose = () => {
       const params = new URLSearchParams(searchParams);
       params.delete(query);
-      router.push(`${pathname}?${params}`);
+      router.replace(`${pathname}?${params}`);
       onClose?.();
       setIsShown(false);
     };
