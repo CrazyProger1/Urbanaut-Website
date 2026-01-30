@@ -62,15 +62,9 @@ export const EditProfileForm = ({ user }: Props) => {
   const closeModalLink = usePreservedParamsLink({ [QUERIES.EDIT_PROFILE_MODAL]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    "use server";
-    // await updateCurrentUser(values);
-    // router.push(closeModalLink, { scroll: false });
-    // toast.success("Profile updated successfully!");
-    const session = await getSession();
-    if (!session) return;
-    const userResponse = await getMe();
-    session.user = userResponse.success ? userResponse : undefined;
-    await setSession(session);
+    await updateCurrentUser(values);
+    router.push(closeModalLink, { scroll: false });
+    toast.success("Profile updated successfully!");
   };
 
   return (
