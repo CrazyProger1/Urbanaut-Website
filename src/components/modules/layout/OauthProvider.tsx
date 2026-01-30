@@ -12,13 +12,14 @@ export const OauthProvider = () => {
 
   useEffect(() => {
     if (searchParams.has(QUERIES.OAUTH_SUCCESS)) {
-      const id = searchParams.get("oauth-user");
+      const id = searchParams.get(QUERIES.OAUTH_USER);
 
       if (id) {
         loginOneSignal(id);
 
         const params = new URLSearchParams(searchParams);
-        params.delete("oauth-user");
+        params.delete(QUERIES.OAUTH_USER);
+        params.delete(QUERIES.OAUTH_SUCCESS);
         router.replace(`?${params}`);
       }
     }

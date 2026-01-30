@@ -37,6 +37,7 @@ export const QUERIES = {
   MAP_SELECTED_POINT: "point",
   SETTINGS_MODAL: "settings",
   OAUTH_SUCCESS: "oauth-success",
+  OAUTH_USER: "oauth-user",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
