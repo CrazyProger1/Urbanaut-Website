@@ -25,6 +25,8 @@ import { updateCurrentUser } from "@/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { Separator } from "@/components/ui/separator";
+import { getSession, setSession } from "@/utils/session";
+import { getMe } from "@/services";
 
 const formSchema = z.object({
   first_name: z.string().min(3, "First name is required").max(150),
@@ -60,9 +62,14 @@ export const EditProfileForm = ({ user }: Props) => {
   const closeModalLink = usePreservedParamsLink({ [QUERIES.EDIT_PROFILE_MODAL]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await updateCurrentUser(values);
-    router.push(closeModalLink, { scroll: false });
-    toast.success("Profile updated successfully!");
+    // await updateCurrentUser(values);
+    // router.push(closeModalLink, { scroll: false });
+    // toast.success("Profile updated successfully!");
+    const session = await getSession();
+    if (!session) return;
+    const userResponse = await getMe();
+    session.user = userResponse.success ? userResponse : undefined;
+    await setSession(session);
   };
 
   return (
