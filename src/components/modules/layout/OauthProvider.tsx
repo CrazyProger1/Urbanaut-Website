@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import { QueryToast } from "@/components/common/toasts";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -15,12 +15,9 @@ export const OauthProvider = () => {
       const id = searchParams.get(QUERIES.OAUTH_USER);
 
       if (id) {
-        loginOneSignal(id);
-
-        const params = new URLSearchParams(searchParams);
-        params.delete(QUERIES.OAUTH_USER);
-        params.delete(QUERIES.OAUTH_SUCCESS);
-        router.replace(`?${params}`);
+        loginOneSignal(id).then(() => {
+          console.log("Logged in one signal");
+        });
       }
     }
   }, [searchParams, router]);
@@ -30,6 +27,9 @@ export const OauthProvider = () => {
       <QueryToast
         query={QUERIES.OAUTH_SUCCESS}
         content={PLACEHOLDERS.SUCCESSFUL_OAUTH_AUTHENTIFICATION}
+        onClose={() => {
+          router.replace("");
+        }}
       />
     </>
   );

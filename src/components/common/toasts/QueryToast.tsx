@@ -7,9 +7,10 @@ import { toast } from "sonner";
 type Props = {
   query: string;
   content: React.ReactNode;
+  onClose?: () => void;
 };
 
-export const QueryToast = ({ query, content }: Props) => {
+export const QueryToast = ({ query, content, onClose }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -29,6 +30,7 @@ export const QueryToast = ({ query, content }: Props) => {
       const params = new URLSearchParams(searchParams);
       params.delete(query);
       router.push(`${pathname}?${params}`);
+      onClose?.();
       setIsShown(false);
     };
 
