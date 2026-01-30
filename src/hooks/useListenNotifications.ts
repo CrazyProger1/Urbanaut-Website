@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Notification } from "@/types";
 import useWebSocket from "react-use-websocket";
-import { SOUNDS, WEBSOCKET_URL } from "@/config";
-import { playSound } from "@/utils/sound";
+import { WEBSOCKET_URL } from "@/config";
 
 const deduplicateNotifications = (notifications: Notification[]) => {
   const uniqueIds = new Set<number>();
@@ -30,7 +29,7 @@ export const useListenNotifications = (
   }, [defaultNotifications]);
 
   const { lastMessage, readyState } = useWebSocket(
-    process.env.WEBSOCKET_URL!.replace("[token]", websocketToken),
+    WEBSOCKET_URL.replace("[token]", websocketToken),
     {
       share: true,
     },
