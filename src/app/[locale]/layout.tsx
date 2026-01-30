@@ -3,7 +3,7 @@ import React from "react";
 import "../../styles";
 import { NextIntlClientProvider } from "next-intl";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { GOOGLE_ANALYTICS_ID, SITE_URL } from "@/config";
+import { GOOGLE_ANALYTICS_ID, ONESIGNAL_APP_ID, SITE_URL } from "@/config";
 import { ModalProvider } from "@/components/common/modals";
 import { SigninModal, SignupModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar } from "@/components/modules/layout";
@@ -18,6 +18,7 @@ import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
 import { getMe, getNotifications, getUserByUsername, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
+import { OneSignalProvider } from "@/components/lib/onesignal";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -79,13 +80,12 @@ const RootLayout = async ({ children }: Props) => {
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
       <body>
         <ModalProvider>
+          <OneSignalProvider appId={ONESIGNAL_APP_ID} />
           <ToastProvider theme={theme}>
             <SidebarProvider>
               <NextIntlClientProvider>
                 <Sidebar />
-                <CookieConsent
-                  variant="default"
-                />
+                <CookieConsent variant="default" />
                 <SidebarInset className="flex flex-col">
                   <Header
                     user={user}

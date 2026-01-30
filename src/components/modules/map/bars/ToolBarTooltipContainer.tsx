@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AnimatePresence } from "framer-motion";
-import { Motion } from "@/components/common/motion";
+import { Motion } from "@/components/lib/motion";
 import { ToolBarTooltip } from "./ToolBarTooltip";
 
 type Props = {
