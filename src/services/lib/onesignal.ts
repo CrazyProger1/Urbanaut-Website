@@ -1,12 +1,21 @@
 import OneSignal from "react-onesignal";
 
-
 export const loginOneSignal = async (id: string) => {
-  await OneSignal.login(id);
-}
-
-
+  try {
+    await OneSignal.login(id);
+    return true;
+  } catch (error) {
+    console.error("Failed to login onesignal:", error);
+    return false;
+  }
+};
 
 export const logoutOneSignal = async () => {
-  await OneSignal.logout()
-}
+  try {
+    await OneSignal.logout();
+    return true;
+  } catch (error) {
+    console.error("Failed to logout onesignal:", error);
+    return false;
+  }
+};

@@ -1,4 +1,4 @@
-export type APIFileType = "PHOTO";
+export type APIFileType = "PHOTO" | "OTHER";
 
 export type APIListFile = {
   id: string;

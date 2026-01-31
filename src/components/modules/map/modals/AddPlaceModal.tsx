@@ -20,9 +20,7 @@ export const AddPlaceModal = ({ tags }: Props) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Create new place</DialogTitle>
-          <DialogDescription>
-            Here you can easily create new place
-          </DialogDescription>
+          <DialogDescription>Here you can easily create new place</DialogDescription>
         </DialogHeader>
         <AddPlaceForm tags={tags} />
       </DialogContent>

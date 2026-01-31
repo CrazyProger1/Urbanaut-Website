@@ -14,3 +14,4 @@ export { createFeedback } from "./feedbacks";
 export { getReferralCodes } from "./referrals";
 export { getCities, getCountries } from "./geo";
 export { getNotifications } from "./notifications";
+export { uploadFile } from "./media";

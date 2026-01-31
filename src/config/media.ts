@@ -16,3 +16,7 @@ export const IMAGES = {
 export const SOUNDS = {
   NOTIFICATION: "/sounds/notification.mp3",
 };
+
+export const PLACE_PHOTO_ACCEPT_FILETYPES = [".png", ".jpg", ".jpeg", ".gif"];
+export const PLACE_PHOTO_MAX_FILE_SIZE = 5 * 1024 * 1024;
+export const PLACE_PHOTO_MAX_FILES = 10;

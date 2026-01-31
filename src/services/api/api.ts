@@ -27,7 +27,7 @@ export const fetchAPI = async <T>(
   const userAgent = nextHeaders.get("user-agent");
   const acceptLanguage = nextHeaders.get("accept-language");
   const requestHeaders: HeadersInit = {
-    "Content-Type": "application/json",
+    ...(!(options.body instanceof FormData) && { "Content-Type": "application/json" }),
     "Accept-Language": "en",
     "X-Forwarded-For": clientIp,
     "X-Client-Referer": referer ?? "",

@@ -20,4 +20,5 @@ export {
   obtainWebsocketToken,
   getMe,
   getNotifications,
+  uploadFile,
 } from "./api";

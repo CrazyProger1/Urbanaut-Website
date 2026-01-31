@@ -63,8 +63,9 @@ export const SigninForm = ({ otherProviders }: Props) => {
       return toast.error("Wrong password or authentication method! Try use Oauth");
     }
     await loginOneSignal(user.id);
+
     const params = new URLSearchParams(searchParams);
-    params.delete("signin");
+    params.delete(QUERIES.SIGNIN_MODAL);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
     toast.success("Successfully signed in!");

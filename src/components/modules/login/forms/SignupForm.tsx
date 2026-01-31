@@ -25,6 +25,7 @@ import { QUERIES } from "@/config";
 import { CountrySelect } from "@/components/modules/common/selects";
 import { Country } from "@/types";
 import { BirthDateSelector } from "./BirthDateSelector";
+import { loginOneSignal } from "@/services/lib/onesignal";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -96,6 +97,8 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     if (!user) {
       return toast.error("This email is already used!");
     }
+
+    await loginOneSignal(user.id);
 
     const params = new URLSearchParams(searchParams);
     params.delete(QUERIES.SIGNUP_MODAL);

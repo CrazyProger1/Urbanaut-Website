@@ -9,3 +9,4 @@ export {
   updateCurrentUser,
   updateSettings,
 } from "./users";
+export { uploadFile } from "./media";

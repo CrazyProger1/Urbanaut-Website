@@ -9,7 +9,15 @@ export {
 export { PAGES, QUERIES, SIDEBAR_GROUPS, URLS, SITE_URL } from "./nav";
 export { ICONS } from "./assets";
 export { LAYERS } from "./map";
-export { STUBS, ALTS, IMAGES, SOUNDS } from "./media";
+export {
+  STUBS,
+  ALTS,
+  IMAGES,
+  SOUNDS,
+  PLACE_PHOTO_ACCEPT_FILETYPES,
+  PLACE_PHOTO_MAX_FILE_SIZE,
+  PLACE_PHOTO_MAX_FILES,
+} from "./media";
 export { PLACEHOLDERS } from "./i18n";
 export { COORDINATES_REGEX } from "./geo";
 export { CACHE_TAGS } from "./cache";

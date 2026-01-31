@@ -45,6 +45,7 @@ export type APICreatePlace = {
   is_private?: boolean;
   preservation?: APIPreservationLevel;
   security?: APISecurityLevel;
+  files?: string[];
 };
 
 export type APIPlaceFilters = APIMapBounds & {
