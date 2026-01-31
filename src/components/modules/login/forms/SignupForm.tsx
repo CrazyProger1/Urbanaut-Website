@@ -98,7 +98,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     }
 
     const params = new URLSearchParams(searchParams);
-    params.delete("signin");
+    params.delete(QUERIES.SIGNUP_MODAL);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
     toast.success("Successfully signed in!");
