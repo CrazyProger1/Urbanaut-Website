@@ -11,7 +11,7 @@ export const OauthProvider = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const closeModal = async () => {
+  const handleOpen = async () => {
     const id = searchParams.get(QUERIES.OAUTH_USER);
     if (id) {
       await loginOneSignal(id);
@@ -24,7 +24,7 @@ export const OauthProvider = () => {
       <QueryToast
         query={QUERIES.OAUTH_SUCCESS}
         content={PLACEHOLDERS.SUCCESSFUL_OAUTH_AUTHENTIFICATION}
-        onClose={closeModal}
+        onOpen={handleOpen}
       />
     </>
   );

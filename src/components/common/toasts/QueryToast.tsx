@@ -8,9 +8,10 @@ type Props = {
   query: string;
   content: React.ReactNode;
   onClose?: () => void;
+  onOpen?: () => void;
 };
 
-export const QueryToast = ({ query, content, onClose }: Props) => {
+export const QueryToast = ({ query, content, onClose, onOpen }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -36,6 +37,7 @@ export const QueryToast = ({ query, content, onClose }: Props) => {
 
     if (actualVisible && !isShown) {
       setIsShown(true);
+      onOpen?.();
       toast.success(content, { onAutoClose: handleClose, onDismiss: handleClose });
     }
     return () => {
