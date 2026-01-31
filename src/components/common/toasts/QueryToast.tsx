@@ -28,15 +28,15 @@ export const QueryToast = ({ query, content, onClose, onOpen }: Props) => {
 
   useEffect(() => {
     const handleClose = () => {
-      const params = new URLSearchParams(searchParams);
-      params.delete(query);
-      router.replace(`${pathname}?${params}`);
       onClose?.();
       setIsShown(false);
     };
 
     if (actualVisible && !isShown) {
       setIsShown(true);
+      const params = new URLSearchParams(searchParams);
+      params.delete(query);
+      router.replace(`${pathname}?${params}`);
       onOpen?.();
       toast.success(content, { onAutoClose: handleClose, onDismiss: handleClose });
     }
