@@ -216,7 +216,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           accept={{ "image/*": PLACE_PHOTO_ACCEPT_FILETYPES }}
           maxSize={PLACE_PHOTO_MAX_FILE_SIZE}
           maxFiles={PLACE_PHOTO_MAX_FILES}
-          onDrop={(acceptedFiles) => {
+          onDropAccepted={(acceptedFiles) => {
             setFiles((prev) => [...prev, ...acceptedFiles]);
           }}
         >
