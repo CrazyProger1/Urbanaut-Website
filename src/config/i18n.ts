@@ -25,7 +25,7 @@ export const PLACEHOLDERS = {
   TOOLTIP_TOGGLE_THEME: "Theme",
 
   // Toasts (short, past tense or state + exclamation)
-  TOAST_SUCCESSFUL_OAUTH_AUTHENTICATION: "Successfully signed in with OAuth!",
+  TOAST_SUCCESSFUL_OAUTH_AUTHENTIFICATION: "Successfully signed in with OAuth!",
   TOAST_AI_MODE_ENABLED: "AI mode enabled!",
   TOAST_AI_MODE_DISABLED: "AI mode disabled!",
   TOAST_COORDINATES_ENABLED: "Coordinates tool enabled!",
