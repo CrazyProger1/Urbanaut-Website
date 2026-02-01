@@ -4,7 +4,7 @@ import * as services from "@/services";
 import { getMe } from "@/services";
 import { clearSession, getSession, setSession } from "@/utils/session";
 import { ActionResult, APICreateUser, CurrentUser } from "@/types";
-import { apiResponseToActionResult } from "@/utils/actions";
+import { convertAPIResponseToActionResult } from "@/utils/actions";
 
 export const login = async (
   email: string,
@@ -29,7 +29,7 @@ export const login = async (
 
 export const register = async (user: APICreateUser): Promise<ActionResult> => {
   const response = await services.register(user);
-  return apiResponseToActionResult(response);
+  return convertAPIResponseToActionResult(response);
 };
 
 export const logout = async () => {

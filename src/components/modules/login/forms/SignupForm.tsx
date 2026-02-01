@@ -92,7 +92,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
 
     const validationOptions = {
       successToastMessage: PLACEHOLDERS.TOAST_SIGNUP_SUCCESS,
-      errorToastMessage: PLACEHOLDERS.TOAST_SIGNUP_FAIL,
+      failToastMessage: PLACEHOLDERS.TOAST_SIGNUP_FAIL,
       setError,
     };
 

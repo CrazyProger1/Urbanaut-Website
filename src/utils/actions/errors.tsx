@@ -11,8 +11,8 @@ import { FieldValues, UseFormSetError, Path } from "react-hook-form";
 type Options<T extends FieldValues> = {
   successToastMessage?: string;
   successToastOptions?: ExternalToast;
-  errorToastMessage?: string;
-  errorToastOptions?: ExternalToast;
+  failToastMessage?: string;
+  failToastOptions?: ExternalToast;
   setError?: UseFormSetError<T>;
 };
 
@@ -26,7 +26,7 @@ export const validateActionResult = <T extends FieldValues>(
     }
     return true;
   } else {
-    if (options?.errorToastMessage) {
+    if (options?.failToastMessage) {
       result.errors?.map((error: ActionError) => {
         if (error?.field) {
           try {
@@ -46,13 +46,13 @@ export const validateActionResult = <T extends FieldValues>(
         ),
       };
 
-      toast.error(options.errorToastMessage, options.errorToastOptions || toastOptions);
+      toast.error(options.failToastMessage, options.failToastOptions || toastOptions);
     }
     return false;
   }
 };
 
-export const apiResponseToActionResult = (
+export const convertAPIResponseToActionResult = (
   response: APIErrorResponse | APISuccessfulResponse,
 ): ActionResult => {
   if (!response.success) {

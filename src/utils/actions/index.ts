@@ -1,1 +1,1 @@
-export { validateActionResult, apiResponseToActionResult } from "./errors";
+export { validateActionResult, convertAPIResponseToActionResult } from "./errors";

@@ -16,13 +16,13 @@ import { Spinner } from "@/components/ui/spinner";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { SessionUser } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { updateCurrentUser } from "@/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
+import { validateActionResult } from "@/utils/actions";
 
 const formSchema = z.object({
   first_name: z
@@ -59,14 +59,23 @@ export const EditProfileForm = ({ user }: Props) => {
     mode: "onSubmit",
   });
 
-  const { formState } = form;
+  const { formState, setError } = form;
 
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_EDIT_PROFILE]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await updateCurrentUser(values);
+    const result = await updateCurrentUser(values);
+    const validationOptions = {
+      successToastMessage: PLACEHOLDERS.TOAST_PROFILE_UPDATE_SUCCESS,
+      failToastMessage: PLACEHOLDERS.TOAST_PROFILE_UPDATE_FAIL,
+      setError,
+    };
+
+    if (!validateActionResult(result, validationOptions)) {
+      return;
+    }
+
     router.push(closeModalLink, { scroll: false });
-    toast.success(PLACEHOLDERS.TOAST_PROFILE_UPDATED);
   };
 
   return (
@@ -126,10 +135,10 @@ export const EditProfileForm = ({ user }: Props) => {
         />
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            Save {formState.isSubmitting && <Spinner />}
+            {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>Cancel</Link>
+            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
           </Button>
         </Field>
       </form>

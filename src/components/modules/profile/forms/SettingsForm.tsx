@@ -8,7 +8,6 @@ import { Spinner } from "@/components/ui/spinner";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CurrentUser } from "@/types";
 import { Field } from "@/components/ui/field";
@@ -16,9 +15,10 @@ import { usePreservedParamsLink } from "@/hooks";
 import { Globe, Bell, Mail } from "lucide-react";
 import { LanguageSelect } from "./LanguageSelect";
 import { SwitchToggle } from "@/components/common/toggles";
-import { setLanguage, switchEmailNews, switchPushNotifications, updateSettings } from "@/actions";
+import { updateSettings } from "@/actions";
 import { Locale } from "@/i18n";
 import { Separator } from "@/components/ui/separator";
+import { validateActionResult } from "@/utils/actions";
 
 const formSchema = z.object({
   language: z.string(),
@@ -43,18 +43,27 @@ export const SettingsForm = ({ user }: Props) => {
     mode: "onSubmit",
   });
 
-  const { formState } = form;
+  const { formState, setError } = form;
 
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_SETTINGS]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const languageCode = (values.language === "English" ? "en" : "en") as Locale;
-    await updateSettings({
+    const result = await updateSettings({
       ...values,
       language: languageCode,
     });
+    const validationOptions = {
+      successToastMessage: PLACEHOLDERS.TOAST_SETTINGS_UPDATE_SUCCESS,
+      failToastMessage: PLACEHOLDERS.TOAST_SETTINGS_UPDATE_FAIL,
+      setError,
+    };
+
+    if (!validateActionResult(result, validationOptions)) {
+      return;
+    }
+
     router.push(closeModalLink, { scroll: false });
-    toast.success(PLACEHOLDERS.TOAST_SETTINGS_UPDATED);
   };
 
   return (
@@ -116,7 +125,7 @@ export const SettingsForm = ({ user }: Props) => {
             Apply {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>Close</Link>
+            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CLOSE}</Link>
           </Button>
         </Field>
       </form>

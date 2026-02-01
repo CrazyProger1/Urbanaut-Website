@@ -63,7 +63,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
 
     if (
       !validateActionResult(result, {
-        errorToastMessage: PLACEHOLDERS.TOAST_SIGNIN_FAIL,
+        failToastMessage: PLACEHOLDERS.TOAST_SIGNIN_FAIL,
         successToastMessage: PLACEHOLDERS.TOAST_SIGNIN_SUCCESS,
         setError,
       })
