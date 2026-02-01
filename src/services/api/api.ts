@@ -12,7 +12,7 @@ export type FetchAPIOptions = {
 export const fetchAPI = async <T>(
   endpoint: string,
   options?: RequestInit & FetchAPIOptions,
-): Promise<APIErrorResponse | (APISuccessfulResponse & T)> => {
+): Promise<(APIErrorResponse | APISuccessfulResponse) & T> => {
   options = options || {};
 
   const { accessToken } = options;

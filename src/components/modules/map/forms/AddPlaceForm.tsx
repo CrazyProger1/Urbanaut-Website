@@ -37,6 +37,7 @@ import {
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import { Lock, Upload, X } from "lucide-react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/ui/dropzone";
+import { validateActionResult } from "@/utils/actions";
 
 const FilePreview = ({ file }: { file: File }) => {
   const src = useMemo(() => URL.createObjectURL(file), [file]);
@@ -98,7 +99,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
     );
   };
 
-  const { formState } = form;
+  const { formState, setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { tags, name, is_private, preservation, security } = values;
@@ -110,7 +111,13 @@ export const AddPlaceForm = ({ tags }: Props) => {
       const uploads = await Promise.all(files.map((file) => uploadFile(file)));
       const fileIds = uploads.map((file) => file?.id).filter((id) => !!id);
 
-      const response = await createPlace({
+      uploads.map((result) =>
+        validateActionResult(result, {
+          failToastMessage: PLACEHOLDERS.TOAST_PLACE_FILE_UPLOADING_FAIL,
+        }),
+      );
+
+      const result = await createPlace({
         name,
         point: [lat, lng],
         tags,
@@ -120,12 +127,19 @@ export const AddPlaceForm = ({ tags }: Props) => {
         files: fileIds,
       });
 
-      if (validateResponse(response)) {
-        toast.success(PLACEHOLDERS.TOAST_PLACE_ADDED);
-        params.delete(QUERIES.FILTER_SELECTED_POINT);
-        params.delete(QUERIES.MODAL_PLACE_ADDING);
-        router.push(`?${params}`);
+      const validationOptions = {
+        successToastMessage: PLACEHOLDERS.TOAST_PLACE_ADDITION_SUCCESS,
+        failToastMessage: PLACEHOLDERS.TOAST_PLACE_ADDITION_FAIL,
+        setError,
+      };
+
+      if (!validateActionResult(result, validationOptions)) {
+        return;
       }
+
+      params.delete(QUERIES.FILTER_SELECTED_POINT);
+      params.delete(QUERIES.MODAL_PLACE_ADDING);
+      router.push(`?${params}`);
     }
   };
 
@@ -170,6 +184,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
                 onSelect={handleSelect}
                 onRemove={handleRemove}
               />
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -181,6 +196,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <FormItem>
               <FormLabel>{PLACEHOLDERS.LABEL_PRESERVATION_LEVEL}</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -191,6 +207,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <FormItem>
               <FormLabel>{PLACEHOLDERS.LABEL_SECURITY_LEVEL}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -229,7 +246,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
             </div>
             <span
               role="button"
-              className="mt-2 inline-flex cursor-pointer items-center text-sm text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground mt-2 inline-flex cursor-pointer items-center text-sm"
               onClick={(e) => {
                 e.stopPropagation();
                 setFiles([]);

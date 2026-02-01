@@ -52,7 +52,6 @@ export const SecuritySelect = ({ value, onChange }: Props) => {
         </Select>
       </FormControl>
       <p className="text-muted-foreground text-sm">{SECURITY_DESCRIPTIONS[value || "MEDIUM"]}</p>
-      <FormMessage />
     </>
   );
 };

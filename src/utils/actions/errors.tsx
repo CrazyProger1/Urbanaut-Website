@@ -61,7 +61,7 @@ export const convertAPIResponseToActionResult = (
       response?.errors?.forEach(({ detail, attr }: APIError) => {
         errors.push({ message: detail || "", field: attr });
       });
-      return { success: false, errors: errors };
+      return { success: false, errors: errors } as ActionResult;
     } else {
       return { success: false };
     }
