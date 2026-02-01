@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "3mb",
     },
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+    incomingRequests: true,
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

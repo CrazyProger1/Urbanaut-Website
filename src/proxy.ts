@@ -1,17 +1,23 @@
 import createMiddleware from "next-intl/middleware";
 import { jwtDecode } from "jwt-decode";
 import { routing } from "./i18n/routing";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { getSession, setSession } from "@/utils/session";
 import { APITokenPayload } from "@/types/services/api";
 import { API_ENDPOINTS, REFRESH_DELTA_TIME } from "@/config";
-import { fetchAPI, getMe } from "@/services";
-import { Session } from "@/types";
+import { fetchAPI } from "@/services";
 import { syncCurrentUser } from "@/actions";
+import pino from "pino";
 
 const intlMiddleware = createMiddleware(routing);
 
+const logger = pino({
+  base: {},
+});
+
 const proxy = async (request: NextRequest) => {
+  const start = Date.now();
+
   const session = await getSession();
 
   if (session && session.accessToken && session.refreshToken) {
@@ -31,13 +37,24 @@ const proxy = async (request: NextRequest) => {
         return;
       }
 
-      await setSession({accessToken: response.access})
+      await setSession({ accessToken: response.access });
     }
 
     await syncCurrentUser();
   }
 
-  return intlMiddleware(request);
+  const response = intlMiddleware(request);
+  const duration = Date.now() - start;
+
+  logger.info({
+    method: request.method,
+    user: session?.user?.id,
+    url: request.url,
+    status: response.status,
+    duration,
+  });
+
+  return response;
 };
 
 export const config = {
