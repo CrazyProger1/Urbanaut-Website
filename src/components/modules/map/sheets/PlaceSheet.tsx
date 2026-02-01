@@ -15,9 +15,10 @@ import { StateSection } from "./StateSection";
 import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/next/sheet";
-import { QUERIES } from "@/config";
+import { PAGES, QUERIES, SITE_URL } from "@/config";
 import { ContributorsSection } from "./ContributorsSection";
-import { Backpack, Pencil } from "lucide-react";
+
+import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
 
 type Props = {
   place: PlaceDetail;
@@ -25,6 +26,7 @@ type Props = {
 
 export const PlaceSheet = ({ place }: Props) => {
   const {
+    id,
     description,
     name,
     tags,
@@ -40,15 +42,30 @@ export const PlaceSheet = ({ place }: Props) => {
 
   return (
     <Sheet open={true} query={QUERIES.PLACE_SHEET}>
-      <SheetContent className="!w-full overflow-y-auto sm:!w-3/4">
+      <SheetContent className="w-full! overflow-y-auto sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
           <SheetDescription>Place</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
-          {!!photos?.length && <GallerySection photos={photos} />}
-          {description && <DescriptionSection description={description} />}
-          {!!tags?.length && <TagsSection tags={tags} />}
+          {!!photos?.length && (
+            <>
+              <GallerySection photos={photos} />
+            </>
+          )}
+
+          {description && (
+            <>
+              <DescriptionSection description={description} />
+            </>
+          )}
+
+          {!!tags?.length && (
+            <>
+              <TagsSection tags={tags} />
+            </>
+          )}
+
           <TimelineSection
             createdAt={created_at ? new Date(created_at) : undefined}
             builtAt={built_at ? new Date(built_at) : undefined}
@@ -56,17 +73,15 @@ export const PlaceSheet = ({ place }: Props) => {
           />
           <StateSection security={security} preservation={preservation} />
           <LocationSection point={point} />
-          {created_by && <ContributorsSection creator={created_by} />}
+
+          {created_by && (
+            <>
+              <ContributorsSection creator={created_by} />
+            </>
+          )}
+          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?place=${id}`} />
         </div>
         <SheetFooter>
-          <Button type="submit" disabled={true}>
-            <Pencil />
-            Suggest Correction
-          </Button>
-          <Button type="submit" disabled={true}>
-            <Backpack />
-            Plan Expedition
-          </Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
