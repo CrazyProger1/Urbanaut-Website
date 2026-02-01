@@ -10,10 +10,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link, usePathname, useRouter } from "@/i18n";
+import { Link, useRouter } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,18 +23,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { updateCurrentUser } from "@/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
-import { Separator } from "@/components/ui/separator";
-import { getSession, setSession } from "@/utils/session";
-import { getMe } from "@/services";
 
 const formSchema = z.object({
-  first_name: z.string().min(3, "First name is required").max(150),
+  first_name: z
+    .string()
+    .min(3, "First name must be at least 3 characters")
+    .max(150)
+    .optional()
+    .or(z.literal("")),
   last_name: z.string().max(150),
   username: z
     .string()
     .min(3, "Username must be at least 3 characters")
     .max(150, "Username must be at most 150 characters")
-    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores")
+    .optional(),
   bio: z.string().max(250),
 });
 
