@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { z } from "zod";
 import Image from "next/image";
 import { useRouter } from "@/i18n";
@@ -18,14 +18,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { createPlace, uploadFile } from "@/actions";
+import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
 import { Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
-import { validateResponse } from "@/utils/api";
 import { PreservationSelect } from "@/components/modules/map/forms/PreservationSelect";
 import {
   PLACE_PHOTO_ACCEPT_FILETYPES,
@@ -64,6 +62,17 @@ const formSchema = z.object({
 
 type Props = {
   tags?: Tag[];
+};
+
+const uploadFile = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const response = await fetch("/api/files", {
+    method: "POST",
+    body: formData,
+  });
+
+  return response.json();
 };
 
 export const AddPlaceForm = ({ tags }: Props) => {
@@ -109,7 +118,10 @@ export const AddPlaceForm = ({ tags }: Props) => {
     if (point) {
       const [lat, lng] = point.split(",").map(Number);
       const uploads = await Promise.all(files.map((file) => uploadFile(file)));
-      const fileIds = uploads.map((file) => file?.id).filter((id) => !!id);
+      const fileIds = uploads
+        .filter((upload) => upload.success)
+        .map((file) => file?.id)
+        .filter((id) => !!id);
 
       uploads.map((result) =>
         validateActionResult(result, {

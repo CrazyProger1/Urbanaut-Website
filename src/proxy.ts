@@ -13,6 +13,7 @@ const intlMiddleware = createMiddleware(routing);
 
 const logger = pino({
   base: {},
+  level: process.env.NODE_ENV === "production" ? "info" : "silent",
 });
 
 const proxy = async (request: NextRequest) => {
