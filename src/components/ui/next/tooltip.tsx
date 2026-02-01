@@ -4,12 +4,13 @@ import { TooltipTrigger, TooltipContent, Tooltip as ShadcnTooltip } from "@/comp
 type Props = {
   children?: ReactNode;
   content?: ReactNode;
+  asChild?: boolean;
 };
 
-export const Tooltip = ({ children, content }: Props) => {
+export const Tooltip = ({ children, content, asChild }: Props) => {
   return (
     <ShadcnTooltip delayDuration={500}>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
       <TooltipContent>{content}</TooltipContent>
     </ShadcnTooltip>
   );

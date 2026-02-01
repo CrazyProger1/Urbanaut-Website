@@ -36,7 +36,7 @@ export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Prop
           </Button>
         )}
         {shareLink && (
-          <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PLACE}>
+          <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PLACE} asChild>
             <CopyToast clipboard={shareLink}>
               <Button variant="outline">
                 <Share2 />

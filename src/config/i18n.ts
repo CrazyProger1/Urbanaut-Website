@@ -20,4 +20,6 @@ export const PLACEHOLDERS = {
 
   TOAST_COORDINATES_COPIED: "Coordinates copied into buffer.",
   TOAST_SUCCESSFUL_OAUTH_AUTHENTIFICATION: "Successful OAuth authentification!",
+  TOAST_AI_MODE_ENABLED: "AI mode enabled",
+  TOAST_AI_MODE_DISABLED: "AI mode disabled",
 };

@@ -76,13 +76,13 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
         </Mobile>
         <div className="flex flex-col gap-1 md:flex-row">
           <div className="flex flex-row gap-1">
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_GET_MY_LOCATION}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_GET_MY_LOCATION} asChild>
               <Button variant="ghost" onClick={onCenterMap}>
                 <LocateFixed />
               </Button>
             </Tooltip>
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS} asChild>
               <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
                 <MapPin />
               </Toggle>
@@ -92,13 +92,13 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
             {/*  <Scan />*/}
             {/*</Toggle>*/}
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES} asChild>
               <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
                 <Move3d />
               </Toggle>
             </Tooltip>
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_RULER}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_RULER} asChild>
               <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
                 <Ruler />
               </Toggle>

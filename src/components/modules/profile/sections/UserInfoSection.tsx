@@ -53,13 +53,15 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
                 </Link>
               </Button>
             </Tooltip>
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PROFILE}>
-              <CopyToast clipboard={`${SITE_URL}${PAGES.PROFILE}/${user.usernames?.[0]}`}>
+
+            <CopyToast clipboard={`${SITE_URL}${PAGES.PROFILE}/${user.usernames?.[0]}`}>
+              <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PROFILE} asChild>
                 <Button variant="outline">
                   <Share2 />
                 </Button>
-              </CopyToast>
-            </Tooltip>
+              </Tooltip>
+            </CopyToast>
+
             <Tooltip content={PLACEHOLDERS.TOOLTIP_REFERRAL_PROGRAM}>
               <Button variant="outline" asChild>
                 <Link href={`${PAGES.PROFILE}?${QUERIES.REFERRAL_PROFILE_MODAL}=true`}>

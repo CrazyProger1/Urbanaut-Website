@@ -48,6 +48,7 @@ export const Sidebar = () => {
                       className={cn(item.disabled && "disabled")}
                       asChild
                       isActive={pathname === item.url}
+                      tooltip={item.title}
                     >
                       {item.disabled ? (
                         <div className="flex">

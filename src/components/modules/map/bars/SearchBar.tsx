@@ -69,7 +69,7 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   return (
     <StopPropagation className="absolute top-4 left-4 flex flex-col gap-4 pr-4 md:flex-row">
       <Card className="bg-background/80 max-w-fit items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-        <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_SEARCH_BAR}>
+        <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_SEARCH_BAR} asChild>
           <Toggle pressed={isSearchBarOpen} onPressedChange={toggleSearchBar}>
             <Search />
           </Toggle>
@@ -89,7 +89,7 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_SEARCH}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_SEARCH} asChild>
               <Button type="submit" variant="ghost" onClick={handleSearch}>
                 <Search />
               </Button>
@@ -104,13 +104,13 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
             </Toggle>
           </Tooltip>
 
-          <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH}>
-            <ClickToast message={isAIActive ? "AI mode disabled" : "AI mode enabled"}>
-              <Toggle onPressedChange={setIsAIActive}>
+          <ClickToast message={isAIActive ? PLACEHOLDERS.TOAST_AI_MODE_DISABLED: PLACEHOLDERS.TOAST_AI_MODE_ENABLED}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH} asChild>
+              <Toggle onPressedChange={setIsAIActive} pressed={isAIActive}>
                 <Sparkles />
               </Toggle>
-            </ClickToast>
-          </Tooltip>
+            </Tooltip>
+          </ClickToast>
         </Card>
       )}
     </StopPropagation>

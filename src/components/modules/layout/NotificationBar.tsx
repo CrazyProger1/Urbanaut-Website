@@ -33,7 +33,7 @@ export const NotificationBar = ({ websocketToken, notifications: defaultNotifica
 
   return (
     <Popover onOpenChange={() => setHasNewNotification(false)}>
-      <Tooltip content={PLACEHOLDERS.TOOLTIP_NOTIFICATIONS}>
+      <Tooltip content={PLACEHOLDERS.TOOLTIP_NOTIFICATIONS} asChild>
         <PopoverTrigger asChild>
           <Button
             variant="ghost"

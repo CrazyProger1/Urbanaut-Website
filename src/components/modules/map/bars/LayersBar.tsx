@@ -30,7 +30,7 @@ export const LayersBar = ({ layers }: Props) => {
     <StopPropagation className="absolute top-4 right-4 flex flex-col">
       <div className="flex flex-col items-end">
         <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-          <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_LAYERS}>
+          <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_LAYERS} asChild>
             <Toggle pressed={isLayersBarOpen} onPressedChange={toggleLayersBar}>
               <Layers />
             </Toggle>
