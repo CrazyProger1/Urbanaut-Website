@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 import { Link } from "@/i18n";
 import { useModalOpenLink } from "@/hooks/useModalOpenLink";
-import { QUERIES } from "@/config";
+import { PLACEHOLDERS, QUERIES } from "@/config";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { ClickToast } from "@/components/common/toasts";
@@ -17,6 +17,7 @@ import { useMapStore } from "@/stores";
 import { LatLng } from "leaflet";
 import { parseCoordinates } from "@/utils/map";
 import { StopPropagation } from "@/components/common/modals";
+import { Tooltip } from "@/components/ui/next/tooltip";
 
 const FILTER_PARAMS = new Set(["preservation", "security", "tags", "country"]);
 
@@ -68,9 +69,11 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   return (
     <StopPropagation className="absolute top-4 left-4 flex flex-col gap-4 pr-4 md:flex-row">
       <Card className="bg-background/80 max-w-fit items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-        <Toggle pressed={isSearchBarOpen} onPressedChange={toggleSearchBar}>
-          <Search />
-        </Toggle>
+        <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_SEARCH_BAR}>
+          <Toggle pressed={isSearchBarOpen} onPressedChange={toggleSearchBar}>
+            <Search />
+          </Toggle>
+        </Tooltip>
       </Card>
       {isSearchBarOpen && (
         <Card
@@ -86,22 +89,28 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <Button type="submit" variant="ghost" onClick={handleSearch}>
-              <Search />
-            </Button>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_SEARCH}>
+              <Button type="submit" variant="ghost" onClick={handleSearch}>
+                <Search />
+              </Button>
+            </Tooltip>
           </div>
 
-          <Toggle pressed={isFiltersActive} asChild>
-            <Link href={openFilterModalLink} scroll={false}>
-              <Filter />
-            </Link>
-          </Toggle>
-
-          <ClickToast message={isAIActive ? "AI mode disabled" : "AI mode enabled"}>
-            <Toggle onPressedChange={setIsAIActive}>
-              <Sparkles />
+          <Tooltip content={PLACEHOLDERS.TOOLTIP_FILTERS}>
+            <Toggle pressed={isFiltersActive} asChild>
+              <Link href={openFilterModalLink} scroll={false}>
+                <Filter />
+              </Link>
             </Toggle>
-          </ClickToast>
+          </Tooltip>
+
+          <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH}>
+            <ClickToast message={isAIActive ? "AI mode disabled" : "AI mode enabled"}>
+              <Toggle onPressedChange={setIsAIActive}>
+                <Sparkles />
+              </Toggle>
+            </ClickToast>
+          </Tooltip>
         </Card>
       )}
     </StopPropagation>

@@ -23,7 +23,7 @@ export const OauthProvider = () => {
     <>
       <QueryToast
         query={QUERIES.OAUTH_SUCCESS}
-        content={PLACEHOLDERS.SUCCESSFUL_OAUTH_AUTHENTIFICATION}
+        content={PLACEHOLDERS.TOAST_SUCCESSFUL_OAUTH_AUTHENTIFICATION}
         onOpen={handleOpen}
       />
     </>

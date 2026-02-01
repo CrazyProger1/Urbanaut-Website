@@ -7,8 +7,9 @@ import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
 import { User } from "lucide-react";
-import { QUERIES } from "@/config";
+import { PLACEHOLDERS, QUERIES } from "@/config";
 import { Notification } from "@/types";
+import { Tooltip } from "@/components/ui/next/tooltip";
 
 type Props = {
   user?: SessionUser;
@@ -20,7 +21,9 @@ export const Header = ({ user, websocketToken, notifications }: Props) => {
   return (
     <header className="bg-background drop-shadow-volume sticky top-0 flex h-16 shrink-0 flex-row items-center justify-between gap-4 border-b px-4 select-none">
       <div className="flex items-center gap-2">
-        <SidebarTrigger className="-ml-1" />
+        <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_SIDEBAR}>
+          <SidebarTrigger className="-ml-1" />
+        </Tooltip>
         <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
       </div>
 

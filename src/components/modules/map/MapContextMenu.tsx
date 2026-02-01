@@ -22,7 +22,7 @@ const MapContextMenu = ({ onCopyCoordinates }: Props) => {
       <ContextMenuItem
         onClick={() => {
           toggleChoosingPlace(true);
-          addTooltip(PLACEHOLDERS.PLACE_ADDING_TOOLTIP);
+          addTooltip(PLACEHOLDERS.TOOLTIP_PLACE_ADDING);
         }}
       >
         <Plus /> Place{" "}

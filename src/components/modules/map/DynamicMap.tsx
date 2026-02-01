@@ -174,7 +174,12 @@ const DynamicMap = ({
     }
 
     navigator?.geolocation.getCurrentPosition((position) => {
-      map.setView(new LatLng(position.coords.latitude, position.coords.longitude));
+      const params = new URLSearchParams(searchParams);
+      params.set(
+        QUERIES.MAP_SELECTED_POINT,
+        `${position.coords.latitude},${position.coords.longitude}`,
+      );
+      router.push(`?${params}`);
     });
   }, [map]);
 
@@ -189,7 +194,7 @@ const DynamicMap = ({
 
     if (isChoosingPlace && placeChoosingToolRef.current) {
       toggleChoosingPlace(false);
-      removeTooltip(PLACEHOLDERS.PLACE_ADDING_TOOLTIP);
+      removeTooltip(PLACEHOLDERS.TOOLTIP_PLACE_ADDING);
 
       const point = placeChoosingToolRef.current.getPoint();
 
@@ -203,7 +208,7 @@ const DynamicMap = ({
 
     if (isChoosingArea && areaChoosingToolRef.current) {
       toggleChoosingArea(false);
-      removeTooltip(PLACEHOLDERS.AREA_ADDING_TOOLTIP);
+      removeTooltip(PLACEHOLDERS.TOOLTIP_AREA_ADDING);
 
       const points = areaChoosingToolRef.current.getPoints();
 
@@ -288,7 +293,7 @@ const DynamicMap = ({
       </ContextMenuTrigger>
       <MapContextMenu
         onCopyCoordinates={() => {
-          toast.success(PLACEHOLDERS.COORDINATES_COPIED_TOAST);
+          toast.success(PLACEHOLDERS.TOAST_COORDINATES_COPIED);
           if (lastRightClickCoordinates) {
             setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
           }

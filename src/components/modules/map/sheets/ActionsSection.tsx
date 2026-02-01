@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 
 import { CopyToast } from "@/components/common/toasts";
 import { Link } from "@/i18n";
+import { Tooltip } from "@/components/ui/next/tooltip";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   shareLink?: string;
@@ -34,11 +36,13 @@ export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Prop
           </Button>
         )}
         {shareLink && (
-          <CopyToast clipboard={shareLink}>
-            <Button variant="outline">
-              <Share2 />
-            </Button>
-          </CopyToast>
+          <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PLACE}>
+            <CopyToast clipboard={shareLink}>
+              <Button variant="outline">
+                <Share2 />
+              </Button>
+            </CopyToast>
+          </Tooltip>
         )}
       </div>
     </div>

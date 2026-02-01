@@ -7,9 +7,10 @@ import { Label } from "@/components/ui/label";
 import { MapLayer } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { LAYERS } from "@/config";
+import { LAYERS, PLACEHOLDERS } from "@/config";
 import { useMapStore } from "@/stores";
 import { StopPropagation } from "@/components/common/modals";
+import { Tooltip } from "@/components/ui/next/tooltip";
 
 type Props = {
   layers: MapLayer[];
@@ -29,9 +30,11 @@ export const LayersBar = ({ layers }: Props) => {
     <StopPropagation className="absolute top-4 right-4 flex flex-col">
       <div className="flex flex-col items-end">
         <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-          <Toggle pressed={isLayersBarOpen} onPressedChange={toggleLayersBar}>
-            <Layers />
-          </Toggle>
+          <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_LAYERS}>
+            <Toggle pressed={isLayersBarOpen} onPressedChange={toggleLayersBar}>
+              <Layers />
+            </Toggle>
+          </Tooltip>
         </Card>
       </div>
       {isLayersBarOpen && (

@@ -9,6 +9,8 @@ import { ToolBarTooltipsToggle } from "./ToolBarTooltipsToggle";
 import { ToolBarTooltipContainer } from "./ToolBarTooltipContainer";
 import { useMapStore } from "@/stores";
 import { Mobile } from "@/components/common/utils";
+import { Tooltip } from "@/components/ui/next/tooltip";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   onCenterMap?: () => void;
@@ -74,25 +76,33 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
         </Mobile>
         <div className="flex flex-col gap-1 md:flex-row">
           <div className="flex flex-row gap-1">
-            <Button variant="ghost" onClick={onCenterMap}>
-              <LocateFixed />
-            </Button>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_GET_MY_LOCATION}>
+              <Button variant="ghost" onClick={onCenterMap}>
+                <LocateFixed />
+              </Button>
+            </Tooltip>
 
-            <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
-              <MapPin />
-            </Toggle>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS}>
+              <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
+                <MapPin />
+              </Toggle>
+            </Tooltip>
 
             {/*<Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>*/}
             {/*  <Scan />*/}
             {/*</Toggle>*/}
 
-            <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
-              <Move3d />
-            </Toggle>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES}>
+              <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
+                <Move3d />
+              </Toggle>
+            </Tooltip>
 
-            <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
-              <Ruler />
-            </Toggle>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_RULER}>
+              <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
+                <Ruler />
+              </Toggle>
+            </Tooltip>
           </div>
 
           {(isChoosingArea || isChoosingPlace) && (
