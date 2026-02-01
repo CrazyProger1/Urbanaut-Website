@@ -112,4 +112,6 @@ export const PLACEHOLDERS = {
   LABEL_NO_ACCOUNT: "Don't have an account?",
   LABEL_HAVE_ACCOUNT: "Already have an account?",
   LABEL_JOINED: "Joined",
+  LABEL_EMAIL: "Email",
+  LABEL_PASSWORD: "Password",
 };

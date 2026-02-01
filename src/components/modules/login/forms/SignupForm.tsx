@@ -37,7 +37,7 @@ const formSchema = z.object({
     .regex(/[A-Z]/, "Password must contain an uppercase letter")
     .regex(/[0-9]/, "Password must contain a number")
     .regex(/[!@#$%^&*()_\-+=<>?]/, "Password must contain a special character"),
-  country: z.string().max(2),
+  country: z.string().max(2).optional(),
   first_name: z.string().max(150),
   last_name: z.string().max(150),
   born_at: z
@@ -73,7 +73,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     defaultValues: {
       email: "",
       password: "",
-      country: "",
+      country: undefined,
       first_name: "",
       last_name: "",
       born_at: undefined,
@@ -142,7 +142,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_COUNTRY}</FormLabel>
               <CountrySelect
                 value={field.value}
                 onChange={field.onChange}
@@ -167,7 +167,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_EMAIL}</FormLabel>
               <FormControl>
                 <Input placeholder="crazyurbanaut@gmail.com" {...field} />
               </FormControl>
@@ -180,7 +180,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_PASSWORD}</FormLabel>
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
@@ -202,7 +202,8 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            {PLACEHOLDERS.LABEL_HAVE_ACCOUNT} <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>{PLACEHOLDERS.BUTTON_SIGNIN}</Link>
+            {PLACEHOLDERS.LABEL_HAVE_ACCOUNT}{" "}
+            <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>{PLACEHOLDERS.BUTTON_SIGNIN}</Link>
           </FieldDescription>
         </Field>
       </form>
