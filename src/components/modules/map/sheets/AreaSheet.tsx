@@ -13,24 +13,24 @@ import { TagsSection } from "./TagsSection";
 import { TimelineSection } from "./TimelineSection";
 import { StateSection } from "./StateSection";
 import { Button } from "@/components/ui/button";
-import { QUERIES } from "@/config";
+import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { Sheet } from "@/components/ui/next/sheet";
-import { ContributorsSection } from "@/components/modules/map/sheets/ContributorsSection";
-import { Pencil } from "lucide-react";
+import { ContributorsSection } from "./ContributorsSection";
+import { ActionsSection } from "./ActionsSection";
 
 type Props = {
   area: AreaDetail;
 };
 
 export const AreaSheet = ({ area }: Props) => {
-  const { description, name, tags, created_by } = area;
+  const { id, description, name, tags, created_by } = area;
 
   return (
-    <Sheet open={true} query={QUERIES.AREA_SHEET}>
-      <SheetContent className="!w-full overflow-y-auto sm:!w-3/4">
+    <Sheet open={true} query={QUERIES.SHEET_AREA}>
+      <SheetContent className="w-full! overflow-y-auto sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
-          <SheetDescription>Area</SheetDescription>
+          <SheetDescription>{PLACEHOLDERS.TITLE_AREA}</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
           <GallerySection />
@@ -40,14 +40,11 @@ export const AreaSheet = ({ area }: Props) => {
           <TimelineSection />
           <StateSection />
           {created_by && <ContributorsSection creator={created_by} />}
+          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_AREA}=${id}`} />
         </div>
         <SheetFooter>
-          <Button type="submit" disabled={true}>
-            <Pencil />
-            Suggest Correction
-          </Button>
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">{PLACEHOLDERS.BUTTON_CLOSE}</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

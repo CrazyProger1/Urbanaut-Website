@@ -1,5 +1,5 @@
 import React from "react";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { FiltersForm } from "@/components/modules/map/forms";
@@ -21,10 +21,10 @@ export const FiltersModal = ({
   onSearchCityAction,
 }: Props) => {
   return (
-    <Modal query={QUERIES.MAP_FILTERS_MODAL}>
+    <Modal query={QUERIES.MODAL_MAP_FILTERS}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Filters</DialogTitle>
+          <DialogTitle>{PLACEHOLDERS.TITLE_FILTERS}</DialogTitle>
         </DialogHeader>
         <FiltersForm
           tags={tags}

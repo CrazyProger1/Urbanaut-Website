@@ -11,7 +11,7 @@ export const SearchCoordinatesTool = () => {
   const map = useMap();
 
   useEffect(() => {
-    const point = parseCoordinates(params.get(QUERIES.MAP_SELECTED_POINT) || "");
+    const point = parseCoordinates(params.get(QUERIES.FILTER_SELECTED_POINT) || "");
     setCoordinates(point);
 
     if (point) {

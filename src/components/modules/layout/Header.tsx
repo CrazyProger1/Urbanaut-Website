@@ -39,9 +39,9 @@ export const Header = ({ user, websocketToken, notifications }: Props) => {
           <UserNavBar user={user} />
         ) : (
           <Button asChild>
-            <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>
+            <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>
               <User className="h-4 w-4" />
-              Login
+              {PLACEHOLDERS.BUTTON_LOGIN}
             </Link>
           </Button>
         )}

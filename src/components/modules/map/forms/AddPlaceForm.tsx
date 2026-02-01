@@ -31,6 +31,7 @@ import {
   PLACE_PHOTO_ACCEPT_FILETYPES,
   PLACE_PHOTO_MAX_FILE_SIZE,
   PLACE_PHOTO_MAX_FILES,
+  PLACEHOLDERS,
   QUERIES,
 } from "@/config";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
@@ -101,7 +102,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { tags, name, is_private, preservation, security } = values;
-    const point = searchParams.get(QUERIES.MAP_SELECTED_POINT);
+    const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
 
     if (point) {
@@ -120,9 +121,9 @@ export const AddPlaceForm = ({ tags }: Props) => {
       });
 
       if (validateResponse(response)) {
-        toast.success("Place added successfully.");
-        params.delete(QUERIES.MAP_SELECTED_POINT);
-        params.delete(QUERIES.PLACE_ADDING_MODAL);
+        toast.success(PLACEHOLDERS.TOAST_PLACE_ADDED);
+        params.delete(QUERIES.FILTER_SELECTED_POINT);
+        params.delete(QUERIES.MODAL_PLACE_ADDING);
         router.push(`?${params}`);
       }
     }
@@ -136,7 +137,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="Abandoned Factory" {...field} />
               </FormControl>
@@ -149,7 +150,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_DESCRIPTION}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
@@ -162,7 +163,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <Label>Tags</Label>
+              <Label>{PLACEHOLDERS.LABEL_TAGS}</Label>
               <TagsSelect
                 tags={tags?.map((tag) => tag.tag) || []}
                 selected={field.value}
@@ -178,7 +179,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="preservation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Preservation Level</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_PRESERVATION_LEVEL}</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
@@ -188,7 +189,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="security"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Security Level</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_SECURITY_LEVEL}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
@@ -203,8 +204,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
                   icon={<Lock className="h-4 w-4" />}
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  title="Private"
-                  description="If enabled, this place will be visible only to you."
+                  title={PLACEHOLDERS.LABEL_PRIVATE}
+                  description={PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE}
                 />
               </FormControl>
               <FormMessage />
@@ -242,11 +243,11 @@ export const AddPlaceForm = ({ tags }: Props) => {
           </DropzoneContent>
           <DropzoneEmptyState>
             <Upload />
-            <Label>Upload photos</Label>
+            <Label>{PLACEHOLDERS.LABEL_UPLOAD_PHOTOS}</Label>
           </DropzoneEmptyState>
         </Dropzone>
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-          Save {formState.isSubmitting && <Spinner />}
+          {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
         </Button>
       </form>
     </Form>

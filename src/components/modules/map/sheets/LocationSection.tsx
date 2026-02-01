@@ -3,6 +3,7 @@ import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Point } from "@/types";
 import { CopyToast } from "@/components/common/toasts";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   point?: Point;
@@ -14,7 +15,7 @@ export const LocationSection = ({ point, address }: Props) => {
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <MapPin />
-        <div className="font-semibold">Location</div>
+        <div className="font-semibold">{PLACEHOLDERS.SECTION_LOCATION}</div>
       </div>
 
       <div className="flex flex-col gap-1 text-sm">

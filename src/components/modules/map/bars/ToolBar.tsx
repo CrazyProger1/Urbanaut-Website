@@ -32,7 +32,6 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
     toggleChoosingPlace,
     toggleCoordinatesVisibility,
     togglePlacesVisibility,
-    toggleAreasVisibility,
     toggleRulerActivity,
   } = useMapStore();
   const [isTooltipsExpanded, setIsTooltipsExpanded] = useState(false);
@@ -44,17 +43,17 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
 
   useEffect(() => {
     if (isRulerActive) {
-      addTooltip("Build your route and measure the distance by tapping any point on the map.");
+      addTooltip(PLACEHOLDERS.HINT_RULER_TOOL);
     } else {
-      removeTooltip("Build your route and measure the distance by tapping any point on the map.");
+      removeTooltip(PLACEHOLDERS.HINT_RULER_TOOL);
     }
   }, [isRulerActive]);
 
   useEffect(() => {
     if (isCoordinatesVisible) {
-      addTooltip("Tap any point on the map to determine the coordinates.");
+      addTooltip(PLACEHOLDERS.HINT_COORDINATES_TOOL);
     } else {
-      removeTooltip("Tap any point on the map to determine the coordinates.");
+      removeTooltip(PLACEHOLDERS.HINT_COORDINATES_TOOL);
     }
   }, [isCoordinatesVisible]);
 
@@ -108,10 +107,10 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
           {(isChoosingArea || isChoosingPlace) && (
             <div className="flex flex-col gap-1 border-t border-white/20 pt-1 md:flex-row md:border-t-0 md:border-l md:pl-1">
               <Button variant="ghost" size="sm" onClick={onSave}>
-                <Save /> Save
+                <Save /> {PLACEHOLDERS.BUTTON_SAVE}
               </Button>
               <Button variant="destructive" size="sm" onClick={handleCancel}>
-                <Ban /> Cancel
+                <Ban /> {PLACEHOLDERS.BUTTON_CANCEL}
               </Button>
             </div>
           )}

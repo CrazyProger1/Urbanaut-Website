@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CurrentUser } from "@/types";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
@@ -45,7 +45,7 @@ export const SettingsForm = ({ user }: Props) => {
 
   const { formState } = form;
 
-  const closeModalLink = usePreservedParamsLink({ [QUERIES.SETTINGS_MODAL]: false });
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_SETTINGS]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const languageCode = (values.language === "English" ? "en" : "en") as Locale;
@@ -54,7 +54,7 @@ export const SettingsForm = ({ user }: Props) => {
       language: languageCode,
     });
     router.push(closeModalLink, { scroll: false });
-    toast.success("Settings updated successfully!");
+    toast.success(PLACEHOLDERS.TOAST_SETTINGS_UPDATED);
   };
 
   return (
@@ -67,7 +67,7 @@ export const SettingsForm = ({ user }: Props) => {
             <FormItem>
               <FormLabel className="flex items-center gap-2">
                 <Globe className="text-muted-foreground h-4 w-4" />
-                Language
+                {PLACEHOLDERS.LABEL_LANGUAGE}
               </FormLabel>
               <FormControl>
                 <LanguageSelect
@@ -87,8 +87,8 @@ export const SettingsForm = ({ user }: Props) => {
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
-                title="Push notifications"
-                description="Receive push notifications on your device"
+                title={PLACEHOLDERS.LABEL_PUSH_NOTIFICATIONS}
+                description={PLACEHOLDERS.DESCRIPTION_PUSH_NOTIFICATIONS}
                 icon={<Bell className="h-4 w-4" />}
                 checked={field.value}
                 onCheckedChange={field.onChange}
@@ -102,8 +102,8 @@ export const SettingsForm = ({ user }: Props) => {
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
-                title="Email news"
-                description="Get the latest news and updates via email"
+                title={PLACEHOLDERS.LABEL_EMAIL_NEWS}
+                description={PLACEHOLDERS.DESCRIPTION_EMAIL_NEWS}
                 icon={<Mail className="h-4 w-4" />}
                 checked={field.value}
                 onCheckedChange={field.onChange}

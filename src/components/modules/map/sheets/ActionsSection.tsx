@@ -18,7 +18,7 @@ export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Prop
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <Play />
-        <div className="font-semibold">Actions</div>
+        <div className="font-semibold">{PLACEHOLDERS.SECTION_ACTIONS}</div>
       </div>
       <div className="flex flex-row gap-1">
         {editLink && (
@@ -36,13 +36,13 @@ export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Prop
           </Button>
         )}
         {shareLink && (
-          <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PLACE} asChild>
-            <CopyToast clipboard={shareLink}>
+          <CopyToast clipboard={shareLink}>
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PLACE} asChild>
               <Button variant="outline">
                 <Share2 />
               </Button>
-            </CopyToast>
-          </Tooltip>
+            </Tooltip>
+          </CopyToast>
         )}
       </div>
     </div>

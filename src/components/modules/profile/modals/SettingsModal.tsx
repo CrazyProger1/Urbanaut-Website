@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CurrentUser } from "@/types";
 import { SettingsForm } from "../forms/SettingsForm";
 
@@ -16,12 +16,12 @@ type Props = {
 
 export const SettingsModal = ({ user }: Props) => {
   return (
-    <Modal query={QUERIES.SETTINGS_MODAL}>
+    <Modal query={QUERIES.MODAL_SETTINGS}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
+          <DialogTitle>{PLACEHOLDERS.TITLE_SETTINGS}</DialogTitle>
           <DialogDescription>
-            Manage your account settings and preferences.
+            {PLACEHOLDERS.DESCRIPTION_SETTINGS}
           </DialogDescription>
         </DialogHeader>
         <SettingsForm user={user} />

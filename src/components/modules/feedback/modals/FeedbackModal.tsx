@@ -1,5 +1,5 @@
 import React from "react";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import {
   DialogContent,
   DialogDescription,
@@ -11,11 +11,11 @@ import { FeedbackForm } from "@/components/modules/feedback/forms";
 
 export const FeedbackModal = () => {
   return (
-    <Modal query={QUERIES.FEEDBACK_MODAL}>
+    <Modal query={QUERIES.MODAL_FEEDBACK}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Feedback</DialogTitle>
-          <DialogDescription>Here you can easily leave feedback ❤️</DialogDescription>
+          <DialogTitle>{PLACEHOLDERS.TITLE_FEEDBACK}</DialogTitle>
+          <DialogDescription>{PLACEHOLDERS.DESCRIPTION_FEEDBACK}</DialogDescription>
         </DialogHeader>
         <FeedbackForm />
       </DialogContent>

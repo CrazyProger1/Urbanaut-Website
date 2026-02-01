@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { PreservationLevel, SecurityLevel } from "@/types";
 import { getPreservationColorClass, getSecurityColorClass } from "@/utils/classes";
 import { Link } from "@/i18n";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   security?: SecurityLevel;
@@ -15,7 +16,7 @@ export const StateSection = ({ security, preservation }: Props) => {
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <Flame />
-        <div className="font-semibold">State</div>
+        <div className="font-semibold">{PLACEHOLDERS.SECTION_STATE}</div>
       </div>
       <div className="flex flex-col gap-1 text-sm">
         <div>

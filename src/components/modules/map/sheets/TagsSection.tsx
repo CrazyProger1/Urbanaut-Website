@@ -2,6 +2,7 @@ import React from "react";
 import { Tag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   tags: string[];
@@ -12,7 +13,7 @@ export const TagsSection = ({ tags }: Props) => {
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <Tag />
-        <div className="font-semibold">Tags</div>
+        <div className="font-semibold">{PLACEHOLDERS.SECTION_TAGS}</div>
       </div>
       <div className="flex flex-wrap gap-1">
         {tags?.map((tag) => (

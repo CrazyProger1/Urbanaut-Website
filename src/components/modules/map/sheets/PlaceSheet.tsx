@@ -15,7 +15,7 @@ import { StateSection } from "./StateSection";
 import { LocationSection } from "./LocationSection";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/next/sheet";
-import { PAGES, QUERIES, SITE_URL } from "@/config";
+import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { ContributorsSection } from "./ContributorsSection";
 
 import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
@@ -41,11 +41,11 @@ export const PlaceSheet = ({ place }: Props) => {
   } = place;
 
   return (
-    <Sheet open={true} query={QUERIES.PLACE_SHEET}>
+    <Sheet open={true} query={QUERIES.SHEET_PLACE}>
       <SheetContent className="w-full! overflow-y-auto sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
-          <SheetDescription>Place</SheetDescription>
+          <SheetDescription>{PLACEHOLDERS.TITLE_PLACE}</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
           {!!photos?.length && (
@@ -79,11 +79,11 @@ export const PlaceSheet = ({ place }: Props) => {
               <ContributorsSection creator={created_by} />
             </>
           )}
-          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?place=${id}`} />
+          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`} />
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">{PLACEHOLDERS.BUTTON_CLOSE}</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

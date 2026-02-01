@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
-import { QUERIES } from "@/config";
+import { PLACEHOLDERS, QUERIES } from "@/config";
 import { AddPlaceForm } from "../forms";
 import { Tag } from "@/types";
 
@@ -16,11 +16,11 @@ type Props = {
 
 export const AddPlaceModal = ({ tags }: Props) => {
   return (
-    <Modal query={QUERIES.PLACE_ADDING_MODAL}>
+    <Modal query={QUERIES.MODAL_PLACE_ADDING}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create new place</DialogTitle>
-          <DialogDescription>Here you can easily create new place</DialogDescription>
+          <DialogTitle>{PLACEHOLDERS.TITLE_CREATE_PLACE}</DialogTitle>
+          <DialogDescription>{PLACEHOLDERS.DESCRIPTION_CREATE_PLACE}</DialogDescription>
         </DialogHeader>
         <AddPlaceForm tags={tags} />
       </DialogContent>

@@ -18,7 +18,7 @@ import {
   APIPreservationLevel,
   APISecurityLevel,
 } from "@/types";
-import { PAGES, QUERIES } from "@/config";
+import { PAGES, PLACEHOLDERS, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { CountrySelect } from "@/components/modules/common/selects";
@@ -41,17 +41,24 @@ type Props = {
   onLoadMoreCitiesAction?: () => void;
 };
 
-export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, onSearchCityAction }: Props) => {
+export const FiltersForm = ({
+  tags,
+  countries,
+  cities,
+  onLoadMoreCitiesAction,
+  onSearchCityAction,
+}: Props) => {
   const params = useSearchParams();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      preservation: (params.get("preservation") as APIPreservationLevel) || undefined,
-      security: (params.get("security") as APISecurityLevel) || undefined,
-      tags: params.getAll("tags"),
-      country: params.get("country") || undefined,
-      city: params.get("city") || undefined,
+      preservation:
+        (params.get(QUERIES.FILTER_PRESERVATION_LEVEL) as APIPreservationLevel) || undefined,
+      security: (params.get(QUERIES.FILTER_SECURITY_LEVEL) as APISecurityLevel) || undefined,
+      tags: params.getAll(QUERIES.FILTER_TAGS),
+      country: params.get(QUERIES.FILTER_COUNTRY) || undefined,
+      city: params.get(QUERIES.FILTER_CITY) || undefined,
     },
     mode: "onSubmit",
   });
@@ -62,7 +69,7 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
 
   const applyFiltersLink = usePreservedParamsLink({
     ...values,
-    [QUERIES.MAP_FILTERS_MODAL]: false,
+    [QUERIES.MODAL_MAP_FILTERS]: false,
   });
 
   const onSubmit = async () => {
@@ -98,7 +105,7 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
           name="preservation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Preservation Level</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_PRESERVATION_LEVEL}</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
@@ -108,7 +115,7 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
           name="security"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Security Level</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_SECURITY_LEVEL}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
@@ -118,7 +125,7 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <Label>Tags</Label>
+              <Label>{PLACEHOLDERS.LABEL_TAGS}</Label>
               <TagsSelect
                 tags={tags?.map((tag) => tag.tag) || []}
                 selected={field.value}
@@ -133,7 +140,7 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_COUNTRY}</FormLabel>
               <CountrySelect
                 value={field.value}
                 onChange={field.onChange}
@@ -161,10 +168,10 @@ export const FiltersForm = ({ tags, countries, cities, onLoadMoreCitiesAction, o
         {/*  />*/}
         {/*)}*/}
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-          Apply {formState.isSubmitting && <Spinner />}
+          {PLACEHOLDERS.BUTTON_APPLY} {formState.isSubmitting && <Spinner />}
         </Button>
         <Button className="w-full" variant="secondary" asChild>
-          <Link href={PAGES.MAP}>Clear Filters</Link>
+          <Link href={PAGES.MAP}>{PLACEHOLDERS.BUTTON_CLEAR}</Link>
         </Button>
       </form>
     </Form>

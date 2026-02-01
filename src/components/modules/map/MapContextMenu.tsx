@@ -6,7 +6,7 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
 } from "@/components/ui/context-menu";
-import { Plus } from "lucide-react";
+import { Hash, Plus } from "lucide-react";
 import { useMapStore } from "@/stores";
 import { PLACEHOLDERS } from "@/config";
 
@@ -15,14 +15,14 @@ type Props = {
 };
 
 const MapContextMenu = ({ onCopyCoordinates }: Props) => {
-  const { toggleChoosingPlace, toggleChoosingArea, addTooltip } = useMapStore();
+  const { toggleChoosingPlace, addTooltip } = useMapStore();
 
   return (
     <ContextMenuContent>
       <ContextMenuItem
         onClick={() => {
           toggleChoosingPlace(true);
-          addTooltip(PLACEHOLDERS.TOOLTIP_PLACE_ADDING);
+          addTooltip(PLACEHOLDERS.HINT_PLACE_ADDING);
         }}
       >
         <Plus /> Place{" "}
@@ -36,7 +36,10 @@ const MapContextMenu = ({ onCopyCoordinates }: Props) => {
       {/*  <Plus /> Area{" "}*/}
       {/*</ContextMenuItem>*/}
       <ContextMenuSeparator />
-      <ContextMenuItem onClick={onCopyCoordinates}>Coordinates</ContextMenuItem>
+      <ContextMenuItem onClick={onCopyCoordinates}>
+        <Hash />
+        {PLACEHOLDERS.BUTTON_COORDINATES}
+      </ContextMenuItem>
     </ContextMenuContent>
   );
 };

@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CountrySelect } from "@/components/modules/common/selects";
 import { Country } from "@/types";
 import { BirthDateSelector } from "./BirthDateSelector";
@@ -95,16 +95,16 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
       user = await login(values.email, values.password);
     }
     if (!user) {
-      return toast.error("This email is already used!");
+      return toast.error(PLACEHOLDERS.TOAST_EMAIL_EXISTS);
     }
 
     await loginOneSignal(user.id);
 
     const params = new URLSearchParams(searchParams);
-    params.delete(QUERIES.SIGNUP_MODAL);
+    params.delete(QUERIES.MODAL_SIGNUP);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
-    toast.success("Successfully signed in!");
+    toast.success(PLACEHOLDERS.TOAST_SIGNIN_SUCCESS);
   };
 
   return (
@@ -186,7 +186,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
               </FormControl>
               <FormDescription className="text-end">
                 <Link href="#" className="text-end text-sm hover:underline">
-                  Forgot your password?
+                  {PLACEHOLDERS.LABEL_FORGOT_PASSWORD}
                 </Link>
               </FormDescription>
               <FormMessage />
@@ -196,13 +196,13 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
 
         <Field>
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            Sign Up {formState.isSubmitting && <Spinner />}
+            {PLACEHOLDERS.BUTTON_SIGNUP} {formState.isSubmitting && <Spinner />}
           </Button>
           {otherProviders?.map((provider, i) => (
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            Already have an account? <Link href={`?${QUERIES.SIGNIN_MODAL}=true`}>Sign in</Link>
+            {PLACEHOLDERS.LABEL_HAVE_ACCOUNT} <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>{PLACEHOLDERS.BUTTON_SIGNIN}</Link>
           </FieldDescription>
         </Field>
       </form>

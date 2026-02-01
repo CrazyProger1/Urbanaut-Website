@@ -75,7 +75,7 @@ export const UserNavBar = ({ user }: Props) => {
               Profile
             </DropdownMenuItem>
           </Link>
-          <Link href={`?${QUERIES.SETTINGS_MODAL}=true`}>
+          <Link href={`?${QUERIES.MODAL_SETTINGS}=true`}>
             <DropdownMenuItem>
               <Settings />
               Settings

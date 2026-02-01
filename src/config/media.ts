@@ -18,5 +18,5 @@ export const SOUNDS = {
 };
 
 export const PLACE_PHOTO_ACCEPT_FILETYPES = [".png", ".jpg", ".jpeg", ".gif"];
-export const PLACE_PHOTO_MAX_FILE_SIZE = 5 * 1024 * 1024;
+export const PLACE_PHOTO_MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
 export const PLACE_PHOTO_MAX_FILES = 10;

@@ -24,20 +24,28 @@ export const URLS = {
 };
 
 export const QUERIES = {
-  AREA_ADDING_MODAL: "addarea",
-  PLACE_ADDING_MODAL: "addplace",
-  AREA_SHEET: "area",
-  PLACE_SHEET: "place",
-  FEEDBACK_MODAL: "feedback",
-  EDIT_PROFILE_MODAL: "edit",
-  REFERRAL_PROFILE_MODAL: "referral",
-  SIGNIN_MODAL: "signin",
-  SIGNUP_MODAL: "signup",
-  MAP_FILTERS_MODAL: "filters",
-  MAP_SELECTED_POINT: "point",
-  SETTINGS_MODAL: "settings",
+  MODAL_AREA_ADDING: "addarea",
+  MODAL_PLACE_ADDING: "addplace",
+  MODAL_FEEDBACK: "feedback",
+  MODAL_EDIT_PROFILE: "edit",
+  MODAL_REFERRAL_PROFILE: "referral",
+  MODAL_SIGNIN: "signin",
+  MODAL_SIGNUP: "signup",
+  MODAL_MAP_FILTERS: "filters",
+  MODAL_SETTINGS: "settings",
+
+  SHEET_AREA: "area",
+  SHEET_PLACE: "place",
+
   OAUTH_SUCCESS: "oauth-success",
   OAUTH_USER: "oauth-user",
+
+  FILTER_SELECTED_POINT: "point",
+  FILTER_PRESERVATION_LEVEL: "preservation",
+  FILTER_SECURITY_LEVEL: "security",
+  FILTER_TAGS: "tags",
+  FILTER_COUNTRY: "country",
+  FILTER_CITY: "city",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
@@ -106,7 +114,7 @@ export const SIDEBAR_SUPPORT: SidebarItem[] = [
   },
   {
     title: "Feedback",
-    url: `?${QUERIES.FEEDBACK_MODAL}=true`,
+    url: `?${QUERIES.MODAL_FEEDBACK}=true`,
     icon: Send,
   },
 ];

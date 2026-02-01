@@ -12,8 +12,7 @@ export const ThemeToggle = () => {
       variant="ghost"
       size="icon"
       onClick={() => setIsDark(!isDark)}
-      className="transition-colors hover:bg-accent"
-      title="Toggle theme"
+      className="hover:bg-accent transition-colors"
     >
       {isDark ? (
         <Sun className="h-5 w-5 transition-transform hover:rotate-90" />

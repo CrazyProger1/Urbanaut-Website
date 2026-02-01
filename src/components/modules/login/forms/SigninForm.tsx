@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
 import { toast } from "sonner";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import OneSignal from "react-onesignal";
 import { loginOneSignal } from "@/services/lib/onesignal";
 
@@ -60,15 +60,15 @@ export const SigninForm = ({ otherProviders }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const user = await login(values.email, values.password);
     if (!user) {
-      return toast.error("Wrong password or authentication method! Try use Oauth");
+      return toast.error(PLACEHOLDERS.TOAST_WRONG_CREDENTIALS);
     }
     await loginOneSignal(user.id);
 
     const params = new URLSearchParams(searchParams);
-    params.delete(QUERIES.SIGNIN_MODAL);
+    params.delete(QUERIES.MODAL_SIGNIN);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
-    toast.success("Successfully signed in!");
+    toast.success(PLACEHOLDERS.TOAST_SIGNIN_SUCCESS);
   };
 
   return (
@@ -98,7 +98,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
               </FormControl>
               <FormDescription className="text-end">
                 <Link href="#" className="text-end text-sm hover:underline">
-                  Forgot your password?
+                  {PLACEHOLDERS.LABEL_FORGOT_PASSWORD}
                 </Link>
               </FormDescription>
               <FormMessage />
@@ -107,13 +107,13 @@ export const SigninForm = ({ otherProviders }: Props) => {
         />
         <Field>
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            Sign In {formState.isSubmitting && <Spinner />}
+            {PLACEHOLDERS.BUTTON_SIGNIN} {formState.isSubmitting && <Spinner />}
           </Button>
           {otherProviders?.map((provider, i) => (
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            Don&apos;t have an account? <Link href={`?${QUERIES.SIGNUP_MODAL}=true`}>Sign up</Link>
+            {PLACEHOLDERS.LABEL_NO_ACCOUNT} <Link href={`?${QUERIES.MODAL_SIGNUP}=true`}>{PLACEHOLDERS.BUTTON_SIGNUP}</Link>
           </FieldDescription>
         </Field>
       </form>

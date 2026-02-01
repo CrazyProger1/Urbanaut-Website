@@ -2,6 +2,7 @@ import React from "react";
 import { Hourglass } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { localizeDate } from "@/utils/date";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   builtAt?: Date;
@@ -14,7 +15,7 @@ export const TimelineSection = ({ builtAt, abandonedAt, createdAt }: Props) => {
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <Hourglass />
-        <div className="font-semibold">Timeline</div>
+        <div className="font-semibold">{PLACEHOLDERS.SECTION_TIMELINE}</div>
       </div>
       <div className="flex flex-col gap-1 text-sm">
         {builtAt && (

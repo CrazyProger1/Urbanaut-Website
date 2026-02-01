@@ -31,7 +31,7 @@ const Page = async ({ params }: Props) => {
     redirect({ href: PAGES.MAIN, locale: await getLocale() });
   }
 
-  searchParams.append(QUERIES.SIGNUP_MODAL, "true");
+  searchParams.append(QUERIES.MODAL_SIGNUP, "true");
   searchParams.append("code", code);
 
   return (

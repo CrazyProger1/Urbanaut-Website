@@ -41,7 +41,7 @@ export const FeedbackForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await createFeedback(values);
     const params = new URLSearchParams(searchParams);
-    params.delete(QUERIES.FEEDBACK_MODAL);
+    params.delete(QUERIES.MODAL_FEEDBACK);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
     toast.success("Thank you for your feedback, we appreciate it very much ❤️");

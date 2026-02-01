@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { EditProfileForm } from "../forms/EditProfileForm";
 import { SessionUser } from "@/types";
 
@@ -16,12 +16,12 @@ type Props = {
 
 export const EditProfileModal = ({ user }: Props) => {
   return (
-    <Modal query={QUERIES.EDIT_PROFILE_MODAL}>
+    <Modal query={QUERIES.MODAL_EDIT_PROFILE}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>{PLACEHOLDERS.TITLE_EDIT_PROFILE}</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+            {PLACEHOLDERS.DESCRIPTION_EDIT_PROFILE}
           </DialogDescription>
         </DialogHeader>
         <EditProfileForm user={user} />

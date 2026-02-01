@@ -4,6 +4,7 @@ import React from "react";
 import { toast } from "sonner";
 import { setClipboard } from "@/utils/clipboard";
 import { cn } from "@/lib/utils";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   className?: string;
@@ -16,7 +17,7 @@ export const CopyToast = ({
   className,
   clipboard,
   children,
-  message = "Copied to clipboard!",
+  message = PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD,
 }: Props) => {
   return (
     <span

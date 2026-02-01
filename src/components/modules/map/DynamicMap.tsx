@@ -108,7 +108,7 @@ const DynamicMap = ({
     if (!map) {
       return;
     }
-    if (searchParams.get(QUERIES.MAP_SELECTED_POINT)) {
+    if (searchParams.get(QUERIES.FILTER_SELECTED_POINT)) {
       return;
     }
 
@@ -176,7 +176,7 @@ const DynamicMap = ({
     navigator?.geolocation.getCurrentPosition((position) => {
       const params = new URLSearchParams(searchParams);
       params.set(
-        QUERIES.MAP_SELECTED_POINT,
+        QUERIES.FILTER_SELECTED_POINT,
         `${position.coords.latitude},${position.coords.longitude}`,
       );
       router.push(`?${params}`);
@@ -187,20 +187,20 @@ const DynamicMap = ({
     const params = new URLSearchParams(searchParams);
 
     if (!user) {
-      params.set(QUERIES.SIGNIN_MODAL, "true");
+      params.set(QUERIES.MODAL_SIGNIN, "true");
       router.push(`?${params}`, { scroll: false });
       return;
     }
 
     if (isChoosingPlace && placeChoosingToolRef.current) {
       toggleChoosingPlace(false);
-      removeTooltip(PLACEHOLDERS.TOOLTIP_PLACE_ADDING);
+      removeTooltip(PLACEHOLDERS.HINT_PLACE_ADDING);
 
       const point = placeChoosingToolRef.current.getPoint();
 
       if (point) {
-        params.set(QUERIES.PLACE_ADDING_MODAL, "true");
-        params.set(QUERIES.MAP_SELECTED_POINT, `${point.lat},${point.lng}`);
+        params.set(QUERIES.MODAL_PLACE_ADDING, "true");
+        params.set(QUERIES.FILTER_SELECTED_POINT, `${point.lat},${point.lng}`);
 
         router.push(`?${params}`, { scroll: false });
       }
@@ -208,12 +208,12 @@ const DynamicMap = ({
 
     if (isChoosingArea && areaChoosingToolRef.current) {
       toggleChoosingArea(false);
-      removeTooltip(PLACEHOLDERS.TOOLTIP_AREA_ADDING);
+      removeTooltip(PLACEHOLDERS.HINT_AREA_ADDING);
 
       const points = areaChoosingToolRef.current.getPoints();
 
       if (points) {
-        params.set(QUERIES.AREA_ADDING_MODAL, "true");
+        params.set(QUERIES.MODAL_AREA_ADDING, "true");
         params.set("points", points.map((point) => `${point.lat},${point.lng}`).join(";"));
 
         router.push(`?${params}`, { scroll: false });
@@ -224,7 +224,7 @@ const DynamicMap = ({
   const handlePlaceSelect = useCallback(
     (place: Place) => {
       const params = buildParamsFromRecord(
-        { [QUERIES.PLACE_SHEET]: String(place.id), point: "" },
+        { [QUERIES.SHEET_PLACE]: String(place.id), point: "" },
         searchParams,
       );
 
@@ -236,7 +236,7 @@ const DynamicMap = ({
   const handleAreaSelect = useCallback(
     (area: Area) => {
       const params = buildParamsFromRecord(
-        { [QUERIES.AREA_SHEET]: String(area.id), point: "" },
+        { [QUERIES.SHEET_AREA]: String(area.id), point: "" },
         searchParams,
       );
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });
@@ -293,7 +293,7 @@ const DynamicMap = ({
       </ContextMenuTrigger>
       <MapContextMenu
         onCopyCoordinates={() => {
-          toast.success(PLACEHOLDERS.TOAST_COORDINATES_COPIED);
+          toast.success(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD);
           if (lastRightClickCoordinates) {
             setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
           }

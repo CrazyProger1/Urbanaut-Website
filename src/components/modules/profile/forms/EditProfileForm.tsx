@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { SessionUser } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { updateCurrentUser } from "@/actions";
@@ -61,12 +61,12 @@ export const EditProfileForm = ({ user }: Props) => {
 
   const { formState } = form;
 
-  const closeModalLink = usePreservedParamsLink({ [QUERIES.EDIT_PROFILE_MODAL]: false });
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_EDIT_PROFILE]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await updateCurrentUser(values);
     router.push(closeModalLink, { scroll: false });
-    toast.success("Profile updated successfully!");
+    toast.success(PLACEHOLDERS.TOAST_PROFILE_UPDATED);
   };
 
   return (
@@ -77,7 +77,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First Name or Pseudo</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_FIRST_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="John" {...field} />
               </FormControl>
@@ -90,7 +90,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="last_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Last Name</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_LAST_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="Doe" {...field} />
               </FormControl>
@@ -103,7 +103,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_USERNAME}</FormLabel>
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
@@ -116,7 +116,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_BIO}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>

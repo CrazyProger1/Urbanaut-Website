@@ -41,14 +41,14 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
           <div className="flex flex-row gap-1">
             <Tooltip content={PLACEHOLDERS.TOOLTIP_EDIT_PROFILE}>
               <Button variant="outline" asChild>
-                <Link href={`${PAGES.PROFILE}?${QUERIES.EDIT_PROFILE_MODAL}=true`}>
+                <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_EDIT_PROFILE}=true`}>
                   <Edit />
                 </Link>
               </Button>
             </Tooltip>
             <Tooltip content={PLACEHOLDERS.TOOLTIP_OPEN_SETTINGS}>
               <Button variant="outline" asChild>
-                <Link href={`?${QUERIES.SETTINGS_MODAL}=true`}>
+                <Link href={`?${QUERIES.MODAL_SETTINGS}=true`}>
                   <Settings />
                 </Link>
               </Button>
@@ -64,7 +64,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
 
             <Tooltip content={PLACEHOLDERS.TOOLTIP_REFERRAL_PROGRAM}>
               <Button variant="outline" asChild>
-                <Link href={`${PAGES.PROFILE}?${QUERIES.REFERRAL_PROFILE_MODAL}=true`}>
+                <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_REFERRAL_PROFILE}=true`}>
                   <Users />
                 </Link>
               </Button>
@@ -90,7 +90,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
           <div className="flex flex-row items-center gap-1">
             <Calendar size={16} />
             <div>
-              Joined{" "}
+              {PLACEHOLDERS.LABEL_JOINED}{" "}
               {format.dateTime(joinedAt, {
                 year: "numeric",
                 month: "long",

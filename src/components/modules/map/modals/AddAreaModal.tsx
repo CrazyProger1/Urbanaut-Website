@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { AddAreaForm } from "@/components/modules/map/forms";
 import { Tag } from "@/types";
 
@@ -16,12 +16,12 @@ type Props = {
 
 export const AddAreaModal = ({ tags }: Props) => {
   return (
-    <Modal query={QUERIES.AREA_ADDING_MODAL}>
+    <Modal query={QUERIES.MODAL_AREA_ADDING}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create new area</DialogTitle>
+          <DialogTitle>{PLACEHOLDERS.TITLE_CREATE_AREA}</DialogTitle>
           <DialogDescription>
-            Here you can easily create new area
+            {PLACEHOLDERS.DESCRIPTION_CREATE_AREA}
           </DialogDescription>
         </DialogHeader>
         <AddAreaForm tags={tags} />

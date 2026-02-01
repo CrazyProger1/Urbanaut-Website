@@ -1,5 +1,5 @@
 import React from "react";
-import { PAGES, QUERIES, SITE_URL } from "@/config";
+import { PAGES, QUERIES, SITE_URL, PLACEHOLDERS } from "@/config";
 import {
   DialogContent,
   DialogDescription,
@@ -21,13 +21,12 @@ export const ReferralModal = async () => {
   const codes = response.results;
 
   return (
-    <Modal query={QUERIES.REFERRAL_PROFILE_MODAL}>
+    <Modal query={QUERIES.MODAL_REFERRAL_PROFILE}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Referral Program</DialogTitle>
           <DialogDescription>
-            Invite your friends to join and earn rewards for every successful referral. Bonuses will
-            be available soon - stay tuned!
+            {PLACEHOLDERS.DESCRIPTION_REFERRAL}
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-4">

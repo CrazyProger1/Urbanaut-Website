@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
-import { QUERIES } from "@/config";
+import { QUERIES, PLACEHOLDERS } from "@/config";
 import { SignupForm } from "../forms";
 import { GoogleAuthButton } from "../google";
 import { Country } from "@/types";
@@ -17,12 +17,12 @@ type Props = {
 
 export const SignupModal = ({ countries }: Props) => {
   return (
-    <Modal query={QUERIES.SIGNUP_MODAL}>
+    <Modal query={QUERIES.MODAL_SIGNUP}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create new account</DialogTitle>
+          <DialogTitle>{PLACEHOLDERS.TITLE_SIGNUP}</DialogTitle>
           <DialogDescription>
-            Here you can easily create your account in one click
+            {PLACEHOLDERS.DESCRIPTION_SIGNUP}
           </DialogDescription>
         </DialogHeader>
         <SignupForm otherProviders={[<GoogleAuthButton key="google" />]} countries={countries} />
