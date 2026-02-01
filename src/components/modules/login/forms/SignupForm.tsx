@@ -128,7 +128,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First Name or Pseudo</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_FIRST_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="John" {...field} />
               </FormControl>
@@ -141,7 +141,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="last_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Last Name</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_LAST_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="Doe" {...field} />
               </FormControl>
