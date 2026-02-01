@@ -11,7 +11,7 @@ import { syncCurrentUser } from "@/actions";
 
 const intlMiddleware = createMiddleware(routing);
 
-const middleware = async (request: NextRequest) => {
+const proxy = async (request: NextRequest) => {
   const session = await getSession();
 
   if (session && session.accessToken && session.refreshToken) {
@@ -44,4 +44,4 @@ export const config = {
   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };
 
-export default middleware;
+export default proxy;

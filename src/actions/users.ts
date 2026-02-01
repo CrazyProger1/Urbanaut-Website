@@ -12,28 +12,28 @@ export const updateUser = async (user: APIUpdateUser) => {
 };
 
 export const updateCurrentUser = async (user: APIUpdateUser) => {
-  revalidateTag(CACHE_TAGS.CURRENT_USER);
+  revalidateTag(CACHE_TAGS.CURRENT_USER, "max");
   await services.updateUser(user);
   await syncCurrentUser();
 };
 
 export const setLanguage = async (language: Locale) => {
-  revalidateTag(CACHE_TAGS.CURRENT_USER);
+  revalidateTag(CACHE_TAGS.CURRENT_USER, "max");
   return await services.updateSettings({ language: language });
 };
 
 export const switchPushNotifications = async (enabled: boolean) => {
-  revalidateTag(CACHE_TAGS.CURRENT_USER);
+  revalidateTag(CACHE_TAGS.CURRENT_USER, "max");
   return await services.updateSettings({ is_notifications_enabled: enabled });
 };
 
 export const switchEmailNews = async (enabled: boolean) => {
-  revalidateTag(CACHE_TAGS.CURRENT_USER);
+  revalidateTag(CACHE_TAGS.CURRENT_USER, "max");
   return await services.updateSettings({ is_emails_enabled: enabled });
 };
 
 export const updateSettings = async (settings: APIUpdateSettings) => {
   await services.updateSettings(settings);
-  revalidateTag(CACHE_TAGS.CURRENT_USER);
+  revalidateTag(CACHE_TAGS.CURRENT_USER, "max");
   await syncCurrentUser();
 };
