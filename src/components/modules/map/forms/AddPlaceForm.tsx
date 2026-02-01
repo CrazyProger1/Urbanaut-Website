@@ -227,19 +227,17 @@ export const AddPlaceForm = ({ tags }: Props) => {
                 <FilePreview key={file.name + index} file={file} />
               ))}
             </div>
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              className="mt-2"
+            <span
+              role="button"
+              className="mt-2 inline-flex cursor-pointer items-center text-sm text-muted-foreground hover:text-foreground"
               onClick={(e) => {
                 e.stopPropagation();
                 setFiles([]);
               }}
             >
               <X className="mr-1 h-4 w-4" />
-              Clear all
-            </Button>
+              {PLACEHOLDERS.BUTTON_CLEAR}
+            </span>
           </DropzoneContent>
           <DropzoneEmptyState>
             <Upload />

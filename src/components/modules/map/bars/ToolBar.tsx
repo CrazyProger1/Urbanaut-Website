@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Ban, LocateFixed, MapPin, Move3d, Ruler, Save, Scan } from "lucide-react";
+import { Ban, LocateFixed, MapPin, Move3d, Ruler, Save, Scan, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Toggle } from "@/components/ui/toggle";
 import { ToolBarTooltipsToggle } from "./ToolBarTooltipsToggle";
@@ -11,6 +11,7 @@ import { useMapStore } from "@/stores";
 import { Mobile } from "@/components/common/utils";
 import { Tooltip } from "@/components/ui/next/tooltip";
 import { PLACEHOLDERS } from "@/config";
+import { ClickToast } from "@/components/common/toasts";
 
 type Props = {
   onCenterMap?: () => void;
@@ -81,27 +82,62 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
               </Button>
             </Tooltip>
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS} asChild>
-              <Toggle pressed={isPlacesVisible} onPressedChange={togglePlacesVisibility}>
-                <MapPin />
-              </Toggle>
-            </Tooltip>
+            <ClickToast
+              message={
+                isPlacesVisible
+                  ? PLACEHOLDERS.TOAST_PLACES_INVISIBLE
+                  : PLACEHOLDERS.TOAST_PLACES_VISIBLE
+              }
+              passthrough
+            >
+              <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS}>
+                <Toggle onPressedChange={togglePlacesVisibility} pressed={isPlacesVisible} asChild>
+                  <span>
+                    <MapPin />
+                  </span>
+                </Toggle>
+              </Tooltip>
+            </ClickToast>
 
             {/*<Toggle pressed={isAreasVisible} onPressedChange={toggleAreasVisibility}>*/}
             {/*  <Scan />*/}
             {/*</Toggle>*/}
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES} asChild>
-              <Toggle pressed={isCoordinatesVisible} onPressedChange={toggleCoordinatesVisibility}>
-                <Move3d />
-              </Toggle>
-            </Tooltip>
+            <ClickToast
+              message={
+                isCoordinatesVisible
+                  ? PLACEHOLDERS.TOAST_COORDINATES_DISABLED
+                  : PLACEHOLDERS.TOAST_COORDINATES_ENABLED
+              }
+              passthrough
+            >
+              <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES}>
+                <Toggle
+                  onPressedChange={toggleCoordinatesVisibility}
+                  pressed={isCoordinatesVisible}
+                  asChild
+                >
+                  <span>
+                    <Move3d />
+                  </span>
+                </Toggle>
+              </Tooltip>
+            </ClickToast>
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_RULER} asChild>
-              <Toggle pressed={isRulerActive} onPressedChange={toggleRulerActivity}>
-                <Ruler />
-              </Toggle>
-            </Tooltip>
+            <ClickToast
+              message={
+                isRulerActive ? PLACEHOLDERS.TOAST_RULER_DISABLED : PLACEHOLDERS.TOAST_RULER_ENABLED
+              }
+              passthrough
+            >
+              <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_RULER}>
+                <Toggle onPressedChange={toggleRulerActivity} pressed={isRulerActive} asChild>
+                  <span>
+                    <Ruler />
+                  </span>
+                </Toggle>
+              </Tooltip>
+            </ClickToast>
           </div>
 
           {(isChoosingArea || isChoosingPlace) && (

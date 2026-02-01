@@ -9,15 +9,18 @@ type Props = {
   className?: string;
   children?: React.ReactNode;
   message?: string;
+  passthrough?: boolean;
 };
 
-export const ClickToast = ({ className, children, message = "Clicked!" }: Props) => {
+export const ClickToast = ({ className, children, message = "Clicked!", passthrough = false }: Props) => {
   return (
     <span
       className={cn(className, "cursor-pointer select-none")}
       onClick={(event) => {
-        event.stopPropagation();
-        event.preventDefault();
+        if (!passthrough) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
         toast.success(message);
       }}
     >

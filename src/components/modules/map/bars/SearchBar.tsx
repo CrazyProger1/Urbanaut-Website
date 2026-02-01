@@ -12,12 +12,12 @@ import { useModalOpenLink } from "@/hooks/useModalOpenLink";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
-import { ClickToast } from "@/components/common/toasts";
 import { useMapStore } from "@/stores";
 import { LatLng } from "leaflet";
 import { parseCoordinates } from "@/utils/map";
 import { StopPropagation } from "@/components/common/modals";
 import { Tooltip } from "@/components/ui/next/tooltip";
+import { ClickToast } from "@/components/common/toasts";
 
 const FILTER_PARAMS = new Set(["preservation", "security", "tags", "country"]);
 
@@ -104,10 +104,17 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
             </Toggle>
           </Tooltip>
 
-          <ClickToast message={isAIActive ? PLACEHOLDERS.TOAST_AI_MODE_DISABLED: PLACEHOLDERS.TOAST_AI_MODE_ENABLED}>
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH} asChild>
-              <Toggle onPressedChange={setIsAIActive} pressed={isAIActive}>
-                <Sparkles />
+          <ClickToast
+            message={
+              isAIActive ? PLACEHOLDERS.TOAST_AI_MODE_DISABLED : PLACEHOLDERS.TOAST_AI_MODE_ENABLED
+            }
+            passthrough
+          >
+            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH}>
+              <Toggle onPressedChange={setIsAIActive} pressed={isAIActive} asChild>
+                <span>
+                  <Sparkles />
+                </span>
               </Toggle>
             </Tooltip>
           </ClickToast>
