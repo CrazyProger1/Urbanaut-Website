@@ -1,14 +1,15 @@
 "use server";
 
 import * as services from "@/services";
-import { clearSession, getSession, setSession } from "@/utils/session";
-import { APICreateUser, APICurrentUser } from "@/types";
 import { getMe } from "@/services";
+import { clearSession, getSession, setSession } from "@/utils/session";
+import { ActionResult, APICreateUser, CurrentUser } from "@/types";
+import { apiResponseToActionResult } from "@/utils/actions";
 
 export const login = async (
   email: string,
   password: string,
-): Promise<APICurrentUser | undefined> => {
+): Promise<ActionResult & { user?: CurrentUser }> => {
   const response = await services.login(email, password);
 
   if (response.success) {
@@ -17,13 +18,18 @@ export const login = async (
       refreshToken: response.refresh,
       user: response.user,
     });
-    return response.user;
+    return {
+      success: true,
+      user: response.user,
+    };
   }
+
+  return { success: false };
 };
 
-export const register = async (user: APICreateUser): Promise<boolean> => {
+export const register = async (user: APICreateUser): Promise<ActionResult> => {
   const response = await services.register(user);
-  return response.success;
+  return apiResponseToActionResult(response);
 };
 
 export const logout = async () => {

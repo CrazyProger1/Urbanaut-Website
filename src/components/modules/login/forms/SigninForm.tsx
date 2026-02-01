@@ -24,6 +24,7 @@ import { toast } from "sonner";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import OneSignal from "react-onesignal";
 import { loginOneSignal } from "@/services/lib/onesignal";
+import { validateActionResult } from "@/utils/actions";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -55,20 +56,33 @@ export const SigninForm = ({ otherProviders }: Props) => {
     },
     mode: "onSubmit",
   });
-  const { formState } = form;
+  const { formState, setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const user = await login(values.email, values.password);
-    if (!user) {
-      return toast.error(PLACEHOLDERS.TOAST_WRONG_CREDENTIALS);
+    const result = await login(values.email, values.password);
+
+    if (
+      !validateActionResult(result, {
+        errorToastMessage: PLACEHOLDERS.TOAST_SIGNIN_FAIL,
+        successToastMessage: PLACEHOLDERS.TOAST_SIGNIN_SUCCESS,
+        setError,
+      })
+    ) {
+      return;
     }
+
+    const user = result.user;
+
+    if (!user) {
+      return;
+    }
+
     await loginOneSignal(user.id);
 
     const params = new URLSearchParams(searchParams);
     params.delete(QUERIES.MODAL_SIGNIN);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
-    toast.success(PLACEHOLDERS.TOAST_SIGNIN_SUCCESS);
   };
 
   return (
@@ -79,7 +93,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_EMAIL}</FormLabel>
               <FormControl>
                 <Input placeholder="crazyurbanaut@gmail.com" {...field} />
               </FormControl>
@@ -92,7 +106,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{PLACEHOLDERS.LABEL_PASSWORD}</FormLabel>
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
@@ -113,7 +127,8 @@ export const SigninForm = ({ otherProviders }: Props) => {
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            {PLACEHOLDERS.LABEL_NO_ACCOUNT} <Link href={`?${QUERIES.MODAL_SIGNUP}=true`}>{PLACEHOLDERS.BUTTON_SIGNUP}</Link>
+            {PLACEHOLDERS.LABEL_NO_ACCOUNT}{" "}
+            <Link href={`?${QUERIES.MODAL_SIGNUP}=true`}>{PLACEHOLDERS.BUTTON_SIGNUP}</Link>
           </FieldDescription>
         </Field>
       </form>

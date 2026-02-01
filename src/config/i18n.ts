@@ -37,10 +37,13 @@ export const PLACEHOLDERS = {
   TOAST_COPIED_INTO_CLIPBOARD: "Copied to clipboard!",
   TOAST_PLACE_ADDED: "Place added successfully!",
   TOAST_WRONG_CREDENTIALS: "Incorrect password or sign-in method. Try OAuth.",
-  TOAST_SIGNIN_SUCCESS: "Signed in successfully!",
   TOAST_EMAIL_EXISTS: "This email is already in use.",
   TOAST_PROFILE_UPDATED: "Profile updated!",
   TOAST_SETTINGS_UPDATED: "Settings saved!",
+  TOAST_SIGNIN_FAIL: "Failed to login.",
+  TOAST_SIGNIN_SUCCESS: "Signed in successfully!",
+  TOAST_SIGNUP_SUCCESS: "Account created successfully!",
+  TOAST_SIGNUP_FAIL: "Failed to create user.",
 
   // Section headings
   SECTION_ACTIONS: "Actions",

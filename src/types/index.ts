@@ -66,3 +66,5 @@ export type {
   UserMetric,
 } from "./components"; // Component-level types
 export type { Session, SessionUser } from "./session"; // Other global types
+
+export type { ActionResult, ActionError } from "./actions";

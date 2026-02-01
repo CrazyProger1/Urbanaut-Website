@@ -20,12 +20,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
-import { toast } from "sonner";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CountrySelect } from "@/components/modules/common/selects";
 import { Country } from "@/types";
 import { BirthDateSelector } from "./BirthDateSelector";
 import { loginOneSignal } from "@/services/lib/onesignal";
+import { validateActionResult } from "@/utils/actions";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -80,22 +80,36 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     },
     mode: "onSubmit",
   });
-  const { formState } = form;
+  const { formState, setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const code = searchParams.get("code") ?? undefined;
-    const success = await register({
+    const registrationResult = await register({
       ...values,
       born_at: values.born_at?.toISOString().split("T")[0],
       code,
     });
 
-    let user;
-    if (success) {
-      user = await login(values.email, values.password);
+    const validationOptions = {
+      successToastMessage: PLACEHOLDERS.TOAST_SIGNUP_SUCCESS,
+      errorToastMessage: PLACEHOLDERS.TOAST_SIGNUP_FAIL,
+      setError,
+    };
+
+    if (!validateActionResult(registrationResult, validationOptions)) {
+      return;
     }
+
+    const loginResult = await login(values.email, values.password);
+
+    if (!validateActionResult(loginResult, validationOptions)) {
+      return;
+    }
+
+    const user = loginResult.user;
+
     if (!user) {
-      return toast.error(PLACEHOLDERS.TOAST_EMAIL_EXISTS);
+      return;
     }
 
     await loginOneSignal(user.id);
@@ -104,7 +118,6 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     params.delete(QUERIES.MODAL_SIGNUP);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
-    toast.success(PLACEHOLDERS.TOAST_SIGNIN_SUCCESS);
   };
 
   return (
@@ -148,6 +161,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
                 onChange={field.onChange}
                 countries={countries || []}
               />
+              <FormMessage />
             </FormItem>
           )}
         />

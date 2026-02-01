@@ -1,7 +1,14 @@
 import { getSession } from "@/utils/session";
 import { fetchAPI } from "@/services";
 import { API_ENDPOINTS } from "@/config";
-import { APICreateUser, APICurrentUser, APITokens, APIGoogleOauthRedirectURIResponse } from "@/types";
+import {
+  APICreateUser,
+  APICurrentUser,
+  APITokens,
+  APIGoogleOauthRedirectURIResponse,
+  APIErrorResponse,
+  APISuccessfulResponse
+} from "@/types";
 
 export const fetchAuthenticated = async <T>(endpoint: string, options?: RequestInit) => {
   const session = await getSession();
