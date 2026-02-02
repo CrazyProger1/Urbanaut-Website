@@ -47,6 +47,8 @@ export const PLACEHOLDERS = {
   TOAST_SIGNIN_SUCCESS: "Signed in successfully!",
   TOAST_SIGNUP_SUCCESS: "Account created successfully!",
   TOAST_SIGNUP_FAIL: "Failed to create user.",
+  TOAST_FEEDBACK_SUCCESS: "Thank you for your feedback we really appreciate it!",
+  TOAST_FEEDBACK_FAIL: "Failed to accept feedback.",
 
   // Section headings
   SECTION_ACTIONS: "Actions",

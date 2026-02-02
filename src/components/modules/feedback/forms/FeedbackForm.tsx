@@ -20,7 +20,8 @@ import { createFeedback } from "@/actions/feedback";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "@/i18n";
-import { QUERIES } from "@/config";
+import { PLACEHOLDERS, QUERIES } from "@/config";
+import { validateActionResult } from "@/utils/actions";
 
 const formSchema = z.object({
   content: z.string().max(5000).min(5),
@@ -38,13 +39,25 @@ export const FeedbackForm = () => {
     mode: "onSubmit",
   });
 
+  const { setError } = form;
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await createFeedback(values);
+    const result = await createFeedback(values);
+
+    const validationOptions = {
+      successToastMessage: PLACEHOLDERS.TOAST_FEEDBACK_SUCCESS,
+      failToastMessage: PLACEHOLDERS.TOAST_FEEDBACK_FAIL,
+      setError,
+    };
+
+    if (!validateActionResult(result, validationOptions)) {
+      return;
+    }
+
     const params = new URLSearchParams(searchParams);
     params.delete(QUERIES.MODAL_FEEDBACK);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
-    toast.success("Thank you for your feedback, we appreciate it very much ❤️");
   };
 
   const { formState } = form;
