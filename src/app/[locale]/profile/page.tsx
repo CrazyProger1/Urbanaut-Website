@@ -9,7 +9,7 @@ import {
   EditProfileModal,
   ReferralModal,
 } from "@/components/modules/profile";
-
+import { getReferralCodes } from "@/services";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -22,12 +22,18 @@ const Page = async () => {
     return redirect({ href: PAGES.MAIN, locale: await getLocale() });
   }
 
+  const response = await getReferralCodes();
+
+  if (!response.success || response.results.length === 0) return null;
+
+  const codes = response.results;
+
   const { user } = session;
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <EditProfileModal user={user} />
-      <ReferralModal />
+      {codes && <ReferralModal codes={codes} />}
       <UserInfoSection user={user} me />
       <UserActivitySection user={user} />
     </div>

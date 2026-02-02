@@ -19,9 +19,11 @@ import { Spinner } from "@/components/ui/spinner";
 import { createFeedback } from "@/actions/feedback";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
-import { usePathname } from "@/i18n";
+import { Link, usePathname } from "@/i18n";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { validateActionResult } from "@/utils/actions";
+import { Field } from "@/components/ui/field";
+import { usePreservedParamsLink } from "@/hooks";
 
 const formSchema = z.object({
   content: z.string().max(5000).min(5),
@@ -38,6 +40,8 @@ export const FeedbackForm = () => {
     },
     mode: "onSubmit",
   });
+
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_FEEDBACK]: false });
 
   const { setError } = form;
 
@@ -64,7 +68,7 @@ export const FeedbackForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-4">
         <FormField
           control={form.control}
           name="content"
@@ -78,9 +82,14 @@ export const FeedbackForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-          Send {formState.isSubmitting && <Spinner />}
-        </Button>
+        <Field className="flex flex-col">
+          <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+            {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
+          </Button>
+          <Button className="w-full" type="button" variant="outline" asChild>
+            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+          </Button>
+        </Field>
       </form>
     </Form>
   );

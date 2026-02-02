@@ -13,7 +13,7 @@ export const ToastProvider = ({ children, theme = "DARK" }: Props) => {
   return (
     <>
       {children}
-      <Toaster position="bottom-right" richColors theme={theme === "DARK" ? "dark" : "light"} />
+      <Toaster position="top-right" richColors theme={theme === "DARK" ? "dark" : "light"} />
     </>
   );
 };

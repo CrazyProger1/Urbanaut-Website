@@ -12,6 +12,7 @@ export type {
   UserRank,
   UserMetric,
   Notification,
+  ReferralCode,
 } from "./user";
 export type { Tag } from "./tag";
 export type { Achievement } from "./achievement";

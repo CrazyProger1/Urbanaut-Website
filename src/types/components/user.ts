@@ -6,8 +6,8 @@ import {
   APIRank,
   APIRetrieveMetric,
   APIRetrieveNotification,
+  APIListReferralCode,
 } from "@/types/services/api";
-
 
 export type User = APIRetrieveUser;
 
@@ -24,3 +24,5 @@ export type UserRank = APIRank;
 export type UserMetric = APIRetrieveMetric;
 
 export type Notification = APIRetrieveNotification;
+
+export type ReferralCode = APIListReferralCode;

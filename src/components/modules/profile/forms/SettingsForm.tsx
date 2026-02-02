@@ -125,7 +125,7 @@ export const SettingsForm = ({ user }: Props) => {
             Apply {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CLOSE}</Link>
+            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
           </Button>
         </Field>
       </form>

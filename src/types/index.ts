@@ -64,6 +64,7 @@ export type {
   UserRank,
   Notification,
   UserMetric,
+  ReferralCode,
 } from "./components"; // Component-level types
 export type { Session, SessionUser } from "./session"; // Other global types
 
