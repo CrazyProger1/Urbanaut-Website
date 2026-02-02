@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { z } from "zod";
 import Image from "next/image";
-import { useRouter } from "@/i18n";
+import { Link, useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,6 +36,8 @@ import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import { Lock, Upload, X } from "lucide-react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/ui/dropzone";
 import { validateActionResult } from "@/utils/actions";
+import { usePreservedParamsLink } from "@/hooks";
+import { Field } from "@/components/ui/field";
 
 const FilePreview = ({ file }: { file: File }) => {
   const src = useMemo(() => URL.createObjectURL(file), [file]);
@@ -79,6 +81,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_PLACE_ADDING]: false });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -274,9 +277,14 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <Label>{PLACEHOLDERS.LABEL_UPLOAD_PHOTOS}</Label>
           </DropzoneEmptyState>
         </Dropzone>
-        <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-          {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
-        </Button>
+        <Field className="flex flex-col">
+          <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
+            {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
+          </Button>
+          <Button className="w-full" type="button" variant="outline" asChild>
+            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+          </Button>
+        </Field>
       </form>
     </Form>
   );
