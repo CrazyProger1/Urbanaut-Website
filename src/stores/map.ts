@@ -12,6 +12,7 @@ type MapState = {
   isRulerActive: boolean;
   isLayersBarOpen: boolean;
   isSearchBarOpen: boolean;
+  isTooltipsExpanded: boolean;
   tooltips: string[];
   currentMapBounds?: LatLngBounds;
   currentMapCenter?: LatLng;
@@ -33,6 +34,7 @@ type MapDispatch = {
   addTooltip: (text: string) => void;
   removeTooltip: (text: string) => void;
   clearTooltips: () => void;
+  toggleTooltipsExpanded: (expanded?: boolean) => void;
   setCurrentMapBounds: (bounds: LatLngBounds) => void;
   setCurrentMapCenter: (center: LatLng) => void;
   setCurrentMapZoom: (zoom: number) => void;
@@ -58,6 +60,7 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
   tooltips: [],
   isLayersBarOpen: false,
   isSearchBarOpen: false,
+  isTooltipsExpanded: false,
   currentPrimaryLayer: LAYERS.OSM,
   currentSecondaryLayers: [],
 
@@ -102,7 +105,7 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
     const currentTooltips = get().tooltips;
 
     if (!currentTooltips.includes(text)) {
-      set({ tooltips: [text, ...currentTooltips] });
+      set({ tooltips: [text, ...currentTooltips], isTooltipsExpanded: true });
     }
   },
   removeTooltip: (text) => {
@@ -200,5 +203,12 @@ export const useMapStore = create<MapState & MapDispatch>((set, get) => ({
     const secondaryLayers = secondaryLayersRaw ? JSON.parse(secondaryLayersRaw) : [];
     set({ currentPrimaryLayer: primaryLayer, currentSecondaryLayers: secondaryLayers });
     return { primary: primaryLayer, secondary: secondaryLayers };
+  },
+  toggleTooltipsExpanded: (expanded) => {
+    const state = get().isTooltipsExpanded;
+    if (expanded === undefined) {
+      expanded = !state;
+    }
+    set({ isTooltipsExpanded: expanded });
   },
 }));

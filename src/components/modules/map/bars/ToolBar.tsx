@@ -21,12 +21,12 @@ type Props = {
 export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
   const {
     tooltips,
-    isAreasVisible,
     isCoordinatesVisible,
     isPlacesVisible,
     isChoosingPlace,
     isChoosingArea,
     isRulerActive,
+    isTooltipsExpanded,
     addTooltip,
     removeTooltip,
     toggleChoosingArea,
@@ -34,8 +34,8 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
     toggleCoordinatesVisibility,
     togglePlacesVisibility,
     toggleRulerActivity,
+    toggleTooltipsExpanded,
   } = useMapStore();
-  const [isTooltipsExpanded, setIsTooltipsExpanded] = useState(false);
 
   const handleCancel = useCallback(() => {
     removeTooltip(PLACEHOLDERS.HINT_AREA_ADDING);
@@ -71,7 +71,7 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
         <Mobile className="min-w-full">
           {tooltips && tooltips.length > 0 && (
             <div className="flex w-0 min-w-full flex-col pb-1">
-              <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={setIsTooltipsExpanded} />
+              <ToolBarTooltipsToggle value={isTooltipsExpanded} onToggle={toggleTooltipsExpanded} />
               {isTooltipsExpanded && <ToolBarTooltipContainer tooltips={tooltips} />}
             </div>
           )}
