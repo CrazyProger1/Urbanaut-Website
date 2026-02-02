@@ -107,19 +107,19 @@ export const EditProfileForm = ({ user }: Props) => {
             </FormItem>
           )}
         />
-        {/*<FormField*/}
-        {/*  control={form.control}*/}
-        {/*  name="username"*/}
-        {/*  render={({ field }) => (*/}
-        {/*    <FormItem>*/}
-        {/*      <FormLabel>{PLACEHOLDERS.LABEL_USERNAME}</FormLabel>*/}
-        {/*      <FormControl>*/}
-        {/*        <Input placeholder="johndoe" {...field} />*/}
-        {/*      </FormControl>*/}
-        {/*      <FormMessage />*/}
-        {/*    </FormItem>*/}
-        {/*  )}*/}
-        {/*/>*/}
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{PLACEHOLDERS.LABEL_USERNAME}</FormLabel>
+              <FormControl>
+                <Input placeholder="johndoe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="bio"
