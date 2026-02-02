@@ -38,6 +38,8 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
   const [isTooltipsExpanded, setIsTooltipsExpanded] = useState(false);
 
   const handleCancel = useCallback(() => {
+    removeTooltip(PLACEHOLDERS.HINT_AREA_ADDING);
+    removeTooltip(PLACEHOLDERS.HINT_PLACE_ADDING);
     toggleChoosingArea(false);
     toggleChoosingPlace(false);
   }, []);
