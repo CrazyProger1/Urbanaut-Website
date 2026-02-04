@@ -17,10 +17,12 @@ import { Link, usePathname } from "@/i18n";
 import { ALTS, IMAGES, PAGES, SIDEBAR_GROUPS } from "@/config";
 import { Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Sidebar = () => {
   const sidebar = useSidebar();
   const pathname = usePathname();
+  const isMobile = useIsMobile();
 
   return (
     <ShadcnSidebar collapsible="icon" className="drop-shadow-volume select-none">
@@ -57,7 +59,15 @@ export const Sidebar = () => {
                           <Lock className="ml-auto" />
                         </div>
                       ) : (
-                        <Link href={item.url} target={item.target}>
+                        <Link
+                          href={item.url}
+                          target={item.target}
+                          onClick={() => {
+                            if (isMobile) {
+                              sidebar.toggleSidebar();
+                            }
+                          }}
+                        >
                           <item.icon />
                           <span>{item.title}</span>
                         </Link>
