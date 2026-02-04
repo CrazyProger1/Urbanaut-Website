@@ -24,6 +24,7 @@ import { usePreservedParamsLink } from "@/hooks";
 import { CountrySelect } from "@/components/modules/common/selects";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import { CitySelect } from "@/components/modules/map/forms/CitySelect";
+import { useMapStore } from "@/stores";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
@@ -48,6 +49,7 @@ export const FiltersForm = ({
   onLoadMoreCitiesAction,
   onSearchCityAction,
 }: Props) => {
+  const { toggleSearchBar } = useMapStore();
   const params = useSearchParams();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -73,6 +75,7 @@ export const FiltersForm = ({
   });
 
   const onSubmit = async () => {
+    toggleSearchBar(false);
     router.push(applyFiltersLink, {
       scroll: false,
     });
