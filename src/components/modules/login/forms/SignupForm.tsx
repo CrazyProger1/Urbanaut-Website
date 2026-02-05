@@ -96,7 +96,12 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
       setError,
     };
 
-    if (!validateActionResult(registrationResult, validationOptions)) {
+    if (
+      !validateActionResult(registrationResult, {
+        ...validationOptions,
+        successToastMessage: undefined,
+      })
+    ) {
       return;
     }
 
