@@ -12,7 +12,7 @@ import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CurrentUser } from "@/types";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
-import { Globe, Bell, Mail } from "lucide-react";
+import { Globe, Bell, Mail, Pointer } from "lucide-react";
 import { LanguageSelect } from "./LanguageSelect";
 import { SwitchToggle } from "@/components/common/toggles";
 import { updateSettings } from "@/actions";
@@ -24,6 +24,7 @@ const formSchema = z.object({
   language: z.string(),
   is_notifications_enabled: z.boolean(),
   is_emails_enabled: z.boolean(),
+  is_interactive_mode_enabled: z.boolean(),
 });
 
 type Props = {
@@ -39,6 +40,7 @@ export const SettingsForm = ({ user }: Props) => {
       language: "English",
       is_notifications_enabled: user.settings.is_notifications_enabled,
       is_emails_enabled: user.settings.is_emails_enabled,
+      is_interactive_mode_enabled: user.settings.is_interactive_mode_enabled,
     },
     mode: "onSubmit",
   });
@@ -114,6 +116,21 @@ export const SettingsForm = ({ user }: Props) => {
                 title={PLACEHOLDERS.LABEL_EMAIL_NEWS}
                 description={PLACEHOLDERS.DESCRIPTION_EMAIL_NEWS}
                 icon={<Mail className="h-4 w-4" />}
+                checked={field.value}
+                onCheckedChange={field.onChange}
+              />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_interactive_mode_enabled"
+          render={({ field }) => (
+            <FormItem>
+              <SwitchToggle
+                title={PLACEHOLDERS.LABEL_INTERACTIVE_MODE}
+                description={PLACEHOLDERS.DESCRIPTION_INTERACTIVE_MODE}
+                icon={<Pointer className="h-4 w-4" />}
                 checked={field.value}
                 onCheckedChange={field.onChange}
               />

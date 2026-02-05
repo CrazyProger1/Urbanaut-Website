@@ -83,6 +83,8 @@ export const PLACEHOLDERS = {
   DESCRIPTION_PUSH_NOTIFICATIONS: "Receive important updates directly on your device.",
   DESCRIPTION_EMAIL_NEWS: "Stay informed with news and feature updates by email.",
   DESCRIPTION_PLACE_PRIVATE: "When enabled, only you can see this place.",
+  DESCRIPTION_INTERACTIVE_MODE:
+    "Enable informational toasts, hints, and tooltips. Error messages will still appear even when this is disabled.",
 
   // Roles
   ROLE_CREATOR: "creator",
@@ -116,6 +118,7 @@ export const PLACEHOLDERS = {
   LABEL_LANGUAGE: "Language",
   LABEL_PUSH_NOTIFICATIONS: "Push Notifications",
   LABEL_EMAIL_NEWS: "Email Newsletter",
+  LABEL_INTERACTIVE_MODE: "Interactive Mode",
   LABEL_FORGOT_PASSWORD: "Forgot password?",
   LABEL_NO_ACCOUNT: "Don't have an account?",
   LABEL_HAVE_ACCOUNT: "Already have an account?",
