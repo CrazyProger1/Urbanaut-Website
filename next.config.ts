@@ -3,10 +3,25 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   images: {
+    unoptimized: process.env.NODE_ENV === "development",
     remotePatterns: [
-      new URL("http://localhost:8001/api/v1/files/**"),
-      new URL("http://127.0.0.1:8001/api/v1/files/**"),
-      new URL("https://api.urbanaut.club/api/v1/files/**"),
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8001",
+        pathname: "/api/v1/files/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "8001",
+        pathname: "/api/v1/files/**",
+      },
+      {
+        protocol: "https",
+        hostname: "api.urbanaut.club",
+        pathname: "/api/v1/files/**",
+      },
     ],
   },
   output: "standalone",

@@ -25,7 +25,7 @@ export const Carousel = ({ images }: Props) => {
       <CarouselContent>
         {images?.map(({ src, alt, href }) => (
           <CarouselItem key={src}>
-            <OptionalLink href={href} className="relative m-1 aspect-video w-full overflow-hidden">
+            <OptionalLink href={href} className="relative m-1 aspect-video w-full overflow-hidden block">
               <Image
                 src={src}
                 alt={alt || "Carousel photo"}

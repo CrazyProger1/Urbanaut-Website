@@ -1,30 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { ALTS, QUERIES } from "@/config";
 import { File } from "@/types";
 import { Carousel } from "@/components/ui/next/carousel";
-import { usePreservedParamsLink } from "@/hooks";
+import { usePathname } from "@/i18n";
 
 type Props = {
   photos?: File[];
 };
 
 const GallerySection = ({ photos }: Props) => {
-  const current = usePreservedParamsLink();
-  return (
-    <Carousel
-      images={
-        photos?.map(({ id, src }) => {
-          return {
-            src: src,
-            alt: ALTS.PLACE_PHOTO,
-            href: `${current}&${QUERIES.LIGHTBOX_PHOTO}=${id}`,
-          };
-        }) || []
-      }
-    />
-  );
+  const searchParams = new URLSearchParams();
+  const pathname = usePathname();
+
+  const images = useMemo(() => {
+    return (
+      photos?.map(({ src, id }) => {
+        const params = new URLSearchParams(searchParams);
+        params.set(QUERIES.LIGHTBOX_PHOTO, id);
+
+        return {
+          src: src,
+          alt: ALTS.PLACE_PHOTO,
+          href: `${pathname}?${params}`,
+        };
+      }) || []
+    );
+  }, [photos, pathname]);
+  return <Carousel images={images} />;
 };
 
 export default GallerySection;
