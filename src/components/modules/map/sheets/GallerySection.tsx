@@ -1,36 +1,29 @@
+"use client";
+
 import React from "react";
-import Image from "next/image";
-import { ALTS } from "@/config";
+import { ALTS, QUERIES } from "@/config";
 import { File } from "@/types";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Carousel } from "@/components/ui/next/carousel";
+import { usePreservedParamsLink } from "@/hooks";
 
 type Props = {
   photos?: File[];
 };
 
 const GallerySection = ({ photos }: Props) => {
+  const current = usePreservedParamsLink();
   return (
-    <Carousel>
-      <CarouselContent>
-        {photos?.map(({ src, id }) => (
-          <CarouselItem key={id}>
-            <div className="p-1">
-              <div className="relative aspect-video w-full overflow-hidden">
-                <Image src={src} alt={ALTS.PLACE_PHOTO} fill className="rounded-2xl object-cover" />
-              </div>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="right-auto! left-4!" />
-      <CarouselNext className="right-4! left-auto!" />
-    </Carousel>
+    <Carousel
+      images={
+        photos?.map(({ id, src }) => {
+          return {
+            src: src,
+            alt: ALTS.PLACE_PHOTO,
+            href: `${current}&${QUERIES.LIGHTBOX_PHOTO}=${id}`,
+          };
+        }) || []
+      }
+    />
   );
 };
 
