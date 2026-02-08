@@ -47,7 +47,7 @@ export const QUERIES = {
   FILTER_COUNTRY: "country",
   FILTER_CITY: "city",
 
-  LIGHTBOX_PHOTO: "photo",
+  VIEWER_PHOTO: "photo",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

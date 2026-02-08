@@ -1,1 +1,1 @@
-// export { Lightbox } from "./Lightbox";
+export { Viewer } from "./Viewer";
