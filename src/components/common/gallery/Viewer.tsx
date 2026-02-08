@@ -28,14 +28,11 @@ export const Viewer = ({ query, images }: Props) => {
   const isOpen = useMemo(() => {
     return searchParams.has(query);
   }, [query, searchParams]);
-  const [isInitialized, setIsInitialized] = useState(false);
 
-  const initialSlideIndex = useMemo(() => {
-    if (isInitialized) return undefined;
+  const index = useMemo(() => {
     const currentImageKey = searchParams.get(query);
-    setIsInitialized(true);
     return images.findIndex(({ key }) => key === currentImageKey);
-  }, [searchParams, isInitialized]);
+  }, [searchParams]);
 
   const handleChangeSlide = useCallback(
     ({ index }: { index: number }) => {
@@ -43,11 +40,10 @@ export const Viewer = ({ query, images }: Props) => {
       const params = new URLSearchParams(searchParams);
       params.delete(query);
       params.set(query, key);
-      router.replace(`${pathname}?${params}`);
+      router.push(`${pathname}?${params}`);
     },
     [images, pathname, searchParams],
   );
-  console.log("RENDERING!!!");
 
   return (
     <>
@@ -56,7 +52,7 @@ export const Viewer = ({ query, images }: Props) => {
         close={() => {
           router.push(closeLink);
         }}
-        index={initialSlideIndex}
+        index={index}
         slides={images}
         render={{ slide: NextImage }}
         styles={{ root: { pointerEvents: "auto" } }}
