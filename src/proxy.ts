@@ -6,7 +6,6 @@ import { getSession, setSession } from "@/utils/session";
 import { APITokenPayload } from "@/types/services/api";
 import { API_ENDPOINTS, REFRESH_DELTA_TIME } from "@/config";
 import { fetchAPI } from "@/services";
-import { syncCurrentUser } from "@/actions";
 import pino from "pino";
 
 const intlMiddleware = createMiddleware(routing);
@@ -40,8 +39,6 @@ const proxy = async (request: NextRequest) => {
 
       await setSession({ accessToken: response.access });
     }
-
-    await syncCurrentUser();
   }
 
   const response = intlMiddleware(request);
