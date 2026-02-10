@@ -42,4 +42,5 @@ export const syncCurrentUser = async () => {
   const userResponse = await getMe();
   session.user = userResponse.success ? userResponse : undefined;
   await setSession(session);
+  return session;
 };

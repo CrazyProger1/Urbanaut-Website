@@ -8,15 +8,15 @@ import { ModalProvider } from "@/components/common/modals";
 import { SigninModal, SignupModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar, OauthProvider } from "@/components/modules/layout";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { getSession, setSession } from "@/utils/session";
+import { getSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { QueryToast, ToastProvider } from "@/components/common/toasts";
+import { ToastProvider } from "@/components/common/toasts";
 import { Poppins } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
-import { getMe, getNotifications, getUserByUsername, obtainWebsocketToken } from "@/services";
+import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { OneSignalProvider } from "@/components/lib/onesignal";
 
