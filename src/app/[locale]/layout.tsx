@@ -19,6 +19,7 @@ import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { OneSignalProvider } from "@/components/lib/onesignal";
+import { redirect } from "@/i18n";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -52,18 +53,24 @@ const poppins = Poppins({
 
 type Props = {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 };
 
 export const generateStaticParams = () => {
   return routing.locales.map((locale) => ({ locale }));
 };
 
-const RootLayout = async ({ children }: Props) => {
+const RootLayout = async ({ children, params }: Props) => {
+  const { locale } = await params;
   const session = await getSession();
 
   const user = session?.user;
 
-  setRequestLocale(user?.settings?.language || "en");
+  if (user?.settings.language && locale !== user?.settings.language) {
+    setRequestLocale(user.settings.language);
+  } else {
+    setRequestLocale(locale);
+  }
 
   const theme = user?.settings?.theme || "DARK";
 

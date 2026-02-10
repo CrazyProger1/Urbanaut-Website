@@ -1,5 +1,18 @@
 {
   "HomePage": {
     "title": "Hello world!"
+  },
+  "Sidebar": {
+    "Home": "Home",
+    "Map": "Map",
+    "Blog": "Blog",
+    "Calendar": "Calendar",
+    "YouTube": "YouTube",
+    "Instagram": "Instagram",
+    "Telegram": "Telegram",
+    "TikTok": "TikTok",
+    "Patreon": "Patreon",
+    "Donate": "Donate",
+    "Feedback": "Feedback"
   }
 }

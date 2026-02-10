@@ -10,7 +10,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
 import React from "react";
 import Image from "next/image";
 import { Link, usePathname } from "@/i18n";
@@ -18,11 +17,14 @@ import { ALTS, IMAGES, PAGES, SIDEBAR_GROUPS } from "@/config";
 import { Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useTranslations } from "next-intl";
+
 
 export const Sidebar = () => {
   const sidebar = useSidebar();
   const pathname = usePathname();
   const isMobile = useIsMobile();
+  const t = useTranslations("Sidebar");
 
   return (
     <ShadcnSidebar collapsible="icon" className="drop-shadow-volume select-none">
@@ -55,7 +57,7 @@ export const Sidebar = () => {
                       {item.disabled ? (
                         <div className="flex">
                           <item.icon />
-                          <span>{item.title}</span>
+                          <span>{t(item.title)}</span>
                           <Lock className="ml-auto" />
                         </div>
                       ) : (
@@ -69,7 +71,7 @@ export const Sidebar = () => {
                           }}
                         >
                           <item.icon />
-                          <span>{item.title}</span>
+                          <span>{t(item.title)}</span>
                         </Link>
                       )}
                     </SidebarMenuButton>

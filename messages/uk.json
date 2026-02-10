@@ -1,5 +1,18 @@
 {
   "HomePage": {
     "title": "Привіт Світ!"
+  },
+  "Sidebar": {
+    "Home": "Головна",
+    "Map": "Карта",
+    "Blog": "Блог",
+    "Calendar": "Календар",
+    "YouTube": "YouTube",
+    "Instagram": "Instagram",
+    "Telegram": "Telegram",
+    "TikTok": "TikTok",
+    "Patreon": "Patreon",
+    "Donate": "Донат",
+    "Feedback": "Зворотній зв'язок"
   }
 }
