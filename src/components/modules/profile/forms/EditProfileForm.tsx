@@ -23,6 +23,7 @@ import { updateCurrentUser } from "@/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { validateActionResult } from "@/utils/actions";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   first_name: z
@@ -46,6 +47,7 @@ type Props = {
 };
 
 export const EditProfileForm = ({ user }: Props) => {
+  const t = useTranslations("Profile");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -66,8 +68,8 @@ export const EditProfileForm = ({ user }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const result = await updateCurrentUser(values);
     const validationOptions = {
-      successToastMessage: PLACEHOLDERS.TOAST_PROFILE_UPDATE_SUCCESS,
-      failToastMessage: PLACEHOLDERS.TOAST_PROFILE_UPDATE_FAIL,
+      successToastMessage: t(PLACEHOLDERS.TOAST_PROFILE_UPDATE_SUCCESS),
+      failToastMessage: t(PLACEHOLDERS.TOAST_PROFILE_UPDATE_FAIL),
       setError,
     };
 
@@ -86,7 +88,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_FIRST_NAME}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_FIRST_NAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="John" {...field} />
               </FormControl>
@@ -99,7 +101,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="last_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_LAST_NAME}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_LAST_NAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="Doe" {...field} />
               </FormControl>
@@ -112,7 +114,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_USERNAME}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_USERNAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
@@ -125,7 +127,7 @@ export const EditProfileForm = ({ user }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_BIO}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_BIO)}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
@@ -135,10 +137,10 @@ export const EditProfileForm = ({ user }: Props) => {
         />
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
+            {t(PLACEHOLDERS.BUTTON_SAVE)} {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+            <Link href={closeModalLink}>{t(PLACEHOLDERS.BUTTON_CANCEL)}</Link>
           </Button>
         </Field>
       </form>

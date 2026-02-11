@@ -9,12 +9,14 @@ import { Copy } from "lucide-react";
 import { Link } from "@/i18n";
 import { ReferralCode } from "@/types";
 import { usePreservedParamsLink } from "@/hooks";
+import { useTranslations } from "next-intl";
 
 type Props = {
   codes: ReferralCode[];
 };
 
 export const ReferralModalContent = ({ codes }: Props) => {
+  const t = useTranslations("Profile");
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_REFERRAL_PROFILE]: false });
 
   return (
@@ -30,7 +32,7 @@ export const ReferralModalContent = ({ codes }: Props) => {
         </div>
       ))}
       <Button className="w-full" type="button" variant="outline" asChild>
-        <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+        <Link href={closeModalLink}>{t(PLACEHOLDERS.BUTTON_CANCEL)}</Link>
       </Button>
     </div>
   );

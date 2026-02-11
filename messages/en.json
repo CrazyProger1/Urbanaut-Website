@@ -23,5 +23,43 @@
     "BUTTON_PROFILE": "Profile",
     "BUTTON_SETTINGS": "Settings",
     "BUTTON_LOGOUT": "Log out"
+  },
+  "Profile": {
+    "TOOLTIP_EDIT_PROFILE": "Edit Profile",
+    "TOOLTIP_OPEN_SETTINGS": "Settings",
+    "TOOLTIP_SHARE_PROFILE": "Share Profile",
+    "TOOLTIP_REFERRAL_PROGRAM": "Referral Program",
+    "LABEL_JOINED": "Joined",
+    "TITLE_EDIT_PROFILE": "Edit Profile",
+    "TITLE_SETTINGS": "Settings",
+    "TITLE_REFERRAL": "Referral Program",
+    "DESCRIPTION_EDIT_PROFILE": "Update your profile information. Save when you're done.",
+    "DESCRIPTION_SETTINGS": "Manage your account, preferences, and notifications.",
+    "DESCRIPTION_REFERRAL": "Invite friends and earn rewards for each successful referral. Bonuses coming soon!",
+    "DESCRIPTION_PUSH_NOTIFICATIONS": "Receive important updates directly on your device.",
+    "DESCRIPTION_EMAIL_NEWS": "Stay informed with news and feature updates by email.",
+    "DESCRIPTION_INTERACTIVE_MODE": "Enable informational toasts, hints, and tooltips. Error messages will still appear even when this is disabled.",
+    "TOAST_PROFILE_UPDATE_SUCCESS": "Profile updated successfully!",
+    "TOAST_PROFILE_UPDATE_FAIL": "Failed to update profile.",
+    "TOAST_SETTINGS_UPDATE_SUCCESS": "Settings updated successfully!",
+    "TOAST_SETTINGS_UPDATE_FAIL": "Failed to update settings.",
+    "LABEL_FIRST_NAME": "First Name / Nickname",
+    "LABEL_LAST_NAME": "Last Name",
+    "LABEL_USERNAME": "Username",
+    "LABEL_BIO": "Bio",
+    "LABEL_LANGUAGE": "Language",
+    "LABEL_PUSH_NOTIFICATIONS": "Push Notifications",
+    "LABEL_EMAIL_NEWS": "Email Newsletter",
+    "LABEL_INTERACTIVE_MODE": "Interactive Mode",
+    "BUTTON_SAVE": "Save",
+    "BUTTON_CANCEL": "Cancel",
+    "BUTTON_APPLY": "Apply",
+    "LABEL_REPORTS": "Reports",
+    "LABEL_PLACES": "Places",
+    "LABEL_ACHIEVEMENTS": "Achievements",
+    "LABEL_FRIENDS": "Friends"
+  },
+  "Common": {
+    "TOAST_COPIED_INTO_CLIPBOARD": "Copied to clipboard!"
   }
 }

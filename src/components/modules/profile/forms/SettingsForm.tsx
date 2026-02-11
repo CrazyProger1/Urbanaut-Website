@@ -19,6 +19,7 @@ import { updateSettings } from "@/actions";
 import { Locale } from "@/i18n";
 import { Separator } from "@/components/ui/separator";
 import { validateActionResult } from "@/utils/actions";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   language: z.string(),
@@ -32,6 +33,7 @@ type Props = {
 };
 
 export const SettingsForm = ({ user }: Props) => {
+  const t = useTranslations("Profile");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,8 +58,8 @@ export const SettingsForm = ({ user }: Props) => {
       language: languageCode,
     });
     const validationOptions = {
-      successToastMessage: PLACEHOLDERS.TOAST_SETTINGS_UPDATE_SUCCESS,
-      failToastMessage: PLACEHOLDERS.TOAST_SETTINGS_UPDATE_FAIL,
+      successToastMessage: t(PLACEHOLDERS.TOAST_SETTINGS_UPDATE_SUCCESS),
+      failToastMessage: t(PLACEHOLDERS.TOAST_SETTINGS_UPDATE_FAIL),
       setError,
     };
 
@@ -78,7 +80,7 @@ export const SettingsForm = ({ user }: Props) => {
             <FormItem>
               <FormLabel className="flex items-center gap-2">
                 <Globe className="text-muted-foreground h-4 w-4" />
-                {PLACEHOLDERS.LABEL_LANGUAGE}
+                {t(PLACEHOLDERS.LABEL_LANGUAGE)}
               </FormLabel>
               <FormControl>
                 <LanguageSelect
@@ -98,8 +100,8 @@ export const SettingsForm = ({ user }: Props) => {
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
-                title={PLACEHOLDERS.LABEL_PUSH_NOTIFICATIONS}
-                description={PLACEHOLDERS.DESCRIPTION_PUSH_NOTIFICATIONS}
+                title={t(PLACEHOLDERS.LABEL_PUSH_NOTIFICATIONS)}
+                description={t(PLACEHOLDERS.DESCRIPTION_PUSH_NOTIFICATIONS)}
                 icon={<Bell className="h-4 w-4" />}
                 checked={field.value}
                 onCheckedChange={field.onChange}
@@ -113,8 +115,8 @@ export const SettingsForm = ({ user }: Props) => {
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
-                title={PLACEHOLDERS.LABEL_EMAIL_NEWS}
-                description={PLACEHOLDERS.DESCRIPTION_EMAIL_NEWS}
+                title={t(PLACEHOLDERS.LABEL_EMAIL_NEWS)}
+                description={t(PLACEHOLDERS.DESCRIPTION_EMAIL_NEWS)}
                 icon={<Mail className="h-4 w-4" />}
                 checked={field.value}
                 onCheckedChange={field.onChange}
@@ -128,8 +130,8 @@ export const SettingsForm = ({ user }: Props) => {
           render={({ field }) => (
             <FormItem>
               <SwitchToggle
-                title={PLACEHOLDERS.LABEL_INTERACTIVE_MODE}
-                description={PLACEHOLDERS.DESCRIPTION_INTERACTIVE_MODE}
+                title={t(PLACEHOLDERS.LABEL_INTERACTIVE_MODE)}
+                description={t(PLACEHOLDERS.DESCRIPTION_INTERACTIVE_MODE)}
                 icon={<Pointer className="h-4 w-4" />}
                 checked={field.value}
                 onCheckedChange={field.onChange}
@@ -139,10 +141,10 @@ export const SettingsForm = ({ user }: Props) => {
         />
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            Apply {formState.isSubmitting && <Spinner />}
+            {t(PLACEHOLDERS.BUTTON_APPLY)} {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+            <Link href={closeModalLink}>{t(PLACEHOLDERS.BUTTON_CANCEL)}</Link>
           </Button>
         </Field>
       </form>

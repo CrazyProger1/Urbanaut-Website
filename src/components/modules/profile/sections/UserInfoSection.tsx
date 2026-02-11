@@ -6,7 +6,7 @@ import { Calendar, Edit, MapPin, Settings, Share2, Users } from "lucide-react";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { Link } from "@/i18n";
-import { getFormatter } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/classes";
 import { CopyToast } from "@/components/common/toasts";
@@ -19,6 +19,7 @@ type Props = {
 };
 
 export const UserInfoSection = async ({ user, me = false }: Props) => {
+  const t = await getTranslations("Profile");
   const format = await getFormatter();
 
   const joinedAt = Date.parse(user.created_at);
@@ -39,14 +40,14 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
         />
         {me && (
           <div className="flex flex-row gap-1">
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_EDIT_PROFILE}>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_EDIT_PROFILE)}>
               <Button variant="outline" asChild>
                 <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_EDIT_PROFILE}=true`}>
                   <Edit />
                 </Link>
               </Button>
             </Tooltip>
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_OPEN_SETTINGS}>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_OPEN_SETTINGS)}>
               <Button variant="outline" asChild>
                 <Link href={`?${QUERIES.MODAL_SETTINGS}=true`}>
                   <Settings />
@@ -55,14 +56,14 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
             </Tooltip>
 
             <CopyToast clipboard={`${SITE_URL}${PAGES.PROFILE}/${user.usernames?.[0]}`}>
-              <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PROFILE} asChild>
+              <Tooltip content={t(PLACEHOLDERS.TOOLTIP_SHARE_PROFILE)} asChild>
                 <Button variant="outline">
                   <Share2 />
                 </Button>
               </Tooltip>
             </CopyToast>
 
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_REFERRAL_PROGRAM}>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_REFERRAL_PROGRAM)}>
               <Button variant="outline" asChild>
                 <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_REFERRAL_PROFILE}=true`}>
                   <Users />
@@ -90,7 +91,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
           <div className="flex flex-row items-center gap-1">
             <Calendar size={16} />
             <div>
-              {PLACEHOLDERS.LABEL_JOINED}{" "}
+              {t(PLACEHOLDERS.LABEL_JOINED)}{" "}
               {format.dateTime(joinedAt, {
                 year: "numeric",
                 month: "long",

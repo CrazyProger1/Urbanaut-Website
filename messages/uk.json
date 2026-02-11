@@ -16,7 +16,6 @@
     "BUTTON_FEEDBACK": "Зворотній зв'язок"
   },
   "Header": {
-    "HINT_PLACE_ADDING": "Натисніть на карту, щоб розмістити маркер. Перетягніть для коригування позиції.",
     "TOOLTIP_TOGGLE_SIDEBAR": "Бічна панель",
     "TOOLTIP_NOTIFICATIONS": "Сповіщення",
     "BUTTON_LOGIN": "Увійти",
@@ -24,5 +23,43 @@
     "BUTTON_PROFILE": "Профіль",
     "BUTTON_SETTINGS": "Налаштування",
     "BUTTON_LOGOUT": "Вийти"
+  },
+  "Profile": {
+    "TOOLTIP_EDIT_PROFILE": "Редагувати профіль",
+    "TOOLTIP_OPEN_SETTINGS": "Налаштування",
+    "TOOLTIP_SHARE_PROFILE": "Поділитися профілем",
+    "TOOLTIP_REFERRAL_PROGRAM": "Реферальна програма",
+    "LABEL_JOINED": "Приєднався",
+    "TITLE_EDIT_PROFILE": "Редагувати профіль",
+    "TITLE_SETTINGS": "Налаштування",
+    "TITLE_REFERRAL": "Реферальна програма",
+    "DESCRIPTION_EDIT_PROFILE": "Оновіть інформацію профілю. Збережіть, коли закінчите.",
+    "DESCRIPTION_SETTINGS": "Керуйте обліковим записом, налаштуваннями та сповіщеннями.",
+    "DESCRIPTION_REFERRAL": "Запрошуйте друзів та отримуйте винагороди за кожного успішного реферала. Бонуси незабаром!",
+    "DESCRIPTION_PUSH_NOTIFICATIONS": "Отримуйте важливі оновлення безпосередньо на ваш пристрій.",
+    "DESCRIPTION_EMAIL_NEWS": "Будьте в курсі новин та оновлень функцій електронною поштою.",
+    "DESCRIPTION_INTERACTIVE_MODE": "Увімкніть інформаційні сповіщення, підказки та підписи. Повідомлення про помилки все одно з'являтимуться, навіть коли це вимкнено.",
+    "TOAST_PROFILE_UPDATE_SUCCESS": "Профіль успішно оновлено!",
+    "TOAST_PROFILE_UPDATE_FAIL": "Не вдалося оновити профіль.",
+    "TOAST_SETTINGS_UPDATE_SUCCESS": "Налаштування успішно оновлено!",
+    "TOAST_SETTINGS_UPDATE_FAIL": "Не вдалося оновити налаштування.",
+    "LABEL_FIRST_NAME": "Ім'я / Нікнейм",
+    "LABEL_LAST_NAME": "Прізвище",
+    "LABEL_USERNAME": "Ім'я користувача",
+    "LABEL_BIO": "Про себе",
+    "LABEL_LANGUAGE": "Мова",
+    "LABEL_PUSH_NOTIFICATIONS": "Push-сповіщення",
+    "LABEL_EMAIL_NEWS": "Розсилка електронною поштою",
+    "LABEL_INTERACTIVE_MODE": "Інтерактивний режим",
+    "BUTTON_SAVE": "Зберегти",
+    "BUTTON_CANCEL": "Скасувати",
+    "BUTTON_APPLY": "Застосувати",
+    "LABEL_REPORTS": "Звіти",
+    "LABEL_PLACES": "Місця",
+    "LABEL_ACHIEVEMENTS": "Досягнення",
+    "LABEL_FRIENDS": "Друзі"
+  },
+  "Common": {
+    "TOAST_COPIED_INTO_CLIPBOARD": "Скопійовано до буферу обміну!"
   }
 }

@@ -3,26 +3,29 @@ import { User } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Lock } from "lucide-react";
+import { PLACEHOLDERS } from "@/config";
+import { useTranslations } from "next-intl";
 
 type Props = {
   user: User;
 };
 
 export const UserActivitySection = ({ user }: Props) => {
+  const t = useTranslations("Profile");
   return (
     <Tabs defaultValue="reports" className="flex flex-1 flex-col gap-4 select-none">
       <TabsList className="w-full">
         <TabsTrigger value="reports" className="w-full">
-          Reports
+          {t(PLACEHOLDERS.LABEL_REPORTS)}
         </TabsTrigger>
         <TabsTrigger value="places" className="w-full">
-          Places
+          {t(PLACEHOLDERS.LABEL_PLACES)}
         </TabsTrigger>
         <TabsTrigger value="achivements" className="w-full">
-          Achievements
+          {t(PLACEHOLDERS.LABEL_ACHIEVEMENTS)}
         </TabsTrigger>
         <TabsTrigger value="friends" className="w-full">
-          Friends
+          {t(PLACEHOLDERS.LABEL_FRIENDS)}
         </TabsTrigger>
       </TabsList>
       <TabsContent value="reports" className="drop-shadow-volume flex flex-1 flex-col">

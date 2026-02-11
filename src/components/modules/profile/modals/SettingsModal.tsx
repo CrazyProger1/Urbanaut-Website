@@ -9,19 +9,21 @@ import { Modal } from "@/components/ui/next/modal";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CurrentUser } from "@/types";
 import { SettingsForm } from "../forms/SettingsForm";
+import { useTranslations } from "next-intl";
 
 type Props = {
   user: CurrentUser;
 };
 
 export const SettingsModal = ({ user }: Props) => {
+  const t = useTranslations("Profile");
   return (
     <Modal query={QUERIES.MODAL_SETTINGS}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{PLACEHOLDERS.TITLE_SETTINGS}</DialogTitle>
+          <DialogTitle>{t(PLACEHOLDERS.TITLE_SETTINGS)}</DialogTitle>
           <DialogDescription>
-            {PLACEHOLDERS.DESCRIPTION_SETTINGS}
+            {t(PLACEHOLDERS.DESCRIPTION_SETTINGS)}
           </DialogDescription>
         </DialogHeader>
         <SettingsForm user={user} />
