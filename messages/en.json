@@ -1,6 +1,14 @@
 {
   "Common": {
-    "TOAST_COPIED_INTO_CLIPBOARD": "Copied to clipboard!"
+    "TOAST_COPIED_INTO_CLIPBOARD": "Copied to clipboard!",
+    "LABEL_COOKIE_TITLE": "We use cookies",
+    "LABEL_COOKIE_NOTICE": "Cookie Notice",
+    "DESCRIPTION_COOKIE": "We use cookies to ensure you get the best experience on our website. For more information on how we use cookies, please see our cookie policy.",
+    "DESCRIPTION_COOKIE_MINIMAL": "We use cookies to enhance your browsing experience.",
+    "LABEL_COOKIE_CONSENT": "By clicking <accept>Accept</accept>, you agree to our use of cookies.",
+    "LABEL_COOKIE_LEARN_MORE": "Learn more.",
+    "BUTTON_ACCEPT": "Accept",
+    "BUTTON_DECLINE": "Decline"
   },
   "Modules": {
     "HINT_PLACE_ADDING": "Tap on the map to place the marker. Drag to adjust position.",

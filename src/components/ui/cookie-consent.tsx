@@ -4,6 +4,8 @@ import { CookieIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
+import { PLACEHOLDERS } from "@/config";
 
 export function CookieConsent({
   variant = "default",
@@ -11,6 +13,7 @@ export function CookieConsent({
   onAcceptCallback = () => { },
   onDeclineCallback = () => { },
 }) {
+  const t = useTranslations("Common");
   const [isOpen, setIsOpen] = useState(false);
   const [hide, setHide] = useState(false);
 
@@ -61,33 +64,31 @@ export function CookieConsent({
       <div className="dark:bg-card bg-background rounded-lg sm:rounded-md border border-border shadow-lg">
         <div className="grid gap-2">
           <div className="border-b border-border h-12 sm:h-14 flex items-center justify-between p-3 sm:p-4">
-            <h1 className="text-base sm:text-lg font-medium">We use cookies</h1>
+            <h1 className="text-base sm:text-lg font-medium">{t(PLACEHOLDERS.LABEL_COOKIE_TITLE)}</h1>
             <CookieIcon className="h-4 w-4 sm:h-[1.2rem] sm:w-[1.2rem]" />
           </div>
           <div className="p-3 sm:p-4">
             <p className="text-xs sm:text-sm font-normal text-start text-muted-foreground">
-              We use cookies to ensure you get the best experience on our
-              website. For more information on how we use cookies, please see
-              our cookie policy.
+              {t(PLACEHOLDERS.DESCRIPTION_COOKIE)}
               <br />
               <br />
               <span className="text-xs">
-                By clicking{" "}
-                <span className="font-medium text-black dark:text-white">Accept</span>, you
-                agree to our use of cookies.
+                {t.rich(PLACEHOLDERS.LABEL_COOKIE_CONSENT, {
+                  accept: (chunks) => <span className="font-medium text-black dark:text-white">{chunks}</span>,
+                })}
               </span>
               <br />
               <a href="#" className="text-xs underline">
-                Learn more.
+                {t(PLACEHOLDERS.LABEL_COOKIE_LEARN_MORE)}
               </a>
             </p>
           </div>
           <div className="grid grid-cols-2 items-center gap-2 p-3 sm:p-4 sm:py-5 border-t border-border dark:bg-background/20">
             <Button onClick={accept} variant="default" className="w-full">
-              Accept
+              {t(PLACEHOLDERS.BUTTON_ACCEPT)}
             </Button>
             <Button onClick={decline} variant="outline" className="w-full">
-              Decline
+              {t(PLACEHOLDERS.BUTTON_DECLINE)}
             </Button>
           </div>
         </div>
@@ -105,26 +106,24 @@ export function CookieConsent({
     >
       <div className="m-0 sm:m-3 dark:bg-card bg-background border border-border rounded-lg shadow-lg">
         <div className="flex items-center justify-between p-3">
-          <h1 className="text-base sm:text-lg font-medium">We use cookies</h1>
+          <h1 className="text-base sm:text-lg font-medium">{t(PLACEHOLDERS.LABEL_COOKIE_TITLE)}</h1>
           <CookieIcon className="h-4 w-4 sm:h-[1.2rem] sm:w-[1.2rem]" />
         </div>
         <div className="p-3 -mt-2">
           <p className="text-xs sm:text-sm text-left text-muted-foreground">
-            We use cookies to ensure you get the best experience on our website.
-            For more information on how we use cookies, please see our cookie
-            policy.
+            {t(PLACEHOLDERS.DESCRIPTION_COOKIE)}
           </p>
         </div>
         <div className="grid grid-cols-2 items-center gap-2 p-3 mt-2 border-t">
           <Button onClick={accept} className="w-full">
-            Accept
+            {t(PLACEHOLDERS.BUTTON_ACCEPT)}
           </Button>
           <Button
             onClick={decline}
             className="w-full"
             variant="outline"
           >
-            Decline
+            {t(PLACEHOLDERS.BUTTON_DECLINE)}
           </Button>
         </div>
       </div>
@@ -144,12 +143,12 @@ export function CookieConsent({
           <div className="p-3 flex items-center justify-between border-b border-border">
             <div className="flex items-center gap-2">
               <CookieIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm font-medium">Cookie Notice</span>
+              <span className="text-xs sm:text-sm font-medium">{t(PLACEHOLDERS.LABEL_COOKIE_NOTICE)}</span>
             </div>
           </div>
           <div className="p-3">
             <p className="text-[11px] sm:text-xs text-muted-foreground">
-              We use cookies to enhance your browsing experience.
+              {t(PLACEHOLDERS.DESCRIPTION_COOKIE_MINIMAL)}
             </p>
             <div className="grid grid-cols-2 items-center gap-2 mt-3">
               <Button
@@ -157,14 +156,14 @@ export function CookieConsent({
                 variant="default"
                 className="w-full"
               >
-                Accept
+                {t(PLACEHOLDERS.BUTTON_ACCEPT)}
               </Button>
               <Button
                 onClick={decline}
                 variant="ghost"
                 className="w-full"
               >
-                Decline
+                {t(PLACEHOLDERS.BUTTON_DECLINE)}
               </Button>
             </div>
           </div>

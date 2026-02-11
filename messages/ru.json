@@ -1,6 +1,14 @@
 {
   "Common": {
-    "TOAST_COPIED_INTO_CLIPBOARD": "Скопировано в буфер обмена!"
+    "TOAST_COPIED_INTO_CLIPBOARD": "Скопировано в буфер обмена!",
+    "LABEL_COOKIE_TITLE": "Мы используем cookies",
+    "LABEL_COOKIE_NOTICE": "Уведомление о cookies",
+    "DESCRIPTION_COOKIE": "Мы используем cookies, чтобы обеспечить лучший опыт на нашем сайте. Для получения дополнительной информации о том, как мы используем cookies, ознакомьтесь с нашей политикой cookies.",
+    "DESCRIPTION_COOKIE_MINIMAL": "Мы используем cookies для улучшения вашего опыта просмотра.",
+    "LABEL_COOKIE_CONSENT": "Нажимая <accept>Принять</accept>, вы соглашаетесь с использованием нами cookies.",
+    "LABEL_COOKIE_LEARN_MORE": "Узнать больше.",
+    "BUTTON_ACCEPT": "Принять",
+    "BUTTON_DECLINE": "Отклонить"
   },
   "Modules": {
     "HINT_PLACE_ADDING": "Нажмите на карту, чтобы разместить маркер. Перетащите для корректировки позиции.",
