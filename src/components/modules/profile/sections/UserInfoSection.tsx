@@ -94,7 +94,8 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
               {t(PLACEHOLDERS.LABEL_JOINED)}{" "}
               {format.dateTime(joinedAt, {
                 year: "numeric",
-                month: "long",
+                month: "short",
+                day: "numeric",
               })}
             </div>
           </div>
