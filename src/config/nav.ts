@@ -2,6 +2,7 @@ import { Calendar, CircleDollarSign, Home, Map, Newspaper, Search, Send } from "
 import { FaInstagram, FaPatreon, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { SidebarItem } from "@/types";
 import { SidebarGroup } from "@/types/components/sidebar";
+import { PLACEHOLDERS } from "@/config/i18n";
 
 export const PAGES = {
   MAIN: "/",
@@ -52,24 +53,24 @@ export const QUERIES = {
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
   {
-    title: "Home",
+    title: PLACEHOLDERS.BUTTON_HOME,
     url: PAGES.MAIN,
     icon: Home,
     disabled: true,
   },
   {
-    title: "Map",
+    title: PLACEHOLDERS.BUTTON_MAP,
     url: PAGES.MAP,
     icon: Map,
   },
   {
-    title: "Blog",
+    title: PLACEHOLDERS.BUTTON_BLOG,
     url: PAGES.BLOG,
     icon: Newspaper,
     disabled: true,
   },
   {
-    title: "Calendar",
+    title: PLACEHOLDERS.BUTTON_CALENDAR,
     url: PAGES.CALENDAR,
     icon: Calendar,
     disabled: true,
@@ -77,31 +78,31 @@ export const SIDEBAR_MAIN: SidebarItem[] = [
 ];
 export const SIDEBAR_PLATFORMS: SidebarItem[] = [
   {
-    title: "YouTube",
+    title: PLACEHOLDERS.BUTTON_YOUTUBE,
     url: URLS.YOU_TUBE,
     icon: FaYoutube,
     target: "_blank",
   },
   {
-    title: "Instagram",
+    title: PLACEHOLDERS.BUTTON_INSTAGRAM,
     url: URLS.INSTAGRAM,
     icon: FaInstagram,
     target: "_blank",
   },
   {
-    title: "Telegram",
+    title: PLACEHOLDERS.BUTTON_TELEGRAM,
     url: URLS.TELEGRAM,
     icon: FaTelegram,
     target: "_blank",
   },
   {
-    title: "TikTok",
+    title: PLACEHOLDERS.BUTTON_TIKTOK,
     url: URLS.TIKTOK,
     icon: FaTiktok,
     target: "_blank",
   },
   {
-    title: "Patreon",
+    title: PLACEHOLDERS.BUTTON_PATREON,
     url: URLS.PATREON,
     icon: FaPatreon,
     target: "_blank",
@@ -109,13 +110,13 @@ export const SIDEBAR_PLATFORMS: SidebarItem[] = [
 ];
 export const SIDEBAR_SUPPORT: SidebarItem[] = [
   {
-    title: "Donate",
+    title: PLACEHOLDERS.BUTTON_DONATE,
     url: URLS.PATREON,
     icon: CircleDollarSign,
     target: "_blank",
   },
   {
-    title: "Feedback",
+    title: PLACEHOLDERS.BUTTON_FEEDBACK,
     url: `?${QUERIES.MODAL_FEEDBACK}=true`,
     icon: Send,
   },

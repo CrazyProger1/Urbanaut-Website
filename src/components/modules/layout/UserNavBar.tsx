@@ -13,19 +13,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import { Link } from "@/i18n";
-import { ALTS, IMAGES, PAGES, QUERIES, STUBS } from "@/config";
+import { ALTS, IMAGES, PAGES, PLACEHOLDERS, QUERIES, STUBS } from "@/config";
 import { logout } from "@/actions";
 import { getRankShadowClass } from "@/utils/classes";
 import { cn } from "@/lib/utils";
 import { CurrentUser } from "@/types";
 import { getUserFullName } from "@/utils/user";
 import { logoutOneSignal } from "@/services/lib/onesignal";
+import { useTranslations } from "next-intl";
 
 type Props = {
   user: CurrentUser;
 };
 
 export const UserNavBar = ({ user }: Props) => {
+  const t = useTranslations("Header");
   const { isMobile } = useSidebar();
   const rankClass = getRankShadowClass(user?.rank);
   const avatarClass = cn(rankClass, "h-8 w-8 rounded-lg");
@@ -72,13 +74,13 @@ export const UserNavBar = ({ user }: Props) => {
           <Link href={PAGES.PROFILE}>
             <DropdownMenuItem>
               <User />
-              Profile
+              {t(PLACEHOLDERS.BUTTON_PROFILE)}
             </DropdownMenuItem>
           </Link>
           <Link href={`?${QUERIES.MODAL_SETTINGS}=true`}>
             <DropdownMenuItem>
               <Settings />
-              Settings
+              {t(PLACEHOLDERS.BUTTON_SETTINGS)}
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
@@ -90,7 +92,7 @@ export const UserNavBar = ({ user }: Props) => {
           }}
         >
           <LogOut />
-          Log out
+          {t(PLACEHOLDERS.BUTTON_LOGOUT)}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

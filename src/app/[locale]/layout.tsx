@@ -19,7 +19,6 @@ import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { OneSignalProvider } from "@/components/lib/onesignal";
-import { redirect } from "@/i18n";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -66,7 +65,7 @@ const RootLayout = async ({ children, params }: Props) => {
 
   const user = session?.user;
 
-  setRequestLocale(user?.settings.language || locale);
+  setRequestLocale(locale); // user?.settings.language || locale
 
   const theme = user?.settings?.theme || "DARK";
 

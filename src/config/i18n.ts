@@ -1,11 +1,9 @@
 export const PLACEHOLDERS = {
-  // Map interaction hints
-  HINT_PLACE_ADDING: "Tap on the map to place the marker. Drag to adjust position.",
-  HINT_AREA_ADDING: "Tap to add each point and outline the area. Drag markers to adjust.",
+  HINT_PLACE_ADDING: "HINT_PLACE_ADDING",
+  HINT_AREA_ADDING: "HINT_AREA_ADDING",
   HINT_RULER_TOOL: "Tap points on the map to build your route and measure distance.",
   HINT_COORDINATES_TOOL: "Tap any point on the map to see its coordinates.",
 
-  // Tooltips (short & imperative or noun-based)
   TOOLTIP_EDIT_PROFILE: "Edit Profile",
   TOOLTIP_OPEN_SETTINGS: "Settings",
   TOOLTIP_SHARE_PROFILE: "Share Profile",
@@ -16,15 +14,14 @@ export const PLACEHOLDERS = {
   TOOLTIP_TOGGLE_AI_SEARCH: "AI Search",
   TOOLTIP_FILTERS: "Filters",
   TOOLTIP_SEARCH: "Search",
-  TOOLTIP_TOGGLE_SIDEBAR: "Sidebar",
-  TOOLTIP_NOTIFICATIONS: "Notifications",
+  TOOLTIP_TOGGLE_SIDEBAR: "TOOLTIP_TOGGLE_SIDEBAR",
+  TOOLTIP_NOTIFICATIONS: "TOOLTIP_NOTIFICATIONS",
   TOOLTIP_GET_MY_LOCATION: "My Location",
   TOOLTIP_TOGGLE_MAP_PINS: "Places",
   TOOLTIP_TOGGLE_COORDINATES: "Coordinates",
   TOOLTIP_TOGGLE_RULER: "Ruler",
   TOOLTIP_TOGGLE_THEME: "Theme",
 
-  // Toasts (short, past tense or state + exclamation)
   TOAST_SUCCESSFUL_OAUTH_AUTHENTIFICATION: "Successfully signed in with OAuth!",
   TOAST_AI_MODE_ENABLED: "AI mode enabled!",
   TOAST_AI_MODE_DISABLED: "AI mode disabled!",
@@ -50,7 +47,6 @@ export const PLACEHOLDERS = {
   TOAST_FEEDBACK_SUCCESS: "Thank you for your feedback we really appreciate it!",
   TOAST_FEEDBACK_FAIL: "Failed to accept feedback.",
 
-  // Section headings
   SECTION_ACTIONS: "Actions",
   SECTION_CONTRIBUTORS: "Contributors",
   SECTION_STATE: "State",
@@ -58,7 +54,6 @@ export const PLACEHOLDERS = {
   SECTION_LOCATION: "Location",
   SECTION_TAGS: "Tags",
 
-  // Page / modal titles
   TITLE_PLACE: "Place",
   TITLE_AREA: "Area",
   TITLE_CREATE_PLACE: "Create Place",
@@ -70,7 +65,6 @@ export const PLACEHOLDERS = {
   TITLE_SETTINGS: "Settings",
   TITLE_FEEDBACK: "Feedback",
 
-  // Descriptions / subtitles (longer explanatory text)
   DESCRIPTION_CREATE_PLACE: "Create a new place on the map in just a few taps.",
   DESCRIPTION_CREATE_AREA: "Outline a new area by placing points on the map.",
   DESCRIPTION_SIGNIN: "Sign in to your account to continue.",
@@ -86,11 +80,9 @@ export const PLACEHOLDERS = {
   DESCRIPTION_INTERACTIVE_MODE:
     "Enable informational toasts, hints, and tooltips. Error messages will still appear even when this is disabled.",
 
-  // Roles
   ROLE_CREATOR: "creator",
   ROLE_EDITOR: "editor",
 
-  // Buttons
   BUTTON_CLOSE: "Close",
   BUTTON_CANCEL: "Cancel",
   BUTTON_SAVE: "Save",
@@ -99,10 +91,24 @@ export const PLACEHOLDERS = {
   BUTTON_CLEAR: "Clear",
   BUTTON_SIGNIN: "Sign In",
   BUTTON_SIGNUP: "Sign Up",
-  BUTTON_LOGIN: "Log In",
+  BUTTON_LOGIN: "BUTTON_LOGIN",
   BUTTON_GOOGLE_AUTH: "Continue with Google",
+  BUTTON_PROFILE: "BUTTON_PROFILE",
+  BUTTON_SETTINGS: "BUTTON_SETTINGS",
+  BUTTON_LOGOUT: "BUTTON_LOGOUT",
+  BUTTON_HOME: "BUTTON_HOME",
+  BUTTON_MAP: "BUTTON_MAP",
+  BUTTON_BLOG: "BUTTON_BLOG",
+  BUTTON_CALENDAR: "BUTTON_CALENDAR",
+  BUTTON_YOUTUBE: "BUTTON_YOUTUBE",
+  BUTTON_INSTAGRAM: "BUTTON_INSTAGRAM",
+  BUTTON_TELEGRAM: "BUTTON_TELEGRAM",
+  BUTTON_TIKTOK: "BUTTON_TIKTOK",
+  BUTTON_PATREON: "BUTTON_PATREON",
+  BUTTON_DONATE: "BUTTON_DONATE",
+  BUTTON_FEEDBACK: "BUTTON_FEEDBACK",
 
-  // Form labels
+  LABEL_NO_NOTIFICATIONS: "LABEL_NO_NOTIFICATIONS",
   LABEL_COUNTRY: "Country",
   LABEL_TAGS: "Tags",
   LABEL_SECURITY_LEVEL: "Security Level",

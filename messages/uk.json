@@ -3,16 +3,26 @@
     "title": "Привіт Світ!"
   },
   "Sidebar": {
-    "Home": "Головна",
-    "Map": "Карта",
-    "Blog": "Блог",
-    "Calendar": "Календар",
-    "YouTube": "YouTube",
-    "Instagram": "Instagram",
-    "Telegram": "Telegram",
-    "TikTok": "TikTok",
-    "Patreon": "Patreon",
-    "Donate": "Донат",
-    "Feedback": "Зворотній зв'язок"
+    "BUTTON_HOME": "Головна",
+    "BUTTON_MAP": "Карта",
+    "BUTTON_BLOG": "Блог",
+    "BUTTON_CALENDAR": "Календар",
+    "BUTTON_YOUTUBE": "YouTube",
+    "BUTTON_INSTAGRAM": "Instagram",
+    "BUTTON_TELEGRAM": "Telegram",
+    "BUTTON_TIKTOK": "TikTok",
+    "BUTTON_PATREON": "Patreon",
+    "BUTTON_DONATE": "Донат",
+    "BUTTON_FEEDBACK": "Зворотній зв'язок"
+  },
+  "Header": {
+    "HINT_PLACE_ADDING": "Натисніть на карту, щоб розмістити маркер. Перетягніть для коригування позиції.",
+    "TOOLTIP_TOGGLE_SIDEBAR": "Бічна панель",
+    "TOOLTIP_NOTIFICATIONS": "Сповіщення",
+    "BUTTON_LOGIN": "Увійти",
+    "LABEL_NO_NOTIFICATIONS": "Немає сповіщень",
+    "BUTTON_PROFILE": "Профіль",
+    "BUTTON_SETTINGS": "Налаштування",
+    "BUTTON_LOGOUT": "Вийти"
   }
 }

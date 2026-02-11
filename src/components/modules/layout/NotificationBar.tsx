@@ -12,6 +12,7 @@ import { playSound } from "@/utils/sound";
 import { PLACEHOLDERS, SOUNDS } from "@/config";
 import { showNotificationToast } from "@/utils/toasts";
 import { Tooltip } from "@/components/ui/next/tooltip";
+import { useTranslations } from "next-intl";
 
 type Props = {
   notifications: Notification[];
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export const NotificationBar = ({ websocketToken, notifications: defaultNotifications }: Props) => {
+  const t = useTranslations("Header");
   const notifications = useListenNotifications(
     websocketToken,
     defaultNotifications,
@@ -33,7 +35,7 @@ export const NotificationBar = ({ websocketToken, notifications: defaultNotifica
 
   return (
     <Popover onOpenChange={() => setHasNewNotification(false)}>
-      <Tooltip content={PLACEHOLDERS.TOOLTIP_NOTIFICATIONS} asChild>
+      <Tooltip content={t(PLACEHOLDERS.TOOLTIP_NOTIFICATIONS)} asChild>
         <PopoverTrigger asChild>
           <Button
             variant="ghost"
@@ -50,7 +52,7 @@ export const NotificationBar = ({ websocketToken, notifications: defaultNotifica
       <PopoverContent className="w-80 rounded-none p-0">
         <div className="flex max-h-96 flex-col overflow-y-auto">
           {notifications.length === 0 ? (
-            <div className="text-muted-foreground p-4 text-center">No notifications</div>
+            <div className="text-muted-foreground p-4 text-center">{t(PLACEHOLDERS.LABEL_NO_NOTIFICATIONS)}</div>
           ) : (
             notifications.map((notification) => (
               <NotificationItem notification={notification} key={notification.id} />

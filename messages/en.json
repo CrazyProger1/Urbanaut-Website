@@ -3,16 +3,25 @@
     "title": "Hello world!"
   },
   "Sidebar": {
-    "Home": "Home",
-    "Map": "Map",
-    "Blog": "Blog",
-    "Calendar": "Calendar",
-    "YouTube": "YouTube",
-    "Instagram": "Instagram",
-    "Telegram": "Telegram",
-    "TikTok": "TikTok",
-    "Patreon": "Patreon",
-    "Donate": "Donate",
-    "Feedback": "Feedback"
+    "BUTTON_HOME": "Home",
+    "BUTTON_MAP": "Map",
+    "BUTTON_BLOG": "Blog",
+    "BUTTON_CALENDAR": "Calendar",
+    "BUTTON_YOUTUBE": "YouTube",
+    "BUTTON_INSTAGRAM": "Instagram",
+    "BUTTON_TELEGRAM": "Telegram",
+    "BUTTON_TIKTOK": "TikTok",
+    "BUTTON_PATREON": "Patreon",
+    "BUTTON_DONATE": "Donate",
+    "BUTTON_FEEDBACK": "Feedback"
+  },
+  "Header": {
+    "TOOLTIP_TOGGLE_SIDEBAR": "Sidebar",
+    "TOOLTIP_NOTIFICATIONS": "Notifications",
+    "BUTTON_LOGIN": "Log In",
+    "LABEL_NO_NOTIFICATIONS": "No notifications",
+    "BUTTON_PROFILE": "Profile",
+    "BUTTON_SETTINGS": "Settings",
+    "BUTTON_LOGOUT": "Log out"
   }
 }
