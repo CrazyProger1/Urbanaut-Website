@@ -4,7 +4,6 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -17,13 +16,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { createFeedback } from "@/actions/feedback";
-import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Link, usePathname } from "@/i18n";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { validateActionResult } from "@/utils/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   content: z.string().max(5000).min(5),
@@ -33,6 +32,7 @@ export const FeedbackForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const t = useTranslations("Modules");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,8 +49,8 @@ export const FeedbackForm = () => {
     const result = await createFeedback(values);
 
     const validationOptions = {
-      successToastMessage: PLACEHOLDERS.TOAST_FEEDBACK_SUCCESS,
-      failToastMessage: PLACEHOLDERS.TOAST_FEEDBACK_FAIL,
+      successToastMessage: t(PLACEHOLDERS.TOAST_FEEDBACK_SUCCESS),
+      failToastMessage: t(PLACEHOLDERS.TOAST_FEEDBACK_FAIL),
       setError,
     };
 
@@ -74,7 +74,7 @@ export const FeedbackForm = () => {
           name="content"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Feedback</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_FEEDBACK)}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
@@ -84,10 +84,10 @@ export const FeedbackForm = () => {
         />
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
+            {t(PLACEHOLDERS.BUTTON_SAVE)} {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+            <Link href={closeModalLink}>{t(PLACEHOLDERS.BUTTON_CANCEL)}</Link>
           </Button>
         </Field>
       </form>

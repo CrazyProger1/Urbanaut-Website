@@ -24,7 +24,7 @@ export const Sidebar = () => {
   const sidebar = useSidebar();
   const pathname = usePathname();
   const isMobile = useIsMobile();
-  const t = useTranslations("Sidebar");
+  const t = useTranslations("Modules");
 
   return (
     <ShadcnSidebar collapsible="icon" className="drop-shadow-volume select-none">

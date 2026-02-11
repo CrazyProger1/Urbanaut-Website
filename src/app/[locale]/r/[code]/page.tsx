@@ -12,9 +12,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Link, redirect } from "@/i18n";
-import { PAGES, QUERIES } from "@/config";
+import { PAGES, PLACEHOLDERS, QUERIES } from "@/config";
 import { User, Gift, Sparkles, Users } from "lucide-react";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { CopyToast } from "@/components/common/toasts";
 
 type Props = {
@@ -25,6 +25,7 @@ type Props = {
 
 const Page = async ({ params }: Props) => {
   const { code } = await params;
+  const t = await getTranslations("Modules");
   const searchParams = new URLSearchParams();
 
   if (!code) {
@@ -46,9 +47,9 @@ const Page = async ({ params }: Props) => {
             className="mx-auto h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48"
           />
           <div>
-            <CardTitle className="mb-2 text-4xl">You're Invited!</CardTitle>
+            <CardTitle className="mb-2 text-4xl">{t(PLACEHOLDERS.TITLE_REFERRAL_INVITE)}</CardTitle>
             <CardDescription className="text-lg">
-              Join our community and unlock exclusive rewards
+              {t(PLACEHOLDERS.DESCRIPTION_REFERRAL_INVITE)}
             </CardDescription>
           </div>
         </CardHeader>
@@ -56,12 +57,12 @@ const Page = async ({ params }: Props) => {
         <CardContent className="space-y-6">
           <div className="space-y-4 text-center">
             <p className="text-muted-foreground">
-              Someone special thinks you'd be a great addition to our platform.
+              {t(PLACEHOLDERS.LABEL_REFERRAL_INVITED_TEXT)}
             </p>
 
             <div className="flex flex-col items-center gap-2">
               <span className="text-muted-foreground text-sm font-medium">
-                Your Invitation Code
+                {t(PLACEHOLDERS.LABEL_INVITATION_CODE)}
               </span>
               <CopyToast clipboard={code}>
                 <Badge
@@ -77,27 +78,27 @@ const Page = async ({ params }: Props) => {
           <Separator />
 
           <div className="space-y-4">
-            <h3 className="text-center text-lg font-semibold">What you'll get:</h3>
+            <h3 className="text-center text-lg font-semibold">{t(PLACEHOLDERS.LABEL_REFERRAL_BENEFITS)}</h3>
             <div className="grid gap-4 md:grid-cols-3">
               <div className="bg-muted/50 flex flex-col items-center gap-2 rounded-lg p-4 text-center">
                 <Gift className="text-primary h-8 w-8" />
-                <p className="text-sm font-medium">Exclusive Bonuses</p>
+                <p className="text-sm font-medium">{t(PLACEHOLDERS.LABEL_REFERRAL_BONUSES)}</p>
                 <p className="text-muted-foreground text-xs">
-                  Special rewards for new members joined via referral program
+                  {t(PLACEHOLDERS.DESCRIPTION_REFERRAL_BONUSES)}
                 </p>
               </div>
               <div className="bg-muted/50 flex flex-col items-center gap-2 rounded-lg p-4 text-center">
                 <Sparkles className="text-primary h-8 w-8" />
-                <p className="text-sm font-medium">Powerful Tools</p>
+                <p className="text-sm font-medium">{t(PLACEHOLDERS.LABEL_REFERRAL_TOOLS)}</p>
                 <p className="text-muted-foreground text-xs">
-                  Access to advanced tools for discovering abandoned places and planning expeditions
+                  {t(PLACEHOLDERS.DESCRIPTION_REFERRAL_TOOLS)}
                 </p>
               </div>
               <div className="bg-muted/50 flex flex-col items-center gap-2 rounded-lg p-4 text-center">
                 <Users className="text-primary h-8 w-8" />
-                <p className="text-sm font-medium">Community</p>
+                <p className="text-sm font-medium">{t(PLACEHOLDERS.LABEL_REFERRAL_COMMUNITY)}</p>
                 <p className="text-muted-foreground text-xs">
-                  Become part of our fast-growing community and find friends
+                  {t(PLACEHOLDERS.DESCRIPTION_REFERRAL_COMMUNITY)}
                 </p>
               </div>
             </div>
@@ -108,7 +109,7 @@ const Page = async ({ params }: Props) => {
           <Button asChild size="lg" className="w-full text-base font-semibold">
             <Link href={`${PAGES.MAIN}?${searchParams}`}>
               <User className="mr-2" />
-              Create Your Account
+              {t(PLACEHOLDERS.BUTTON_CREATE_ACCOUNT)}
             </Link>
           </Button>
         </CardFooter>

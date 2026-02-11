@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const UserInfoSection = async ({ user, me = false }: Props) => {
-  const t = await getTranslations("Profile");
+  const t = await getTranslations("Modules");
   const format = await getFormatter();
 
   const joinedAt = Date.parse(user.created_at);

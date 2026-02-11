@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const ReferralModalContent = ({ codes }: Props) => {
-  const t = useTranslations("Profile");
+  const t = useTranslations("Modules");
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_REFERRAL_PROFILE]: false });
 
   return (

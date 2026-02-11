@@ -12,6 +12,7 @@ import { Mobile } from "@/components/common/utils";
 import { Tooltip } from "@/components/ui/next/tooltip";
 import { PLACEHOLDERS } from "@/config";
 import { ClickToast } from "@/components/common/toasts";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onCenterMap?: () => void;
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
+  const t = useTranslations("Modules");
   const {
     tooltips,
     isCoordinatesVisible,
@@ -78,7 +80,7 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
         </Mobile>
         <div className="flex flex-col gap-1 md:flex-row">
           <div className="flex flex-row gap-1">
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_GET_MY_LOCATION} asChild>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_GET_MY_LOCATION)} asChild>
               <Button variant="ghost" onClick={onCenterMap}>
                 <LocateFixed />
               </Button>
@@ -87,12 +89,12 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
             <ClickToast
               message={
                 isPlacesVisible
-                  ? PLACEHOLDERS.TOAST_PLACES_INVISIBLE
-                  : PLACEHOLDERS.TOAST_PLACES_VISIBLE
+                  ? t(PLACEHOLDERS.TOAST_PLACES_INVISIBLE)
+                  : t(PLACEHOLDERS.TOAST_PLACES_VISIBLE)
               }
               passthrough
             >
-              <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS}>
+              <Tooltip content={t(PLACEHOLDERS.TOOLTIP_TOGGLE_MAP_PINS)}>
                 <Toggle onPressedChange={togglePlacesVisibility} pressed={isPlacesVisible} asChild>
                   <span>
                     <MapPin />
@@ -108,12 +110,12 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
             <ClickToast
               message={
                 isCoordinatesVisible
-                  ? PLACEHOLDERS.TOAST_COORDINATES_DISABLED
-                  : PLACEHOLDERS.TOAST_COORDINATES_ENABLED
+                  ? t(PLACEHOLDERS.TOAST_COORDINATES_DISABLED)
+                  : t(PLACEHOLDERS.TOAST_COORDINATES_ENABLED)
               }
               passthrough
             >
-              <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES}>
+              <Tooltip content={t(PLACEHOLDERS.TOOLTIP_TOGGLE_COORDINATES)}>
                 <Toggle
                   onPressedChange={toggleCoordinatesVisibility}
                   pressed={isCoordinatesVisible}
@@ -128,11 +130,11 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
 
             <ClickToast
               message={
-                isRulerActive ? PLACEHOLDERS.TOAST_RULER_DISABLED : PLACEHOLDERS.TOAST_RULER_ENABLED
+                isRulerActive ? t(PLACEHOLDERS.TOAST_RULER_DISABLED) : t(PLACEHOLDERS.TOAST_RULER_ENABLED)
               }
               passthrough
             >
-              <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_RULER}>
+              <Tooltip content={t(PLACEHOLDERS.TOOLTIP_TOGGLE_RULER)}>
                 <Toggle onPressedChange={toggleRulerActivity} pressed={isRulerActive} asChild>
                   <span>
                     <Ruler />
@@ -145,10 +147,10 @@ export const ToolBar = ({ onCenterMap, onSavePlace: onSave }: Props) => {
           {(isChoosingArea || isChoosingPlace) && (
             <div className="flex flex-col gap-1 border-t border-white/20 pt-1 md:flex-row md:border-t-0 md:border-l md:pl-1">
               <Button variant="ghost" size="sm" onClick={onSave}>
-                <Save /> {PLACEHOLDERS.BUTTON_SAVE}
+                <Save /> {t(PLACEHOLDERS.BUTTON_SAVE)}
               </Button>
               <Button variant="destructive" size="sm" onClick={handleCancel}>
-                <Ban /> {PLACEHOLDERS.BUTTON_CANCEL}
+                <Ban /> {t(PLACEHOLDERS.BUTTON_CANCEL)}
               </Button>
             </div>
           )}

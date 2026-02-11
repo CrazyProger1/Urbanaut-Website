@@ -11,12 +11,14 @@ import { LAYERS, PLACEHOLDERS } from "@/config";
 import { useMapStore } from "@/stores";
 import { StopPropagation } from "@/components/common/modals";
 import { Tooltip } from "@/components/ui/next/tooltip";
+import { useTranslations } from "next-intl";
 
 type Props = {
   layers: MapLayer[];
 };
 
 export const LayersBar = ({ layers }: Props) => {
+  const t = useTranslations("Modules");
   const {
     isLayersBarOpen,
     toggleLayersBar,
@@ -30,7 +32,7 @@ export const LayersBar = ({ layers }: Props) => {
     <StopPropagation className="absolute top-4 right-4 flex flex-col">
       <div className="flex flex-col items-end">
         <Card className="bg-background/80 items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-          <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_LAYERS} asChild>
+          <Tooltip content={t(PLACEHOLDERS.TOOLTIP_TOGGLE_LAYERS)} asChild>
             <Toggle pressed={isLayersBarOpen} onPressedChange={toggleLayersBar}>
               <Layers />
             </Toggle>

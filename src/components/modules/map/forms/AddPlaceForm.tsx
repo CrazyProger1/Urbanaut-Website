@@ -7,6 +7,7 @@ import { Link, useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -78,6 +79,7 @@ const uploadFile = async (file: File) => {
 };
 
 export const AddPlaceForm = ({ tags }: Props) => {
+  const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
@@ -128,7 +130,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
 
       uploads.map((result) =>
         validateActionResult(result, {
-          failToastMessage: PLACEHOLDERS.TOAST_PLACE_FILE_UPLOADING_FAIL,
+          failToastMessage: t(PLACEHOLDERS.TOAST_PLACE_FILE_UPLOADING_FAIL),
         }),
       );
 
@@ -144,8 +146,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
       });
 
       const validationOptions = {
-        successToastMessage: PLACEHOLDERS.TOAST_PLACE_ADDITION_SUCCESS,
-        failToastMessage: PLACEHOLDERS.TOAST_PLACE_ADDITION_FAIL,
+        successToastMessage: t(PLACEHOLDERS.TOAST_PLACE_ADDITION_SUCCESS),
+        failToastMessage: t(PLACEHOLDERS.TOAST_PLACE_ADDITION_FAIL),
         setError,
       };
 
@@ -167,7 +169,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_NAME}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="Abandoned Factory" {...field} />
               </FormControl>
@@ -180,7 +182,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_DESCRIPTION}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_DESCRIPTION)}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
@@ -193,7 +195,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <Label>{PLACEHOLDERS.LABEL_TAGS}</Label>
+              <Label>{t(PLACEHOLDERS.LABEL_TAGS)}</Label>
               <TagsSelect
                 tags={tags?.map((tag) => tag.tag) || []}
                 selected={field.value}
@@ -210,7 +212,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="preservation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_PRESERVATION_LEVEL}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_PRESERVATION_LEVEL)}</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
               <FormMessage />
             </FormItem>
@@ -221,7 +223,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
           name="security"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_SECURITY_LEVEL}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
               <FormMessage />
             </FormItem>
@@ -237,8 +239,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
                   icon={<Lock className="h-4 w-4" />}
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  title={PLACEHOLDERS.LABEL_PRIVATE}
-                  description={PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE}
+                  title={t(PLACEHOLDERS.LABEL_PRIVATE)}
+                  description={t(PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE)}
                 />
               </FormControl>
               <FormMessage />
@@ -269,20 +271,20 @@ export const AddPlaceForm = ({ tags }: Props) => {
               }}
             >
               <X className="mr-1 h-4 w-4" />
-              {PLACEHOLDERS.BUTTON_CLEAR}
+              {t(PLACEHOLDERS.BUTTON_CLEAR)}
             </span>
           </DropzoneContent>
           <DropzoneEmptyState>
             <Upload />
-            <Label>{PLACEHOLDERS.LABEL_UPLOAD_PHOTOS}</Label>
+            <Label>{t(PLACEHOLDERS.LABEL_UPLOAD_PHOTOS)}</Label>
           </DropzoneEmptyState>
         </Dropzone>
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            {PLACEHOLDERS.BUTTON_SAVE} {formState.isSubmitting && <Spinner />}
+            {t(PLACEHOLDERS.BUTTON_SAVE)} {formState.isSubmitting && <Spinner />}
           </Button>
           <Button className="w-full" type="button" variant="outline" asChild>
-            <Link href={closeModalLink}>{PLACEHOLDERS.BUTTON_CANCEL}</Link>
+            <Link href={closeModalLink}>{t(PLACEHOLDERS.BUTTON_CANCEL)}</Link>
           </Button>
         </Field>
       </form>

@@ -6,6 +6,7 @@ import { useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -25,6 +26,7 @@ import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { Lock } from "lucide-react";
+import { PLACEHOLDERS } from "@/config";
 
 const formSchema = z.object({
   name: z.string().max(250).min(2),
@@ -38,6 +40,7 @@ type Props = {
 };
 
 export const AddAreaForm = ({ tags }: Props) => {
+  const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -79,7 +82,7 @@ export const AddAreaForm = ({ tags }: Props) => {
       });
 
       await createArea({ ...values, polygon });
-      toast.success("Area added successfully.");
+      toast.success(t(PLACEHOLDERS.TOAST_AREA_ADDITION_SUCCESS));
       params.delete("points");
       params.delete("addarea");
       router.push(`?${params}`);
@@ -93,7 +96,7 @@ export const AddAreaForm = ({ tags }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="Chornobyl disaster zone" {...field} />
               </FormControl>
@@ -106,7 +109,7 @@ export const AddAreaForm = ({ tags }: Props) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_DESCRIPTION)}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
@@ -119,7 +122,7 @@ export const AddAreaForm = ({ tags }: Props) => {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <Label>Tags</Label>
+              <Label>{t(PLACEHOLDERS.LABEL_TAGS)}</Label>
               <TagsSelect
                 tags={tags?.map((tag) => tag.tag) || []}
                 selected={field.value}
@@ -139,8 +142,8 @@ export const AddAreaForm = ({ tags }: Props) => {
                   icon={<Lock className="h-4 w-4" />}
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  title="Private"
-                  description="Will this area be private for others?"
+                  title={t(PLACEHOLDERS.LABEL_PRIVATE)}
+                  description={t(PLACEHOLDERS.DESCRIPTION_AREA_PRIVATE)}
                 />
               </FormControl>
               <FormMessage />
@@ -148,7 +151,7 @@ export const AddAreaForm = ({ tags }: Props) => {
           )}
         />
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-          Save {formState.isSubmitting && <Spinner />}
+          {t(PLACEHOLDERS.BUTTON_SAVE)} {formState.isSubmitting && <Spinner />}
         </Button>
       </form>
     </Form>

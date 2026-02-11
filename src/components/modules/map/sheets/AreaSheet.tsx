@@ -1,3 +1,5 @@
+"use client";
+
 import {
   SheetClose,
   SheetContent,
@@ -6,6 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { useTranslations } from "next-intl";
 import { AreaDetail } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
@@ -23,6 +26,7 @@ type Props = {
 };
 
 export const AreaSheet = ({ area }: Props) => {
+  const t = useTranslations("Modules");
   const { id, description, name, tags, created_by } = area;
 
   return (
@@ -30,7 +34,7 @@ export const AreaSheet = ({ area }: Props) => {
       <SheetContent className="w-full! overflow-y-auto sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
-          <SheetDescription>{PLACEHOLDERS.TITLE_AREA}</SheetDescription>
+          <SheetDescription>{t(PLACEHOLDERS.TITLE_AREA)}</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
           <GallerySection />
@@ -44,7 +48,7 @@ export const AreaSheet = ({ area }: Props) => {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="outline">{PLACEHOLDERS.BUTTON_CLOSE}</Button>
+            <Button variant="outline">{t(PLACEHOLDERS.BUTTON_CLOSE)}</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

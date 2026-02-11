@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const NotificationBar = ({ websocketToken, notifications: defaultNotifications }: Props) => {
-  const t = useTranslations("Header");
+  const t = useTranslations("Modules");
   const notifications = useListenNotifications(
     websocketToken,
     defaultNotifications,

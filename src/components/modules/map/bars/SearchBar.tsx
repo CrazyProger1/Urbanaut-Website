@@ -18,6 +18,7 @@ import { parseCoordinates } from "@/utils/map";
 import { StopPropagation } from "@/components/common/modals";
 import { Tooltip } from "@/components/ui/next/tooltip";
 import { ClickToast } from "@/components/common/toasts";
+import { useTranslations } from "next-intl";
 
 const FILTER_PARAMS = new Set(["preservation", "security", "tags", "country"]);
 
@@ -26,6 +27,7 @@ type Props = {
 };
 
 export const SearchBar = ({ onSearchByCoordinates }: Props) => {
+  const t = useTranslations("Modules");
   const params = useSearchParams();
   const [isAIActive, setIsAIActive] = useState(false);
   const openFilterModalLink = useModalOpenLink(QUERIES.MODAL_MAP_FILTERS);
@@ -69,7 +71,7 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
   return (
     <StopPropagation className="absolute top-4 left-4 flex flex-col gap-4 pr-4 md:flex-row">
       <Card className="bg-background/80 max-w-fit items-center rounded-2xl px-2 py-1 shadow-lg backdrop-blur-sm">
-        <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_SEARCH_BAR} asChild>
+        <Tooltip content={t(PLACEHOLDERS.TOOLTIP_TOGGLE_SEARCH_BAR)} asChild>
           <Toggle pressed={isSearchBarOpen} onPressedChange={toggleSearchBar}>
             <Search />
           </Toggle>
@@ -89,14 +91,14 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_SEARCH} asChild>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_SEARCH)} asChild>
               <Button type="submit" variant="ghost" onClick={handleSearch}>
                 <Search />
               </Button>
             </Tooltip>
           </div>
 
-          <Tooltip content={PLACEHOLDERS.TOOLTIP_FILTERS}>
+          <Tooltip content={t(PLACEHOLDERS.TOOLTIP_FILTERS)}>
             <Toggle pressed={isFiltersActive} asChild>
               <Link href={openFilterModalLink} scroll={false}>
                 <Filter />
@@ -106,11 +108,11 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
 
           <ClickToast
             message={
-              isAIActive ? PLACEHOLDERS.TOAST_AI_MODE_DISABLED : PLACEHOLDERS.TOAST_AI_MODE_ENABLED
+              isAIActive ? t(PLACEHOLDERS.TOAST_AI_MODE_DISABLED) : t(PLACEHOLDERS.TOAST_AI_MODE_ENABLED)
             }
             passthrough
           >
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH}>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_TOGGLE_AI_SEARCH)}>
               <Toggle onPressedChange={setIsAIActive} pressed={isAIActive} asChild>
                 <span>
                   <Sparkles />

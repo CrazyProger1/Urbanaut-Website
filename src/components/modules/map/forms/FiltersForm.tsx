@@ -5,6 +5,7 @@ import { PreservationSelect } from "./PreservationSelect";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
@@ -49,6 +50,7 @@ export const FiltersForm = ({
   onLoadMoreCitiesAction,
   onSearchCityAction,
 }: Props) => {
+  const t = useTranslations("Modules");
   const { toggleSearchBar } = useMapStore();
   const params = useSearchParams();
   const router = useRouter();
@@ -108,7 +110,7 @@ export const FiltersForm = ({
           name="preservation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_PRESERVATION_LEVEL}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_PRESERVATION_LEVEL)}</FormLabel>
               <PreservationSelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
@@ -118,7 +120,7 @@ export const FiltersForm = ({
           name="security"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_SECURITY_LEVEL}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
             </FormItem>
           )}
@@ -128,7 +130,7 @@ export const FiltersForm = ({
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <Label>{PLACEHOLDERS.LABEL_TAGS}</Label>
+              <Label>{t(PLACEHOLDERS.LABEL_TAGS)}</Label>
               <TagsSelect
                 tags={tags?.map((tag) => tag.tag) || []}
                 selected={field.value}
@@ -143,7 +145,7 @@ export const FiltersForm = ({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_COUNTRY}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_COUNTRY)}</FormLabel>
               <CountrySelect
                 value={field.value}
                 onChange={field.onChange}
@@ -171,10 +173,10 @@ export const FiltersForm = ({
         {/*  />*/}
         {/*)}*/}
         <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-          {PLACEHOLDERS.BUTTON_APPLY} {formState.isSubmitting && <Spinner />}
+          {t(PLACEHOLDERS.BUTTON_APPLY)} {formState.isSubmitting && <Spinner />}
         </Button>
         <Button className="w-full" variant="secondary" asChild>
-          <Link href={PAGES.MAP}>{PLACEHOLDERS.BUTTON_CLEAR}</Link>
+          <Link href={PAGES.MAP}>{t(PLACEHOLDERS.BUTTON_CLEAR)}</Link>
         </Button>
       </form>
     </Form>

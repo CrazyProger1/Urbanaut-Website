@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import {
   Tags,
   TagsContent,
@@ -11,6 +14,7 @@ import {
   TagsValue,
 } from "@/components/ui/shadcn-io/tags";
 import { CheckIcon } from "lucide-react";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   tags: string[];
@@ -20,6 +24,8 @@ type Props = {
 };
 
 export const TagsSelect = ({ tags, selected, onSelect, onRemove }: Props) => {
+  const t = useTranslations("Modules");
+
   return (
     <Tags>
       <TagsTrigger>
@@ -30,7 +36,7 @@ export const TagsSelect = ({ tags, selected, onSelect, onRemove }: Props) => {
         ))}
       </TagsTrigger>
       <TagsContent className="z-[9999]">
-        <TagsInput placeholder="Search tag..." />
+        <TagsInput placeholder={t(PLACEHOLDERS.LABEL_SEARCH_TAG)} />
         <TagsList>
           <TagsEmpty />
           <TagsGroup>

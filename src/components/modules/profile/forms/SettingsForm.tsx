@@ -33,7 +33,7 @@ type Props = {
 };
 
 export const SettingsForm = ({ user }: Props) => {
-  const t = useTranslations("Profile");
+  const t = useTranslations("Modules");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({

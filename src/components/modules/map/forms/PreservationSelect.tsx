@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
+import { FormControl } from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -11,47 +12,52 @@ import {
 } from "@/components/ui/select";
 import { getPreservationColorClass } from "@/utils/classes";
 import { PreservationLevel } from "@/types";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   value?: PreservationLevel;
   onChange: (value: PreservationLevel) => void;
 };
 
-export const PreservationSelect = ({ value, onChange }: Props) => {
-  const PRESERVATION_LABELS: Record<PreservationLevel, string> = {
-    NONE: "No preservation",
-    LOW: "Low",
-    MEDIUM: "Medium",
-    HIGH: "High",
-    AWESOME: "Awesome",
-  };
+const PRESERVATION_LEVELS: PreservationLevel[] = ["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"];
 
-  const PRESERVATION_DESCRIPTIONS: Record<PreservationLevel, string> = {
-    NONE: "Object is mostly ruined; only fragments remain.",
-    LOW: "Partially destroyed; roof or walls may be missing.",
-    MEDIUM: "Main structure intact; some interiors damaged.",
-    HIGH: "Buildings mostly preserved; minor damage.",
-    AWESOME: "Almost untouched; interiors and details intact.",
-  };
+const PRESERVATION_LABEL_KEYS: Record<PreservationLevel, string> = {
+  NONE: PLACEHOLDERS.LABEL_PRESERVATION_NONE,
+  LOW: PLACEHOLDERS.LABEL_PRESERVATION_LOW,
+  MEDIUM: PLACEHOLDERS.LABEL_PRESERVATION_MEDIUM,
+  HIGH: PLACEHOLDERS.LABEL_PRESERVATION_HIGH,
+  AWESOME: PLACEHOLDERS.LABEL_PRESERVATION_AWESOME,
+};
+
+const PRESERVATION_DESCRIPTION_KEYS: Record<PreservationLevel, string> = {
+  NONE: PLACEHOLDERS.DESCRIPTION_PRESERVATION_NONE,
+  LOW: PLACEHOLDERS.DESCRIPTION_PRESERVATION_LOW,
+  MEDIUM: PLACEHOLDERS.DESCRIPTION_PRESERVATION_MEDIUM,
+  HIGH: PLACEHOLDERS.DESCRIPTION_PRESERVATION_HIGH,
+  AWESOME: PLACEHOLDERS.DESCRIPTION_PRESERVATION_AWESOME,
+};
+
+export const PreservationSelect = ({ value, onChange }: Props) => {
+  const t = useTranslations("Modules");
 
   return (
     <>
       <FormControl>
         <Select value={value} onValueChange={onChange}>
           <SelectTrigger className={`w-full ${getPreservationColorClass(value)}`}>
-            <SelectValue placeholder="Select level" />
+            <SelectValue placeholder={t(PLACEHOLDERS.LABEL_SELECT_LEVEL)} />
           </SelectTrigger>
           <SelectContent>
-            {(Object.keys(PRESERVATION_LABELS) as PreservationLevel[]).map((key) => (
+            {PRESERVATION_LEVELS.map((key) => (
               <SelectItem key={key} value={key} className={getPreservationColorClass(key)}>
-                {PRESERVATION_LABELS[key]}
+                {t(PRESERVATION_LABEL_KEYS[key])}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </FormControl>
       <p className="text-muted-foreground text-sm">
-        {PRESERVATION_DESCRIPTIONS[value || "MEDIUM"]}
+        {t(PRESERVATION_DESCRIPTION_KEYS[value || "MEDIUM"])}
       </p>
     </>
   );

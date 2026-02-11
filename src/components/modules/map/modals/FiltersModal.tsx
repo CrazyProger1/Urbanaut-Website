@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { FiltersForm } from "@/components/modules/map/forms";
 import { City, Country, Tag } from "@/types";
+import { useTranslations } from "next-intl";
 
 type Props = {
   countries?: Country[];
@@ -20,11 +23,13 @@ export const FiltersModal = ({
   onLoadMoreCitiesAction,
   onSearchCityAction,
 }: Props) => {
+  const t = useTranslations("Modules");
+
   return (
     <Modal query={QUERIES.MODAL_MAP_FILTERS}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{PLACEHOLDERS.TITLE_FILTERS}</DialogTitle>
+          <DialogTitle>{t(PLACEHOLDERS.TITLE_FILTERS)}</DialogTitle>
         </DialogHeader>
         <FiltersForm
           tags={tags}

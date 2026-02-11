@@ -9,12 +9,14 @@ import {
 import { Hash, Plus } from "lucide-react";
 import { useMapStore } from "@/stores";
 import { PLACEHOLDERS } from "@/config";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onCopyCoordinates?: () => void;
 };
 
 const MapContextMenu = ({ onCopyCoordinates }: Props) => {
+  const t = useTranslations("Modules");
   const { toggleChoosingPlace, addTooltip } = useMapStore();
 
   return (
@@ -25,7 +27,7 @@ const MapContextMenu = ({ onCopyCoordinates }: Props) => {
           addTooltip(PLACEHOLDERS.HINT_PLACE_ADDING);
         }}
       >
-        <Plus /> Place{" "}
+        <Plus /> {t(PLACEHOLDERS.LABEL_PLACE)}{" "}
       </ContextMenuItem>
       {/*<ContextMenuItem*/}
       {/*  onClick={() => {*/}
@@ -38,7 +40,7 @@ const MapContextMenu = ({ onCopyCoordinates }: Props) => {
       <ContextMenuSeparator />
       <ContextMenuItem onClick={onCopyCoordinates}>
         <Hash />
-        {PLACEHOLDERS.BUTTON_COORDINATES}
+        {t(PLACEHOLDERS.BUTTON_COORDINATES)}
       </ContextMenuItem>
     </ContextMenuContent>
   );

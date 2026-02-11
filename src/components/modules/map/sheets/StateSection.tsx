@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Flame } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { PreservationLevel, SecurityLevel } from "@/types";
@@ -12,15 +15,16 @@ type Props = {
 };
 
 export const StateSection = ({ security, preservation }: Props) => {
+  const t = useTranslations("Modules");
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <Flame />
-        <div className="font-semibold">{PLACEHOLDERS.SECTION_STATE}</div>
+        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_STATE)}</div>
       </div>
       <div className="flex flex-col gap-1 text-sm">
         <div>
-          Security:{" "}
+          {t(PLACEHOLDERS.LABEL_SECURITY)}:{" "}
           <Link href={`?security=${security}`}>
             <Badge className={getSecurityColorClass(security)}>{security}</Badge>
           </Link>
@@ -32,7 +36,7 @@ export const StateSection = ({ security, preservation }: Props) => {
         {/*  </Badge>*/}
         {/*</div>*/}
         <div>
-          Preservation:{" "}
+          {t(PLACEHOLDERS.LABEL_PRESERVATION)}:{" "}
           <Link href={`?preservation=${preservation}`}>
             <Badge className={`${getPreservationColorClass(preservation)} cursor-pointer`}>
               {preservation}

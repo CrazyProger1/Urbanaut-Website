@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const ReferralModal = async ({ codes }: Props) => {
-  const t = await getTranslations("Profile");
+  const t = await getTranslations("Modules");
   return (
     <Modal query={QUERIES.MODAL_REFERRAL_PROFILE}>
       <DialogContent className="sm:max-w-md">

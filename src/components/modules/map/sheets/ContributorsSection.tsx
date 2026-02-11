@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import { UserCreator, UserEditor } from "@/types";
 import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,18 +16,19 @@ type Props = {
 };
 
 export const ContributorsSection = ({ creator }: Props) => {
+  const t = useTranslations("Modules");
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <User />
-        <div className="font-semibold">{PLACEHOLDERS.SECTION_CONTRIBUTORS}</div>
+        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_CONTRIBUTORS)}</div>
       </div>
       <div>
         {creator && (
           <Link href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}>
             <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg">
               <div className="text-muted-foreground absolute top-1 right-2 text-xs">
-                {PLACEHOLDERS.ROLE_CREATOR}
+                {t(PLACEHOLDERS.ROLE_CREATOR)}
               </div>
               <Avatar className="h-16 w-16 rounded-lg">
                 <AvatarImage

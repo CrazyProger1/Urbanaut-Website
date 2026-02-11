@@ -29,6 +29,7 @@ import {
 import { useSearchParams } from "next/navigation";
 import { TileLayers, PlacesLayer, AreasLayer, ClusteringLayer } from "./layers";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import { MapPageParams } from "@/types/components/map";
 import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
@@ -53,6 +54,7 @@ const DynamicMap = ({
   user,
   filters,
 }: Props) => {
+  const t = useTranslations("Modules");
   const {
     isAreasVisible,
     isPlacesVisible,
@@ -293,7 +295,7 @@ const DynamicMap = ({
       </ContextMenuTrigger>
       <MapContextMenu
         onCopyCoordinates={() => {
-          toast.success(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD);
+          toast.success(t(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD));
           if (lastRightClickCoordinates) {
             setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
           }

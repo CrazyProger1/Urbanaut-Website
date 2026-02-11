@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const UserActivitySection = ({ user }: Props) => {
-  const t = useTranslations("Profile");
+  const t = useTranslations("Modules");
   return (
     <Tabs defaultValue="reports" className="flex flex-1 flex-col gap-4 select-none">
       <TabsList className="w-full">

@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const Header = async ({ user, websocketToken, notifications }: Props) => {
-  const t = await getTranslations("Header");
+  const t = await getTranslations("Modules");
   return (
     <header className="bg-background drop-shadow-volume sticky top-0 flex h-16 shrink-0 flex-row items-center justify-between gap-4 border-b px-4 select-none">
       <div className="flex items-center gap-2">

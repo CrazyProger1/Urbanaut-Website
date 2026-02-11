@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Command,
@@ -15,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Country } from "@/types";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   countries: Country[];
@@ -23,6 +25,7 @@ type Props = {
 };
 
 export const CountrySelect = ({ countries, value, onChange }: Props) => {
+  const t = useTranslations("Modules");
   const [open, setOpen] = React.useState(false);
 
   const selectedCountry = countries.find((country) => country.tld === value);
@@ -37,7 +40,7 @@ export const CountrySelect = ({ countries, value, onChange }: Props) => {
             aria-expanded={open}
             className={cn("w-full justify-between", !value && "text-muted-foreground")}
           >
-            {selectedCountry?.name || "Select country"}
+            {selectedCountry?.name || t(PLACEHOLDERS.LABEL_SELECT_COUNTRY)}
             <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </FormControl>
@@ -48,9 +51,9 @@ export const CountrySelect = ({ countries, value, onChange }: Props) => {
         style={{ width: "var(--radix-popover-trigger-width)" }}
       >
         <Command>
-          <CommandInput placeholder="Search country..." />
+          <CommandInput placeholder={t(PLACEHOLDERS.LABEL_SEARCH_COUNTRY)} />
           <CommandList>
-            <CommandEmpty>No country found.</CommandEmpty>
+            <CommandEmpty>{t(PLACEHOLDERS.LABEL_NO_COUNTRY_FOUND)}</CommandEmpty>
             <CommandGroup>
               {countries
                 .filter(({ name, tld }) => name && tld)

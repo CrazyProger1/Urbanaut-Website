@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const UserNavBar = ({ user }: Props) => {
-  const t = useTranslations("Header");
+  const t = useTranslations("Modules");
   const { isMobile } = useSidebar();
   const rankClass = getRankShadowClass(user?.rank);
   const avatarClass = cn(rankClass, "h-8 w-8 rounded-lg");

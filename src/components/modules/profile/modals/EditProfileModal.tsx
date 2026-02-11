@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const EditProfileModal = ({ user }: Props) => {
-  const t = useTranslations("Profile");
+  const t = useTranslations("Modules");
   return (
     <Modal query={QUERIES.MODAL_EDIT_PROFILE}>
       <DialogContent className="sm:max-w-md">

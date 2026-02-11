@@ -25,6 +25,7 @@ import { QUERIES, PLACEHOLDERS } from "@/config";
 import OneSignal from "react-onesignal";
 import { loginOneSignal } from "@/services/lib/onesignal";
 import { validateActionResult } from "@/utils/actions";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -46,7 +47,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  // const t = useTranslations()
+  const t = useTranslations("Modules");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,8 +64,8 @@ export const SigninForm = ({ otherProviders }: Props) => {
 
     if (
       !validateActionResult(result, {
-        failToastMessage: PLACEHOLDERS.TOAST_SIGNIN_FAIL,
-        successToastMessage: PLACEHOLDERS.TOAST_SIGNIN_SUCCESS,
+        failToastMessage: t(PLACEHOLDERS.TOAST_SIGNIN_FAIL),
+        successToastMessage: t(PLACEHOLDERS.TOAST_SIGNIN_SUCCESS),
         setError,
       })
     ) {
@@ -93,7 +94,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_EMAIL}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_EMAIL)}</FormLabel>
               <FormControl>
                 <Input placeholder="crazyurbanaut@gmail.com" {...field} />
               </FormControl>
@@ -106,13 +107,13 @@ export const SigninForm = ({ otherProviders }: Props) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_PASSWORD}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_PASSWORD)}</FormLabel>
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
               <FormDescription className="text-end">
                 <Link href="#" className="text-end text-sm hover:underline">
-                  {PLACEHOLDERS.LABEL_FORGOT_PASSWORD}
+                  {t(PLACEHOLDERS.LABEL_FORGOT_PASSWORD)}
                 </Link>
               </FormDescription>
               <FormMessage />
@@ -121,14 +122,14 @@ export const SigninForm = ({ otherProviders }: Props) => {
         />
         <Field>
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            {PLACEHOLDERS.BUTTON_SIGNIN} {formState.isSubmitting && <Spinner />}
+            {t(PLACEHOLDERS.BUTTON_SIGNIN)} {formState.isSubmitting && <Spinner />}
           </Button>
           {otherProviders?.map((provider, i) => (
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            {PLACEHOLDERS.LABEL_NO_ACCOUNT}{" "}
-            <Link href={`?${QUERIES.MODAL_SIGNUP}=true`}>{PLACEHOLDERS.BUTTON_SIGNUP}</Link>
+            {t(PLACEHOLDERS.LABEL_NO_ACCOUNT)}{" "}
+            <Link href={`?${QUERIES.MODAL_SIGNUP}=true`}>{t(PLACEHOLDERS.BUTTON_SIGNUP)}</Link>
           </FieldDescription>
         </Field>
       </form>

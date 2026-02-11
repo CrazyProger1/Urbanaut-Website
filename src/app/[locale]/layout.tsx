@@ -87,10 +87,10 @@ const RootLayout = async ({ children, params }: Props) => {
             serviceWorkerPath="onesignal/OneSignalSDKWorker.js"
             serviceWorkerParam={{ scope: "/onesignal/" }}
           />
-          <OauthProvider />
           <ToastProvider theme={theme}>
             <SidebarProvider>
               <NextIntlClientProvider>
+                <OauthProvider />
                 <Sidebar />
                 <CookieConsent variant="default" />
                 <SidebarInset className="flex flex-col">

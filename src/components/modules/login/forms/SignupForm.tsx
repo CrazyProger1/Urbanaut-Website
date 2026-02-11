@@ -26,6 +26,7 @@ import { Country } from "@/types";
 import { BirthDateSelector } from "./BirthDateSelector";
 import { loginOneSignal } from "@/services/lib/onesignal";
 import { validateActionResult } from "@/utils/actions";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -66,7 +67,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  // const t = useTranslations()
+  const t = useTranslations("Modules");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -91,8 +92,8 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
     });
 
     const validationOptions = {
-      successToastMessage: PLACEHOLDERS.TOAST_SIGNUP_SUCCESS,
-      failToastMessage: PLACEHOLDERS.TOAST_SIGNUP_FAIL,
+      successToastMessage: t(PLACEHOLDERS.TOAST_SIGNUP_SUCCESS),
+      failToastMessage: t(PLACEHOLDERS.TOAST_SIGNUP_FAIL),
       setError,
     };
 
@@ -133,7 +134,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_FIRST_NAME}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_FIRST_NAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="John" {...field} />
               </FormControl>
@@ -146,7 +147,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="last_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_LAST_NAME}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_LAST_NAME)}</FormLabel>
               <FormControl>
                 <Input placeholder="Doe" {...field} />
               </FormControl>
@@ -160,7 +161,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_COUNTRY}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_COUNTRY)}</FormLabel>
               <CountrySelect
                 value={field.value}
                 onChange={field.onChange}
@@ -186,7 +187,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_EMAIL}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_EMAIL)}</FormLabel>
               <FormControl>
                 <Input placeholder="crazyurbanaut@gmail.com" {...field} />
               </FormControl>
@@ -199,13 +200,13 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{PLACEHOLDERS.LABEL_PASSWORD}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_PASSWORD)}</FormLabel>
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
               <FormDescription className="text-end">
                 <Link href="#" className="text-end text-sm hover:underline">
-                  {PLACEHOLDERS.LABEL_FORGOT_PASSWORD}
+                  {t(PLACEHOLDERS.LABEL_FORGOT_PASSWORD)}
                 </Link>
               </FormDescription>
               <FormMessage />
@@ -215,14 +216,14 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
 
         <Field>
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
-            {PLACEHOLDERS.BUTTON_SIGNUP} {formState.isSubmitting && <Spinner />}
+            {t(PLACEHOLDERS.BUTTON_SIGNUP)} {formState.isSubmitting && <Spinner />}
           </Button>
           {otherProviders?.map((provider, i) => (
             <React.Fragment key={i}>{provider}</React.Fragment>
           ))}
           <FieldDescription className="text-center">
-            {PLACEHOLDERS.LABEL_HAVE_ACCOUNT}{" "}
-            <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>{PLACEHOLDERS.BUTTON_SIGNIN}</Link>
+            {t(PLACEHOLDERS.LABEL_HAVE_ACCOUNT)}{" "}
+            <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>{t(PLACEHOLDERS.BUTTON_SIGNIN)}</Link>
           </FieldDescription>
         </Field>
       </form>

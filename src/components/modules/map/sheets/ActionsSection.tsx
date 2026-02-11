@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Backpack, Play, Share2, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -14,11 +17,12 @@ type Props = {
 };
 
 export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Props) => {
+  const t = useTranslations("Modules");
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
         <Play />
-        <div className="font-semibold">{PLACEHOLDERS.SECTION_ACTIONS}</div>
+        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_ACTIONS)}</div>
       </div>
       <div className="flex flex-row gap-1">
         {editLink && (
@@ -37,7 +41,7 @@ export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Prop
         )}
         {shareLink && (
           <CopyToast clipboard={shareLink}>
-            <Tooltip content={PLACEHOLDERS.TOOLTIP_SHARE_PLACE} asChild>
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_SHARE_PLACE)} asChild>
               <Button variant="outline">
                 <Share2 />
               </Button>

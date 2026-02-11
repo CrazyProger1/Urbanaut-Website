@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
+import { FormControl } from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -9,49 +10,55 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getPreservationColorClass, getSecurityColorClass } from "@/utils/classes";
+import { getSecurityColorClass } from "@/utils/classes";
 import { SecurityLevel } from "@/types";
+import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   value?: SecurityLevel;
   onChange: (value: SecurityLevel) => void;
 };
 
-export const SecuritySelect = ({ value, onChange }: Props) => {
-  const SECURITY_LABELS: Record<SecurityLevel, string> = {
-    NONE: "None",
-    EASY: "Easy",
-    MEDIUM: "Medium",
-    HARD: "Hard",
-    IMPOSSIBLE: "Impossible",
-  };
+const SECURITY_LEVELS: SecurityLevel[] = ["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"];
 
-  const SECURITY_DESCRIPTIONS: Record<SecurityLevel, string> = {
-    NONE: "No security - anyone can enter without any effort.",
-    EASY: "Very low security - basic locks, easily bypassed or forced.",
-    MEDIUM: "Moderate security - standard locks, alarms, some physical barriers.",
-    HARD: "High security - reinforced doors/windows, good alarms, cameras, difficult to breach.",
-    IMPOSSIBLE:
-      "Extremely secure - heavy fortifications, advanced systems, almost no realistic chance of unauthorized entry.",
-  };
+const SECURITY_LABEL_KEYS: Record<SecurityLevel, string> = {
+  NONE: PLACEHOLDERS.LABEL_SECURITY_NONE,
+  EASY: PLACEHOLDERS.LABEL_SECURITY_EASY,
+  MEDIUM: PLACEHOLDERS.LABEL_SECURITY_MEDIUM,
+  HARD: PLACEHOLDERS.LABEL_SECURITY_HARD,
+  IMPOSSIBLE: PLACEHOLDERS.LABEL_SECURITY_IMPOSSIBLE,
+};
+
+const SECURITY_DESCRIPTION_KEYS: Record<SecurityLevel, string> = {
+  NONE: PLACEHOLDERS.DESCRIPTION_SECURITY_NONE,
+  EASY: PLACEHOLDERS.DESCRIPTION_SECURITY_EASY,
+  MEDIUM: PLACEHOLDERS.DESCRIPTION_SECURITY_MEDIUM,
+  HARD: PLACEHOLDERS.DESCRIPTION_SECURITY_HARD,
+  IMPOSSIBLE: PLACEHOLDERS.DESCRIPTION_SECURITY_IMPOSSIBLE,
+};
+
+export const SecuritySelect = ({ value, onChange }: Props) => {
+  const t = useTranslations("Modules");
 
   return (
     <>
       <FormControl>
         <Select value={value} onValueChange={onChange}>
           <SelectTrigger className={`w-full ${getSecurityColorClass(value)}`}>
-            <SelectValue placeholder="Select level" />
+            <SelectValue placeholder={t(PLACEHOLDERS.LABEL_SELECT_LEVEL)} />
           </SelectTrigger>
           <SelectContent>
-            {(Object.keys(SECURITY_LABELS) as SecurityLevel[]).map((key) => (
+            {SECURITY_LEVELS.map((key) => (
               <SelectItem key={key} value={key} className={getSecurityColorClass(key)}>
-                {SECURITY_LABELS[key]}
+                {t(SECURITY_LABEL_KEYS[key])}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </FormControl>
-      <p className="text-muted-foreground text-sm">{SECURITY_DESCRIPTIONS[value || "MEDIUM"]}</p>
+      <p className="text-muted-foreground text-sm">
+        {t(SECURITY_DESCRIPTION_KEYS[value || "MEDIUM"])}
+      </p>
     </>
   );
 };
