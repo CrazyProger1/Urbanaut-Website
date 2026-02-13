@@ -53,10 +53,11 @@ export const SettingsForm = ({ user, languages }: Props) => {
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_SETTINGS]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const languageCode = (values.language === "English" ? "en" : "en") as Locale;
+    const languageCode =
+      languages.filter(({ name }) => values.language === name)?.[0]?.code || "en";
     const result = await updateSettings({
       ...values,
-      language: languageCode,
+      language: languageCode as Locale,
     });
     const validationOptions = {
       successToastMessage: t(PLACEHOLDERS.TOAST_SETTINGS_UPDATE_SUCCESS),
@@ -91,7 +92,6 @@ export const SettingsForm = ({ user, languages }: Props) => {
                   languages={languageNames}
                   value={field.value}
                   onChange={field.onChange}
-                  disabled={true}
                 />
               </FormControl>
             </FormItem>
