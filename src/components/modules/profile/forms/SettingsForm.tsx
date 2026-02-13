@@ -53,8 +53,7 @@ export const SettingsForm = ({ user, languages }: Props) => {
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_SETTINGS]: false });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const languageCode =
-      languages.find(({ name }) => values.language === name)?.code || "en";
+    const languageCode = languages.find(({ name }) => values.language === name)?.code || "en";
     const result = await updateSettings({
       ...values,
       language: languageCode as Locale,
@@ -69,7 +68,7 @@ export const SettingsForm = ({ user, languages }: Props) => {
       return;
     }
 
-    router.push(closeModalLink, { scroll: false });
+    router.push(closeModalLink, { scroll: false, locale: languageCode });
   };
 
   const languageNames = useMemo(() => languages.map(({ name }) => name), [languages]);
