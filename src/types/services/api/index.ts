@@ -58,3 +58,4 @@ export type { APIPreservationLevel } from "./preservation";
 export type { APICreateFeedback } from "./feedback";
 export type { APIListReferralCode } from "./referrals";
 export type { APIListFile, APIFileType } from "./media";
+export type { APIListLanguage } from "./i18n";

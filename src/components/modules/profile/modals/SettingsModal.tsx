@@ -7,26 +7,25 @@ import {
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES, PLACEHOLDERS } from "@/config";
-import { CurrentUser } from "@/types";
+import { CurrentUser, Language } from "@/types";
 import { SettingsForm } from "../forms/SettingsForm";
 import { useTranslations } from "next-intl";
 
 type Props = {
   user: CurrentUser;
+  languages: Language[];
 };
 
-export const SettingsModal = ({ user }: Props) => {
+export const SettingsModal = ({ user, languages }: Props) => {
   const t = useTranslations("Modules");
   return (
     <Modal query={QUERIES.MODAL_SETTINGS}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_SETTINGS)}</DialogTitle>
-          <DialogDescription>
-            {t(PLACEHOLDERS.DESCRIPTION_SETTINGS)}
-          </DialogDescription>
+          <DialogDescription>{t(PLACEHOLDERS.DESCRIPTION_SETTINGS)}</DialogDescription>
         </DialogHeader>
-        <SettingsForm user={user} />
+        <SettingsForm user={user} languages={languages} />
       </DialogContent>
     </Modal>
   );

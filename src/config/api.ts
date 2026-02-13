@@ -25,4 +25,5 @@ export const API_ENDPOINTS = {
   NOTIFICATIONS: "notifications/",
   FILE: "files/[id]/",
   FILES: "files/",
+  LANGUAGES: "languages/",
 };

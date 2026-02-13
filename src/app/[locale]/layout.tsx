@@ -19,6 +19,7 @@ import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { OneSignalProvider } from "@/components/lib/onesignal";
+import { getLanguages } from "@/services/api";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -78,6 +79,10 @@ const RootLayout = async ({ children, params }: Props) => {
   const notificationsResponse = await getNotifications();
   const notifications = notificationsResponse.success ? notificationsResponse.results : [];
 
+  const languagesResponse = await getLanguages();
+  const languages = languagesResponse.success ? languagesResponse.results : [];
+
+  console.log(languages);
   return (
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
       <body>
@@ -105,7 +110,7 @@ const RootLayout = async ({ children, params }: Props) => {
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
-                {user && <SettingsModal user={user} />}
+                {user && languages && <SettingsModal user={user} languages={languages} />}
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
             </SidebarProvider>

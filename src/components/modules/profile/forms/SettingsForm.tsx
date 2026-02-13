@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Link, useRouter } from "@/i18n";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { QUERIES, PLACEHOLDERS } from "@/config";
-import { CurrentUser } from "@/types";
+import { CurrentUser, Language } from "@/types";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { Globe, Bell, Mail, Pointer } from "lucide-react";
@@ -30,9 +30,10 @@ const formSchema = z.object({
 
 type Props = {
   user: CurrentUser;
+  languages: Language[];
 };
 
-export const SettingsForm = ({ user }: Props) => {
+export const SettingsForm = ({ user, languages }: Props) => {
   const t = useTranslations("Modules");
   const router = useRouter();
 
@@ -70,6 +71,9 @@ export const SettingsForm = ({ user }: Props) => {
     router.push(closeModalLink, { scroll: false });
   };
 
+  const languageNames = useMemo(() => languages.map(({ name }) => name), [languages]);
+
+  console.log(languageNames);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -84,7 +88,7 @@ export const SettingsForm = ({ user }: Props) => {
               </FormLabel>
               <FormControl>
                 <LanguageSelect
-                  languages={["English"]}
+                  languages={languageNames}
                   value={field.value}
                   onChange={field.onChange}
                   disabled={true}

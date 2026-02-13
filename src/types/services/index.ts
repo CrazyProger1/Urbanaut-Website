@@ -39,4 +39,5 @@ export type {
   APIListCity,
   APIObtainWebsocketToken,
   APIRetrieveNotification,
+  APIListLanguage,
 } from "./api";

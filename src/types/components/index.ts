@@ -18,3 +18,4 @@ export type { Tag } from "./tag";
 export type { Achievement } from "./achievement";
 export type { File } from "./media";
 export type { SecurityLevel, PreservationLevel } from "./security";
+export type { Language } from "./i18n";
