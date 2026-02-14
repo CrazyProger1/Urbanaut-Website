@@ -20,7 +20,15 @@ import { Tooltip } from "@/components/ui/next/tooltip";
 import { ClickToast } from "@/components/common/toasts";
 import { useTranslations } from "next-intl";
 
-const FILTER_PARAMS = new Set(["preservation", "security", "tags", "country"]);
+const FILTER_PARAMS = new Set([
+  QUERIES.FILTER_PRESERVATION_LEVEL,
+  QUERIES.FILTER_SECURITY_LEVEL,
+  QUERIES.FILTER_TAGS,
+  QUERIES.FILTER_COUNTRY,
+  QUERIES.FILTER_IS_PRIVATE,
+  QUERIES.FILTER_IS_FAVORITE,
+  QUERIES.FILTER_CITY,
+]);
 
 type Props = {
   onSearchByCoordinates?: (point: LatLng) => void;
@@ -108,7 +116,9 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
 
           <ClickToast
             message={
-              isAIActive ? t(PLACEHOLDERS.TOAST_AI_MODE_DISABLED) : t(PLACEHOLDERS.TOAST_AI_MODE_ENABLED)
+              isAIActive
+                ? t(PLACEHOLDERS.TOAST_AI_MODE_DISABLED)
+                : t(PLACEHOLDERS.TOAST_AI_MODE_ENABLED)
             }
             passthrough
           >

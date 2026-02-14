@@ -47,6 +47,8 @@ export const QUERIES = {
   FILTER_TAGS: "tags",
   FILTER_COUNTRY: "country",
   FILTER_CITY: "city",
+  FILTER_IS_FAVORITE: "is_favorite",
+  FILTER_IS_PRIVATE: "is_private",
 
   VIEWER_PHOTO: "photo",
 };

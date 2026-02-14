@@ -6,7 +6,14 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Link, useRouter } from "@/i18n";
@@ -26,6 +33,8 @@ import { CountrySelect } from "@/components/modules/common/selects";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import { CitySelect } from "@/components/modules/map/forms/CitySelect";
 import { useMapStore } from "@/stores";
+import { CheckBoxToggle } from "@/components/common/toggles";
+import { Heart, Lock } from "lucide-react";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
@@ -33,6 +42,8 @@ const formSchema = z.object({
   tags: z.array(z.string()),
   country: z.string().max(2).optional(),
   city: z.string().optional(),
+  is_favorite: z.boolean().optional(),
+  is_private: z.boolean().optional(),
 });
 
 type Props = {
@@ -63,6 +74,8 @@ export const FiltersForm = ({
       tags: params.getAll(QUERIES.FILTER_TAGS),
       country: params.get(QUERIES.FILTER_COUNTRY) || undefined,
       city: params.get(QUERIES.FILTER_CITY) || undefined,
+      is_favorite: params.get(QUERIES.FILTER_IS_FAVORITE) === "true" || undefined,
+      is_private: params.get(QUERIES.FILTER_IS_PRIVATE) === "true" || undefined,
     },
     mode: "onSubmit",
   });
@@ -122,6 +135,42 @@ export const FiltersForm = ({
             <FormItem>
               <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_favorite"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <CheckBoxToggle
+                  icon={<Heart className="h-4 w-4" />}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  title={t(PLACEHOLDERS.LABEL_FAVORITE)}
+                  description={t(PLACEHOLDERS.DESCRIPTION_FILTER_FAVORITE)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_private"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <CheckBoxToggle
+                  icon={<Lock className="h-4 w-4" />}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  title={t(PLACEHOLDERS.LABEL_PRIVATE)}
+                  description={t(PLACEHOLDERS.DESCRIPTION_FILTER_PRIVATE)}
+                />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
