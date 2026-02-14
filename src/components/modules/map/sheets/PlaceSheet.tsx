@@ -22,6 +22,11 @@ import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { ContributorsSection } from "./ContributorsSection";
 
 import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
+import { togglePlaceFavorite } from "@/actions";
+import { validateActionResult } from "@/utils/actions";
+import { toast } from "sonner";
+import { useRouter } from "@/i18n";
+import { usePreservedParamsLink } from "@/hooks";
 
 type Props = {
   place: PlaceDetail;
@@ -29,6 +34,7 @@ type Props = {
 
 export const PlaceSheet = ({ place }: Props) => {
   const t = useTranslations("Modules");
+  const router = useRouter();
   const {
     id,
     description,
@@ -42,7 +48,28 @@ export const PlaceSheet = ({ place }: Props) => {
     preservation,
     created_by,
     photos,
+    is_favorite,
   } = place;
+
+  const updatePageLink = usePreservedParamsLink();
+
+  const togglePlaceFavoriteStatus = async () => {
+    const result = await togglePlaceFavorite(id);
+    const validationOptions = {
+      failToastMessage: t(PLACEHOLDERS.TOAST_PLACE_FAVORITE_FAIL),
+    };
+
+    if (!validateActionResult(result, validationOptions)) {
+      return;
+    }
+
+    if (result.is_favorite) {
+      toast.success(t(PLACEHOLDERS.TOAST_PLACE_FAVORITE));
+    } else {
+      toast.success(t(PLACEHOLDERS.TOAST_PLACE_NOT_FAVORITE));
+    }
+    router.push(updatePageLink);
+  };
 
   return (
     <Sheet open={true} query={QUERIES.SHEET_PLACE}>
@@ -83,7 +110,11 @@ export const PlaceSheet = ({ place }: Props) => {
               <ContributorsSection creator={created_by} />
             </>
           )}
-          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`} />
+          <ActionsSection
+            shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`}
+            isFavorite={is_favorite}
+            toggleFavoriteAction={togglePlaceFavoriteStatus}
+          />
         </div>
         <SheetFooter>
           <SheetClose asChild>

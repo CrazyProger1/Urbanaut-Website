@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Backpack, Play, Share2, SquarePen } from "lucide-react";
+import { Backpack, Heart, Play, Share2, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { CopyToast } from "@/components/common/toasts";
@@ -14,10 +14,19 @@ type Props = {
   shareLink?: string;
   editLink?: string;
   planExpeditionLink?: string;
+  isFavorite?: boolean;
+  toggleFavoriteAction?: () => void;
 };
 
-export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Props) => {
+export const ActionsSection = ({
+  shareLink,
+  editLink,
+  planExpeditionLink,
+  isFavorite,
+  toggleFavoriteAction,
+}: Props) => {
   const t = useTranslations("Modules");
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row gap-1">
@@ -48,6 +57,9 @@ export const ActionsSection = ({ shareLink, editLink, planExpeditionLink }: Prop
             </Tooltip>
           </CopyToast>
         )}
+        <Button variant="outline" onClick={toggleFavoriteAction}>
+          <Heart fill={isFavorite ? "white" : undefined} />
+        </Button>
       </div>
     </div>
   );

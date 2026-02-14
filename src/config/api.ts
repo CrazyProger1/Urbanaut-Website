@@ -10,6 +10,7 @@ export const API_ENDPOINTS = {
   USER_BY_USERNAME: "users/by-username/[username]",
   LOGIN: "tokens/",
   PLACES: "places/",
+  PLACE_TOGGLE_FAVORITE: "places/[id]/toggle-favorite/",
   PLACE: "places/[id]/",
   AREAS: "areas/",
   AREA: "areas/[id]/",

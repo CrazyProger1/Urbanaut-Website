@@ -1,7 +1,14 @@
 "use server";
 import { fetchAuthenticated } from "./auth";
 import { API_ENDPOINTS } from "@/config";
-import { APICreatePlace, APIListPlace, APIRetrievePlace, APIErrorResponse, APISuccessfulResponse, APIPaginatedResponse } from "@/types";
+import {
+  APICreatePlace,
+  APIListPlace,
+  APIRetrievePlace,
+  APIErrorResponse,
+  APISuccessfulResponse,
+  APIPaginatedResponse,
+} from "@/types";
 import { APIPlaceFilters } from "@/types/services/api";
 import { buildURLSearchParams } from "@/utils/api";
 
@@ -25,4 +32,13 @@ export const createPlace = async (
     body: JSON.stringify(place),
     method: "POST",
   });
+};
+
+export const togglePlaceFavorite = async (id: string | number) => {
+  return await fetchAuthenticated<{ is_favorite: boolean }>(
+    API_ENDPOINTS.PLACE_TOGGLE_FAVORITE.replace("[id]", String(id)),
+    {
+      method: "PATCH",
+    },
+  );
 };

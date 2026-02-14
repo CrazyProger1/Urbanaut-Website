@@ -21,4 +21,5 @@ export {
   getMe,
   getNotifications,
   uploadFile,
+  togglePlaceFavorite,
 } from "./api";

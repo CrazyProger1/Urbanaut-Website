@@ -10,6 +10,7 @@ export type APIListPlaceFile = APIListFile;
 export type APIListPlace = {
   id: number;
   point: APIPoint;
+  is_favorite: boolean;
 };
 
 export type APIRetrievePlace = {
@@ -30,6 +31,7 @@ export type APIRetrievePlace = {
   created_by?: APIListUser;
   photos: APIListPlaceFile[];
   area?: number;
+  is_favorite: boolean;
 };
 
 export type APICreatePlace = {
