@@ -12,7 +12,7 @@ import { getSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
-import { Poppins } from "next/font/google";
+import { Poppins, Russo_One } from "next/font/google";
 import { FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
@@ -47,6 +47,12 @@ export const metadata: Metadata = {
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+});
+
+const russoOne = Russo_One({
+  weight: ["400"],
   subsets: ["latin"],
   variable: "--font-poppins",
 });
