@@ -11,7 +11,7 @@ export const Tooltip = ({ children, content, asChild }: Props) => {
   return (
     <ShadcnTooltip delayDuration={500}>
       <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
-      <TooltipContent>{content}</TooltipContent>
+      <TooltipContent className="select-none">{content}</TooltipContent>
     </ShadcnTooltip>
   );
 };
