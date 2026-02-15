@@ -44,7 +44,7 @@ export const PreservationSelect = ({ value, onChange }: Props) => {
     <>
       <FormControl>
         <Select value={value} onValueChange={onChange}>
-          <SelectTrigger className={`w-full ${getPreservationColorClass(value)}`}>
+          <SelectTrigger className={`w-full`}>
             <SelectValue placeholder={t(PLACEHOLDERS.LABEL_SELECT_LEVEL)} />
           </SelectTrigger>
           <SelectContent>

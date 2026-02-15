@@ -8,7 +8,8 @@
     "LABEL_COOKIE_CONSENT": "Натискаючи <accept>Прийняти</accept>, ви погоджуєтеся з використанням файлів cookie.",
     "LABEL_COOKIE_LEARN_MORE": "Дізнатися більше",
     "BUTTON_ACCEPT": "Прийняти",
-    "BUTTON_DECLINE": "Відхилити"
+    "BUTTON_DECLINE": "Відхилити",
+    "LABEL_SELECT_TAG": "Оберіть тег..."
   },
   "Modules": {
     "HINT_PLACE_ADDING": "Натисніть на карту, щоб поставити маркер. Перетягуйте його для точного коригування.",
@@ -69,7 +70,7 @@
     "DESCRIPTION_CREATE_AREA": "Окресліть нову область, розставивши точки на карті.",
     "DESCRIPTION_PLACE_PRIVATE": "Якщо увімкнено, це місце бачите лише ви.",
     "DESCRIPTION_AREA_PRIVATE": "Якщо увімкнено, цю область бачите лише ви.",
-    "DESCRIPTION_FILTER_FAVORITE": "Показувати лише місця, які ви позначили як обрані.",
+    "DESCRIPTION_FILTER_FAVORITE": "Показувати лише ваші обрані місця.",
     "DESCRIPTION_FILTER_PRIVATE": "Показувати лише ваші приватні місця.",
     "DESCRIPTION_EDIT_PROFILE": "Оновіть дані профілю. Не забудьте зберегти зміни.",
     "DESCRIPTION_SETTINGS": "Керуйте обліковим записом, налаштуваннями та сповіщеннями.",
@@ -130,8 +131,8 @@
     "LABEL_ADDED": "Додано",
     "LABEL_COORDINATES": "Координати",
     "LABEL_ADDRESS": "Адреса",
-    "LABEL_SELECT_LEVEL": "Оберіть рівень",
-    "LABEL_SELECT_COUNTRY": "Оберіть країну",
+    "LABEL_SELECT_LEVEL": "Оберіть рівень...",
+    "LABEL_SELECT_COUNTRY": "Оберіть країну...",
     "LABEL_SEARCH_TAG": "Пошук тегу…",
     "LABEL_SEARCH_COUNTRY": "Пошук країни…",
     "LABEL_NO_COUNTRY_FOUND": "Країну не знайдено",

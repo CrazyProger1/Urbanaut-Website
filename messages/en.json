@@ -8,7 +8,8 @@
     "LABEL_COOKIE_CONSENT": "By clicking <accept>Accept</accept>, you agree to our use of cookies.",
     "LABEL_COOKIE_LEARN_MORE": "Learn more.",
     "BUTTON_ACCEPT": "Accept",
-    "BUTTON_DECLINE": "Decline"
+    "BUTTON_DECLINE": "Decline",
+    "LABEL_SELECT_TAG": "Select tag..."
   },
   "Modules": {
     "HINT_PLACE_ADDING": "Tap on the map to place the marker. Drag to adjust position.",
@@ -69,7 +70,7 @@
     "DESCRIPTION_CREATE_AREA": "Outline a new area by placing points on the map.",
     "DESCRIPTION_PLACE_PRIVATE": "When enabled, only you can see this place.",
     "DESCRIPTION_AREA_PRIVATE": "When enabled, only you can see this area.",
-    "DESCRIPTION_FILTER_FAVORITE": "Show only places you have marked as favorite.",
+    "DESCRIPTION_FILTER_FAVORITE": "Show only your favorite places.",
     "DESCRIPTION_FILTER_PRIVATE": "Show only your private places.",
     "DESCRIPTION_EDIT_PROFILE": "Update your profile information. Save when you're done.",
     "DESCRIPTION_SETTINGS": "Manage your account, preferences, and notifications.",
@@ -130,8 +131,8 @@
     "LABEL_ADDED": "Added",
     "LABEL_COORDINATES": "Coordinates",
     "LABEL_ADDRESS": "Address",
-    "LABEL_SELECT_LEVEL": "Select level",
-    "LABEL_SELECT_COUNTRY": "Select country",
+    "LABEL_SELECT_LEVEL": "Select level...",
+    "LABEL_SELECT_COUNTRY": "Select country...",
     "LABEL_SEARCH_TAG": "Search tag...",
     "LABEL_SEARCH_COUNTRY": "Search country...",
     "LABEL_NO_COUNTRY_FOUND": "No country found.",
