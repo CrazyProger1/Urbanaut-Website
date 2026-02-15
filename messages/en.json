@@ -12,6 +12,9 @@
     "LABEL_SELECT_TAG": "Select tag..."
   },
   "Modules": {
+    "TOOLTIP_TOGGLE_FAVORITE_PLACE": "Toggle Favorite",
+    "TOOLTIP_MARK_FAVORITE": "Add to Favorites",
+    "TOOLTIP_UNMARK_FAVORITE": "Remove from Favorites",
     "HINT_PLACE_ADDING": "Tap on the map to place the marker. Drag to adjust position.",
     "HINT_AREA_ADDING": "Tap to add each point and outline the area. Drag markers to adjust.",
     "HINT_RULER_TOOL": "Tap points on the map to build your route and measure distance.",

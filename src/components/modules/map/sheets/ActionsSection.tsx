@@ -57,9 +57,16 @@ export const ActionsSection = ({
             </Tooltip>
           </CopyToast>
         )}
-        <Button variant="outline" onClick={toggleFavoriteAction}>
-          <Heart fill={isFavorite ? "white" : undefined} />
-        </Button>
+        <Tooltip
+          content={t(
+            isFavorite ? PLACEHOLDERS.TOOLTIP_UNMARK_FAVORITE : PLACEHOLDERS.TOOLTIP_MARK_FAVORITE,
+          )}
+          asChild
+        >
+          <Button variant="outline" onClick={toggleFavoriteAction}>
+            <Heart fill={isFavorite ? "white" : undefined} />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );
