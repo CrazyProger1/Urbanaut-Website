@@ -32,7 +32,7 @@ export const Sidebar = () => {
         <SidebarGroup>
           <Link className="flex flex-row items-center gap-4" href={PAGES.MAIN}>
             <Image
-              className="cursor-pointer"
+              className={"cursor-pointer" + (sidebar.open ? "": " pt-2")}
               src={IMAGES.LOGO}
               alt={ALTS.LOGO_PHOTO}
               width="64"
