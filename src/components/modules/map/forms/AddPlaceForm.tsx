@@ -146,8 +146,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
         is_private,
         preservation,
         security,
-        built_at: built_at?.toISOString(),
-        abandoned_at: abandoned_at?.toISOString(),
+        built_at: built_at?.toISOString().split("T")[0],
+        abandoned_at: abandoned_at?.toISOString().split("T")[0],
         files: fileIds,
       });
 
