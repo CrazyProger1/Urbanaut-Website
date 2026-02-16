@@ -23,7 +23,7 @@ import { Field, FieldDescription } from "@/components/ui/field";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CountrySelect } from "@/components/modules/common/selects";
 import { Country } from "@/types";
-import { BirthDateSelector } from "./BirthDateSelector";
+import { BirthDateSelect } from "./BirthDateSelect";
 import { loginOneSignal } from "@/services/lib/onesignal";
 import { validateActionResult } from "@/utils/actions";
 import { useTranslations } from "next-intl";
@@ -176,7 +176,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           name="born_at"
           render={({ field }) => (
             <FormItem>
-              <BirthDateSelector value={field.value} onChange={field.onChange} />
+              <BirthDateSelect value={field.value} onChange={field.onChange} />
               <FormMessage />
             </FormItem>
           )}

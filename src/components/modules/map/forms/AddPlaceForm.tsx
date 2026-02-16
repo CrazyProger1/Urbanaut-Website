@@ -39,6 +39,7 @@ import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/ui/d
 import { validateActionResult } from "@/utils/actions";
 import { usePreservedParamsLink } from "@/hooks";
 import { Field } from "@/components/ui/field";
+import { DateSelect } from "@/components/common/selects";
 
 const FilePreview = ({ file }: { file: File }) => {
   const src = useMemo(() => URL.createObjectURL(file), [file]);
@@ -61,6 +62,8 @@ const formSchema = z.object({
   tags: z.array(z.string()),
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
   security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]),
+  built_at: z.date(),
+  abandoned_at: z.date(),
 });
 
 type Props = {
@@ -225,6 +228,40 @@ export const AddPlaceForm = ({ tags }: Props) => {
             <FormItem>
               <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
               <SecuritySelect value={field.value} onChange={field.onChange} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="built_at"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <DateSelect
+                  value={field.value}
+                  onChange={field.onChange}
+                  label={t(PLACEHOLDERS.LABEL_BUILT)}
+                  placeholder={t(PLACEHOLDERS.LABEL_SELECT_DATE)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="abandoned_at"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <DateSelect
+                  value={field.value}
+                  onChange={field.onChange}
+                  label={t(PLACEHOLDERS.LABEL_ABANDONED)}
+                  placeholder={t(PLACEHOLDERS.LABEL_SELECT_DATE)}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

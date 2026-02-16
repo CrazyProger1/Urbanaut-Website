@@ -172,7 +172,7 @@
     "LABEL_NO_ACCOUNT": "Don't have an account?",
     "LABEL_HAVE_ACCOUNT": "Already have an account?",
     "LABEL_BIRTH_DATE": "Date Of Birth",
-    "LABEL_SELECT_DATE": "Select date",
+    "LABEL_SELECT_DATE": "Select date...",
     "TOAST_SIGNIN_SUCCESS": "Signed in successfully!",
     "TOAST_SIGNIN_FAIL": "Failed to sign in.",
     "TOAST_SIGNUP_SUCCESS": "Signed up successfully!",

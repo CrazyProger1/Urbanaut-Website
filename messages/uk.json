@@ -172,7 +172,7 @@
     "LABEL_NO_ACCOUNT": "Немає облікового запису?",
     "LABEL_HAVE_ACCOUNT": "Вже є обліковий запис?",
     "LABEL_BIRTH_DATE": "Дата народження",
-    "LABEL_SELECT_DATE": "Оберіть дату",
+    "LABEL_SELECT_DATE": "Оберіть дату...",
     "TOAST_SIGNIN_SUCCESS": "Успішний вхід!",
     "TOAST_SIGNIN_FAIL": "Не вдалося увійти",
     "TOAST_SIGNUP_SUCCESS": "Реєстрацію завершено!",

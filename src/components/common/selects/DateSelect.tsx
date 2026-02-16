@@ -7,15 +7,15 @@ import { Calendar } from "@/components/ui/calendar";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
-import { PLACEHOLDERS } from "@/config";
 
 type Props = {
   value?: Date;
+  label?: string;
+  placeholder?: string;
   onChange?: (value: Date) => void;
 };
-export const BirthDateSelector = ({ value, onChange }: Props) => {
-  const t = useTranslations("Modules");
+
+export const DateSelect = ({ value, label, placeholder, onChange }: Props) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(value);
 
@@ -27,13 +27,15 @@ export const BirthDateSelector = ({ value, onChange }: Props) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Label htmlFor="date" className="px-1">
-        {t(PLACEHOLDERS.LABEL_BIRTH_DATE)}
-      </Label>
+      {label && (
+        <Label htmlFor="date" className="px-1">
+          {label}
+        </Label>
+      )}
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" id="date" className="w-full justify-between font-normal">
-            {date ? date.toISOString().split('T')[0] : t(PLACEHOLDERS.LABEL_SELECT_DATE)}
+            {date ? date.toISOString().split("T")[0] : placeholder}
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>

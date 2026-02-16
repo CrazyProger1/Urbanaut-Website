@@ -190,7 +190,7 @@
     "LABEL_NO_ACCOUNT": "Нет учётной записи?",
     "LABEL_HAVE_ACCOUNT": "Уже есть учётная запись?",
     "LABEL_BIRTH_DATE": "Дата рождения",
-    "LABEL_SELECT_DATE": "Выберите дату",
+    "LABEL_SELECT_DATE": "Выберите дату...",
     "LABEL_FEEDBACK": "Обратная связь",
     "LABEL_REFERRAL_INVITED_TEXT": "Кто-то особенный считает, что вы стали бы отличным участником нашей платформы.",
     "LABEL_INVITATION_CODE": "Ваш код приглашения",
