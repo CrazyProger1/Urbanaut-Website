@@ -62,8 +62,8 @@ const formSchema = z.object({
   tags: z.array(z.string()),
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
   security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]),
-  built_at: z.date(),
-  abandoned_at: z.date(),
+  built_at: z.date().optional(),
+  abandoned_at: z.date().optional(),
 });
 
 type Props = {
@@ -119,7 +119,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
   const { formState, setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { tags, name, is_private, preservation, security, description } = values;
+    const { tags, name, is_private, preservation, security, description, built_at, abandoned_at } =
+      values;
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
 
@@ -145,6 +146,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
         is_private,
         preservation,
         security,
+        built_at: built_at?.toISOString(),
+        abandoned_at: abandoned_at?.toISOString(),
         files: fileIds,
       });
 
