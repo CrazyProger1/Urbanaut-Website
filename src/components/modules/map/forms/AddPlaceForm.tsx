@@ -40,6 +40,7 @@ import { validateActionResult } from "@/utils/actions";
 import { usePreservedParamsLink } from "@/hooks";
 import { Field } from "@/components/ui/field";
 import { DateSelect } from "@/components/common/selects";
+import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 
 const FilePreview = ({ file }: { file: File }) => {
   const src = useMemo(() => URL.createObjectURL(file), [file]);
@@ -169,156 +170,171 @@ export const AddPlaceForm = ({ tags }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
-              <FormControl>
-                <Input placeholder="Abandoned Factory" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t(PLACEHOLDERS.LABEL_DESCRIPTION)}</FormLabel>
-              <FormControl>
-                <Textarea {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="tags"
-          render={({ field }) => (
-            <FormItem>
-              <Label>{t(PLACEHOLDERS.LABEL_TAGS)}</Label>
-              <TagsSelect
-                tags={tags?.map((tag) => tag.tag) || []}
-                selected={field.value}
-                onSelect={handleSelect}
-                onRemove={handleRemove}
-              />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="preservation"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t(PLACEHOLDERS.LABEL_PRESERVATION_LEVEL)}</FormLabel>
-              <PreservationSelect value={field.value} onChange={field.onChange} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="security"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
-              <SecuritySelect value={field.value} onChange={field.onChange} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="built_at"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <DateSelect
-                  value={field.value}
-                  onChange={field.onChange}
-                  label={t(PLACEHOLDERS.LABEL_BUILT)}
-                  placeholder={t(PLACEHOLDERS.LABEL_SELECT_DATE)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="abandoned_at"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <DateSelect
-                  value={field.value}
-                  onChange={field.onChange}
-                  label={t(PLACEHOLDERS.LABEL_ABANDONED)}
-                  placeholder={t(PLACEHOLDERS.LABEL_SELECT_DATE)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="is_private"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <CheckBoxToggle
-                  icon={<Lock className="h-4 w-4" />}
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  title={t(PLACEHOLDERS.LABEL_PRIVATE)}
-                  description={t(PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Dropzone
-          src={files.length ? files : undefined}
-          accept={{ "image/*": PLACE_PHOTO_ACCEPT_FILETYPES }}
-          maxSize={PLACE_PHOTO_MAX_FILE_SIZE}
-          maxFiles={PLACE_PHOTO_MAX_FILES}
-          onDropAccepted={(acceptedFiles) => {
-            setFiles((prev) => [...prev, ...acceptedFiles]);
-          }}
-        >
-          <DropzoneContent>
-            <div className="flex flex-row flex-wrap justify-center gap-2">
-              {files.map((file, index) => (
-                <FilePreview key={file.name + index} file={file} />
-              ))}
-            </div>
-            <span
-              role="button"
-              className="text-muted-foreground hover:text-foreground mt-2 inline-flex cursor-pointer items-center text-sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                setFiles([]);
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <Tabs defaultValue="overview" className="gap-4 py-4">
+          <TabsList className="w-full">
+            <TabsTrigger value="overview">{t(PLACEHOLDERS.TAB_GENERAL)}</TabsTrigger>
+            <TabsTrigger value="dates">{t(PLACEHOLDERS.TAB_DATES)}</TabsTrigger>
+            <TabsTrigger value="state">{t(PLACEHOLDERS.TAB_STATE)}</TabsTrigger>
+            <TabsTrigger value="media">{t(PLACEHOLDERS.TAB_MEDIA)}</TabsTrigger>
+          </TabsList>
+          <TabsContent value="overview" className="flex flex-col gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Abandoned Factory" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t(PLACEHOLDERS.LABEL_DESCRIPTION)}</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="tags"
+              render={({ field }) => (
+                <FormItem>
+                  <Label>{t(PLACEHOLDERS.LABEL_TAGS)}</Label>
+                  <TagsSelect
+                    tags={tags?.map((tag) => tag.tag) || []}
+                    selected={field.value}
+                    onSelect={handleSelect}
+                    onRemove={handleRemove}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="is_private"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<Lock className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_PRIVATE)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </TabsContent>
+          <TabsContent value="dates" className="flex flex-col gap-4">
+            <FormField
+              control={form.control}
+              name="built_at"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <DateSelect
+                      value={field.value}
+                      onChange={field.onChange}
+                      label={t(PLACEHOLDERS.LABEL_BUILT)}
+                      placeholder={t(PLACEHOLDERS.LABEL_SELECT_DATE)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="abandoned_at"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <DateSelect
+                      value={field.value}
+                      onChange={field.onChange}
+                      label={t(PLACEHOLDERS.LABEL_ABANDONED)}
+                      placeholder={t(PLACEHOLDERS.LABEL_SELECT_DATE)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </TabsContent>
+          <TabsContent value="state" className="flex flex-col gap-4">
+            <FormField
+              control={form.control}
+              name="preservation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t(PLACEHOLDERS.LABEL_PRESERVATION_LEVEL)}</FormLabel>
+                  <PreservationSelect value={field.value} onChange={field.onChange} />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="security"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
+                  <SecuritySelect value={field.value} onChange={field.onChange} />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </TabsContent>
+          <TabsContent value="media" className="flex flex-col gap-4">
+            <Dropzone
+              src={files.length ? files : undefined}
+              accept={{ "image/*": PLACE_PHOTO_ACCEPT_FILETYPES }}
+              maxSize={PLACE_PHOTO_MAX_FILE_SIZE}
+              maxFiles={PLACE_PHOTO_MAX_FILES}
+              onDropAccepted={(acceptedFiles) => {
+                setFiles((prev) => [...prev, ...acceptedFiles]);
               }}
             >
-              <X className="mr-1 h-4 w-4" />
-              {t(PLACEHOLDERS.BUTTON_CLEAR)}
-            </span>
-          </DropzoneContent>
-          <DropzoneEmptyState>
-            <Upload />
-            <Label>{t(PLACEHOLDERS.LABEL_UPLOAD_PHOTOS)}</Label>
-          </DropzoneEmptyState>
-        </Dropzone>
+              <DropzoneContent>
+                <div className="flex flex-row flex-wrap justify-center gap-2">
+                  {files.map((file, index) => (
+                    <FilePreview key={file.name + index} file={file} />
+                  ))}
+                </div>
+                <span
+                  role="button"
+                  className="text-muted-foreground hover:text-foreground mt-2 inline-flex cursor-pointer items-center text-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFiles([]);
+                  }}
+                >
+                  <X className="mr-1 h-4 w-4" />
+                  {t(PLACEHOLDERS.BUTTON_CLEAR)}
+                </span>
+              </DropzoneContent>
+              <DropzoneEmptyState>
+                <Upload />
+                <Label>{t(PLACEHOLDERS.LABEL_UPLOAD_PHOTOS)}</Label>
+              </DropzoneEmptyState>
+            </Dropzone>
+          </TabsContent>
+        </Tabs>
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
             {t(PLACEHOLDERS.BUTTON_SAVE)} {formState.isSubmitting && <Spinner />}
