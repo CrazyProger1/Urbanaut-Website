@@ -34,7 +34,7 @@ import {
   QUERIES,
 } from "@/config";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
-import { Lock, Upload, X } from "lucide-react";
+import { CircleQuestionMark, Lock, Upload, X } from "lucide-react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/ui/dropzone";
 import { validateActionResult } from "@/utils/actions";
 import { usePreservedParamsLink } from "@/hooks";
@@ -60,6 +60,7 @@ const formSchema = z.object({
   name: z.string().max(250).min(2),
   description: z.string().max(1000).min(0),
   is_private: z.boolean(),
+  is_supposed: z.boolean(),
   tags: z.array(z.string()),
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
   security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]),
@@ -95,6 +96,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
       name: "",
       description: "",
       is_private: false,
+      is_supposed: false,
       tags: [],
       preservation: "MEDIUM",
       security: "NONE",
@@ -103,6 +105,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
   });
 
   const selected = form.watch("tags");
+  const supposed = form.watch("is_supposed");
 
   const handleSelect = (tag: string) => {
     if (!selected.includes(tag)) {
@@ -229,10 +232,29 @@ export const AddPlaceForm = ({ tags }: Props) => {
                   <FormControl>
                     <CheckBoxToggle
                       icon={<Lock className="h-4 w-4" />}
-                      checked={field.value}
+                      checked={field.value || supposed}
+                      disabled={supposed}
                       onCheckedChange={field.onChange}
                       title={t(PLACEHOLDERS.LABEL_PRIVATE)}
                       description={t(PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="is_supposed"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<CircleQuestionMark className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_SUPPOSED)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_PLACE_SUPPOSED)}
                     />
                   </FormControl>
                   <FormMessage />

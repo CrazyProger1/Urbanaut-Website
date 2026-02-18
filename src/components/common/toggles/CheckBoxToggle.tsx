@@ -27,10 +27,12 @@ export const CheckBoxToggle = (props: Props) => {
   return (
     <Label className={actualClassName}>
       <div className="flex items-center gap-3">
-        {icon}
+        <div className="w-fit">{icon}</div>
         <div className="font-normal">
           <p className="text-sm font-medium">{title}</p>
-          <p className="text-muted-foreground text-sm group-has-aria-checked:text-black transition-colors">{description}</p>
+          <p className="text-muted-foreground text-sm transition-colors group-has-aria-checked:text-black">
+            {description}
+          </p>
         </div>
       </div>
       <Checkbox {...rest} className={actualCheckBoxClassName} />
