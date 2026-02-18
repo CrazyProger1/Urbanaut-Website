@@ -49,6 +49,7 @@ export const QUERIES = {
   FILTER_CITY: "city",
   FILTER_IS_FAVORITE: "is_favorite",
   FILTER_IS_PRIVATE: "is_private",
+  FILTER_IS_SUPPOSED: "is_supposed",
 
   VIEWER_PHOTO: "photo",
 };

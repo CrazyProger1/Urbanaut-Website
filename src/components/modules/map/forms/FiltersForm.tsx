@@ -34,7 +34,7 @@ import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import { CitySelect } from "@/components/modules/map/forms/CitySelect";
 import { useMapStore } from "@/stores";
 import { CheckBoxToggle } from "@/components/common/toggles";
-import { Heart, Lock } from "lucide-react";
+import { CircleQuestionMark, Heart, Lock } from "lucide-react";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
@@ -44,6 +44,7 @@ const formSchema = z.object({
   city: z.string().optional(),
   is_favorite: z.boolean().optional(),
   is_private: z.boolean().optional(),
+  is_supposed: z.boolean().optional(),
 });
 
 type Props = {
@@ -76,6 +77,7 @@ export const FiltersForm = ({
       city: params.get(QUERIES.FILTER_CITY) || undefined,
       is_favorite: params.get(QUERIES.FILTER_IS_FAVORITE) === "true" || undefined,
       is_private: params.get(QUERIES.FILTER_IS_PRIVATE) === "true" || undefined,
+      is_supposed: params.get(QUERIES.FILTER_IS_SUPPOSED) === "true" || undefined,
     },
     mode: "onSubmit",
   });
@@ -168,6 +170,24 @@ export const FiltersForm = ({
                   onCheckedChange={field.onChange}
                   title={t(PLACEHOLDERS.LABEL_PRIVATE)}
                   description={t(PLACEHOLDERS.DESCRIPTION_FILTER_PRIVATE)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_supposed"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <CheckBoxToggle
+                  icon={<CircleQuestionMark className="h-4 w-4" />}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  title={t(PLACEHOLDERS.LABEL_SUPPOSED)}
+                  description={t(PLACEHOLDERS.DESCRIPTION_PLACE_SUPPOSED)}
                 />
               </FormControl>
               <FormMessage />

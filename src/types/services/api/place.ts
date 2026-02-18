@@ -45,6 +45,7 @@ export type APICreatePlace = {
   abandoned_at?: string;
   area?: number;
   is_private?: boolean;
+  is_supposed?: boolean;
   preservation?: APIPreservationLevel;
   security?: APISecurityLevel;
   files?: string[];

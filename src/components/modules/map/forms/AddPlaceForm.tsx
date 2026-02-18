@@ -123,8 +123,17 @@ export const AddPlaceForm = ({ tags }: Props) => {
   const { formState, setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { tags, name, is_private, preservation, security, description, built_at, abandoned_at } =
-      values;
+    const {
+      tags,
+      name,
+      is_private,
+      preservation,
+      security,
+      description,
+      built_at,
+      abandoned_at,
+      is_supposed,
+    } = values;
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
 
@@ -150,6 +159,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
         is_private,
         preservation,
         security,
+        is_supposed,
         built_at: built_at?.toISOString().split("T")[0],
         abandoned_at: abandoned_at?.toISOString().split("T")[0],
         files: fileIds,
