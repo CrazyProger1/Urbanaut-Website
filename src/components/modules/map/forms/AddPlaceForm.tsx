@@ -218,7 +218,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
           <TabsList className="w-full">
             <TabsTrigger value="overview">{t(PLACEHOLDERS.TAB_GENERAL)}</TabsTrigger>
             <TabsTrigger value="dates">{t(PLACEHOLDERS.TAB_DATES)}</TabsTrigger>
-            <TabsTrigger value="state">{t(PLACEHOLDERS.TAB_STATE)}</TabsTrigger>
+            <TabsTrigger value="preservation">{t(PLACEHOLDERS.LABEL_PRESERVATION)}</TabsTrigger>
+            <TabsTrigger value="security">{t(PLACEHOLDERS.LABEL_SECURITY)}</TabsTrigger>
             <TabsTrigger value="media">{t(PLACEHOLDERS.TAB_MEDIA)}</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="flex flex-col gap-4">
@@ -338,7 +339,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
               )}
             />
           </TabsContent>
-          <TabsContent value="state" className="flex flex-col gap-4">
+          <TabsContent value="preservation" className="flex flex-col gap-4">
             <FormField
               control={form.control}
               name="has_roof"
@@ -447,6 +448,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
                 </FormItem>
               )}
             />
+          </TabsContent>
+          <TabsContent value="security" className="flex flex-col gap-4">
             <FormField
               control={form.control}
               name="security"
