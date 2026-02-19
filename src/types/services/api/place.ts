@@ -46,7 +46,7 @@ export type APICreatePlace = {
   area?: number;
   is_private?: boolean;
   is_supposed?: boolean;
-  preservation?: APIPreservationLevel;
+  preservation?: APIPlaceCreatePreservation;
   security?: APISecurityLevel;
   files?: string[];
 };
@@ -56,4 +56,13 @@ export type APIPlaceFilters = APIMapBounds & {
   area?: number;
   tags?: string;
   query?: string;
+};
+
+export type APIPlaceCreatePreservation = {
+  has_windows?: boolean;
+  has_roof?: boolean;
+  has_floor?: boolean;
+  has_walls?: boolean;
+  has_doors?: boolean;
+  has_internal_ceilings?: boolean;
 };

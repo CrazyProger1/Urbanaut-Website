@@ -34,7 +34,18 @@ import {
   QUERIES,
 } from "@/config";
 import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
-import { CircleQuestionMark, Lock, Upload, X } from "lucide-react";
+import {
+  Image as ImageIcon,
+  BrickWall,
+  CircleQuestionMark,
+  DoorClosed,
+  House,
+  LampCeiling,
+  Layers,
+  Lock,
+  Upload,
+  X,
+} from "lucide-react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/ui/dropzone";
 import { validateActionResult } from "@/utils/actions";
 import { usePreservedParamsLink } from "@/hooks";
@@ -64,6 +75,12 @@ const formSchema = z.object({
   tags: z.array(z.string()),
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
   security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]),
+  has_roof: z.boolean().optional(),
+  has_floor: z.boolean().optional(),
+  has_walls: z.boolean().optional(),
+  has_windows: z.boolean().optional(),
+  has_doors: z.boolean().optional(),
+  has_internal_ceilings: z.boolean().optional(),
   built_at: z.date().optional(),
   abandoned_at: z.date().optional(),
 });
@@ -133,6 +150,12 @@ export const AddPlaceForm = ({ tags }: Props) => {
       built_at,
       abandoned_at,
       is_supposed,
+      has_windows,
+      has_roof,
+      has_floor,
+      has_walls,
+      has_doors,
+      has_internal_ceilings,
     } = values;
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
@@ -157,7 +180,14 @@ export const AddPlaceForm = ({ tags }: Props) => {
         description,
         tags,
         is_private,
-        preservation,
+        preservation: {
+          has_windows,
+          has_doors,
+          has_floor,
+          has_walls,
+          has_roof,
+          has_internal_ceilings,
+        },
         security,
         is_supposed,
         built_at: built_at?.toISOString().split("T")[0],
@@ -311,11 +341,108 @@ export const AddPlaceForm = ({ tags }: Props) => {
           <TabsContent value="state" className="flex flex-col gap-4">
             <FormField
               control={form.control}
-              name="preservation"
+              name="has_roof"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t(PLACEHOLDERS.LABEL_PRESERVATION_LEVEL)}</FormLabel>
-                  <PreservationSelect value={field.value} onChange={field.onChange} />
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<House className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_ROOF)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_ROOF)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_floor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<Layers className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_FLOOR)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_FLOOR)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_internal_ceilings"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<LampCeiling className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_INTERNAL_CEILINGS)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_INTERNAL_CEILINGS)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_walls"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<BrickWall className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_WALLS)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_WALLS)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_windows"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<ImageIcon className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_WINDOWS)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_WINDOWS)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_doors"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<DoorClosed className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_DOORS)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_DOORS)}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
