@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES, PLACEHOLDERS } from "@/config";
-import { AddAreaForm } from "@/components/modules/map/forms";
+import { AreaForm } from "@/components/modules/map/forms";
 import { Tag } from "@/types";
 import { useTranslations } from "next-intl";
 
@@ -29,7 +29,7 @@ export const AddAreaModal = ({ tags }: Props) => {
             {t(PLACEHOLDERS.DESCRIPTION_CREATE_AREA)}
           </DialogDescription>
         </DialogHeader>
-        <AddAreaForm tags={tags} />
+        <AreaForm tags={tags} />
       </DialogContent>
     </Modal>
   );

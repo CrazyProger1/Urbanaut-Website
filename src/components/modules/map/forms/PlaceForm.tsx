@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import Image from "next/image";
 import { Link, useRouter } from "@/i18n";
@@ -21,7 +21,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
-import { Tag } from "@/types";
+import { APICreatePlace, APIUpdatePlace, Place, PlaceDetail, Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
@@ -51,10 +51,12 @@ import {
 } from "lucide-react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/ui/dropzone";
 import { validateActionResult } from "@/utils/actions";
+import { getDiff } from "@/utils/diff";
 import { usePreservedParamsLink } from "@/hooks";
 import { Field } from "@/components/ui/field";
 import { DateSelect } from "@/components/common/selects";
 import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
+import { editPlace } from "@/actions/place";
 
 const FilePreview = ({ file }: { file: File }) => {
   const src = useMemo(() => URL.createObjectURL(file), [file]);
@@ -82,10 +84,10 @@ const formSchema = z.object({
   has_windows: z.boolean().optional(),
   has_doors: z.boolean().optional(),
   has_security: z.boolean().optional(),
-  has_dogs: z.boolean().optional(),
-  has_weapons: z.boolean().optional(),
-  has_sensors: z.boolean().optional(),
-  has_cameras: z.boolean().optional(),
+  // has_dogs: z.boolean().optional(),
+  // has_weapons: z.boolean().optional(),
+  // has_sensors: z.boolean().optional(),
+  // has_cameras: z.boolean().optional(),
   has_internal_ceilings: z.boolean().optional(),
   built_at: z.date().optional(),
   abandoned_at: z.date().optional(),
@@ -93,6 +95,8 @@ const formSchema = z.object({
 
 type Props = {
   tags?: Tag[];
+  place?: PlaceDetail;
+  edit?: boolean;
 };
 
 const uploadFile = async (file: File) => {
@@ -106,28 +110,46 @@ const uploadFile = async (file: File) => {
   return response.json();
 };
 
-export const AddPlaceForm = ({ tags }: Props) => {
+export const PlaceForm = ({ tags, place, edit }: Props) => {
   const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
-  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_PLACE_ADDING]: false });
+  const closeModalLink = usePreservedParamsLink({
+    [QUERIES.MODAL_PLACE_ADDING]: false,
+    [QUERIES.MODAL_EDIT_PLACE]: false,
+    [QUERIES.FILTER_SELECTED_POINT]: false,
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      is_private: false,
-      is_supposed: false,
-      tags: [],
+      has_windows: place?.preservation.has_windows ?? false,
+      has_floor: place?.preservation.has_floor ?? false,
+      has_doors: place?.preservation.has_doors ?? false,
+      has_roof: place?.preservation.has_roof ?? false,
+      has_walls: place?.preservation.has_walls ?? false,
+      has_internal_ceilings: place?.preservation.has_internal_ceilings ?? false,
+      has_security: place?.security.has_security ?? false,
+      name: place?.name || "",
+      description: place?.description || "",
+      is_private: place?.is_private ?? false,
+      is_supposed: place?.is_supposed ?? false,
+      tags: place?.tags || [],
+      abandoned_at: place?.abandoned_at ? new Date(place?.abandoned_at) : undefined,
+      built_at: place?.built_at ? new Date(place?.built_at) : undefined,
     },
     mode: "onSubmit",
   });
 
   const selected = form.watch("tags");
-  const supposed = form.watch("is_supposed");
-  const hasSecurity = form.watch("has_security");
+  const isSupposed = form.watch("is_supposed");
+
+  useEffect(() => {
+    if (isSupposed) {
+      form.setValue("is_private", true);
+    }
+  }, [isSupposed, form]);
 
   const handleSelect = (tag: string) => {
     if (!selected.includes(tag)) {
@@ -168,7 +190,44 @@ export const AddPlaceForm = ({ tags }: Props) => {
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
 
-    if (point) {
+    const body = {
+      name,
+      description,
+      tags,
+      is_private,
+      preservation: {
+        has_windows,
+        has_doors,
+        has_floor,
+        has_walls,
+        has_roof,
+        has_internal_ceilings,
+      },
+      security: {
+        has_security,
+        // Doubts about legality
+        // has_cameras,
+        // has_dogs,
+        // has_weapons,
+        // has_sensors,
+      },
+      is_supposed,
+      built_at: built_at?.toISOString().split("T")[0],
+      abandoned_at: abandoned_at?.toISOString().split("T")[0],
+    };
+
+    if (edit && place) {
+      const result = await editPlace(place.id, getDiff(place, body));
+      const validationOptions = {
+        successToastMessage: t(PLACEHOLDERS.TOAST_PLACE_EDIT_SUCCESS),
+        failToastMessage: t(PLACEHOLDERS.TOAST_PLACE_EDIT_FAIL),
+        setError,
+      };
+
+      if (!validateActionResult(result, validationOptions)) {
+        return;
+      }
+    } else if (point) {
       const [lat, lng] = point.split(",").map(Number);
       const uploads = await Promise.all(files.map((file) => uploadFile(file)));
       const fileIds = uploads
@@ -182,33 +241,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
         }),
       );
 
-      const result = await createPlace({
-        name,
-        point: [lat, lng],
-        description,
-        tags,
-        is_private,
-        preservation: {
-          has_windows,
-          has_doors,
-          has_floor,
-          has_walls,
-          has_roof,
-          has_internal_ceilings,
-        },
-        security: {
-          has_security,
-          // Doubts about legality
-          // has_cameras,
-          // has_dogs,
-          // has_weapons,
-          // has_sensors,
-        },
-        is_supposed,
-        built_at: built_at?.toISOString().split("T")[0],
-        abandoned_at: abandoned_at?.toISOString().split("T")[0],
-        files: fileIds,
-      });
+      const result = await createPlace({ ...body, point: [lat, lng], files: fileIds });
 
       const validationOptions = {
         successToastMessage: t(PLACEHOLDERS.TOAST_PLACE_ADDITION_SUCCESS),
@@ -219,11 +252,10 @@ export const AddPlaceForm = ({ tags }: Props) => {
       if (!validateActionResult(result, validationOptions)) {
         return;
       }
-
-      params.delete(QUERIES.FILTER_SELECTED_POINT);
-      params.delete(QUERIES.MODAL_PLACE_ADDING);
-      router.push(`?${params}`);
+    } else {
+      return;
     }
+    router.push(closeModalLink);
   };
 
   return (
@@ -287,8 +319,8 @@ export const AddPlaceForm = ({ tags }: Props) => {
                   <FormControl>
                     <CheckBoxToggle
                       icon={<Lock className="h-4 w-4" />}
-                      checked={field.value || supposed}
-                      disabled={supposed}
+                      checked={field.value}
+                      disabled={isSupposed}
                       onCheckedChange={field.onChange}
                       title={t(PLACEHOLDERS.LABEL_PRIVATE)}
                       description={t(PLACEHOLDERS.DESCRIPTION_PLACE_PRIVATE)}

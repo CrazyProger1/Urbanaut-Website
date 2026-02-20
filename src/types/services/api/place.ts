@@ -1,5 +1,5 @@
 import { APIPoint } from "./geo";
-import { APISecurityLevel } from "@/types";
+import { APICreateRequest, APISecurityLevel } from "@/types";
 import { APIPreservationLevel } from "@/types";
 import { APIMapBounds } from "@/types/services/api/map";
 import { APIListUser } from "@/types/services/api/user";
@@ -35,13 +35,12 @@ export type APIRetrievePlace = {
   is_favorite: boolean;
 };
 
-export type APICreatePlace = {
-  name: string;
+export type APIUpdatePlace = {
+  name?: string;
   name_en?: string;
   description?: string;
   description_en?: string;
-  point: APIPoint;
-  tags: string[];
+  tags?: string[];
   built_at?: string;
   abandoned_at?: string;
   area?: number;
@@ -50,6 +49,12 @@ export type APICreatePlace = {
   preservation?: APIPlaceCreatePreservation;
   security?: APIPlaceCreateSecurity;
   files?: string[];
+};
+
+export type APICreatePlace = APIUpdatePlace & {
+  point: APIPoint;
+  name: string;
+  tags: string[];
 };
 
 export type APIPlaceFilters = APIMapBounds & {

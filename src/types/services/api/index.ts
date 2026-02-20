@@ -53,13 +53,14 @@ export type {
   APIPlaceRetrievePreservation,
   APIPlaceRetrieveSecurity,
   APIPlaceCreatePreservation,
+  APIUpdatePlace,
 } from "./place";
 export type { APIListArea, APIRetrieveArea, APICreateArea, APIAreaFilters } from "./area";
 export type { APIListTag } from "./tag";
 export type { APIMapBounds } from "./map";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";
-export type { APICreateFeedback } from "./feedback";
+export type { APICreateFeedback, APICreateRequest } from "./feedback";
 export type { APIListReferralCode } from "./referrals";
 export type { APIListFile, APIFileType } from "./media";
 export type { APIListLanguage } from "./i18n";

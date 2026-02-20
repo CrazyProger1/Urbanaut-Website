@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Backpack, Heart, Play, Share2, SquarePen } from "lucide-react";
+import { Backpack, FlagTriangleRight, Heart, Pencil, Play, Share2, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { CopyToast } from "@/components/common/toasts";
@@ -35,11 +35,13 @@ export const ActionsSection = ({
       </div>
       <div className="flex flex-row gap-1">
         {editLink && (
-          <Button variant="outline" asChild>
-            <Link href={editLink}>
-              <SquarePen />
-            </Link>
-          </Button>
+          <Tooltip content={t(PLACEHOLDERS.TOOLTIP_EDIT_PLACE)} asChild>
+            <Button variant="outline" asChild>
+              <Link href={editLink}>
+                <SquarePen />
+              </Link>
+            </Button>
+          </Tooltip>
         )}
         {planExpeditionLink && (
           <Button variant="outline" asChild>

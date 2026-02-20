@@ -39,7 +39,7 @@ type Props = {
   tags?: Tag[];
 };
 
-export const AddAreaForm = ({ tags }: Props) => {
+export const AreaForm = ({ tags }: Props) => {
   const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();

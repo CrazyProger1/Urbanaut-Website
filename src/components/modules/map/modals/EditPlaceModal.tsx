@@ -10,24 +10,25 @@ import {
 import { Modal } from "@/components/ui/next/modal";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { PlaceForm } from "../forms";
-import { Tag } from "@/types";
+import { PlaceDetail, Tag } from "@/types";
 import { useTranslations } from "next-intl";
 
 type Props = {
   tags?: Tag[];
+  place: PlaceDetail;
 };
 
-export const AddPlaceModal = ({ tags }: Props) => {
+export const EditPlaceModal = ({ tags, place }: Props) => {
   const t = useTranslations("Modules");
 
   return (
-    <Modal query={QUERIES.MODAL_PLACE_ADDING}>
+    <Modal query={QUERIES.MODAL_EDIT_PLACE}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{t(PLACEHOLDERS.TITLE_CREATE_PLACE)}</DialogTitle>
-          <DialogDescription>{t(PLACEHOLDERS.DESCRIPTION_CREATE_PLACE)}</DialogDescription>
+          <DialogTitle>{t(PLACEHOLDERS.TITLE_EDIT_PLACE)}</DialogTitle>
+          <DialogDescription>{t(PLACEHOLDERS.DESCRIPTION_EDIT_PLACE)}</DialogDescription>
         </DialogHeader>
-        <PlaceForm tags={tags} />
+        <PlaceForm tags={tags} place={place} edit />
       </DialogContent>
     </Modal>
   );
