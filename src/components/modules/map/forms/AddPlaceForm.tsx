@@ -25,7 +25,6 @@ import { Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
-import { PreservationSelect } from "@/components/modules/map/forms/PreservationSelect";
 import {
   PLACE_PHOTO_ACCEPT_FILETYPES,
   PLACE_PHOTO_MAX_FILE_SIZE,
@@ -33,16 +32,20 @@ import {
   PLACEHOLDERS,
   QUERIES,
 } from "@/config";
-import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import {
   Image as ImageIcon,
   BrickWall,
+  Cctv,
   CircleQuestionMark,
+  Dog,
   DoorClosed,
   House,
   LampCeiling,
   Layers,
   Lock,
+  Radar,
+  ShieldUser,
+  Swords,
   Upload,
   X,
 } from "lucide-react";
@@ -73,13 +76,16 @@ const formSchema = z.object({
   is_private: z.boolean(),
   is_supposed: z.boolean(),
   tags: z.array(z.string()),
-  preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]),
-  security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]),
   has_roof: z.boolean().optional(),
   has_floor: z.boolean().optional(),
   has_walls: z.boolean().optional(),
   has_windows: z.boolean().optional(),
   has_doors: z.boolean().optional(),
+  has_security: z.boolean().optional(),
+  has_dogs: z.boolean().optional(),
+  has_weapons: z.boolean().optional(),
+  has_sensors: z.boolean().optional(),
+  has_cameras: z.boolean().optional(),
   has_internal_ceilings: z.boolean().optional(),
   built_at: z.date().optional(),
   abandoned_at: z.date().optional(),
@@ -115,14 +121,13 @@ export const AddPlaceForm = ({ tags }: Props) => {
       is_private: false,
       is_supposed: false,
       tags: [],
-      preservation: "MEDIUM",
-      security: "NONE",
     },
     mode: "onSubmit",
   });
 
   const selected = form.watch("tags");
   const supposed = form.watch("is_supposed");
+  const hasSecurity = form.watch("has_security");
 
   const handleSelect = (tag: string) => {
     if (!selected.includes(tag)) {
@@ -144,8 +149,6 @@ export const AddPlaceForm = ({ tags }: Props) => {
       tags,
       name,
       is_private,
-      preservation,
-      security,
       description,
       built_at,
       abandoned_at,
@@ -156,6 +159,11 @@ export const AddPlaceForm = ({ tags }: Props) => {
       has_walls,
       has_doors,
       has_internal_ceilings,
+      // has_dogs,
+      // has_weapons,
+      // has_cameras,
+      // has_sensors,
+      has_security,
     } = values;
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
     const params = new URLSearchParams(searchParams);
@@ -188,7 +196,14 @@ export const AddPlaceForm = ({ tags }: Props) => {
           has_roof,
           has_internal_ceilings,
         },
-        security,
+        security: {
+          has_security,
+          // Doubts about legality
+          // has_cameras,
+          // has_dogs,
+          // has_weapons,
+          // has_sensors,
+        },
         is_supposed,
         built_at: built_at?.toISOString().split("T")[0],
         abandoned_at: abandoned_at?.toISOString().split("T")[0],
@@ -214,15 +229,14 @@ export const AddPlaceForm = ({ tags }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Tabs defaultValue="overview" className="gap-4 py-4">
+        <Tabs defaultValue="general" className="gap-4 py-4">
           <TabsList className="w-full">
-            <TabsTrigger value="overview">{t(PLACEHOLDERS.TAB_GENERAL)}</TabsTrigger>
+            <TabsTrigger value="general">{t(PLACEHOLDERS.TAB_GENERAL)}</TabsTrigger>
             <TabsTrigger value="dates">{t(PLACEHOLDERS.TAB_DATES)}</TabsTrigger>
             <TabsTrigger value="preservation">{t(PLACEHOLDERS.LABEL_PRESERVATION)}</TabsTrigger>
-            <TabsTrigger value="security">{t(PLACEHOLDERS.LABEL_SECURITY)}</TabsTrigger>
             <TabsTrigger value="media">{t(PLACEHOLDERS.TAB_MEDIA)}</TabsTrigger>
           </TabsList>
-          <TabsContent value="overview" className="flex flex-col gap-4">
+          <TabsContent value="general" className="flex flex-col gap-4">
             <FormField
               control={form.control}
               name="name"
@@ -296,6 +310,24 @@ export const AddPlaceForm = ({ tags }: Props) => {
                       onCheckedChange={field.onChange}
                       title={t(PLACEHOLDERS.LABEL_SUPPOSED)}
                       description={t(PLACEHOLDERS.DESCRIPTION_PLACE_SUPPOSED)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_security"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<ShieldUser className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_SECURITY)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_SECURITY)}
                     />
                   </FormControl>
                   <FormMessage />
@@ -449,19 +481,82 @@ export const AddPlaceForm = ({ tags }: Props) => {
               )}
             />
           </TabsContent>
-          <TabsContent value="security" className="flex flex-col gap-4">
-            <FormField
-              control={form.control}
-              name="security"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
-                  <SecuritySelect value={field.value} onChange={field.onChange} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </TabsContent>
+          {/*{hasSecurity && (*/}
+          {/*  <>*/}
+          {/*    <FormField*/}
+          {/*      control={form.control}*/}
+          {/*      name="has_dogs"*/}
+          {/*      render={({ field }) => (*/}
+          {/*        <FormItem>*/}
+          {/*          <FormControl>*/}
+          {/*            <CheckBoxToggle*/}
+          {/*              icon={<Dog className="h-4 w-4" />}*/}
+          {/*              checked={field.value}*/}
+          {/*              onCheckedChange={field.onChange}*/}
+          {/*              title={t(PLACEHOLDERS.LABEL_HAS_DOGS)}*/}
+          {/*              description={t(PLACEHOLDERS.DESCRIPTION_HAS_DOGS)}*/}
+          {/*            />*/}
+          {/*          </FormControl>*/}
+          {/*          <FormMessage />*/}
+          {/*        </FormItem>*/}
+          {/*      )}*/}
+          {/*    />*/}
+          {/*    <FormField*/}
+          {/*      control={form.control}*/}
+          {/*      name="has_weapons"*/}
+          {/*      render={({ field }) => (*/}
+          {/*        <FormItem>*/}
+          {/*          <FormControl>*/}
+          {/*            <CheckBoxToggle*/}
+          {/*              icon={<Swords className="h-4 w-4" />}*/}
+          {/*              checked={field.value}*/}
+          {/*              onCheckedChange={field.onChange}*/}
+          {/*              title={t(PLACEHOLDERS.LABEL_HAS_WEAPONS)}*/}
+          {/*              description={t(PLACEHOLDERS.DESCRIPTION_HAS_WEAPONS)}*/}
+          {/*            />*/}
+          {/*          </FormControl>*/}
+          {/*          <FormMessage />*/}
+          {/*        </FormItem>*/}
+          {/*      )}*/}
+          {/*    />*/}
+          {/*    <FormField*/}
+          {/*      control={form.control}*/}
+          {/*      name="has_cameras"*/}
+          {/*      render={({ field }) => (*/}
+          {/*        <FormItem>*/}
+          {/*          <FormControl>*/}
+          {/*            <CheckBoxToggle*/}
+          {/*              icon={<Cctv className="h-4 w-4" />}*/}
+          {/*              checked={field.value}*/}
+          {/*              onCheckedChange={field.onChange}*/}
+          {/*              title={t(PLACEHOLDERS.LABEL_HAS_CAMERAS)}*/}
+          {/*              description={t(PLACEHOLDERS.DESCRIPTION_HAS_CAMERAS)}*/}
+          {/*            />*/}
+          {/*          </FormControl>*/}
+          {/*          <FormMessage />*/}
+          {/*        </FormItem>*/}
+          {/*      )}*/}
+          {/*    />*/}
+          {/*    <FormField*/}
+          {/*      control={form.control}*/}
+          {/*      name="has_sensors"*/}
+          {/*      render={({ field }) => (*/}
+          {/*        <FormItem>*/}
+          {/*          <FormControl>*/}
+          {/*            <CheckBoxToggle*/}
+          {/*              icon={<Radar className="h-4 w-4" />}*/}
+          {/*              checked={field.value}*/}
+          {/*              onCheckedChange={field.onChange}*/}
+          {/*              title={t(PLACEHOLDERS.LABEL_HAS_SENSORS)}*/}
+          {/*              description={t(PLACEHOLDERS.DESCRIPTION_HAS_SENSORS)}*/}
+          {/*            />*/}
+          {/*          </FormControl>*/}
+          {/*          <FormMessage />*/}
+          {/*        </FormItem>*/}
+          {/*      )}*/}
+          {/*    />*/}
+          {/*  </>*/}
+          {/*)}*/}
           <TabsContent value="media" className="flex flex-col gap-4">
             <Dropzone
               src={files.length ? files : undefined}

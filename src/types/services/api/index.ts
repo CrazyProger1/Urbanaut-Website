@@ -49,6 +49,10 @@ export type {
   APICreatePlace,
   APIPlaceFilters,
   APIListPlaceFile,
+  APIPlaceCreateSecurity,
+  APIPlaceRetrievePreservation,
+  APIPlaceRetrieveSecurity,
+  APIPlaceCreatePreservation,
 } from "./place";
 export type { APIListArea, APIRetrieveArea, APICreateArea, APIAreaFilters } from "./area";
 export type { APIListTag } from "./tag";

@@ -50,6 +50,7 @@ export const QUERIES = {
   FILTER_IS_FAVORITE: "is_favorite",
   FILTER_IS_PRIVATE: "is_private",
   FILTER_IS_SUPPOSED: "is_supposed",
+  FILTER_HAS_SECURITY: "has_security",
 
   VIEWER_PHOTO: "photo",
 };

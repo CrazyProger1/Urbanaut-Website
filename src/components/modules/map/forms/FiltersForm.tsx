@@ -34,11 +34,12 @@ import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
 import { CitySelect } from "@/components/modules/map/forms/CitySelect";
 import { useMapStore } from "@/stores";
 import { CheckBoxToggle } from "@/components/common/toggles";
-import { CircleQuestionMark, Heart, Lock } from "lucide-react";
+import { CircleQuestionMark, Heart, Lock, ShieldUser } from "lucide-react";
 
 const formSchema = z.object({
   preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
-  security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]).optional(),
+  // security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]).optional(),
+  has_security: z.boolean().optional(),
   tags: z.array(z.string()),
   country: z.string().max(2).optional(),
   city: z.string().optional(),
@@ -71,7 +72,7 @@ export const FiltersForm = ({
     defaultValues: {
       preservation:
         (params.get(QUERIES.FILTER_PRESERVATION_LEVEL) as APIPreservationLevel) || undefined,
-      security: (params.get(QUERIES.FILTER_SECURITY_LEVEL) as APISecurityLevel) || undefined,
+      has_security: params.get(QUERIES.FILTER_HAS_SECURITY) === "true" || undefined,
       tags: params.getAll(QUERIES.FILTER_TAGS),
       country: params.get(QUERIES.FILTER_COUNTRY) || undefined,
       city: params.get(QUERIES.FILTER_CITY) || undefined,
@@ -132,11 +133,19 @@ export const FiltersForm = ({
         />
         <FormField
           control={form.control}
-          name="security"
+          name="has_security"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t(PLACEHOLDERS.LABEL_SECURITY_LEVEL)}</FormLabel>
-              <SecuritySelect value={field.value} onChange={field.onChange} />
+              <FormControl>
+                <CheckBoxToggle
+                  icon={<ShieldUser className="h-4 w-4" />}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  title={t(PLACEHOLDERS.LABEL_HAS_SECURITY)}
+                  description={t(PLACEHOLDERS.DESCRIPTION_HAS_SECURITY)}
+                />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

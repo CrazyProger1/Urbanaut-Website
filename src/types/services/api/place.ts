@@ -21,8 +21,8 @@ export type APIRetrievePlace = {
   description_en?: string;
   point: APIPoint;
   tags: string[];
-  security: APISecurityLevel;
-  preservation: APIPreservationLevel;
+  security: APIPlaceRetrieveSecurity;
+  preservation: APIPlaceRetrievePreservation;
   built_at?: string;
   abandoned_at?: string;
   is_private: boolean;
@@ -47,7 +47,7 @@ export type APICreatePlace = {
   is_private?: boolean;
   is_supposed?: boolean;
   preservation?: APIPlaceCreatePreservation;
-  security?: APISecurityLevel;
+  security?: APIPlaceCreateSecurity;
   files?: string[];
 };
 
@@ -66,3 +66,17 @@ export type APIPlaceCreatePreservation = {
   has_doors?: boolean;
   has_internal_ceilings?: boolean;
 };
+
+export type APIPlaceRetrievePreservation = APIPlaceCreatePreservation & {
+  level: APIPreservationLevel;
+};
+
+export type APIPlaceCreateSecurity = {
+  has_security?: boolean;
+  // has_dogs?: boolean;
+  // has_weapons?: boolean;
+  // has_cameras?: boolean;
+  // has_sensors?: boolean;
+};
+
+export type APIPlaceRetrieveSecurity = APIPlaceCreateSecurity;
