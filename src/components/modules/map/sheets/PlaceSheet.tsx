@@ -89,7 +89,7 @@ export const PlaceSheet = ({ place }: Props) => {
                   variant="destructive"
                   className="border-base-hard bg-base-hard! hover:bg-base-hard-hover!"
                 >
-                  Supposed
+                  {t(PLACEHOLDERS.LABEL_SUPPOSED)}
                 </Badge>
               </Link>
             )}
@@ -99,7 +99,7 @@ export const PlaceSheet = ({ place }: Props) => {
                   variant="destructive"
                   className="border-base-hard bg-base-hard! hover:bg-base-hard-hover!"
                 >
-                  Private
+                  {t(PLACEHOLDERS.LABEL_PRIVATE)}
                 </Badge>
               </Link>
             )}
