@@ -26,6 +26,7 @@ export type APIRetrievePlace = {
   built_at?: string;
   abandoned_at?: string;
   is_private: boolean;
+  is_supposed: boolean;
   created_at: string;
   updated_at: string;
   created_by?: APIListUser;

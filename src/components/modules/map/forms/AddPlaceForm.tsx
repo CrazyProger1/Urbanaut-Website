@@ -244,7 +244,7 @@ export const AddPlaceForm = ({ tags }: Props) => {
                 <FormItem>
                   <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Abandoned Factory" {...field} />
+                    <Input placeholder="Abandoned factory..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

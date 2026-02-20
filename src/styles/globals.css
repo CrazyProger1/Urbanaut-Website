@@ -319,6 +319,18 @@
     --color-badge-tertiary: var(--color-badge-tertiary);
     --color-badge-tertiary-hover: var(--color-badge-tertiary-hover);
 
+    --color-base-none: rgba(var(--color-base-none), 0.3);
+    --color-base-none-hover: rgba(var(--color-base-none), 0.4);
+    --color-base-easy: rgba(var(--color-base-easy), 0.3);
+    --color-base-easy-hover: rgba(var(--color-base-easy), 0.4);
+    --color-base-medium: rgba(var(--color-base-medium), 0.3);
+    --color-base-medium-hover: rgba(var(--color-base-medium), 0.4);
+    --color-base-hard: rgba(var(--color-base-hard), 0.3);
+    --color-base-hard-hover: rgba(var(--color-base-hard), 0.4);
+    --color-base-impossible: rgba(var(--color-base-impossible), 0.3);
+    --color-base-impossible-hover: rgba(var(--color-base-impossible), 0.4);
+
+
     /* Notification Colors */
     --color-notification-update-bg: var(--color-notification-update-bg);
     --color-notification-update-icon: var(--color-notification-update-icon);

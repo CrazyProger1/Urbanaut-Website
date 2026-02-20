@@ -25,8 +25,9 @@ import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
 import { togglePlaceFavorite } from "@/actions";
 import { validateActionResult } from "@/utils/actions";
 import { toast } from "sonner";
-import { useRouter } from "@/i18n";
+import { Link, useRouter } from "@/i18n";
 import { usePreservedParamsLink } from "@/hooks";
+import { Badge } from "@/components/ui/badge";
 
 type Props = {
   place: PlaceDetail;
@@ -46,10 +47,14 @@ export const PlaceSheet = ({ place }: Props) => {
     built_at,
     security,
     preservation,
+    is_private,
+    is_supposed,
     created_by,
     photos,
     is_favorite,
   } = place;
+
+  const { has_security } = security;
 
   const updatePageLink = usePreservedParamsLink();
 
@@ -73,10 +78,32 @@ export const PlaceSheet = ({ place }: Props) => {
 
   return (
     <Sheet open={true} query={QUERIES.SHEET_PLACE}>
-      <SheetContent className="w-full! overflow-y-auto sm:w-3/4! select-none">
+      <SheetContent className="w-full! overflow-y-auto select-none sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
-          <SheetDescription>{t(PLACEHOLDERS.TITLE_PLACE)}</SheetDescription>
+          <SheetDescription className="flex flex-row items-center gap-1">
+            {t(PLACEHOLDERS.TITLE_PLACE)}
+            {is_supposed && (
+              <Link href={`${PAGES.MAP}?${QUERIES.FILTER_IS_SUPPOSED}=true`}>
+                <Badge
+                  variant="destructive"
+                  className="border-base-hard bg-base-hard! hover:bg-base-hard-hover!"
+                >
+                  Supposed
+                </Badge>
+              </Link>
+            )}
+            {is_private && (
+              <Link href={`${PAGES.MAP}?${QUERIES.FILTER_IS_PRIVATE}=true`}>
+                <Badge
+                  variant="destructive"
+                  className="border-base-hard bg-base-hard! hover:bg-base-hard-hover!"
+                >
+                  Private
+                </Badge>
+              </Link>
+            )}
+          </SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 p-4">
           {!!photos?.length && (
