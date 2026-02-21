@@ -8,6 +8,7 @@ import {
   APIErrorResponse,
   APISuccessfulResponse,
   APIPaginatedResponse,
+  APIUpdatePlace,
 } from "@/types";
 import { APIPlaceFilters } from "@/types/services/api";
 import { buildURLSearchParams } from "@/utils/api";
@@ -31,6 +32,13 @@ export const createPlace = async (
   return await fetchAuthenticated(API_ENDPOINTS.PLACES, {
     body: JSON.stringify(place),
     method: "POST",
+  });
+};
+
+export const updatePlace = async (id: string | number, place: APIUpdatePlace) => {
+  return await fetchAuthenticated(API_ENDPOINTS.PLACE.replace("[id]", String(id)), {
+    body: JSON.stringify(place),
+    method: "PATCH",
   });
 };
 

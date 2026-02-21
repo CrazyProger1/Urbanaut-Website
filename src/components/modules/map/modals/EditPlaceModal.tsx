@@ -10,15 +10,16 @@ import {
 import { Modal } from "@/components/ui/next/modal";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { PlaceForm } from "../forms";
-import { PlaceDetail, Tag } from "@/types";
+import { CurrentUser, PlaceDetail, Tag, User } from "@/types";
 import { useTranslations } from "next-intl";
 
 type Props = {
   tags?: Tag[];
+  user?: CurrentUser;
   place: PlaceDetail;
 };
 
-export const EditPlaceModal = ({ tags, place }: Props) => {
+export const EditPlaceModal = ({ tags, place, user }: Props) => {
   const t = useTranslations("Modules");
 
   return (
@@ -28,7 +29,7 @@ export const EditPlaceModal = ({ tags, place }: Props) => {
           <DialogTitle>{t(PLACEHOLDERS.TITLE_EDIT_PLACE)}</DialogTitle>
           <DialogDescription>{t(PLACEHOLDERS.DESCRIPTION_EDIT_PLACE)}</DialogDescription>
         </DialogHeader>
-        <PlaceForm tags={tags} place={place} edit />
+        <PlaceForm tags={tags} place={place} edit user={user} />
       </DialogContent>
     </Modal>
   );

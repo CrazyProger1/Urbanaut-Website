@@ -21,7 +21,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createPlace } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
-import { APICreatePlace, APIUpdatePlace, Place, PlaceDetail, Tag } from "@/types";
+import { APICreatePlace, APIUpdatePlace, CurrentUser, Place, PlaceDetail, Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
@@ -96,6 +96,7 @@ const formSchema = z.object({
 type Props = {
   tags?: Tag[];
   place?: PlaceDetail;
+  user?: CurrentUser;
   edit?: boolean;
 };
 
@@ -110,7 +111,7 @@ const uploadFile = async (file: File) => {
   return response.json();
 };
 
-export const PlaceForm = ({ tags, place, edit }: Props) => {
+export const PlaceForm = ({ tags, place, edit, user }: Props) => {
   const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -217,10 +218,16 @@ export const PlaceForm = ({ tags, place, edit }: Props) => {
     };
 
     if (edit && place) {
-      const result = await editPlace(place.id, getDiff(place, body));
+      const isOwner = user?.id === place?.created_by?.id;
+      const result = await editPlace(place.id, getDiff(place, body), isOwner);
+
       const validationOptions = {
-        successToastMessage: t(PLACEHOLDERS.TOAST_PLACE_EDIT_SUCCESS),
-        failToastMessage: t(PLACEHOLDERS.TOAST_PLACE_EDIT_FAIL),
+        successToastMessage: isOwner
+          ? t(PLACEHOLDERS.TOAST_PLACE_EDIT_SUCCESS)
+          : t(PLACEHOLDERS.TOAST_PLACE_EDIT_REQUEST_SENT_SUCCESS),
+        failToastMessage: isOwner
+          ? t(PLACEHOLDERS.TOAST_PLACE_EDIT_FAIL)
+          : t(PLACEHOLDERS.TOAST_PLACE_EDIT_REQUEST_SENT_FAIL),
         setError,
       };
 
@@ -266,7 +273,9 @@ export const PlaceForm = ({ tags, place, edit }: Props) => {
             <TabsTrigger value="general">{t(PLACEHOLDERS.TAB_GENERAL)}</TabsTrigger>
             <TabsTrigger value="dates">{t(PLACEHOLDERS.TAB_DATES)}</TabsTrigger>
             <TabsTrigger value="preservation">{t(PLACEHOLDERS.LABEL_PRESERVATION)}</TabsTrigger>
-            <TabsTrigger value="media">{t(PLACEHOLDERS.TAB_MEDIA)}</TabsTrigger>
+            <TabsTrigger value="media" disabled={edit}>
+              {t(PLACEHOLDERS.TAB_MEDIA)}
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="general" className="flex flex-col gap-4">
             <FormField
