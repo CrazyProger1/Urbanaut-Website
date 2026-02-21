@@ -65,4 +65,3 @@ export type { APIRequestType, APICreateRequest } from "./requests";
 export type { APIListReferralCode } from "./referrals";
 export type { APIListFile, APIFileType } from "./media";
 export type { APIListLanguage } from "./i18n";
-export type { APICreateComplaint } from "./complain";
