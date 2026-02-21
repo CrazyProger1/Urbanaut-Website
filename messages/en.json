@@ -13,6 +13,12 @@
   },
   "Modules": {
     "TOOLTIP_TOGGLE_FAVORITE_PLACE": "Toggle Favorite",
+    "TITLE_COMPLAIN": "Complain",
+    "DESCRIPTION_COMPLAIN": "Please describe your complaint in detail and provide any relevant facts or evidence to support your claim.",
+    "LABEL_COMPLAIN": "Complaint",
+    "TOOLTIP_COMPLAIN": "Complain",
+    "TOAST_COMPLAIN_SUCCESS": "Complaint sent successfully!",
+    "TOAST_COMPLAIN_FAIL": "Failed to send complaint.",
     "TOOLTIP_MARK_FAVORITE": "Add to Favorites",
     "TOOLTIP_UNMARK_FAVORITE": "Remove from Favorites",
     "HINT_PLACE_ADDING": "Tap on the map to place the marker. Drag to adjust position.",

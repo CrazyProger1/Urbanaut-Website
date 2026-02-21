@@ -13,7 +13,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins, Russo_One } from "next/font/google";
-import { FeedbackModal } from "@/components/modules/feedback/modals";
+import { ComplainModal, FeedbackModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
@@ -116,6 +116,7 @@ const RootLayout = async ({ children, params }: Props) => {
                 <SigninModal />
                 <SignupModal countries={countries} />
                 <FeedbackModal />
+                <ComplainModal />
                 {user && languages && <SettingsModal user={user} languages={languages} />}
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />

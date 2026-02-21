@@ -13,6 +13,7 @@ import { PLACEHOLDERS } from "@/config";
 type Props = {
   shareLink?: string;
   editLink?: string;
+  complainLink?: string;
   planExpeditionLink?: string;
   isFavorite?: boolean;
   toggleFavoriteAction?: () => void;
@@ -21,6 +22,7 @@ type Props = {
 export const ActionsSection = ({
   shareLink,
   editLink,
+  complainLink,
   planExpeditionLink,
   isFavorite,
   toggleFavoriteAction,
@@ -69,6 +71,15 @@ export const ActionsSection = ({
             <Heart fill={isFavorite ? "white" : undefined} />
           </Button>
         </Tooltip>
+        {complainLink && (
+          <Tooltip content={t(PLACEHOLDERS.TOOLTIP_COMPLAIN)} asChild>
+            <Button variant="outline" asChild>
+              <Link href={complainLink}>
+                <FlagTriangleRight />
+              </Link>
+            </Button>
+          </Tooltip>
+        )}
       </div>
     </div>
   );

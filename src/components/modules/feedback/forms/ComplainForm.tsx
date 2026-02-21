@@ -15,7 +15,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { leaveFeedback } from "@/actions";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Link, usePathname } from "@/i18n";
 import { PLACEHOLDERS, QUERIES } from "@/config";
@@ -23,12 +22,13 @@ import { validateActionResult } from "@/utils/actions";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { useTranslations } from "next-intl";
+import { leaveComplaint } from "@/actions";
 
 const formSchema = z.object({
   content: z.string().max(5000).min(5),
 });
 
-export const FeedbackForm = () => {
+export const ComplainForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -41,16 +41,16 @@ export const FeedbackForm = () => {
     mode: "onSubmit",
   });
 
-  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_FEEDBACK]: false });
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_COMPLAIN]: false });
 
   const { setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const result = await leaveFeedback(values);
+    const result = await leaveComplaint(values.content, `${pathname}?${searchParams}`);
 
     const validationOptions = {
-      successToastMessage: t(PLACEHOLDERS.TOAST_FEEDBACK_SUCCESS),
-      failToastMessage: t(PLACEHOLDERS.TOAST_FEEDBACK_FAIL),
+      successToastMessage: t(PLACEHOLDERS.TOAST_COMPLAIN_SUCCESS),
+      failToastMessage: t(PLACEHOLDERS.TOAST_COMPLAIN_FAIL),
       setError,
     };
 
@@ -58,10 +58,7 @@ export const FeedbackForm = () => {
       return;
     }
 
-    const params = new URLSearchParams(searchParams);
-    params.delete(QUERIES.MODAL_FEEDBACK);
-    const newPage = `${pathname}?${params}`;
-    router.push(newPage);
+    router.push(closeModalLink);
   };
 
   const { formState } = form;
@@ -74,7 +71,7 @@ export const FeedbackForm = () => {
           name="content"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>{t(PLACEHOLDERS.LABEL_FEEDBACK)}</FormLabel>
+              <FormLabel>{t(PLACEHOLDERS.LABEL_COMPLAIN)}</FormLabel>
               <FormControl>
                 <Textarea {...field} />
               </FormControl>

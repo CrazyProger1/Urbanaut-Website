@@ -13,6 +13,12 @@
   },
   "Modules": {
     "TOOLTIP_TOGGLE_FAVORITE_PLACE": "Перемкнути обране",
+    "TITLE_COMPLAIN": "Скарга",
+    "DESCRIPTION_COMPLAIN": "Будь ласка, детально опишіть свою скаргу та наведіть відповідні факти або докази на її підтримку.",
+    "LABEL_COMPLAIN": "Скарга",
+    "TOOLTIP_COMPLAIN": "Поскаржитися",
+    "TOAST_COMPLAIN_SUCCESS": "Скаргу успішно надіслано!",
+    "TOAST_COMPLAIN_FAIL": "Не вдалося надіслати скаргу.",
     "TOOLTIP_MARK_FAVORITE": "Додати до обраного",
     "TOOLTIP_UNMARK_FAVORITE": "Видалити з обраного",
     "HINT_PLACE_ADDING": "Натисніть на карту, щоб поставити маркер. Перетягуйте його для точного коригування.",

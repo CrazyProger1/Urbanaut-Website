@@ -140,6 +140,7 @@ export const PlaceSheet = ({ place }: Props) => {
           <ActionsSection
             shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`}
             editLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`}
+            complainLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_COMPLAIN}=true`}
             isFavorite={is_favorite}
             toggleFavoriteAction={togglePlaceFavoriteStatus}
           />

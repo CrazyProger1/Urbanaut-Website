@@ -22,4 +22,5 @@ export {
   getNotifications,
   uploadFile,
   togglePlaceFavorite,
+  createRequest,
 } from "./api";

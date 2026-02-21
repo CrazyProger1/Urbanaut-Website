@@ -35,6 +35,7 @@ export const QUERIES = {
   MODAL_MAP_FILTERS: "filters",
   MODAL_SETTINGS: "settings",
   MODAL_EDIT_PLACE: "edit",
+  MODAL_COMPLAIN: "complain",
 
   SHEET_AREA: "area",
   SHEET_PLACE: "place",

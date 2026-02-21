@@ -13,6 +13,12 @@
   },
   "Modules": {
     "TOOLTIP_TOGGLE_FAVORITE_PLACE": "Переключить избранное",
+    "TITLE_COMPLAIN": "Жалоба",
+    "DESCRIPTION_COMPLAIN": "Пожалуйста, подробно опишите вашу жалобу и приведите соответствующие факты или доказательства в её поддержку.",
+    "LABEL_COMPLAIN": "Жалоба",
+    "TOOLTIP_COMPLAIN": "Пожаловаться",
+    "TOAST_COMPLAIN_SUCCESS": "Жалоба успешно отправлена!",
+    "TOAST_COMPLAIN_FAIL": "Не удалось отправить жалобу.",
     "TOOLTIP_MARK_FAVORITE": "Добавить в избранное",
     "TOOLTIP_UNMARK_FAVORITE": "Удалить из избранного",
     "HINT_PLACE_ADDING": "Нажмите на карту, чтобы разместить маркер. Перетащите для корректировки позиции.",
