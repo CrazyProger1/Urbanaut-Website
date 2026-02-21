@@ -171,11 +171,11 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
     const {
       tags,
       name,
-      is_private,
       description,
       built_at,
       abandoned_at,
       is_supposed,
+      is_private,
       has_windows,
       has_roof,
       has_floor,
@@ -189,13 +189,11 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
       has_security,
     } = values;
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
-    const params = new URLSearchParams(searchParams);
 
     const body = {
       name,
       description,
       tags,
-      is_private,
       preservation: {
         has_windows,
         has_doors,
@@ -213,6 +211,7 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
         // has_sensors,
       },
       is_supposed,
+      is_private,
       built_at: built_at?.toISOString().split("T")[0],
       abandoned_at: abandoned_at?.toISOString().split("T")[0],
     };
