@@ -37,9 +37,14 @@ export const StateSection = ({ security, preservation }: Props) => {
         {/*</div>*/}
         <div>
           {t(PLACEHOLDERS.LABEL_PRESERVATION)}:{" "}
-          <Link href={`?preservation=${preservation}`}>
+          <Link href={`?preservation=${preservation?.level}`}>
             <Badge className={`${getPreservationColorClass(preservation?.level)} cursor-pointer`}>
-              {preservation?.level && t(PLACEHOLDERS[`LABEL_PRESERVATION_${preservation.level}` as keyof typeof PLACEHOLDERS])}
+              {preservation?.level &&
+                t(
+                  PLACEHOLDERS[
+                    `LABEL_PRESERVATION_${preservation.level}` as keyof typeof PLACEHOLDERS
+                  ],
+                )}
             </Badge>
           </Link>
         </div>
