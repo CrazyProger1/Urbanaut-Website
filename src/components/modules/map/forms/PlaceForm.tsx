@@ -34,6 +34,7 @@ import {
 } from "@/config";
 import {
   Image as ImageIcon,
+  Armchair,
   BrickWall,
   Cctv,
   CircleQuestionMark,
@@ -45,6 +46,7 @@ import {
   Lock,
   Radar,
   ShieldUser,
+  Sparkles,
   Swords,
   Upload,
   X,
@@ -83,6 +85,8 @@ const formSchema = z.object({
   has_walls: z.boolean().optional(),
   has_windows: z.boolean().optional(),
   has_doors: z.boolean().optional(),
+  has_furniture: z.boolean().optional(),
+  is_clean: z.boolean().optional(),
   has_security: z.boolean().optional(),
   // has_dogs: z.boolean().optional(),
   // has_weapons: z.boolean().optional(),
@@ -132,6 +136,8 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
       has_walls: place?.preservation.has_walls ?? false,
       has_internal_ceilings: place?.preservation.has_internal_ceilings ?? false,
       has_security: place?.security.has_security ?? false,
+      has_furniture: place?.preservation.has_furniture ?? false,
+      is_clean: place?.preservation.is_clean ?? false,
       name: place?.name || "",
       description: place?.description || "",
       is_private: place?.is_private ?? false,
@@ -182,6 +188,8 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
       has_walls,
       has_doors,
       has_internal_ceilings,
+      has_furniture,
+      is_clean,
       // has_dogs,
       // has_weapons,
       // has_cameras,
@@ -201,6 +209,8 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
         has_walls,
         has_roof,
         has_internal_ceilings,
+        has_furniture,
+        is_clean,
       },
       security: {
         has_security,
@@ -514,6 +524,42 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
                       onCheckedChange={field.onChange}
                       title={t(PLACEHOLDERS.LABEL_HAS_DOORS)}
                       description={t(PLACEHOLDERS.DESCRIPTION_HAS_DOORS)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="has_furniture"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<Armchair className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_FURNITURE)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_FURNITURE)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="is_clean"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<Sparkles className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_IS_CLEAN)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_IS_CLEAN)}
                     />
                   </FormControl>
                   <FormMessage />

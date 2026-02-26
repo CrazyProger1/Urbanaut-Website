@@ -71,6 +71,8 @@ export type APIPlaceCreatePreservation = {
   has_walls?: boolean;
   has_doors?: boolean;
   has_internal_ceilings?: boolean;
+  has_furniture?: boolean;
+  is_clean?: boolean;
 };
 
 export type APIPlaceRetrievePreservation = APIPlaceCreatePreservation & {
