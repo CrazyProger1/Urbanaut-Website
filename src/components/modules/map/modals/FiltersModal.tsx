@@ -5,7 +5,7 @@ import { QUERIES, PLACEHOLDERS } from "@/config";
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Modal } from "@/components/ui/next/modal";
 import { FiltersForm } from "@/components/modules/map/forms";
-import { City, Country, Tag } from "@/types";
+import { City, Country, CurrentUser, Tag } from "@/types";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -14,6 +14,7 @@ type Props = {
   tags?: Tag[];
   onSearchCityAction?: (term: string) => void;
   onLoadMoreCitiesAction?: () => void;
+  user?: CurrentUser;
 };
 
 export const FiltersModal = ({
@@ -22,6 +23,7 @@ export const FiltersModal = ({
   cities,
   onLoadMoreCitiesAction,
   onSearchCityAction,
+  user,
 }: Props) => {
   const t = useTranslations("Modules");
 
@@ -37,6 +39,7 @@ export const FiltersModal = ({
           cities={cities}
           onLoadMoreCitiesAction={onLoadMoreCitiesAction}
           onSearchCityAction={onSearchCityAction}
+          user={user}
         />
       </DialogContent>
     </Modal>

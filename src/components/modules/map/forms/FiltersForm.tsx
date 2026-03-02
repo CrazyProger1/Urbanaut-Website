@@ -25,6 +25,7 @@ import {
   APIListTag,
   APIPreservationLevel,
   APISecurityLevel,
+  CurrentUser,
 } from "@/types";
 import { PAGES, PLACEHOLDERS, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
@@ -54,6 +55,7 @@ type Props = {
   cities?: APIListCity[];
   onSearchCityAction?: (term: string) => void;
   onLoadMoreCitiesAction?: () => void;
+  user?: CurrentUser;
 };
 
 export const FiltersForm = ({
@@ -62,6 +64,7 @@ export const FiltersForm = ({
   cities,
   onLoadMoreCitiesAction,
   onSearchCityAction,
+  user,
 }: Props) => {
   const t = useTranslations("Modules");
   const { toggleSearchBar } = useMapStore();
@@ -149,42 +152,46 @@ export const FiltersForm = ({
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="is_favorite"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <CheckBoxToggle
-                  icon={<Heart className="h-4 w-4" />}
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  title={t(PLACEHOLDERS.LABEL_FAVORITE)}
-                  description={t(PLACEHOLDERS.DESCRIPTION_FILTER_FAVORITE)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="is_private"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <CheckBoxToggle
-                  icon={<Lock className="h-4 w-4" />}
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  title={t(PLACEHOLDERS.LABEL_PRIVATE)}
-                  description={t(PLACEHOLDERS.DESCRIPTION_FILTER_PRIVATE)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {user && (
+          <FormField
+            control={form.control}
+            name="is_favorite"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <CheckBoxToggle
+                    icon={<Heart className="h-4 w-4" />}
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    title={t(PLACEHOLDERS.LABEL_FAVORITE)}
+                    description={t(PLACEHOLDERS.DESCRIPTION_FILTER_FAVORITE)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
+        {user && (
+          <FormField
+            control={form.control}
+            name="is_private"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <CheckBoxToggle
+                    icon={<Lock className="h-4 w-4" />}
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    title={t(PLACEHOLDERS.LABEL_PRIVATE)}
+                    description={t(PLACEHOLDERS.DESCRIPTION_FILTER_PRIVATE)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
           name="is_supposed"

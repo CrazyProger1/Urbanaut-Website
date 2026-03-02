@@ -69,6 +69,7 @@ const Page = async ({ searchParams }: Props) => {
         cities={cities}
         onLoadMoreCitiesAction={loadMoreCities}
         onSearchCityAction={searchCity}
+        user={session?.user}
       />
       {currentPlace && <PlaceSheet place={currentPlace} />}
       {currentArea && <AreaSheet area={currentArea} />}
