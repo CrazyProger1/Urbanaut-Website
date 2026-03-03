@@ -24,23 +24,7 @@ import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { validateActionResult } from "@/utils/actions";
 import { useTranslations } from "next-intl";
-
-const formSchema = z.object({
-  first_name: z
-    .string()
-    .min(3, "First name must be at least 3 characters")
-    .max(150)
-    .optional()
-    .or(z.literal("")),
-  last_name: z.string().max(150),
-  username: z
-    .string()
-    .min(3, "Username must be at least 3 characters")
-    .max(150, "Username must be at most 150 characters")
-    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores")
-    .optional(),
-  bio: z.string().max(250),
-});
+import { editProfileFormSchema } from "@/schemas";
 
 type Props = {
   user?: SessionUser;
@@ -50,8 +34,8 @@ export const EditProfileForm = ({ user }: Props) => {
   const t = useTranslations("Modules");
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof editProfileFormSchema>>({
+    resolver: zodResolver(editProfileFormSchema),
     defaultValues: {
       first_name: user?.first_name ?? "",
       last_name: user?.last_name ?? "",
@@ -65,7 +49,7 @@ export const EditProfileForm = ({ user }: Props) => {
 
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_EDIT_PROFILE]: false });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof editProfileFormSchema>) => {
     const result = await updateCurrentUser(values);
     const validationOptions = {
       successToastMessage: t(PLACEHOLDERS.TOAST_PROFILE_UPDATE_SUCCESS),

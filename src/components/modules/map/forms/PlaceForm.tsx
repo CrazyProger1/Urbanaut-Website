@@ -19,9 +19,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { createPlace } from "@/actions";
+import { createPlace, uploadFile } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
-import { APICreatePlace, APIUpdatePlace, CurrentUser, Place, PlaceDetail, Tag } from "@/types";
+import { CurrentUser, PlaceDetail, Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
@@ -36,18 +36,14 @@ import {
   Image as ImageIcon,
   Armchair,
   BrickWall,
-  Cctv,
   CircleQuestionMark,
-  Dog,
   DoorClosed,
   House,
   LampCeiling,
   Layers,
   Lock,
-  Radar,
   ShieldUser,
   Sparkles,
-  Swords,
   Upload,
   X,
 } from "lucide-react";
@@ -59,43 +55,8 @@ import { Field } from "@/components/ui/field";
 import { DateSelect } from "@/components/common/selects";
 import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 import { editPlace } from "@/actions/place";
-
-const FilePreview = ({ file }: { file: File }) => {
-  const src = useMemo(() => URL.createObjectURL(file), [file]);
-
-  return (
-    <Image
-      src={src}
-      alt="File preview"
-      width={100}
-      height={100}
-      className={"h-10 w-16 object-cover"}
-    />
-  );
-};
-
-const formSchema = z.object({
-  name: z.string().max(250).min(2),
-  description: z.string().max(1000).min(0),
-  is_private: z.boolean(),
-  is_supposed: z.boolean(),
-  tags: z.array(z.string()),
-  has_roof: z.boolean().optional(),
-  has_floor: z.boolean().optional(),
-  has_walls: z.boolean().optional(),
-  has_windows: z.boolean().optional(),
-  has_doors: z.boolean().optional(),
-  has_furniture: z.boolean().optional(),
-  is_clean: z.boolean().optional(),
-  has_security: z.boolean().optional(),
-  // has_dogs: z.boolean().optional(),
-  // has_weapons: z.boolean().optional(),
-  // has_sensors: z.boolean().optional(),
-  // has_cameras: z.boolean().optional(),
-  has_internal_ceilings: z.boolean().optional(),
-  built_at: z.date().optional(),
-  abandoned_at: z.date().optional(),
-});
+import { placeFormSchema } from "@/schemas";
+import { FilePreview } from "./FilePreview";
 
 type Props = {
   tags?: Tag[];
@@ -104,16 +65,6 @@ type Props = {
   edit?: boolean;
 };
 
-const uploadFile = async (file: File) => {
-  const formData = new FormData();
-  formData.append("file", file);
-  const response = await fetch("/api/files", {
-    method: "POST",
-    body: formData,
-  });
-
-  return response.json();
-};
 
 export const PlaceForm = ({ tags, place, edit, user }: Props) => {
   const t = useTranslations("Modules");
@@ -126,8 +77,8 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
     [QUERIES.FILTER_SELECTED_POINT]: false,
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof placeFormSchema>>({
+    resolver: zodResolver(placeFormSchema),
     defaultValues: {
       has_windows: place?.preservation.has_windows ?? false,
       has_floor: place?.preservation.has_floor ?? false,
@@ -173,7 +124,7 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
 
   const { formState, setError } = form;
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof placeFormSchema>) => {
     const {
       tags,
       name,

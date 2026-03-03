@@ -20,13 +20,7 @@ import { Locale } from "@/i18n";
 import { Separator } from "@/components/ui/separator";
 import { validateActionResult } from "@/utils/actions";
 import { useTranslations } from "next-intl";
-
-const formSchema = z.object({
-  language: z.string(),
-  is_notifications_enabled: z.boolean(),
-  is_emails_enabled: z.boolean(),
-  is_interactive_mode_enabled: z.boolean(),
-});
+import { settingsFormSchema } from "@/schemas";
 
 type Props = {
   user: CurrentUser;
@@ -37,8 +31,8 @@ export const SettingsForm = ({ user, languages }: Props) => {
   const t = useTranslations("Modules");
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof settingsFormSchema>>({
+    resolver: zodResolver(settingsFormSchema),
     defaultValues: {
       language: languages.find(({ code }) => user.settings.language === code)?.name,
       is_notifications_enabled: user.settings.is_notifications_enabled,
@@ -52,7 +46,7 @@ export const SettingsForm = ({ user, languages }: Props) => {
 
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_SETTINGS]: false });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof settingsFormSchema>) => {
     const languageCode = languages.find(({ name }) => values.language === name)?.code || "en";
     const result = await updateSettings({
       ...values,

@@ -23,18 +23,16 @@ import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { leaveComplaint } from "@/actions";
+import { complainFormSchema } from "@/schemas";
 
-const formSchema = z.object({
-  content: z.string().max(5000).min(5),
-});
 
 export const ComplainForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const t = useTranslations("Modules");
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof complainFormSchema>>({
+    resolver: zodResolver(complainFormSchema),
     defaultValues: {
       content: "",
     },
@@ -45,7 +43,7 @@ export const ComplainForm = () => {
 
   const { setError } = form;
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof complainFormSchema>) => {
     const result = await leaveComplaint(values.content, `${pathname}?${searchParams}`);
 
     const validationOptions = {

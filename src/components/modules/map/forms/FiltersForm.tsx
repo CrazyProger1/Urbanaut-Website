@@ -24,30 +24,16 @@ import {
   APIListCountry,
   APIListTag,
   APIPreservationLevel,
-  APISecurityLevel,
   CurrentUser,
 } from "@/types";
 import { PAGES, PLACEHOLDERS, QUERIES } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { usePreservedParamsLink } from "@/hooks";
 import { CountrySelect } from "@/components/modules/common/selects";
-import { SecuritySelect } from "@/components/modules/map/forms/SecuritySelect";
-import { CitySelect } from "@/components/modules/map/forms/CitySelect";
 import { useMapStore } from "@/stores";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { CircleQuestionMark, Heart, Lock, ShieldUser } from "lucide-react";
-
-const formSchema = z.object({
-  preservation: z.enum(["NONE", "LOW", "MEDIUM", "HIGH", "AWESOME"]).optional(),
-  // security: z.enum(["NONE", "EASY", "MEDIUM", "HARD", "IMPOSSIBLE"]).optional(),
-  has_security: z.boolean().optional(),
-  tags: z.array(z.string()),
-  country: z.string().max(2).optional(),
-  city: z.string().optional(),
-  is_favorite: z.boolean().optional(),
-  is_private: z.boolean().optional(),
-  is_supposed: z.boolean().optional(),
-});
+import { filtersFormSchema } from "@/schemas";
 
 type Props = {
   tags?: APIListTag[];
@@ -70,8 +56,8 @@ export const FiltersForm = ({
   const { toggleSearchBar } = useMapStore();
   const params = useSearchParams();
   const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof filtersFormSchema>>({
+    resolver: zodResolver(filtersFormSchema),
     defaultValues: {
       preservation:
         (params.get(QUERIES.FILTER_PRESERVATION_LEVEL) as APIPreservationLevel) || undefined,
