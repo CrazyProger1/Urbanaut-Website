@@ -55,6 +55,9 @@ export const QUERIES = {
   FILTER_HAS_SECURITY: "has_security",
 
   VIEWER_PHOTO: "photo",
+
+  SEARCH: "query",
+  SEARCH_AI: "ai_query",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

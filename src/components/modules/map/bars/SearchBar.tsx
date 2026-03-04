@@ -53,8 +53,8 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
 
     if (!query) {
       const term =
-        params.get("query") ||
-        params.get("ai_query") ||
+        params.get(QUERIES.SEARCH) ||
+        params.get(QUERIES.SEARCH_AI) ||
         params.get(QUERIES.FILTER_SELECTED_POINT) ||
         loadLastSearchTerm();
       setQuery(term || "");
