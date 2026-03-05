@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
-import Image from "next/image";
 import { Link, useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -57,6 +56,7 @@ import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 import { editPlace } from "@/actions/place";
 import { placeFormSchema } from "@/schemas";
 import { FilePreview } from "./FilePreview";
+import { LocalizedFormField } from "@/components/ui/improved/localized";
 
 type Props = {
   tags?: Tag[];
@@ -64,7 +64,6 @@ type Props = {
   user?: CurrentUser;
   edit?: boolean;
 };
-
 
 export const PlaceForm = ({ tags, place, edit, user }: Props) => {
   const t = useTranslations("Modules");
@@ -89,8 +88,10 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
       has_security: place?.security.has_security ?? false,
       has_furniture: place?.preservation.has_furniture ?? false,
       is_clean: place?.preservation.is_clean ?? false,
-      name: place?.name || "",
-      description: place?.description || "",
+      name_en: place?.name_en || "",
+      name_uk: place?.name_uk || "",
+      description_en: place?.description_en || "",
+      description_uk: place?.description_uk || "",
       is_private: place?.is_private ?? false,
       is_supposed: place?.is_supposed ?? false,
       tags: place?.tags || [],
@@ -126,13 +127,6 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof placeFormSchema>) => {
     const {
-      tags,
-      name,
-      description,
-      built_at,
-      abandoned_at,
-      is_supposed,
-      is_private,
       has_windows,
       has_roof,
       has_floor,
@@ -141,18 +135,17 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
       has_internal_ceilings,
       has_furniture,
       is_clean,
-      // has_dogs,
-      // has_weapons,
-      // has_cameras,
-      // has_sensors,
       has_security,
+      built_at,
+      abandoned_at,
+      ...rest
     } = values;
     const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
 
     const body = {
-      name,
-      description,
-      tags,
+      ...rest,
+      name: rest.name_en,
+      description: rest.description_en,
       preservation: {
         has_windows,
         has_doors,
@@ -171,8 +164,6 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
         // has_weapons,
         // has_sensors,
       },
-      is_supposed,
-      is_private,
       built_at: built_at?.toISOString().split("T")[0],
       abandoned_at: abandoned_at?.toISOString().split("T")[0],
     };
@@ -238,9 +229,10 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="general" className="flex flex-col gap-4">
-            <FormField
+            <LocalizedFormField
+              languages={["en", "uk"]}
               control={form.control}
-              name="name"
+              basename="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
@@ -251,9 +243,10 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
                 </FormItem>
               )}
             />
-            <FormField
+            <LocalizedFormField
+              languages={["en", "uk"]}
               control={form.control}
-              name="description"
+              basename="description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t(PLACEHOLDERS.LABEL_DESCRIPTION)}</FormLabel>

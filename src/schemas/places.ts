@@ -1,8 +1,10 @@
 import { z } from "zod";
 
 export const placeFormSchema = z.object({
-  name: z.string().max(250).min(2),
-  description: z.string().max(1000).min(0),
+  name_en: z.string().max(250).min(2, "English name is required"),
+  name_uk: z.string().max(255),
+  description_en: z.string().max(1000).optional(),
+  description_uk: z.string().max(1000).optional(),
   is_private: z.boolean(),
   is_supposed: z.boolean(),
   tags: z.array(z.string()),
