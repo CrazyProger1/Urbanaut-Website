@@ -7,6 +7,7 @@ import { APIResponse, APIErrorResponse, APISuccessfulResponse } from "@/types";
 
 export type FetchAPIOptions = {
   accessToken?: string;
+  language?: string;
 };
 
 export const fetchAPI = async <T>(
@@ -15,7 +16,7 @@ export const fetchAPI = async <T>(
 ): Promise<(APIErrorResponse | APISuccessfulResponse) & T> => {
   options = options || {};
 
-  const { accessToken } = options;
+  const { accessToken, language } = options;
   const actualFetchOptions = { ...options, accessToken: undefined };
 
   const nextHeaders = await headers();
@@ -25,14 +26,14 @@ export const fetchAPI = async <T>(
     "unknown";
   const referer = nextHeaders.get("referer");
   const userAgent = nextHeaders.get("user-agent");
-  const acceptLanguage = nextHeaders.get("accept-language");
+  const acceptLanguage = language || nextHeaders.get("accept-language");
   const requestHeaders: HeadersInit = {
     ...(!(options.body instanceof FormData) && { "Content-Type": "application/json" }),
-    "Accept-Language": "en",
+    "Accept-Language": acceptLanguage || "en",
     "X-Forwarded-For": clientIp,
     "X-Client-Referer": referer ?? "",
     "X-Client-User-Agent": userAgent ?? "",
-    "X-Client-Accept-Language": acceptLanguage ?? "",
+    "X-Client-Accept-Language": acceptLanguage || "",
     ...(actualFetchOptions.headers || {}),
     ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
   };

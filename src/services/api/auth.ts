@@ -7,13 +7,14 @@ import {
   APITokens,
   APIGoogleOauthRedirectURIResponse,
   APIErrorResponse,
-  APISuccessfulResponse
+  APISuccessfulResponse,
 } from "@/types";
 
 export const fetchAuthenticated = async <T>(endpoint: string, options?: RequestInit) => {
   const session = await getSession();
   return await fetchAPI<T>(endpoint, {
     accessToken: session?.accessToken,
+    language: session?.user?.settings?.language,
     ...options,
   });
 };
