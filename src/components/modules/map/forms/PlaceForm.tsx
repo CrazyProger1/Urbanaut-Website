@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import { Link, useRouter } from "@/i18n";
 import { useSearchParams } from "next/navigation";
@@ -20,7 +20,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { createPlace, uploadFile } from "@/actions";
 import { Textarea } from "@/components/ui/textarea";
-import { CurrentUser, PlaceDetail, Tag } from "@/types";
+import { CurrentUser, Language, PlaceDetail, Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
@@ -63,9 +63,10 @@ type Props = {
   place?: PlaceDetail;
   user?: CurrentUser;
   edit?: boolean;
+  languages?: Language[];
 };
 
-export const PlaceForm = ({ tags, place, edit, user }: Props) => {
+export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
   const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -90,8 +91,10 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
       is_clean: place?.preservation.is_clean ?? false,
       name_en: place?.name_en || "",
       name_uk: place?.name_uk || "",
+      name_ru: place?.name_ru || "",
       description_en: place?.description_en || "",
       description_uk: place?.description_uk || "",
+      description_ru: place?.description_ru || "",
       is_private: place?.is_private ?? false,
       is_supposed: place?.is_supposed ?? false,
       tags: place?.tags || [],
@@ -216,6 +219,10 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
     router.push(closeModalLink);
   };
 
+  const languageCodes = useMemo(() => {
+    return languages?.map((language) => language.code) || [];
+  }, [languages]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -230,21 +237,21 @@ export const PlaceForm = ({ tags, place, edit, user }: Props) => {
           </TabsList>
           <TabsContent value="general" className="flex flex-col gap-4">
             <LocalizedFormField
-              languages={["en", "uk"]}
+              languages={languageCodes}
               control={form.control}
               basename="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t(PLACEHOLDERS.LABEL_NAME)}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Abandoned factory..." {...field} />
+                    <Input placeholder={t(PLACEHOLDERS.LABEL_ENTER_NAME)} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <LocalizedFormField
-              languages={["en", "uk"]}
+              languages={languageCodes}
               control={form.control}
               basename="description"
               render={({ field }) => (

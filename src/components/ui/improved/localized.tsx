@@ -1,11 +1,15 @@
 import * as React from "react";
-import { ControllerProps, FieldPath, FieldValues, useForm, useFormState } from "react-hook-form";
+import { ControllerProps, FieldPath, FieldPathValue, FieldValues, useFormState } from "react-hook-form";
 import { FormField } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useMemo, useState } from "react";
 
+type StringFieldPath<TFieldValues extends FieldValues> = {
+  [K in FieldPath<TFieldValues>]: FieldPathValue<TFieldValues, K> extends string | undefined ? K : never;
+}[FieldPath<TFieldValues>];
+
 type LocalizedPath<TFieldValues extends FieldValues, TLang extends string = string> = Extract<
-  FieldPath<TFieldValues>,
+  StringFieldPath<TFieldValues>,
   `${string}_${TLang}`
 >;
 

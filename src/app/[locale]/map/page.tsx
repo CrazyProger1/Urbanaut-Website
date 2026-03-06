@@ -11,6 +11,7 @@ import {
 import { AreaSheet, PlaceSheet } from "@/components/modules/map/sheets";
 import { MapPageParams } from "@/types/components/map";
 import { getSession } from "@/utils/session";
+import { getLanguages } from "@/services/api";
 
 type Props = {
   searchParams: Promise<MapPageParams>;
@@ -46,6 +47,9 @@ const Page = async ({ searchParams }: Props) => {
   const citiesResponse = await getCities();
   const cities = citiesResponse.success ? citiesResponse.results : [];
 
+  const languagesResponse = await getLanguages();
+  const languages = languagesResponse.success ? languagesResponse.results : [];
+
   const loadMoreCities = async () => {
     "use server";
     console.log("LOADING MORE CITIES");
@@ -59,10 +63,17 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className="flex h-full w-full">
       <Map user={session?.user} filters={params} />
-      <AddPlaceModal tags={tags} />
+      <AddPlaceModal tags={tags} languages={languages} />
       <AddAreaModal tags={tags} />
       <SuggestCorrectionModal />
-      {currentPlace && <EditPlaceModal place={currentPlace} tags={tags} user={session?.user} />}
+      {currentPlace && (
+        <EditPlaceModal
+          place={currentPlace}
+          tags={tags}
+          user={session?.user}
+          languages={languages}
+        />
+      )}
       <FiltersModal
         tags={tags}
         countries={countries}
