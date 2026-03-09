@@ -28,6 +28,7 @@ import { toast } from "sonner";
 import { Link, useRouter } from "@/i18n";
 import { usePreservedParamsLink } from "@/hooks";
 import { Badge } from "@/components/ui/badge";
+import { ExploreSection } from "@/components/modules/map/sheets/SourcesSection";
 
 type Props = {
   place: PlaceDetail;
@@ -144,6 +145,7 @@ export const PlaceSheet = ({ place }: Props) => {
             isFavorite={is_favorite}
             toggleFavoriteAction={togglePlaceFavoriteStatus}
           />
+          <ExploreSection point={place.point} />
         </div>
         <SheetFooter>
           <SheetClose asChild>
