@@ -12,7 +12,6 @@
     "LABEL_SELECT_TAG": "Select tag..."
   },
   "Modules": {
-    "TOOLTIP_TOGGLE_FAVORITE_PLACE": "Toggle Favorite",
     "TITLE_COMPLAIN": "Complain",
     "DESCRIPTION_COMPLAIN": "Please describe your complaint in detail and provide any relevant facts or evidence to support your claim.",
     "LABEL_COMPLAIN": "Complaint",

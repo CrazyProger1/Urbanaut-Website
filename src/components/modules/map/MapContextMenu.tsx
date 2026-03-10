@@ -1,23 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
 } from "@/components/ui/context-menu";
-import { Hash, Plus } from "lucide-react";
+import { Binoculars, Earth, Hash, Map, Plus } from "lucide-react";
 import { useMapStore } from "@/stores";
 import { PLACEHOLDERS } from "@/config";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { setClipboard } from "@/utils/clipboard";
+import { Link } from "@/i18n";
+import { useMapProviderLinks } from "@/hooks";
 
-type Props = {
-  onCopyCoordinates?: () => void;
-};
-
-const MapContextMenu = ({ onCopyCoordinates }: Props) => {
+const MapContextMenu = () => {
   const t = useTranslations("Modules");
-  const { toggleChoosingPlace, addTooltip } = useMapStore();
+  const { toggleChoosingPlace, addTooltip, lastRightClickCoordinates, currentMapZoom } = useMapStore();
+
+  const handleCopyCoordinates = useCallback(async () => {
+    toast.success(t(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD));
+    if (lastRightClickCoordinates) {
+      await setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
+    }
+  }, [lastRightClickCoordinates]);
+
+  const providers = useMapProviderLinks(
+    [lastRightClickCoordinates?.lat || 0, lastRightClickCoordinates?.lng || 0],
+    currentMapZoom,
+  );
 
   return (
     <ContextMenuContent>
@@ -29,19 +41,22 @@ const MapContextMenu = ({ onCopyCoordinates }: Props) => {
       >
         <Plus /> {t(PLACEHOLDERS.LABEL_PLACE)}{" "}
       </ContextMenuItem>
-      {/*<ContextMenuItem*/}
-      {/*  onClick={() => {*/}
-      {/*    toggleChoosingArea(true);*/}
-      {/*    addTooltip(PLACEHOLDERS.AREA_ADDING_TOOLTIP);*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <Plus /> Area{" "}*/}
-      {/*</ContextMenuItem>*/}
       <ContextMenuSeparator />
-      <ContextMenuItem onClick={onCopyCoordinates}>
+      <ContextMenuItem onClick={handleCopyCoordinates}>
         <Hash />
         {t(PLACEHOLDERS.BUTTON_COORDINATES)}
       </ContextMenuItem>
+      <ContextMenuSeparator />
+      {providers.map(({ type, link, name }) => (
+        <ContextMenuItem asChild key={link}>
+          <Link href={link} target="_blank">
+            {type === "map" && <Map />}
+            {type === "map3d" && <Earth />}
+            {type === "streetview" && <Binoculars />}
+            {name}
+          </Link>
+        </ContextMenuItem>
+      ))}
     </ContextMenuContent>
   );
 };

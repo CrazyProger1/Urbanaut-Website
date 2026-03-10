@@ -293,14 +293,7 @@ const DynamicMap = ({
           <SearchCoordinatesTool />
         </MapContainer>
       </ContextMenuTrigger>
-      <MapContextMenu
-        onCopyCoordinates={() => {
-          toast.success(t(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD));
-          if (lastRightClickCoordinates) {
-            setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
-          }
-        }}
-      />
+      <MapContextMenu />
       <ToolBar onCenterMap={handleCenterMap} onSavePlace={handleSave} />
     </ContextMenu>
   );

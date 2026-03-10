@@ -1,4 +1,7 @@
 import { MapLayer } from "@/types";
+import { z } from "zod";
+import { control } from "leaflet";
+import zoom = control.zoom;
 
 export const LAYERS: { [key: string]: MapLayer } = {
   OSM: {
@@ -65,5 +68,39 @@ export const LAYERS: { [key: string]: MapLayer } = {
   //     '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   //   primary: false,
   // },
+};
 
+type Point = [number, number];
+type ProviderProps = {
+  point: Point;
+  zoom: number;
+};
+
+export const PROVIDERS = {
+  GoogleMaps: {
+    type: "map",
+    link: ({ point, zoom }: ProviderProps) =>
+      `https://www.google.com/maps?q=${point.join(",")}&ll=${point.join(",")}&z=${zoom}`,
+    name: "Google Maps",
+  },
+  GoogleEarth: {
+    type: "map3d",
+    link: ({ point, zoom }: ProviderProps) => {
+      const range = Math.round(591657550.5 / Math.pow(2, zoom));
+      return `https://earth.google.com/web/@${point.join(",")},${range}d`;
+    },
+    name: "Google Earth",
+  },
+  OSM: {
+    type: "map",
+    link: ({ point, zoom }: ProviderProps) =>
+      `https://www.openstreetmap.org/?mlat=${point[0]}&mlon=${point[1]}&zoom=${zoom}`,
+    name: "Open Street Map",
+  },
+  Wikimapia: {
+    type: "map",
+    link: ({ point, zoom }: ProviderProps) =>
+      `https://wikimapia.org/#lat=${point[0]}&lon=${point[1]}&z=${zoom}`,
+    name: "Wikimapia",
+  },
 };

@@ -3,7 +3,7 @@
     "TOAST_COPIED_INTO_CLIPBOARD": "Скопировано в буфер обмена!",
     "LABEL_COOKIE_TITLE": "Мы используем cookies",
     "LABEL_COOKIE_NOTICE": "Уведомление о cookies",
-    "DESCRIPTION_COOKIE": "Мы используем cookies, чтобы обеспечить лучший опыт на нашем сайте. Для получения дополнительной информации о том, как мы используем cookies, ознакомьтесь с нашей политикой cookies.",
+    "DESCRIPTION_COOKIE": "Мы используем cookies, чтобы обеспечить наилучший опыт на нашем сайте. Для получения дополнительной информации о том, как мы используем cookies, ознакомьтесь с нашей политикой cookies.",
     "DESCRIPTION_COOKIE_MINIMAL": "Мы используем cookies для улучшения вашего опыта просмотра.",
     "LABEL_COOKIE_CONSENT": "Нажимая <accept>Принять</accept>, вы соглашаетесь с использованием нами cookies.",
     "LABEL_COOKIE_LEARN_MORE": "Узнать больше.",
@@ -12,7 +12,6 @@
     "LABEL_SELECT_TAG": "Выберите тег..."
   },
   "Modules": {
-    "TOOLTIP_TOGGLE_FAVORITE_PLACE": "Переключить избранное",
     "TITLE_COMPLAIN": "Жалоба",
     "DESCRIPTION_COMPLAIN": "Пожалуйста, подробно опишите вашу жалобу и приведите соответствующие факты или доказательства в её поддержку.",
     "LABEL_COMPLAIN": "Жалоба",
