@@ -67,7 +67,6 @@ export const SettingsForm = ({ user, languages }: Props) => {
 
   const languageNames = useMemo(() => languages.map(({ name }) => name), [languages]);
 
-  console.log(languageNames);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">

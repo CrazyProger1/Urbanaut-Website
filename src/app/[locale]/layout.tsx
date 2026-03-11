@@ -88,7 +88,6 @@ const RootLayout = async ({ children, params }: Props) => {
   const languagesResponse = await getLanguages();
   const languages = languagesResponse.success ? languagesResponse.results : [];
 
-  console.log(languages);
   return (
     <html lang="en" className={theme === "DARK" ? "dark" : "light"}>
       <body>

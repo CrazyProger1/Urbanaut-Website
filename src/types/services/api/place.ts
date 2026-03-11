@@ -59,6 +59,7 @@ export type APIPlaceFilters = APIMapBounds & {
   query?: string;
 };
 
+
 export type APIPlaceCreatePreservation = {
   has_windows?: boolean;
   has_roof?: boolean;

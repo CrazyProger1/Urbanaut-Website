@@ -3,3 +3,4 @@ export { HeatmapLayer } from "./HeatmapLayer";
 export { AreasLayer } from "./AreasLayer";
 export { TileLayers } from "./TileLayers";
 export { ClusteringLayer } from "./ClusteringLayer";
+export { GeoJSONLayer } from "./GeoJSONLayer";

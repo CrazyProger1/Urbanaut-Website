@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { MapContainer } from "react-leaflet";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { MapContainer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L, { LatLng, LatLngBounds, type Map as LeafletMap } from "leaflet";
+import { GeoJSON } from "react-leaflet/GeoJSON";
 
 // World bounds to prevent panning outside the map
 const WORLD_BOUNDS = new LatLngBounds(
@@ -11,7 +12,7 @@ const WORLD_BOUNDS = new LatLngBounds(
   [85.051129, 180], // Northeast corner
 );
 
-import { Place, Area, MapLayer, User } from "@/types";
+import { User } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS, PAGES, PLACEHOLDERS, QUERIES } from "@/config";
@@ -23,19 +24,17 @@ import {
   PlaceChoosingTool,
   PlaceChoosingToolHandle,
   RulerTool,
-  ZoomSwitch,
   CoordinatesTool,
 } from "@/components/modules/map/tools";
 import { useSearchParams } from "next/navigation";
-import { TileLayers, PlacesLayer, AreasLayer, ClusteringLayer } from "./layers";
-import { toast } from "sonner";
+import { TileLayers, ClusteringLayer, GeoJSONLayer } from "./layers";
 import { useTranslations } from "next-intl";
 import { MapPageParams } from "@/types/components/map";
-import { getAreas, getPlaces } from "@/actions";
 import { useMapStore } from "@/stores";
 import { SearchCoordinatesTool } from "@/components/modules/map/tools/SearchCoordinatesTool";
-import { setClipboard } from "@/utils/clipboard";
 import { buildParamsFromRecord } from "@/utils/params";
+import { getMap } from "@/services";
+
 
 type Props = {
   center?: LatLng;
@@ -49,15 +48,11 @@ type Props = {
 const DynamicMap = ({
   center = new LatLng(50.4663775681885, 30.583190917968754),
   zoom = 5,
-  markerVisibilityMinimumZoomThreshold = 10,
-  areaVisibilityMinimumZoomThreshold = 10,
   user,
   filters,
 }: Props) => {
   const t = useTranslations("Modules");
   const {
-    isAreasVisible,
-    isPlacesVisible,
     isChoosingPlace,
     isChoosingArea,
     isRulerActive,
@@ -67,7 +62,6 @@ const DynamicMap = ({
     updateCurrentMapMeasures,
     loadMapMeasures,
     setLastRightClickCoordinates,
-    lastRightClickCoordinates,
     toggleSearchBar,
     toggleLayersBar,
     currentSecondaryLayers,
@@ -80,8 +74,7 @@ const DynamicMap = ({
   const placeChoosingToolRef = useRef<PlaceChoosingToolHandle>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [places, setPlaces] = useState<Place[]>([]);
-  const [areas, setAreas] = useState<Area[]>([]);
+  const [geoJSON, setGeoJSON] = useState<GeoJSON.FeatureCollection | undefined>();
 
   useEffect(() => {
     loadLastLayers();
@@ -129,15 +122,8 @@ const DynamicMap = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const placesResponse = await getPlaces(filters);
-      const areasResponse = await getAreas();
-
-      if (placesResponse.success) {
-        setPlaces(placesResponse.results);
-      }
-      if (areasResponse.success) {
-        setAreas(areasResponse.results);
-      }
+      const { success, ...response } = await getMap(filters);
+      setGeoJSON(response as GeoJSON.FeatureCollection);
     };
     fetchData();
   }, [filters]);
@@ -224,9 +210,9 @@ const DynamicMap = ({
   };
 
   const handlePlaceSelect = useCallback(
-    (place: Place) => {
+    (id: number) => {
       const params = buildParamsFromRecord(
-        { [QUERIES.SHEET_PLACE]: String(place.id), point: "" },
+        { [QUERIES.SHEET_PLACE]: String(id), point: "" },
         searchParams,
       );
 
@@ -236,9 +222,9 @@ const DynamicMap = ({
   );
 
   const handleAreaSelect = useCallback(
-    (area: Area) => {
+    (id: number) => {
       const params = buildParamsFromRecord(
-        { [QUERIES.SHEET_AREA]: String(area.id), point: "" },
+        { [QUERIES.SHEET_AREA]: String(id), point: "" },
         searchParams,
       );
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });
@@ -274,18 +260,21 @@ const DynamicMap = ({
           maxBounds={WORLD_BOUNDS}
         >
           <TileLayers layers={[currentPrimaryLayer, ...currentSecondaryLayers]} />
-          {isPlacesVisible && (
-            // <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>
-            <ClusteringLayer>
-              <PlacesLayer places={places} enabledZoomOnClick={true} onSelect={handlePlaceSelect} />
-            </ClusteringLayer>
-            // </ZoomSwitch>
-          )}
-          {isAreasVisible && (
-            // <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>
-            <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />
-            // </ZoomSwitch>
-          )}
+          <ClusteringLayer>
+            {geoJSON && <GeoJSONLayer data={geoJSON} onPlaceSelect={handlePlaceSelect} />}
+          </ClusteringLayer>
+          {/*{isPlacesVisible && (*/}
+          {/*  // <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>*/}
+          {/*  <ClusteringLayer>*/}
+          {/*    <PlacesLayer places={places} enabledZoomOnClick={true} onSelect={handlePlaceSelect} />*/}
+          {/*  </ClusteringLayer>*/}
+          {/*  // </ZoomSwitch>*/}
+          {/*)}*/}
+          {/*{isAreasVisible && (*/}
+          {/*  // <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>*/}
+          {/*  <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />*/}
+          {/*  // </ZoomSwitch>*/}
+          {/*)}*/}
           {isCoordinatesVisible && <CoordinatesTool />}
           {isRulerActive && <RulerTool />}
           {isChoosingArea && <AreaChoosingTool ref={areaChoosingToolRef} />}

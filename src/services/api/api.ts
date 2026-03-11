@@ -8,6 +8,7 @@ import { APIResponse, APIErrorResponse, APISuccessfulResponse } from "@/types";
 export type FetchAPIOptions = {
   accessToken?: string;
   language?: string;
+  version?: string;
 };
 
 export const fetchAPI = async <T>(
@@ -16,7 +17,7 @@ export const fetchAPI = async <T>(
 ): Promise<(APIErrorResponse | APISuccessfulResponse) & T> => {
   options = options || {};
 
-  const { accessToken, language } = options;
+  const { accessToken, language, version } = options;
   const actualFetchOptions = { ...options, accessToken: undefined };
 
   const nextHeaders = await headers();
@@ -39,10 +40,13 @@ export const fetchAPI = async <T>(
   };
 
   try {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      ...actualFetchOptions,
-      headers: requestHeaders,
-    });
+    const response = await fetch(
+      `${API_URL.replace("[version]", version ? version : "v1")}${endpoint}`,
+      {
+        ...actualFetchOptions,
+        headers: requestHeaders,
+      },
+    );
     const data = await response.json();
     return { success: response.ok, ...data };
   } catch (error) {

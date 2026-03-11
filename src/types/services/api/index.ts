@@ -57,7 +57,7 @@ export type {
 } from "./place";
 export type { APIListArea, APIRetrieveArea, APICreateArea, APIAreaFilters } from "./area";
 export type { APIListTag } from "./tag";
-export type { APIMapBounds } from "./map";
+export type { APIMapBounds, APIMapFilters } from "./map";
 export type { APISecurityLevel } from "./security";
 export type { APIPreservationLevel } from "./preservation";
 export type { APICreateFeedback } from "./feedback";
