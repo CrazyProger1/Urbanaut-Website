@@ -178,24 +178,26 @@ export const FiltersForm = ({
             )}
           />
         )}
-        <FormField
-          control={form.control}
-          name="is_supposed"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <CheckBoxToggle
-                  icon={<CircleQuestionMark className="h-4 w-4" />}
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  title={t(PLACEHOLDERS.LABEL_SUPPOSED)}
-                  description={t(PLACEHOLDERS.DESCRIPTION_PLACE_SUPPOSED)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {user && (
+          <FormField
+            control={form.control}
+            name="is_supposed"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <CheckBoxToggle
+                    icon={<CircleQuestionMark className="h-4 w-4" />}
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    title={t(PLACEHOLDERS.LABEL_SUPPOSED)}
+                    description={t(PLACEHOLDERS.DESCRIPTION_PLACE_SUPPOSED)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
           name="tags"
