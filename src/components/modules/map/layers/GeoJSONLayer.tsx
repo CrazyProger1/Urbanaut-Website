@@ -10,6 +10,7 @@ type Props = {
 export const GeoJSONLayer = ({ data, onPlaceSelect }: Props) => {
   return (
     <GeoJSON
+      key={JSON.stringify(data)}
       data={data}
       pointToLayer={(feature, latlng) => {
         const marker = L.marker(latlng);
