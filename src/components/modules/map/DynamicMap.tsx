@@ -263,18 +263,6 @@ const DynamicMap = ({
           <ClusteringLayer>
             {geoJSON && <GeoJSONLayer data={geoJSON} onPlaceSelect={handlePlaceSelect} />}
           </ClusteringLayer>
-          {/*{isPlacesVisible && (*/}
-          {/*  // <ZoomSwitch minZoom={markerVisibilityMinimumZoomThreshold}>*/}
-          {/*  <ClusteringLayer>*/}
-          {/*    <PlacesLayer places={places} enabledZoomOnClick={true} onSelect={handlePlaceSelect} />*/}
-          {/*  </ClusteringLayer>*/}
-          {/*  // </ZoomSwitch>*/}
-          {/*)}*/}
-          {/*{isAreasVisible && (*/}
-          {/*  // <ZoomSwitch minZoom={areaVisibilityMinimumZoomThreshold}>*/}
-          {/*  <AreasLayer areas={areas} enabledZoomOnClick={true} onSelect={handleAreaSelect} />*/}
-          {/*  // </ZoomSwitch>*/}
-          {/*)}*/}
           {isCoordinatesVisible && <CoordinatesTool />}
           {isRulerActive && <RulerTool />}
           {isChoosingArea && <AreaChoosingTool ref={areaChoosingToolRef} />}
