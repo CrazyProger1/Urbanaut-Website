@@ -55,8 +55,6 @@ export const PlaceSheet = ({ place }: Props) => {
     is_favorite,
   } = place;
 
-  const { has_security } = security;
-
   const updatePageLink = usePreservedParamsLink();
 
   const togglePlaceFavoriteStatus = async () => {

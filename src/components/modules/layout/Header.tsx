@@ -2,7 +2,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { UserNavBar } from "@/components/modules/layout/UserNavBar";
 import { NotificationBar } from "@/components/modules/layout/NotificationBar";
-import { ThemeToggle } from "@/components/modules/layout/ThemeToggle";
 import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
