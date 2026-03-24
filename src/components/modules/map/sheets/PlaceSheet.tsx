@@ -29,6 +29,7 @@ import { Link, useRouter } from "@/i18n";
 import { usePreservedParamsLink } from "@/hooks";
 import { Badge } from "@/components/ui/badge";
 import { ExploreSection } from "@/components/modules/map/sheets/SourcesSection";
+import { Eye, Heart } from "lucide-react";
 
 type Props = {
   place: PlaceDetail;
@@ -110,6 +111,15 @@ export const PlaceSheet = ({ place }: Props) => {
               <GallerySection photos={photos} />
             </>
           )}
+
+          <div className="flex flex-row justify-center gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-row items-center gap-2">
+              <Eye size="16" /> <p>1302</p>
+            </div>
+            <div className="flex flex-row items-center gap-2">
+              <Heart size="16" /> <p>321</p>
+            </div>
+          </div>
 
           {description && (
             <>
