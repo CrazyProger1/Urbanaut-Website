@@ -54,6 +54,8 @@ export const PlaceSheet = ({ place }: Props) => {
     created_by,
     photos,
     is_favorite,
+    views_count,
+    favorites_count,
   } = place;
 
   const updatePageLink = usePreservedParamsLink();
@@ -112,12 +114,12 @@ export const PlaceSheet = ({ place }: Props) => {
             </>
           )}
 
-          <div className="flex flex-row justify-center gap-4 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex flex-row justify-center gap-4 text-sm">
             <div className="flex flex-row items-center gap-2">
-              <Eye size="16" /> <p>1302</p>
+              <Eye size="16" /> <p>{views_count}</p>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <Heart size="16" /> <p>321</p>
+              <Heart size="16" /> <p>{favorites_count}</p>
             </div>
           </div>
 

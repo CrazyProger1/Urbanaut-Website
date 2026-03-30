@@ -32,6 +32,8 @@ export type APIRetrievePlace = APIOptionalLocalized<"name"> &
     photos: APIListPlaceFile[];
     area?: number;
     is_favorite: boolean;
+    views_count?: number;
+    favorites_count?: number;
   };
 
 export type APIUpdatePlace = APIOptionalLocalized<"name"> &
@@ -58,7 +60,6 @@ export type APIPlaceFilters = APIMapBounds & {
   tags?: string;
   query?: string;
 };
-
 
 export type APIPlaceCreatePreservation = {
   has_windows?: boolean;
