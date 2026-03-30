@@ -66,7 +66,6 @@ export const SIDEBAR_MAIN: SidebarItem[] = [
     title: PLACEHOLDERS.BUTTON_HOME,
     url: PAGES.MAIN,
     icon: Home,
-    disabled: true,
   },
   {
     title: PLACEHOLDERS.BUTTON_MAP,
