@@ -16,8 +16,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { PAGES } from "@/config";
-
-// ─── Mock Data ────────────────────────────────────────────────────────────────
+import { HeroSection, StatsSection } from "@/components/modules/main";
+import { getSession } from "@/utils/session";
+import { getGlobalStats } from "@/services";
 
 const MOCK_PLACES = [
   {
@@ -83,11 +84,46 @@ const MOCK_PLACES = [
 ];
 
 const MOCK_USERS = [
-  { rank: 1, username: "ShadowStalker", rankLabel: "LEGEND", score: 4820, places: 143, tier: "legend" },
-  { rank: 2, username: "NightCrawler_UA", rankLabel: "STALKER", score: 3210, places: 97, tier: "stalker" },
-  { rank: 3, username: "UrbanPhoenix", rankLabel: "STALKER", score: 2980, places: 88, tier: "stalker" },
-  { rank: 4, username: "GhostExplorer", rankLabel: "PROFI", score: 2140, places: 64, tier: "profi" },
-  { rank: 5, username: "RuinsHunter77", rankLabel: "PROFI", score: 1870, places: 51, tier: "profi" },
+  {
+    rank: 1,
+    username: "ShadowStalker",
+    rankLabel: "LEGEND",
+    score: 4820,
+    places: 143,
+    tier: "legend",
+  },
+  {
+    rank: 2,
+    username: "NightCrawler_UA",
+    rankLabel: "STALKER",
+    score: 3210,
+    places: 97,
+    tier: "stalker",
+  },
+  {
+    rank: 3,
+    username: "UrbanPhoenix",
+    rankLabel: "STALKER",
+    score: 2980,
+    places: 88,
+    tier: "stalker",
+  },
+  {
+    rank: 4,
+    username: "GhostExplorer",
+    rankLabel: "PROFI",
+    score: 2140,
+    places: 64,
+    tier: "profi",
+  },
+  {
+    rank: 5,
+    username: "RuinsHunter77",
+    rankLabel: "PROFI",
+    score: 1870,
+    places: 51,
+    tier: "profi",
+  },
 ];
 
 const MOCK_EXPEDITIONS = [
@@ -147,130 +183,72 @@ const MOCK_NEWS = [
   },
 ];
 
-const STATS = [
-  { icon: MapPin, label: "Abandoned Objects", value: "2,847" },
-  { icon: Users, label: "Explorers", value: "14,320" },
-  { icon: Globe, label: "Countries", value: "38" },
-  { icon: Compass, label: "Expeditions", value: "512" },
-];
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
 const PRESERVATION_STYLES: Record<string, { bg: string; label: string }> = {
-  NONE:    { bg: "rgba(255,255,255,0.2)", label: "No preservation" },
-  LOW:     { bg: "rgba(255,60,60,0.4)",   label: "Low" },
-  MEDIUM:  { bg: "rgba(255,220,0,0.4)",   label: "Medium" },
-  HIGH:    { bg: "rgba(0,220,80,0.4)",    label: "High" },
-  AWESOME: { bg: "rgba(160,0,255,0.4)",   label: "Excellent" },
+  NONE: { bg: "rgba(255,255,255,0.2)", label: "No preservation" },
+  LOW: { bg: "rgba(255,60,60,0.4)", label: "Low" },
+  MEDIUM: { bg: "rgba(255,220,0,0.4)", label: "Medium" },
+  HIGH: { bg: "rgba(0,220,80,0.4)", label: "High" },
+  AWESOME: { bg: "rgba(160,0,255,0.4)", label: "Excellent" },
 };
 
 const DIFFICULTY_STYLES: Record<string, { bg: string; label: string }> = {
-  EASY:       { bg: "rgba(0,220,80,0.3)",  label: "Easy" },
-  MEDIUM:     { bg: "rgba(255,220,0,0.3)", label: "Medium" },
-  HARD:       { bg: "rgba(255,60,60,0.3)", label: "Hard" },
+  EASY: { bg: "rgba(0,220,80,0.3)", label: "Easy" },
+  MEDIUM: { bg: "rgba(255,220,0,0.3)", label: "Medium" },
+  HARD: { bg: "rgba(255,60,60,0.3)", label: "Hard" },
   IMPOSSIBLE: { bg: "rgba(160,0,255,0.3)", label: "Impossible" },
 };
 
 const RANK_SHADOW: Record<string, string> = {
-  rookie:  "drop-shadow(3px 3px 5px rgba(255,255,255,0.3))",
+  rookie: "drop-shadow(3px 3px 5px rgba(255,255,255,0.3))",
   amateur: "drop-shadow(3px 3px 5px rgba(0,255,0,0.3))",
-  profi:   "drop-shadow(3px 3px 5px rgba(255,255,0,0.3))",
+  profi: "drop-shadow(3px 3px 5px rgba(255,255,0,0.3))",
   stalker: "drop-shadow(3px 3px 5px rgba(255,0,0,0.3))",
-  legend:  "drop-shadow(3px 3px 5px rgba(157,0,255,0.3))",
+  legend: "drop-shadow(3px 3px 5px rgba(157,0,255,0.3))",
 };
 
 const RANK_COLOR: Record<string, string> = {
-  rookie:  "rgba(255,255,255,0.15)",
+  rookie: "rgba(255,255,255,0.15)",
   amateur: "rgba(0,255,0,0.2)",
-  profi:   "rgba(255,255,0,0.2)",
+  profi: "rgba(255,255,0,0.2)",
   stalker: "rgba(255,0,0,0.2)",
-  legend:  "rgba(157,0,255,0.25)",
+  legend: "rgba(157,0,255,0.25)",
 };
 
 const CATEGORY_COLOR: Record<string, string> = {
-  Update:    "rgba(30,144,255,0.3)",
+  Update: "rgba(30,144,255,0.3)",
   Community: "rgba(0,220,80,0.3)",
-  Feature:   "rgba(160,0,255,0.3)",
+  Feature: "rgba(160,0,255,0.3)",
 };
 
 function fmtDate(d: string) {
-  return new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return new Date(d).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 type Props = {
   searchParams: Promise<Record<string, string>>;
 };
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 const Page = async ({}: Props) => {
+  const session = await getSession();
+  const stats = await getGlobalStats();
+
   return (
     <main className="flex-1 overflow-x-hidden">
+      <HeroSection isAuthenticated={!!session} />
 
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-130 items-center overflow-hidden border-b">
-        {/* Grid texture */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-background via-background/95 to-muted/50" />
-        <div className="pointer-events-none absolute bottom-0 left-1/3 h-72 w-80 rounded-full bg-primary/5 blur-3xl" />
+      <StatsSection stats={stats.success ? stats : undefined} />
 
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20">
-          <h1 className="mb-4 max-w-2xl text-5xl font-bold leading-tight tracking-tight md:text-6xl">
-            Explore the
-            <br />
-            <span className="text-muted-foreground">Forgotten World</span>
-          </h1>
-
-          <p className="mb-8 max-w-xl text-base text-muted-foreground">
-            Discover abandoned places, connect with urban explorers, plan expeditions,
-            and document history before it disappears forever.
-          </p>
-
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg" asChild>
-              <Link href={PAGES.MAP}>
-                <MapPin />
-                Explore Map
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href={PAGES.PROFILE}>
-                <Users />
-                Join Community
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Stats ─────────────────────────────────────────────────────────── */}
-      <section className="border-b bg-muted/20">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y md:grid-cols-4 md:divide-y-0">
-          {STATS.map(({ icon: Icon, label, value }) => (
-            <div key={label} className="flex flex-col items-center gap-1 px-6 py-8">
-              <Icon className="mb-1 size-5 text-muted-foreground" />
-              <span className="text-3xl font-bold">{value}</span>
-              <span className="text-xs text-muted-foreground">{label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Top Abandoned Objects ─────────────────────────────────────────── */}
       <section className="mx-auto max-w-6xl px-6 py-14">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold">Top Abandoned Objects</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Most visited places by the community</p>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Most visited places by the community
+            </p>
           </div>
           <Button variant="ghost" size="sm" asChild>
             <Link href={PAGES.MAP}>
@@ -288,7 +266,9 @@ const Page = async ({}: Props) => {
                 className="group cursor-pointer overflow-hidden py-0 transition-transform duration-200 hover:scale-[1.02]"
               >
                 {/* Photo placeholder */}
-                <div className={`relative h-44 bg-linear-to-br ${place.gradient} flex items-end p-3`}>
+                <div
+                  className={`relative h-44 bg-linear-to-br ${place.gradient} flex items-end p-3`}
+                >
                   <div className="absolute inset-0 bg-black/20" />
                   <div className="relative flex flex-wrap gap-1.5">
                     {place.tags.map((tag) => (
@@ -303,9 +283,9 @@ const Page = async ({}: Props) => {
                   </div>
                 </div>
 
-                <CardContent className="pb-4 pt-4">
+                <CardContent className="pt-4 pb-4">
                   <div className="mb-1 flex items-start justify-between gap-2">
-                    <p className="text-sm font-semibold leading-snug">{place.name}</p>
+                    <p className="text-sm leading-snug font-semibold">{place.name}</p>
                     <span
                       className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
                       style={{ background: ps.bg }}
@@ -313,11 +293,11 @@ const Page = async ({}: Props) => {
                       {ps.label}
                     </span>
                   </div>
-                  <p className="mb-3 flex items-center gap-1 text-xs text-muted-foreground">
+                  <p className="text-muted-foreground mb-3 flex items-center gap-1 text-xs">
                     <MapPin className="size-3" />
                     {place.location}
                   </p>
-                  <div className="flex gap-4 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground flex gap-4 text-xs">
                     <span className="flex items-center gap-1">
                       <Eye className="size-3" /> {place.views.toLocaleString()}
                     </span>
@@ -335,15 +315,14 @@ const Page = async ({}: Props) => {
       {/* ── Two-column: Leaderboard + Expeditions ────────────────────────── */}
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-
           {/* Top Explorers */}
           <div>
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold">Top Explorers</h2>
-                <p className="mt-1 text-sm text-muted-foreground">Community leaderboard</p>
+                <p className="text-muted-foreground mt-1 text-sm">Community leaderboard</p>
               </div>
-              <Trophy className="size-5 text-muted-foreground" />
+              <Trophy className="text-muted-foreground size-5" />
             </div>
 
             <Card className="py-0">
@@ -351,16 +330,13 @@ const Page = async ({}: Props) => {
                 {MOCK_USERS.map((user, idx) => (
                   <div
                     key={user.username}
-                    className={`flex items-center gap-4 px-5 py-4${idx < MOCK_USERS.length - 1 ? " border-b" : ""}`}
+                    className={`flex items-center gap-4 px-5 py-4${idx < MOCK_USERS.length - 1 ? "border-b" : ""}`}
                   >
                     <span className="w-6 shrink-0 text-center text-sm">
                       {user.rank <= 3 ? ["🥇", "🥈", "🥉"][user.rank - 1] : `#${user.rank}`}
                     </span>
 
-                    <Avatar
-                      className="size-9 shrink-0"
-                      style={{ filter: RANK_SHADOW[user.tier] }}
-                    >
+                    <Avatar className="size-9 shrink-0" style={{ filter: RANK_SHADOW[user.tier] }}>
                       <AvatarFallback
                         className="text-xs font-semibold"
                         style={{ background: RANK_COLOR[user.tier] }}
@@ -371,17 +347,17 @@ const Page = async ({}: Props) => {
 
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-medium">{user.username}</p>
-                      <p className="text-xs text-muted-foreground">{user.places} places</p>
+                      <p className="text-muted-foreground text-xs">{user.places} places</p>
                     </div>
 
                     <div className="flex flex-col items-end gap-1">
                       <span
-                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase text-white"
+                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase"
                         style={{ background: RANK_COLOR[user.tier] }}
                       >
                         {user.rankLabel}
                       </span>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-muted-foreground text-xs">
                         {user.score.toLocaleString()} pts
                       </span>
                     </div>
@@ -396,9 +372,9 @@ const Page = async ({}: Props) => {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold">Upcoming Expeditions</h2>
-                <p className="mt-1 text-sm text-muted-foreground">Join a group exploration</p>
+                <p className="text-muted-foreground mt-1 text-sm">Join a group exploration</p>
               </div>
-              <Compass className="size-5 text-muted-foreground" />
+              <Compass className="text-muted-foreground size-5" />
             </div>
 
             <div className="flex flex-col gap-4">
@@ -416,15 +392,15 @@ const Page = async ({}: Props) => {
                         className="flex shrink-0 flex-col items-center justify-center rounded-lg px-3 py-2 text-center"
                         style={{ background: "rgba(255,255,255,0.06)", minWidth: 52 }}
                       >
-                        <span className="text-lg font-bold leading-none">{expDate.getDate()}</span>
-                        <span className="mt-0.5 text-[10px] uppercase text-muted-foreground">
+                        <span className="text-lg leading-none font-bold">{expDate.getDate()}</span>
+                        <span className="text-muted-foreground mt-0.5 text-[10px] uppercase">
                           {expDate.toLocaleString("en-US", { month: "short" })}
                         </span>
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <p className="mb-1 text-sm font-semibold leading-snug">{exp.title}</p>
-                        <p className="mb-2 flex items-center gap-1 text-xs text-muted-foreground">
+                        <p className="mb-1 text-sm leading-snug font-semibold">{exp.title}</p>
+                        <p className="text-muted-foreground mb-2 flex items-center gap-1 text-xs">
                           <MapPin className="size-3" /> {exp.location}
                         </p>
                         <div className="flex items-center gap-2">
@@ -434,7 +410,7 @@ const Page = async ({}: Props) => {
                           >
                             {ds.label}
                           </span>
-                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                          <span className="text-muted-foreground flex items-center gap-1 text-xs">
                             <Users className="size-3" />
                             {exp.participants}/{exp.participants + exp.spots}
                           </span>
@@ -460,14 +436,14 @@ const Page = async ({}: Props) => {
       </section>
 
       {/* ── News ──────────────────────────────────────────────────────────── */}
-      <section className="border-t bg-muted/20">
+      <section className="bg-muted/20 border-t">
         <div className="mx-auto max-w-6xl px-6 py-14">
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold">Latest News</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Updates from the Urbanaut team</p>
+              <p className="text-muted-foreground mt-1 text-sm">Updates from the Urbanaut team</p>
             </div>
-            <Newspaper className="size-5 text-muted-foreground" />
+            <Newspaper className="text-muted-foreground size-5" />
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -481,12 +457,12 @@ const Page = async ({}: Props) => {
                   <CardHeader className="pb-2">
                     <div className="mb-2 flex items-center justify-between">
                       <span
-                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase text-white"
+                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase"
                         style={{ background: cc }}
                       >
                         {news.category}
                       </span>
-                      <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                      <span className="text-muted-foreground flex items-center gap-1 text-[11px]">
                         <Calendar className="size-3" />
                         {fmtDate(news.date)}
                       </span>
@@ -494,9 +470,9 @@ const Page = async ({}: Props) => {
                     <CardTitle className="text-sm leading-snug">{news.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="pb-4">
-                    <p className="text-xs leading-relaxed text-muted-foreground">{news.excerpt}</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{news.excerpt}</p>
                   </CardContent>
-                  <CardFooter className="pb-4 pt-0">
+                  <CardFooter className="pt-0 pb-4">
                     <Button variant="link" size="sm" className="h-auto p-0 text-xs">
                       Read more <ChevronRight className="size-3" />
                     </Button>
@@ -507,7 +483,6 @@ const Page = async ({}: Props) => {
           </div>
         </div>
       </section>
-
     </main>
   );
 };

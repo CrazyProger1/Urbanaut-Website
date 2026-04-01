@@ -29,4 +29,5 @@ export const API_ENDPOINTS = {
   FILES: "files/",
   LANGUAGES: "languages/",
   MAP: "map/",
+  STATS: "stats/",
 };

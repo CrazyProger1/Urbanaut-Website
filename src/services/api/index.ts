@@ -18,3 +18,4 @@ export { uploadFile } from "./media";
 export { getLanguages } from "./i18n";
 export { createRequest } from "./requests";
 export { getMap } from "./map";
+export { getGlobalStats } from "./stats";
