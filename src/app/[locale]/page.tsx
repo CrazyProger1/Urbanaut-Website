@@ -425,7 +425,7 @@ const Page = async ({}: Props) => {
         </div>
       </section>
 
-      {news.success && news.results && <NewsSection news={news.results} />}
+      {news.success && news.results.length > 0 && <NewsSection news={news.results} />}
     </main>
   );
 };
