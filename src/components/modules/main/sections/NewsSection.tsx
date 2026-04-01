@@ -3,15 +3,9 @@ import { Calendar, ChevronRight, Newspaper } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { News } from "@/types";
+import { getNotificationColorClass, getNotificationIconColorClass } from "@/utils/classes";
+import { getNotificationIcon } from "@/utils/icons";
 
-const CATEGORY_COLOR: Record<string, string> = {
-  UPDATE: "var(--color-notification-update-bg)",
-  SUCCESS: "var(--color-notification-success-bg)",
-  REMINDER: "var(--color-notification-reminder-bg)",
-  SYSTEM: "var(--color-notification-system-bg)",
-  SOCIAL: "var(--color-notification-social-bg)",
-  ALERT: "var(--color-notification-alert-bg)",
-};
 
 function fmtDate(d: string) {
   return new Date(d).toLocaleDateString("en-US", {
@@ -38,20 +32,16 @@ export const NewsSection = ({ news }: Props) => {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {news.map(({ id, published_at, title, subtitle, type }) => {
-            const cc = CATEGORY_COLOR[type] ?? "var(--color-notification-default-bg)";
+            const cc = getNotificationColorClass(type);
+            const iconColor = getNotificationIconColorClass(type);
             return (
               <Card
                 key={id}
-                className="cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                className={`${cc} cursor-pointer transition-transform duration-200 hover:scale-[1.02]`}
               >
                 <CardHeader className="pb-2">
                   <div className="mb-2 flex items-center justify-between">
-                    <span
-                      className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase"
-                      style={{ background: cc }}
-                    >
-                      {type}
-                    </span>
+                    {getNotificationIcon(type, iconColor)}
                     <span className="text-muted-foreground flex items-center gap-1 text-[11px]">
                       <Calendar className="size-3" />
                       {fmtDate(published_at)}
