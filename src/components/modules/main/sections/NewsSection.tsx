@@ -1,19 +1,8 @@
 import React from "react";
-import { Calendar, ChevronRight, Newspaper } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Newspaper } from "lucide-react";
 import { News } from "@/types";
-import { getNotificationColorClass, getNotificationIconColorClass } from "@/utils/classes";
-import { getNotificationIcon } from "@/utils/icons";
+import { NewsCard } from "./NewsCard";
 
-
-function fmtDate(d: string) {
-  return new Date(d).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 type Props = {
   news: News[];
 };
@@ -31,35 +20,9 @@ export const NewsSection = ({ news }: Props) => {
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {news.map(({ id, published_at, title, subtitle, type }) => {
-            const cc = getNotificationColorClass(type);
-            const iconColor = getNotificationIconColorClass(type);
-            return (
-              <Card
-                key={id}
-                className={`${cc} cursor-pointer transition-transform duration-200 hover:scale-[1.02]`}
-              >
-                <CardHeader className="pb-2">
-                  <div className="mb-2 flex items-center justify-between">
-                    {getNotificationIcon(type, iconColor)}
-                    <span className="text-muted-foreground flex items-center gap-1 text-[11px]">
-                      <Calendar className="size-3" />
-                      {fmtDate(published_at)}
-                    </span>
-                  </div>
-                  <CardTitle className="text-sm leading-snug">{title}</CardTitle>
-                </CardHeader>
-                <CardContent className="pb-4">
-                  <p className="text-muted-foreground text-xs leading-relaxed">{subtitle}</p>
-                </CardContent>
-                <CardFooter className="pt-0 pb-4">
-                  <Button variant="link" size="sm" className="h-auto p-0 text-xs">
-                    Read more <ChevronRight className="size-3" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
+          {news.map((n) => (
+            <NewsCard key={n.id} news={n} />
+          ))}
         </div>
       </div>
     </section>
