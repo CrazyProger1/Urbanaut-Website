@@ -11,7 +11,9 @@ type Props = {
   news: News;
 };
 
-export const NewsCard = ({ news: { title, type, id, published_at, subtitle } }: Props) => {
+export const NewsCard = ({
+  news: { title, type, id, published_at, subtitle, has_more },
+}: Props) => {
   const colorClass = getNotificationColorClass(type);
   const iconColorClass = getNotificationIconColorClass(type);
   return (
@@ -32,13 +34,15 @@ export const NewsCard = ({ news: { title, type, id, published_at, subtitle } }: 
         <p className="text-muted-foreground text-xs leading-relaxed">{subtitle}</p>
       </CardContent>
       <CardFooter className="pt-0 pb-4">
-        <Link
-          href={`/news/${id}`}
-          className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-xs transition-colors"
-        >
-          Read more
-          <ChevronRight className="size-3" />
-        </Link>
+        {has_more && (
+          <Link
+            href={`/news/${id}`}
+            className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-xs transition-colors"
+          >
+            Read more
+            <ChevronRight className="size-3" />
+          </Link>
+        )}
       </CardFooter>
     </Card>
   );

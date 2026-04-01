@@ -6,6 +6,7 @@ export type APIListNews = {
   subtitle?: string;
   published_at: string;
   created_by?: string;
+  has_more: boolean;
   type: APINewsType;
 };
 
