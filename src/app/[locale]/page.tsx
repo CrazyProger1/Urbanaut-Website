@@ -16,9 +16,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { PAGES } from "@/config";
-import { HeroSection, StatsSection } from "@/components/modules/main";
+import { HeroSection, NewsSection, StatsSection } from "@/components/modules/main";
 import { getSession } from "@/utils/session";
-import { getGlobalStats } from "@/services";
+import { getGlobalStats, getLatestNews } from "@/services";
+import { sub } from "date-fns";
 
 const MOCK_PLACES = [
   {
@@ -184,49 +185,35 @@ const MOCK_NEWS = [
 ];
 
 const PRESERVATION_STYLES: Record<string, { bg: string; label: string }> = {
-  NONE: { bg: "rgba(255,255,255,0.2)", label: "No preservation" },
-  LOW: { bg: "rgba(255,60,60,0.4)", label: "Low" },
-  MEDIUM: { bg: "rgba(255,220,0,0.4)", label: "Medium" },
-  HIGH: { bg: "rgba(0,220,80,0.4)", label: "High" },
-  AWESOME: { bg: "rgba(160,0,255,0.4)", label: "Excellent" },
+  NONE: { bg: "rgba(var(--color-base-none), 0.2)", label: "No preservation" },
+  LOW: { bg: "rgba(var(--color-base-hard), 0.4)", label: "Low" },
+  MEDIUM: { bg: "rgba(var(--color-base-medium), 0.4)", label: "Medium" },
+  HIGH: { bg: "rgba(var(--color-base-easy), 0.4)", label: "High" },
+  AWESOME: { bg: "rgba(var(--color-base-impossible), 0.4)", label: "Excellent" },
 };
 
 const DIFFICULTY_STYLES: Record<string, { bg: string; label: string }> = {
-  EASY: { bg: "rgba(0,220,80,0.3)", label: "Easy" },
-  MEDIUM: { bg: "rgba(255,220,0,0.3)", label: "Medium" },
-  HARD: { bg: "rgba(255,60,60,0.3)", label: "Hard" },
-  IMPOSSIBLE: { bg: "rgba(160,0,255,0.3)", label: "Impossible" },
+  EASY: { bg: "rgba(var(--color-base-easy), 0.3)", label: "Easy" },
+  MEDIUM: { bg: "rgba(var(--color-base-medium), 0.3)", label: "Medium" },
+  HARD: { bg: "rgba(var(--color-base-hard), 0.3)", label: "Hard" },
+  IMPOSSIBLE: { bg: "rgba(var(--color-base-impossible), 0.3)", label: "Impossible" },
 };
 
 const RANK_SHADOW: Record<string, string> = {
-  rookie: "drop-shadow(3px 3px 5px rgba(255,255,255,0.3))",
-  amateur: "drop-shadow(3px 3px 5px rgba(0,255,0,0.3))",
-  profi: "drop-shadow(3px 3px 5px rgba(255,255,0,0.3))",
-  stalker: "drop-shadow(3px 3px 5px rgba(255,0,0,0.3))",
-  legend: "drop-shadow(3px 3px 5px rgba(157,0,255,0.3))",
+  rookie: "drop-shadow(3px 3px 5px rgba(var(--color-base-none), 0.3))",
+  amateur: "drop-shadow(3px 3px 5px rgba(var(--color-base-easy), 0.3))",
+  profi: "drop-shadow(3px 3px 5px rgba(var(--color-base-medium), 0.3))",
+  stalker: "drop-shadow(3px 3px 5px rgba(var(--color-base-hard), 0.3))",
+  legend: "drop-shadow(3px 3px 5px rgba(var(--color-base-impossible), 0.3))",
 };
 
 const RANK_COLOR: Record<string, string> = {
-  rookie: "rgba(255,255,255,0.15)",
-  amateur: "rgba(0,255,0,0.2)",
-  profi: "rgba(255,255,0,0.2)",
-  stalker: "rgba(255,0,0,0.2)",
-  legend: "rgba(157,0,255,0.25)",
+  rookie: "rgba(var(--color-base-none), 0.15)",
+  amateur: "rgba(var(--color-base-easy), 0.2)",
+  profi: "rgba(var(--color-base-medium), 0.2)",
+  stalker: "rgba(var(--color-base-hard), 0.2)",
+  legend: "rgba(var(--color-base-impossible), 0.25)",
 };
-
-const CATEGORY_COLOR: Record<string, string> = {
-  Update: "rgba(30,144,255,0.3)",
-  Community: "rgba(0,220,80,0.3)",
-  Feature: "rgba(160,0,255,0.3)",
-};
-
-function fmtDate(d: string) {
-  return new Date(d).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 
 type Props = {
   searchParams: Promise<Record<string, string>>;
@@ -235,6 +222,9 @@ type Props = {
 const Page = async ({}: Props) => {
   const session = await getSession();
   const stats = await getGlobalStats();
+  const news = await getLatestNews();
+
+  console.log(news);
 
   return (
     <main className="flex-1 overflow-x-hidden">
@@ -435,54 +425,7 @@ const Page = async ({}: Props) => {
         </div>
       </section>
 
-      {/* ── News ──────────────────────────────────────────────────────────── */}
-      <section className="bg-muted/20 border-t">
-        <div className="mx-auto max-w-6xl px-6 py-14">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold">Latest News</h2>
-              <p className="text-muted-foreground mt-1 text-sm">Updates from the Urbanaut team</p>
-            </div>
-            <Newspaper className="text-muted-foreground size-5" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {MOCK_NEWS.map((news) => {
-              const cc = CATEGORY_COLOR[news.category] ?? "rgba(255,255,255,0.1)";
-              return (
-                <Card
-                  key={news.id}
-                  className="cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
-                >
-                  <CardHeader className="pb-2">
-                    <div className="mb-2 flex items-center justify-between">
-                      <span
-                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase"
-                        style={{ background: cc }}
-                      >
-                        {news.category}
-                      </span>
-                      <span className="text-muted-foreground flex items-center gap-1 text-[11px]">
-                        <Calendar className="size-3" />
-                        {fmtDate(news.date)}
-                      </span>
-                    </div>
-                    <CardTitle className="text-sm leading-snug">{news.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pb-4">
-                    <p className="text-muted-foreground text-xs leading-relaxed">{news.excerpt}</p>
-                  </CardContent>
-                  <CardFooter className="pt-0 pb-4">
-                    <Button variant="link" size="sm" className="h-auto p-0 text-xs">
-                      Read more <ChevronRight className="size-3" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {news.success && <NewsSection news={news.results} />}
     </main>
   );
 };

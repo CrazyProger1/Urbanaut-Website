@@ -30,4 +30,5 @@ export const API_ENDPOINTS = {
   LANGUAGES: "languages/",
   MAP: "map/",
   STATS: "stats/",
+  NEWS: "news/",
 };

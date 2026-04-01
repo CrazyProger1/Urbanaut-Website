@@ -9,3 +9,4 @@ export type * from "./achievement";
 export type * from "./media";
 export type * from "./i18n";
 export type * from "./stats";
+export type * from "./news";

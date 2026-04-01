@@ -66,3 +66,4 @@ export type { APIListReferralCode } from "./referrals";
 export type { APIListFile, APIFileType } from "./media";
 export type { APIListLanguage } from "./i18n";
 export type { APIRetrieveGlobalStats } from "./stats";
+export type { APINewsType, APIRetrieveNews, APIListNews } from "./news";
