@@ -1,8 +1,11 @@
 import React from "react";
-import { Newspaper } from "lucide-react";
+import { Newspaper, ChevronRight } from "lucide-react";
 import { News } from "@/types";
 import { NewsCard } from "./NewsCard";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { PAGES } from "@/config";
 
 type Props = {
   news: News[];
@@ -26,6 +29,11 @@ export const NewsSection = ({ news }: Props) => {
             <NewsCard key={n.id} news={n} />
           ))}
         </div>
+        <Button variant="ghost" size="sm" className="mt-6 self-start" asChild>
+          <Link href={PAGES.BLOG}>
+            {t("BUTTON_VIEW_ALL")} <ChevronRight className="size-4" />
+          </Link>
+        </Button>
       </div>
     </section>
   );

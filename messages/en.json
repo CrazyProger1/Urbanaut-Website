@@ -255,6 +255,12 @@
     "LABEL_EXPEDITIONS": "Expeditions",
     "TITLE_NEWS": "Latest News",
     "DESCRIPTION_NEWS": "Updates from the Urbanaut team",
-    "BUTTON_READ_MORE": "Read more"
+    "BUTTON_READ_MORE": "Read more",
+    "BUTTON_VIEW_ALL": "View all",
+    "TITLE_TOP_EXPLORERS": "Top Explorers",
+    "DESCRIPTION_TOP_EXPLORERS": "Highest ranked members this month",
+    "TITLE_TOP_TEAMS": "Top Teams",
+    "DESCRIPTION_TOP_TEAMS": "Best performing exploration crews",
+    "LABEL_MEMBERS": "members"
   }
 }

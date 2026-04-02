@@ -255,6 +255,12 @@
     "LABEL_EXPEDITIONS": "Експедицій",
     "TITLE_NEWS": "Останні новини",
     "DESCRIPTION_NEWS": "Оновлення від команди Urbanaut",
-    "BUTTON_READ_MORE": "Читати далі"
+    "BUTTON_READ_MORE": "Читати далі",
+    "BUTTON_VIEW_ALL": "Переглянути всі",
+    "TITLE_TOP_EXPLORERS": "Топ дослідників",
+    "DESCRIPTION_TOP_EXPLORERS": "Найвищий рейтинг за цей місяць",
+    "TITLE_TOP_TEAMS": "Топ команд",
+    "DESCRIPTION_TOP_TEAMS": "Найактивніші дослідницькі команди",
+    "LABEL_MEMBERS": "учасників"
   }
 }
