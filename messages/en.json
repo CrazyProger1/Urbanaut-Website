@@ -243,6 +243,18 @@
     "DESCRIPTION_REFERRAL_TOOLS": "Access to advanced tools for discovering abandoned places and planning expeditions",
     "LABEL_REFERRAL_COMMUNITY": "Community",
     "DESCRIPTION_REFERRAL_COMMUNITY": "Become part of our fast-growing community and find friends",
-    "BUTTON_CREATE_ACCOUNT": "Create Your Account"
+    "BUTTON_CREATE_ACCOUNT": "Create Your Account",
+    "TITLE_HERO": "Explore the",
+    "LABEL_HERO_HIGHLIGHT": "Forgotten World",
+    "DESCRIPTION_HERO": "Discover abandoned places, connect with urban explorers, plan expeditions, and document history before it disappears forever.",
+    "BUTTON_EXPLORE_MAP": "Explore Map",
+    "BUTTON_JOIN_COMMUNITY": "Join Community",
+    "LABEL_ABANDONED_OBJECTS": "Abandoned Objects",
+    "LABEL_EXPLORERS": "Explorers",
+    "LABEL_COUNTRIES": "Countries",
+    "LABEL_EXPEDITIONS": "Expeditions",
+    "TITLE_NEWS": "Latest News",
+    "DESCRIPTION_NEWS": "Updates from the Urbanaut team",
+    "BUTTON_READ_MORE": "Read more"
   }
 }

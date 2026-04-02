@@ -243,6 +243,18 @@
     "LABEL_REFERRAL_BENEFITS": "Что вы получите:",
     "LABEL_REFERRAL_BONUSES": "Эксклюзивные бонусы",
     "LABEL_REFERRAL_TOOLS": "Мощные инструменты",
-    "LABEL_REFERRAL_COMMUNITY": "Сообщество"
+    "LABEL_REFERRAL_COMMUNITY": "Сообщество",
+    "TITLE_HERO": "Исследуй",
+    "LABEL_HERO_HIGHLIGHT": "Забытый Мир",
+    "DESCRIPTION_HERO": "Открывай заброшенные места, общайся с городскими исследователями, планируй вылазки и документируй историю до того, как она исчезнет навсегда.",
+    "BUTTON_EXPLORE_MAP": "Открыть карту",
+    "BUTTON_JOIN_COMMUNITY": "Присоединиться",
+    "LABEL_ABANDONED_OBJECTS": "Заброшенных объектов",
+    "LABEL_EXPLORERS": "Исследователей",
+    "LABEL_COUNTRIES": "Стран",
+    "LABEL_EXPEDITIONS": "Экспедиций",
+    "TITLE_NEWS": "Последние новости",
+    "DESCRIPTION_NEWS": "Обновления от команды Urbanaut",
+    "BUTTON_READ_MORE": "Читать далее"
   }
 }

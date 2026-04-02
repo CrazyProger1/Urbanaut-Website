@@ -232,198 +232,198 @@ const Page = async ({}: Props) => {
 
       <StatsSection stats={stats.success ? stats : undefined} />
 
-      <section className="mx-auto max-w-6xl px-6 py-14">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold">Top Abandoned Objects</h2>
-            <p className="text-muted-foreground mt-1 text-sm">
-              Most visited places by the community
-            </p>
-          </div>
-          <Button variant="ghost" size="sm" asChild>
-            <Link href={PAGES.MAP}>
-              View all <ChevronRight className="size-4" />
-            </Link>
-          </Button>
-        </div>
+      {/*<section className="mx-auto max-w-6xl px-6 py-14">*/}
+      {/*  <div className="mb-8 flex items-center justify-between">*/}
+      {/*    <div>*/}
+      {/*      <h2 className="text-2xl font-bold">Top Abandoned Objects</h2>*/}
+      {/*      <p className="text-muted-foreground mt-1 text-sm">*/}
+      {/*        Most visited places by the community*/}
+      {/*      </p>*/}
+      {/*    </div>*/}
+      {/*    <Button variant="ghost" size="sm" asChild>*/}
+      {/*      <Link href={PAGES.MAP}>*/}
+      {/*        View all <ChevronRight className="size-4" />*/}
+      {/*      </Link>*/}
+      {/*    </Button>*/}
+      {/*  </div>*/}
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {MOCK_PLACES.map((place) => {
-            const ps = PRESERVATION_STYLES[place.preservation] ?? PRESERVATION_STYLES.NONE;
-            return (
-              <Card
-                key={place.id}
-                className="group cursor-pointer overflow-hidden py-0 transition-transform duration-200 hover:scale-[1.02]"
-              >
-                {/* Photo placeholder */}
-                <div
-                  className={`relative h-44 bg-linear-to-br ${place.gradient} flex items-end p-3`}
-                >
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="relative flex flex-wrap gap-1.5">
-                    {place.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded px-1.5 py-0.5 text-[10px] text-white/80"
-                        style={{ background: "rgba(0,0,0,0.45)" }}
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+      {/*  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">*/}
+      {/*    {MOCK_PLACES.map((place) => {*/}
+      {/*      const ps = PRESERVATION_STYLES[place.preservation] ?? PRESERVATION_STYLES.NONE;*/}
+      {/*      return (*/}
+      {/*        <Card*/}
+      {/*          key={place.id}*/}
+      {/*          className="group cursor-pointer overflow-hidden py-0 transition-transform duration-200 hover:scale-[1.02]"*/}
+      {/*        >*/}
+      {/*          /!* Photo placeholder *!/*/}
+      {/*          <div*/}
+      {/*            className={`relative h-44 bg-linear-to-br ${place.gradient} flex items-end p-3`}*/}
+      {/*          >*/}
+      {/*            <div className="absolute inset-0 bg-black/20" />*/}
+      {/*            <div className="relative flex flex-wrap gap-1.5">*/}
+      {/*              {place.tags.map((tag) => (*/}
+      {/*                <span*/}
+      {/*                  key={tag}*/}
+      {/*                  className="rounded px-1.5 py-0.5 text-[10px] text-white/80"*/}
+      {/*                  style={{ background: "rgba(0,0,0,0.45)" }}*/}
+      {/*                >*/}
+      {/*                  #{tag}*/}
+      {/*                </span>*/}
+      {/*              ))}*/}
+      {/*            </div>*/}
+      {/*          </div>*/}
 
-                <CardContent className="pt-4 pb-4">
-                  <div className="mb-1 flex items-start justify-between gap-2">
-                    <p className="text-sm leading-snug font-semibold">{place.name}</p>
-                    <span
-                      className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
-                      style={{ background: ps.bg }}
-                    >
-                      {ps.label}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground mb-3 flex items-center gap-1 text-xs">
-                    <MapPin className="size-3" />
-                    {place.location}
-                  </p>
-                  <div className="text-muted-foreground flex gap-4 text-xs">
-                    <span className="flex items-center gap-1">
-                      <Eye className="size-3" /> {place.views.toLocaleString()}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Heart className="size-3" /> {place.favorites}
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
+      {/*          <CardContent className="pt-4 pb-4">*/}
+      {/*            <div className="mb-1 flex items-start justify-between gap-2">*/}
+      {/*              <p className="text-sm leading-snug font-semibold">{place.name}</p>*/}
+      {/*              <span*/}
+      {/*                className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium text-white"*/}
+      {/*                style={{ background: ps.bg }}*/}
+      {/*              >*/}
+      {/*                {ps.label}*/}
+      {/*              </span>*/}
+      {/*            </div>*/}
+      {/*            <p className="text-muted-foreground mb-3 flex items-center gap-1 text-xs">*/}
+      {/*              <MapPin className="size-3" />*/}
+      {/*              {place.location}*/}
+      {/*            </p>*/}
+      {/*            <div className="text-muted-foreground flex gap-4 text-xs">*/}
+      {/*              <span className="flex items-center gap-1">*/}
+      {/*                <Eye className="size-3" /> {place.views.toLocaleString()}*/}
+      {/*              </span>*/}
+      {/*              <span className="flex items-center gap-1">*/}
+      {/*                <Heart className="size-3" /> {place.favorites}*/}
+      {/*              </span>*/}
+      {/*            </div>*/}
+      {/*          </CardContent>*/}
+      {/*        </Card>*/}
+      {/*      );*/}
+      {/*    })}*/}
+      {/*  </div>*/}
+      {/*</section>*/}
 
-      {/* ── Two-column: Leaderboard + Expeditions ────────────────────────── */}
-      <section className="mx-auto max-w-6xl px-6 pb-14">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Top Explorers */}
-          <div>
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold">Top Explorers</h2>
-                <p className="text-muted-foreground mt-1 text-sm">Community leaderboard</p>
-              </div>
-              <Trophy className="text-muted-foreground size-5" />
-            </div>
+      {/*/!* ── Two-column: Leaderboard + Expeditions ────────────────────────── *!/*/}
+      {/*<section className="mx-auto max-w-6xl px-6 pb-14">*/}
+      {/*  <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">*/}
+      {/*    /!* Top Explorers *!/*/}
+      {/*    <div>*/}
+      {/*      <div className="mb-5 flex items-center justify-between">*/}
+      {/*        <div>*/}
+      {/*          <h2 className="text-2xl font-bold">Top Explorers</h2>*/}
+      {/*          <p className="text-muted-foreground mt-1 text-sm">Community leaderboard</p>*/}
+      {/*        </div>*/}
+      {/*        <Trophy className="text-muted-foreground size-5" />*/}
+      {/*      </div>*/}
 
-            <Card className="py-0">
-              <CardContent className="p-0">
-                {MOCK_USERS.map((user, idx) => (
-                  <div
-                    key={user.username}
-                    className={`flex items-center gap-4 px-5 py-4${idx < MOCK_USERS.length - 1 ? "border-b" : ""}`}
-                  >
-                    <span className="w-6 shrink-0 text-center text-sm">
-                      {user.rank <= 3 ? ["🥇", "🥈", "🥉"][user.rank - 1] : `#${user.rank}`}
-                    </span>
+      {/*      <Card className="py-0">*/}
+      {/*        <CardContent className="p-0">*/}
+      {/*          {MOCK_USERS.map((user, idx) => (*/}
+      {/*            <div*/}
+      {/*              key={user.username}*/}
+      {/*              className={`flex items-center gap-4 px-5 py-4${idx < MOCK_USERS.length - 1 ? "border-b" : ""}`}*/}
+      {/*            >*/}
+      {/*              <span className="w-6 shrink-0 text-center text-sm">*/}
+      {/*                {user.rank <= 3 ? ["🥇", "🥈", "🥉"][user.rank - 1] : `#${user.rank}`}*/}
+      {/*              </span>*/}
 
-                    <Avatar className="size-9 shrink-0" style={{ filter: RANK_SHADOW[user.tier] }}>
-                      <AvatarFallback
-                        className="text-xs font-semibold"
-                        style={{ background: RANK_COLOR[user.tier] }}
-                      >
-                        {user.username.slice(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
+      {/*              <Avatar className="size-9 shrink-0" style={{ filter: RANK_SHADOW[user.tier] }}>*/}
+      {/*                <AvatarFallback*/}
+      {/*                  className="text-xs font-semibold"*/}
+      {/*                  style={{ background: RANK_COLOR[user.tier] }}*/}
+      {/*                >*/}
+      {/*                  {user.username.slice(0, 2).toUpperCase()}*/}
+      {/*                </AvatarFallback>*/}
+      {/*              </Avatar>*/}
 
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium">{user.username}</p>
-                      <p className="text-muted-foreground text-xs">{user.places} places</p>
-                    </div>
+      {/*              <div className="min-w-0 flex-1">*/}
+      {/*                <p className="truncate text-sm font-medium">{user.username}</p>*/}
+      {/*                <p className="text-muted-foreground text-xs">{user.places} places</p>*/}
+      {/*              </div>*/}
 
-                    <div className="flex flex-col items-end gap-1">
-                      <span
-                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase"
-                        style={{ background: RANK_COLOR[user.tier] }}
-                      >
-                        {user.rankLabel}
-                      </span>
-                      <span className="text-muted-foreground text-xs">
-                        {user.score.toLocaleString()} pts
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
+      {/*              <div className="flex flex-col items-end gap-1">*/}
+      {/*                <span*/}
+      {/*                  className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase"*/}
+      {/*                  style={{ background: RANK_COLOR[user.tier] }}*/}
+      {/*                >*/}
+      {/*                  {user.rankLabel}*/}
+      {/*                </span>*/}
+      {/*                <span className="text-muted-foreground text-xs">*/}
+      {/*                  {user.score.toLocaleString()} pts*/}
+      {/*                </span>*/}
+      {/*              </div>*/}
+      {/*            </div>*/}
+      {/*          ))}*/}
+      {/*        </CardContent>*/}
+      {/*      </Card>*/}
+      {/*    </div>*/}
 
-          {/* Upcoming Expeditions */}
-          <div>
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold">Upcoming Expeditions</h2>
-                <p className="text-muted-foreground mt-1 text-sm">Join a group exploration</p>
-              </div>
-              <Compass className="text-muted-foreground size-5" />
-            </div>
+      {/*    /!* Upcoming Expeditions *!/*/}
+      {/*    <div>*/}
+      {/*      <div className="mb-5 flex items-center justify-between">*/}
+      {/*        <div>*/}
+      {/*          <h2 className="text-2xl font-bold">Upcoming Expeditions</h2>*/}
+      {/*          <p className="text-muted-foreground mt-1 text-sm">Join a group exploration</p>*/}
+      {/*        </div>*/}
+      {/*        <Compass className="text-muted-foreground size-5" />*/}
+      {/*      </div>*/}
 
-            <div className="flex flex-col gap-4">
-              {MOCK_EXPEDITIONS.map((exp) => {
-                const ds = DIFFICULTY_STYLES[exp.difficulty] ?? DIFFICULTY_STYLES.MEDIUM;
-                const expDate = new Date(exp.date);
-                return (
-                  <Card
-                    key={exp.id}
-                    className="cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
-                  >
-                    <CardContent className="flex items-start gap-4 py-4">
-                      {/* Date block */}
-                      <div
-                        className="flex shrink-0 flex-col items-center justify-center rounded-lg px-3 py-2 text-center"
-                        style={{ background: "rgba(255,255,255,0.06)", minWidth: 52 }}
-                      >
-                        <span className="text-lg leading-none font-bold">{expDate.getDate()}</span>
-                        <span className="text-muted-foreground mt-0.5 text-[10px] uppercase">
-                          {expDate.toLocaleString("en-US", { month: "short" })}
-                        </span>
-                      </div>
+      {/*      <div className="flex flex-col gap-4">*/}
+      {/*        {MOCK_EXPEDITIONS.map((exp) => {*/}
+      {/*          const ds = DIFFICULTY_STYLES[exp.difficulty] ?? DIFFICULTY_STYLES.MEDIUM;*/}
+      {/*          const expDate = new Date(exp.date);*/}
+      {/*          return (*/}
+      {/*            <Card*/}
+      {/*              key={exp.id}*/}
+      {/*              className="cursor-pointer transition-transform duration-200 hover:scale-[1.01]"*/}
+      {/*            >*/}
+      {/*              <CardContent className="flex items-start gap-4 py-4">*/}
+      {/*                /!* Date block *!/*/}
+      {/*                <div*/}
+      {/*                  className="flex shrink-0 flex-col items-center justify-center rounded-lg px-3 py-2 text-center"*/}
+      {/*                  style={{ background: "rgba(255,255,255,0.06)", minWidth: 52 }}*/}
+      {/*                >*/}
+      {/*                  <span className="text-lg leading-none font-bold">{expDate.getDate()}</span>*/}
+      {/*                  <span className="text-muted-foreground mt-0.5 text-[10px] uppercase">*/}
+      {/*                    {expDate.toLocaleString("en-US", { month: "short" })}*/}
+      {/*                  </span>*/}
+      {/*                </div>*/}
 
-                      <div className="min-w-0 flex-1">
-                        <p className="mb-1 text-sm leading-snug font-semibold">{exp.title}</p>
-                        <p className="text-muted-foreground mb-2 flex items-center gap-1 text-xs">
-                          <MapPin className="size-3" /> {exp.location}
-                        </p>
-                        <div className="flex items-center gap-2">
-                          <span
-                            className="rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
-                            style={{ background: ds.bg }}
-                          >
-                            {ds.label}
-                          </span>
-                          <span className="text-muted-foreground flex items-center gap-1 text-xs">
-                            <Users className="size-3" />
-                            {exp.participants}/{exp.participants + exp.spots}
-                          </span>
-                        </div>
-                      </div>
+      {/*                <div className="min-w-0 flex-1">*/}
+      {/*                  <p className="mb-1 text-sm leading-snug font-semibold">{exp.title}</p>*/}
+      {/*                  <p className="text-muted-foreground mb-2 flex items-center gap-1 text-xs">*/}
+      {/*                    <MapPin className="size-3" /> {exp.location}*/}
+      {/*                  </p>*/}
+      {/*                  <div className="flex items-center gap-2">*/}
+      {/*                    <span*/}
+      {/*                      className="rounded px-1.5 py-0.5 text-[10px] font-medium text-white"*/}
+      {/*                      style={{ background: ds.bg }}*/}
+      {/*                    >*/}
+      {/*                      {ds.label}*/}
+      {/*                    </span>*/}
+      {/*                    <span className="text-muted-foreground flex items-center gap-1 text-xs">*/}
+      {/*                      <Users className="size-3" />*/}
+      {/*                      {exp.participants}/{exp.participants + exp.spots}*/}
+      {/*                    </span>*/}
+      {/*                  </div>*/}
+      {/*                </div>*/}
 
-                      <Button size="sm" variant="outline" className="shrink-0">
-                        Join
-                      </Button>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+      {/*                <Button size="sm" variant="outline" className="shrink-0">*/}
+      {/*                  Join*/}
+      {/*                </Button>*/}
+      {/*              </CardContent>*/}
+      {/*            </Card>*/}
+      {/*          );*/}
+      {/*        })}*/}
 
-              <Button variant="ghost" size="sm" className="self-start" asChild>
-                <Link href={PAGES.CALENDAR}>
-                  All expeditions <ChevronRight className="size-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/*        <Button variant="ghost" size="sm" className="self-start" asChild>*/}
+      {/*          <Link href={PAGES.CALENDAR}>*/}
+      {/*            All expeditions <ChevronRight className="size-4" />*/}
+      {/*          </Link>*/}
+      {/*        </Button>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
 
       {news.success && news.results.length > 0 && <NewsSection news={news.results} />}
     </main>

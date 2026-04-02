@@ -243,6 +243,18 @@
     "DESCRIPTION_REFERRAL_TOOLS": "Доступ до розширених функцій для пошуку покинутих локацій та планування виїздів",
     "LABEL_REFERRAL_COMMUNITY": "Спільнота",
     "DESCRIPTION_REFERRAL_COMMUNITY": "Станьте частиною швидкозростаючої спільноти та знайдіть однодумців",
-    "BUTTON_CREATE_ACCOUNT": "Створити обліковий запис"
+    "BUTTON_CREATE_ACCOUNT": "Створити обліковий запис",
+    "TITLE_HERO": "Досліджуй",
+    "LABEL_HERO_HIGHLIGHT": "Забутий Світ",
+    "DESCRIPTION_HERO": "Відкривай покинуті місця, спілкуйся з міськими дослідниками, плануй виїзди та документуй історію до того, як вона зникне назавжди.",
+    "BUTTON_EXPLORE_MAP": "Відкрити карту",
+    "BUTTON_JOIN_COMMUNITY": "Приєднатися",
+    "LABEL_ABANDONED_OBJECTS": "Покинутих об'єктів",
+    "LABEL_EXPLORERS": "Дослідників",
+    "LABEL_COUNTRIES": "Країн",
+    "LABEL_EXPEDITIONS": "Експедицій",
+    "TITLE_NEWS": "Останні новини",
+    "DESCRIPTION_NEWS": "Оновлення від команди Urbanaut",
+    "BUTTON_READ_MORE": "Читати далі"
   }
 }

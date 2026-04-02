@@ -6,6 +6,7 @@ import { getNotificationIcon } from "@/utils/icons";
 import { Calendar, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { localizeDate } from "@/utils/date";
+import { useTranslations } from "next-intl";
 
 type Props = {
   news: News;
@@ -14,6 +15,7 @@ type Props = {
 export const NewsCard = ({
   news: { title, type, id, published_at, subtitle, has_more },
 }: Props) => {
+  const t = useTranslations("Modules");
   const colorClass = getNotificationColorClass(type);
   const iconColorClass = getNotificationIconColorClass(type);
   return (
@@ -39,7 +41,7 @@ export const NewsCard = ({
             href={`/news/${id}`}
             className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-xs transition-colors"
           >
-            Read more
+            {t("BUTTON_READ_MORE")}
             <ChevronRight className="size-3" />
           </Link>
         )}
