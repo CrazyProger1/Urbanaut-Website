@@ -10,7 +10,7 @@ import {
 import { Modal } from "@/components/ui/next/modal";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { PlaceForm } from "../forms";
-import { CurrentUser, Language, PlaceDetail, Tag, User } from "@/types";
+import { CurrentUser, Language, PlaceDetail, Tag, UserDetail } from "@/types";
 import { useTranslations } from "next-intl";
 
 type Props = {

@@ -1,10 +1,10 @@
 import React from "react";
-import { User } from "@/types";
+import { UserDetail } from "@/types";
 import { MetricItem } from "./MetricItem";
 import { Card } from "@/components/ui/card";
 
 type Props = {
-  user: User;
+  user: UserDetail;
 };
 
 export const MetricsTable = ({ user }: Props) => {

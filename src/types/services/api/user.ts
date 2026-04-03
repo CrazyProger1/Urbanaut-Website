@@ -63,6 +63,8 @@ export type APIListUser = {
   first_name?: string;
   last_name?: string;
   rank?: APIRank;
+  experience?: number;
+  karma?: number;
 };
 
 export type APIUpdateUser = {

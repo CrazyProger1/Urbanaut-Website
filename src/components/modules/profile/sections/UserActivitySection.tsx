@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "@/types";
+import { UserDetail } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Lock } from "lucide-react";
@@ -7,7 +7,7 @@ import { PLACEHOLDERS } from "@/config";
 import { useTranslations } from "next-intl";
 
 type Props = {
-  user: User;
+  user: UserDetail;
 };
 
 export const UserActivitySection = ({ user }: Props) => {

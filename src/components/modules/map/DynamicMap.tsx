@@ -12,7 +12,7 @@ const WORLD_BOUNDS = new LatLngBounds(
   [85.051129, 180], // Northeast corner
 );
 
-import { User } from "@/types";
+import { UserDetail } from "@/types";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import MapContextMenu from "./MapContextMenu";
 import { ICONS, LAYERS, PAGES, PLACEHOLDERS, QUERIES } from "@/config";
@@ -42,7 +42,7 @@ type Props = {
   filters?: MapPageParams;
   markerVisibilityMinimumZoomThreshold?: number;
   areaVisibilityMinimumZoomThreshold?: number;
-  user?: User;
+  user?: UserDetail;
 };
 
 const DynamicMap = ({

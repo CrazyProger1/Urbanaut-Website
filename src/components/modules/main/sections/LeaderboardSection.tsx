@@ -7,6 +7,7 @@ import { getRankShadowClass } from "@/utils/classes";
 import { CopyToast } from "@/components/common/toasts";
 import React from "react";
 import { useTranslations } from "next-intl";
+import { User } from "@/types";
 
 const shortNum = (n: number) => {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}m`;
@@ -14,63 +15,40 @@ const shortNum = (n: number) => {
   return String(n);
 };
 
-const MOCK_USERS = [
+const MOCK_TEAMS = [
   {
     id: "1",
-    usernames: ["ShadowStalker"],
-    first_name: "Shadow",
-    last_name: "Stalker",
-    rank: "LEGEND" as const,
-    exp: 48200,
-    karma: 1340,
+    name: "Urban Phantoms",
+    handle: "urbanphantoms",
+    members: 12,
+    exp: 124000,
+    karma: 3800,
   },
   {
     id: "2",
-    usernames: ["NightCrawler_UA"],
-    first_name: "Night",
-    last_name: "Crawler",
-    rank: "STALKER" as const,
-    exp: 32100,
-    karma: 970,
+    name: "Chornobyl Runners",
+    handle: "chornobylrunners",
+    members: 8,
+    exp: 98500,
+    karma: 2910,
   },
-  {
-    id: "3",
-    usernames: ["UrbanPhoenix"],
-    first_name: "Urban",
-    last_name: "Phoenix",
-    rank: "STALKER" as const,
-    exp: 29800,
-    karma: 880,
-  },
-  {
-    id: "4",
-    usernames: ["GhostExplorer"],
-    first_name: "Ghost",
-    last_name: "Explorer",
-    rank: "PROFI" as const,
-    exp: 21400,
-    karma: 640,
-  },
-  {
-    id: "5",
-    usernames: ["RuinsHunter77"],
-    first_name: "Ruins",
-    last_name: "Hunter",
-    rank: "PROFI" as const,
-    exp: 18700,
-    karma: 510,
-  },
-];
-
-const MOCK_TEAMS = [
-  { id: "1", name: "Urban Phantoms", handle: "urbanphantoms", members: 12, exp: 124000, karma: 3800 },
-  { id: "2", name: "Chornobyl Runners", handle: "chornobylrunners", members: 8, exp: 98500, karma: 2910 },
   { id: "3", name: "Steel Wolves", handle: "steelwolves", members: 10, exp: 87200, karma: 2540 },
   { id: "4", name: "Ghost Division", handle: "ghostdivision", members: 6, exp: 61400, karma: 1760 },
-  { id: "5", name: "Ruins Collective", handle: "ruinscollective", members: 9, exp: 54900, karma: 1430 },
+  {
+    id: "5",
+    name: "Ruins Collective",
+    handle: "ruinscollective",
+    members: 9,
+    exp: 54900,
+    karma: 1430,
+  },
 ];
 
-export const LeaderboardSection = () => {
+type Props = {
+  users: User[];
+};
+
+export const LeaderboardSection = ({ users }: Props) => {
   const t = useTranslations("Modules");
   return (
     <section className="mx-auto flex max-w-6xl flex-row gap-8 px-6 py-14">
@@ -84,7 +62,7 @@ export const LeaderboardSection = () => {
         </div>
 
         <div className="flex flex-col gap-4">
-          {MOCK_USERS.map((user) => (
+          {users.slice(0, 5).map((user) => (
             <Link href={`${PAGES.PROFILE}/${user?.usernames[0]}`} key={user.id}>
               <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]">
                 <Avatar className="h-16 w-16 rounded-lg">
@@ -115,11 +93,11 @@ export const LeaderboardSection = () => {
                 <div className="text-muted-foreground ml-auto flex flex-col items-start gap-1 pr-2 text-xs">
                   <span className="flex items-center gap-1">
                     <Zap className="size-3" />
-                    {shortNum(user.exp)} exp
+                    {shortNum(user?.experience || 0)} exp
                   </span>
                   <span className="flex items-center gap-1">
                     <Heart className="size-3" />
-                    {shortNum(user.karma)} kar
+                    {shortNum(user?.karma || 0)} kar
                   </span>
                 </div>
               </div>

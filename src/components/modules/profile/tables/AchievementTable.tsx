@@ -1,9 +1,9 @@
 import React from "react";
-import { User } from "@/types";
+import { UserDetail } from "@/types";
 import { AchievementItem } from "./AchievementItem";
 
 type Props = {
-  user: User;
+  user: UserDetail;
 };
 
 export const AchievementTable = ({ user }: Props) => {

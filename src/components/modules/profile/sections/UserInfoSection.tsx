@@ -10,11 +10,11 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { MetricsTable } from "@/components/modules/profile/tables";
 import { getRankShadowClass } from "@/utils/classes";
 import { CopyToast } from "@/components/common/toasts";
-import { User } from "@/types";
+import { UserDetail } from "@/types";
 import { Tooltip } from "@/components/ui/next/tooltip";
 
 type Props = {
-  user: User;
+  user: UserDetail;
   me?: boolean;
 };
 

@@ -9,7 +9,9 @@ import {
   APIListReferralCode,
 } from "@/types/services/api";
 
-export type User = APIRetrieveUser;
+export type User = APIListUser;
+
+export type UserDetail = APIRetrieveUser;
 
 export type CurrentUser = APICurrentUser;
 

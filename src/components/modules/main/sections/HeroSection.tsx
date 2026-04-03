@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PAGES } from "@/config";
+import { PAGES, QUERIES } from "@/config";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -43,7 +43,7 @@ export const HeroSection = ({ isAuthenticated }: Props) => {
           </Button>
           {!isAuthenticated ? (
             <Button size="lg" variant="outline" asChild>
-              <Link href={PAGES.PROFILE}>
+              <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>
                 <Users />
                 {t("BUTTON_JOIN_COMMUNITY")}
               </Link>

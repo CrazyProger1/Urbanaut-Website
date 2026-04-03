@@ -8,9 +8,15 @@ import {
   APISuccessfulResponse,
   APIUpdateSettings,
   APIObtainWebsocketToken,
+  APIPaginatedResponse,
+  APIListUser,
 } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS, CACHE_TAGS } from "@/config";
+
+export const getUsers = async () => {
+  return await fetchAuthenticated<APIPaginatedResponse<APIListUser>>(API_ENDPOINTS.USERS);
+};
 
 export const updateUser = async (
   user: APIUpdateUser,
@@ -44,7 +50,9 @@ export const obtainWebsocketToken = async (): Promise<
   });
 };
 
-export const getMe = async (): Promise<(APISuccessfulResponse & APICurrentUser) | APIErrorResponse> => {
+export const getMe = async (): Promise<
+  (APISuccessfulResponse & APICurrentUser) | APIErrorResponse
+> => {
   return await fetchAuthenticated(API_ENDPOINTS.USER.replace("[id]", "me"), {
     next: { tags: [CACHE_TAGS.CURRENT_USER] },
   });

@@ -8,6 +8,7 @@ export {
   getUserByUsername,
   updateSettings,
   obtainWebsocketToken,
+  getUsers,
   getMe,
 } from "./users";
 export { createFeedback } from "./feedbacks";
