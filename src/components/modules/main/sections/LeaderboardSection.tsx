@@ -33,7 +33,7 @@ export const LeaderboardSection = ({ users }: Props) => {
           {users.slice(0, 5).map((user) => (
             <Link href={`${PAGES.PROFILE}/${user?.usernames[0]}`} key={user.id}>
               <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]">
-                <Avatar className="h-16 w-16 rounded-lg">
+                <Avatar className="h-18 w-18 p-1 rounded-lg">
                   <AvatarImage
                     className={getRankShadowClass(user?.rank)}
                     src={"/web-app-manifest-192x192.png"}

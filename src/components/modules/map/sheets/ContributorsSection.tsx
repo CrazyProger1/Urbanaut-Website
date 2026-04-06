@@ -30,7 +30,7 @@ export const ContributorsSection = ({ creator }: Props) => {
               <div className="text-muted-foreground absolute top-1 right-2 text-xs">
                 {t(PLACEHOLDERS.ROLE_CREATOR)}
               </div>
-              <Avatar className="h-16 w-16 rounded-lg">
+              <Avatar className="h-18 w-18 p-1 rounded-lg">
                 <AvatarImage
                   className={getRankShadowClass(creator?.rank)}
                   src={"/web-app-manifest-192x192.png"}
