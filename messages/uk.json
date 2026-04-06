@@ -261,6 +261,7 @@
     "DESCRIPTION_TOP_EXPLORERS": "Найвищий рейтинг за цей місяць",
     "TITLE_TOP_TEAMS": "Топ команд",
     "DESCRIPTION_TOP_TEAMS": "Найактивніші дослідницькі команди",
-    "LABEL_MEMBERS": "учасників"
+    "LABEL_MEMBERS": "учасників",
+    "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда може бути першою!"
   }
 }

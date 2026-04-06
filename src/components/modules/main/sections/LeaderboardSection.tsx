@@ -8,41 +8,9 @@ import { CopyToast } from "@/components/common/toasts";
 import React from "react";
 import { useTranslations } from "next-intl";
 import { User } from "@/types";
+import { shortifyNumber } from "@/utils/string";
 
-const shortNum = (n: number) => {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}m`;
-  if (n >= 1_000) return `${(n / 1_000).toFixed(n % 1_000 === 0 ? 0 : 1)}k`;
-  return String(n);
-};
 
-const MOCK_TEAMS = [
-  {
-    id: "1",
-    name: "Urban Phantoms",
-    handle: "urbanphantoms",
-    members: 12,
-    exp: 124000,
-    karma: 3800,
-  },
-  {
-    id: "2",
-    name: "Chornobyl Runners",
-    handle: "chornobylrunners",
-    members: 8,
-    exp: 98500,
-    karma: 2910,
-  },
-  { id: "3", name: "Steel Wolves", handle: "steelwolves", members: 10, exp: 87200, karma: 2540 },
-  { id: "4", name: "Ghost Division", handle: "ghostdivision", members: 6, exp: 61400, karma: 1760 },
-  {
-    id: "5",
-    name: "Ruins Collective",
-    handle: "ruinscollective",
-    members: 9,
-    exp: 54900,
-    karma: 1430,
-  },
-];
 
 type Props = {
   users: User[];
@@ -93,11 +61,11 @@ export const LeaderboardSection = ({ users }: Props) => {
                 <div className="text-muted-foreground ml-auto flex flex-col items-start gap-1 pr-2 text-xs">
                   <span className="flex items-center gap-1">
                     <Zap className="size-3" />
-                    {shortNum(user?.experience || 0)} exp
+                    {shortifyNumber(user?.experience || 0)} exp
                   </span>
                   <span className="flex items-center gap-1">
                     <Heart className="size-3" />
-                    {shortNum(user?.karma || 0)} kar
+                    {shortifyNumber(user?.karma || 0)} kar
                   </span>
                 </div>
               </div>
@@ -119,42 +87,44 @@ export const LeaderboardSection = ({ users }: Props) => {
           <Users className="text-muted-foreground size-5" />
         </div>
 
-        <div className="flex flex-col gap-4">
-          {MOCK_TEAMS.map((team) => (
-            <Link href={`/teams/${team.handle}`} key={team.id}>
-              <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]">
-                <Avatar className="h-16 w-16 rounded-lg">
-                  <AvatarFallback className="rounded-lg text-xs font-bold">
-                    {team.name.slice(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col leading-tight">
-                  <span className="truncate font-bold">{team.name}</span>
-                  <span className="text-muted-foreground text-sm">@{team.handle}</span>
-                  <span className="text-muted-foreground flex items-center gap-1 text-xs">
-                    <Users className="size-3" />
-                    {team.members} {t("LABEL_MEMBERS")}
-                  </span>
-                </div>
-                <div className="text-muted-foreground ml-auto flex flex-col items-start gap-1 pr-2 text-xs">
-                  <span className="flex items-center gap-1">
-                    <Zap className="size-3" />
-                    {shortNum(team.exp)} exp
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Heart className="size-3" />
-                    {shortNum(team.karma)} kar
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
+        <div className="flex flex-col gap-4 items-center">
+          <div className="text-muted-foreground">{t("LABEL_TEAM_COULD_BE_FIRST")}</div>
+
+          {/*{MOCK_TEAMS.map((team) => (*/}
+          {/*  <Link href={`/teams/${team.handle}`} key={team.id}>*/}
+          {/*    <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]">*/}
+          {/*      <Avatar className="h-16 w-16 rounded-lg">*/}
+          {/*        <AvatarFallback className="rounded-lg text-xs font-bold">*/}
+          {/*          {team.name.slice(0, 2).toUpperCase()}*/}
+          {/*        </AvatarFallback>*/}
+          {/*      </Avatar>*/}
+          {/*      <div className="flex flex-col leading-tight">*/}
+          {/*        <span className="truncate font-bold">{team.name}</span>*/}
+          {/*        <span className="text-muted-foreground text-sm">@{team.handle}</span>*/}
+          {/*        <span className="text-muted-foreground flex items-center gap-1 text-xs">*/}
+          {/*          <Users className="size-3" />*/}
+          {/*          {team.members} {t("LABEL_MEMBERS")}*/}
+          {/*        </span>*/}
+          {/*      </div>*/}
+          {/*      <div className="text-muted-foreground ml-auto flex flex-col items-start gap-1 pr-2 text-xs">*/}
+          {/*        <span className="flex items-center gap-1">*/}
+          {/*          <Zap className="size-3" />*/}
+          {/*          {shortNum(team.exp)} exp*/}
+          {/*        </span>*/}
+          {/*        <span className="flex items-center gap-1">*/}
+          {/*          <Heart className="size-3" />*/}
+          {/*          {shortNum(team.karma)} kar*/}
+          {/*        </span>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Link>*/}
+          {/*))}*/}
         </div>
-        <Button variant="ghost" size="sm" className="mt-3 self-start" asChild>
-          <Link href="/teams">
-            {t("BUTTON_VIEW_ALL")} <ChevronRight className="size-4" />
-          </Link>
-        </Button>
+        {/*<Button variant="ghost" size="sm" className="mt-3 self-start" asChild>*/}
+        {/*  <Link href="/teams">*/}
+        {/*    {t("BUTTON_VIEW_ALL")} <ChevronRight className="size-4" />*/}
+        {/*  </Link>*/}
+        {/*</Button>*/}
       </div>
     </section>
   );

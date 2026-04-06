@@ -261,6 +261,7 @@
     "DESCRIPTION_TOP_EXPLORERS": "Highest ranked members this month",
     "TITLE_TOP_TEAMS": "Top Teams",
     "DESCRIPTION_TOP_TEAMS": "Best performing exploration crews",
-    "LABEL_MEMBERS": "members"
+    "LABEL_MEMBERS": "members",
+    "LABEL_TEAM_COULD_BE_FIRST": "Your team could be first!"
   }
 }
