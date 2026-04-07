@@ -187,7 +187,7 @@ const DynamicMap = ({
       const point = placeChoosingToolRef.current.getPoint();
 
       if (point) {
-        params.set(QUERIES.MODAL_PLACE_ADDING, "true");
+        params.set(QUERIES.MODAL_CREATE_PLACE, "true");
         params.set(QUERIES.FILTER_SELECTED_POINT, `${point.lat},${point.lng}`);
 
         router.push(`?${params}`, { scroll: false });
@@ -201,7 +201,7 @@ const DynamicMap = ({
       const points = areaChoosingToolRef.current.getPoints();
 
       if (points) {
-        params.set(QUERIES.MODAL_AREA_ADDING, "true");
+        params.set(QUERIES.MODAL_CREATE_AREA, "true");
         params.set("points", points.map((point) => `${point.lat},${point.lng}`).join(";"));
 
         router.push(`?${params}`, { scroll: false });

@@ -39,7 +39,7 @@ export const ComplainForm = () => {
     mode: "onSubmit",
   });
 
-  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_COMPLAIN]: false });
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_CREATE_COMPLAIN]: false });
 
   const { setError } = form;
 

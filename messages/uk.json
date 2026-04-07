@@ -12,6 +12,8 @@
     "LABEL_SELECT_TAG": "Оберіть тег..."
   },
   "Modules": {
+    "TITLE_CREATE_EXPEDITION": "Створити експедицію",
+    "DESCRIPTION_CREATE_EXPEDITION": "Створіть нову експедицію або напишіть звіт про вже завершену.",
     "TITLE_COMPLAIN": "Скарга",
     "DESCRIPTION_COMPLAIN": "Будь ласка, детально опишіть свою скаргу та наведіть відповідні факти або докази на її підтримку.",
     "LABEL_COMPLAIN": "Скарга",

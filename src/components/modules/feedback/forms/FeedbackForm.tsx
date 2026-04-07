@@ -39,7 +39,7 @@ export const FeedbackForm = () => {
     mode: "onSubmit",
   });
 
-  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_FEEDBACK]: false });
+  const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_CREATE_FEEDBACK]: false });
 
   const { setError } = form;
 
@@ -57,7 +57,7 @@ export const FeedbackForm = () => {
     }
 
     const params = new URLSearchParams(searchParams);
-    params.delete(QUERIES.MODAL_FEEDBACK);
+    params.delete(QUERIES.MODAL_CREATE_FEEDBACK);
     const newPage = `${pathname}?${params}`;
     router.push(newPage);
   };

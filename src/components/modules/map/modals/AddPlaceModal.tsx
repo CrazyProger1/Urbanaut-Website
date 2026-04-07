@@ -22,7 +22,7 @@ export const AddPlaceModal = ({ tags, languages }: Props) => {
   const t = useTranslations("Modules");
 
   return (
-    <Modal query={QUERIES.MODAL_PLACE_ADDING}>
+    <Modal query={QUERIES.MODAL_CREATE_PLACE}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_CREATE_PLACE)}</DialogTitle>

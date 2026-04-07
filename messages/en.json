@@ -12,6 +12,8 @@
     "LABEL_SELECT_TAG": "Select tag..."
   },
   "Modules": {
+    "TITLE_CREATE_EXPEDITION": "Create Expedition",
+    "DESCRIPTION_CREATE_EXPEDITION": "Create a new expedition or write a report about one you've already completed.",
     "TITLE_COMPLAIN": "Complain",
     "DESCRIPTION_COMPLAIN": "Please describe your complaint in detail and provide any relevant facts or evidence to support your claim.",
     "LABEL_COMPLAIN": "Complaint",

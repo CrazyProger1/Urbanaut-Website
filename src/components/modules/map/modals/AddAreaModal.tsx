@@ -21,7 +21,7 @@ export const AddAreaModal = ({ tags }: Props) => {
   const t = useTranslations("Modules");
 
   return (
-    <Modal query={QUERIES.MODAL_AREA_ADDING}>
+    <Modal query={QUERIES.MODAL_CREATE_AREA}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_CREATE_AREA)}</DialogTitle>

@@ -72,7 +72,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
   const closeModalLink = usePreservedParamsLink({
-    [QUERIES.MODAL_PLACE_ADDING]: false,
+    [QUERIES.MODAL_CREATE_PLACE]: false,
     [QUERIES.MODAL_EDIT_PLACE]: false,
     [QUERIES.FILTER_SELECTED_POINT]: false,
   });

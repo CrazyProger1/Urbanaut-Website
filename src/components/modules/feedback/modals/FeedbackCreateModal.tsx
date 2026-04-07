@@ -10,11 +10,11 @@ import { Modal } from "@/components/ui/next/modal";
 import { FeedbackForm } from "@/components/modules/feedback/forms";
 import { getTranslations } from "next-intl/server";
 
-export const FeedbackModal = async () => {
+export const FeedbackCreateModal = async () => {
   const t = await getTranslations("Modules");
 
   return (
-    <Modal query={QUERIES.MODAL_FEEDBACK}>
+    <Modal query={QUERIES.MODAL_CREATE_FEEDBACK}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_FEEDBACK)}</DialogTitle>

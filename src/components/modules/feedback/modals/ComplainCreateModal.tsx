@@ -10,11 +10,11 @@ import {
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { ComplainForm } from "@/components/modules/feedback/forms";
 
-export const ComplainModal = async () => {
+export const ComplainCreateModal = async () => {
   const t = await getTranslations("Modules");
 
   return (
-    <Modal query={QUERIES.MODAL_COMPLAIN}>
+    <Modal query={QUERIES.MODAL_CREATE_COMPLAIN}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_COMPLAIN)}</DialogTitle>

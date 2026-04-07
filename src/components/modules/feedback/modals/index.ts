@@ -1,2 +1,2 @@
-export { FeedbackModal } from "./FeedbackModal";
-export { ComplainModal } from "./ComplainModal";
+export { FeedbackCreateModal } from "./FeedbackCreateModal";
+export { ComplainCreateModal } from "./ComplainCreateModal";

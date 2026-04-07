@@ -25,9 +25,9 @@ export const URLS = {
 };
 
 export const QUERIES = {
-  MODAL_AREA_ADDING: "addarea",
-  MODAL_PLACE_ADDING: "addplace",
-  MODAL_FEEDBACK: "feedback",
+  MODAL_CREATE_AREA: "addarea",
+  MODAL_CREATE_PLACE: "addplace",
+  MODAL_CREATE_FEEDBACK: "feedback",
   MODAL_EDIT_PROFILE: "edit",
   MODAL_REFERRAL_PROFILE: "referral",
   MODAL_SIGNIN: "signin",
@@ -35,8 +35,8 @@ export const QUERIES = {
   MODAL_MAP_FILTERS: "filters",
   MODAL_SETTINGS: "settings",
   MODAL_EDIT_PLACE: "edit",
-  MODAL_COMPLAIN: "complain",
-  MODAL_EXPEDITION: "expedition",
+  MODAL_CREATE_COMPLAIN: "complain",
+  MODAL_CREATE_EXPEDITION: "expedition",
 
   SHEET_AREA: "area",
   SHEET_PLACE: "place",
@@ -126,7 +126,7 @@ export const SIDEBAR_SUPPORT: SidebarItem[] = [
   },
   {
     title: PLACEHOLDERS.BUTTON_FEEDBACK,
-    url: `?${QUERIES.MODAL_FEEDBACK}=true`,
+    url: `?${QUERIES.MODAL_CREATE_FEEDBACK}=true`,
     icon: Send,
   },
 ];

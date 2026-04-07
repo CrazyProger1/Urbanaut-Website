@@ -13,13 +13,14 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins, Russo_One } from "next/font/google";
-import { ComplainModal, FeedbackModal } from "@/components/modules/feedback/modals";
+import { ComplainCreateModal, FeedbackCreateModal } from "@/components/modules/feedback/modals";
 import { SettingsModal } from "@/components/modules/profile/modals";
 import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { OneSignalProvider } from "@/components/lib/onesignal";
 import { getLanguages } from "@/services/api";
+import { ExpeditionCreateModal } from "@/components/modules/expeditions/modals";
 
 export const metadata: Metadata = {
   title: "Urbanaut-Club",
@@ -114,8 +115,9 @@ const RootLayout = async ({ children, params }: Props) => {
                 </SidebarInset>
                 <SigninModal />
                 <SignupModal countries={countries} />
-                <FeedbackModal />
-                <ComplainModal />
+                <FeedbackCreateModal />
+                <ComplainCreateModal />
+                <ExpeditionCreateModal />
                 {user && languages && <SettingsModal user={user} languages={languages} />}
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
