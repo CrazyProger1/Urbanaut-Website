@@ -117,7 +117,7 @@ const RootLayout = async ({ children, params }: Props) => {
                 <SignupModal countries={countries} />
                 <FeedbackCreateModal />
                 <ComplainCreateModal />
-                <ExpeditionCreateModal />
+                <ExpeditionCreateModal languages={languages} />
                 {user && languages && <SettingsModal user={user} languages={languages} />}
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
