@@ -16,6 +16,8 @@
     "DESCRIPTION_CREATE_EXPEDITION": "Plan a new expedition you'd like to go on.",
     "TITLE_CREATE_REPORT": "Create Report",
     "DESCRIPTION_CREATE_REPORT": "Write a report about an expedition you've already completed.",
+    "LABEL_PERIOD": "Period",
+    "LABEL_PICK_PERIOD": "Pick period...",
     "LABEL_PLANNED": "Planned",
     "TAB_PARTICIPANTS": "Participants",
     "TAB_REPORT": "Report",

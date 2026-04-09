@@ -15,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { expeditionFormSchema } from "@/schemas";
 import { z } from "zod";
@@ -28,6 +27,9 @@ import { Lock } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
+
+import { Button } from "@/components/ui/button";
+import { DateRangeSelect } from "@/components/common/selects";
 
 type Props = {
   languages?: Language[];
@@ -105,6 +107,7 @@ export const ExpeditionCreateForm = ({ languages, planned }: Props) => {
                 </FormItem>
               )}
             />
+            <DateRangeSelect label={t(PLACEHOLDERS.LABEL_PERIOD)} />
             <FormField
               control={form.control}
               name="is_private"
@@ -141,6 +144,7 @@ export const ExpeditionCreateForm = ({ languages, planned }: Props) => {
             />
           </TabsContent>
         </Tabs>
+
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
             {t(PLACEHOLDERS.BUTTON_SAVE)} {formState.isSubmitting && <Spinner />}

@@ -16,6 +16,8 @@
     "DESCRIPTION_CREATE_EXPEDITION": "Запланируйте новую экспедицию, в которую хотите отправиться.",
     "TITLE_CREATE_REPORT": "Создать отчёт",
     "DESCRIPTION_CREATE_REPORT": "Напишите отчёт об уже завершённой экспедиции.",
+    "LABEL_PERIOD": "Период",
+    "LABEL_PICK_PERIOD": "Выберите период...",
     "LABEL_PLANNED": "Запланированное",
     "TAB_PARTICIPANTS": "Участники",
     "TAB_REPORT": "Отчёт",
