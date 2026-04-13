@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Link, useRouter } from "@/i18n";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PLACEHOLDERS, QUERIES } from "@/config";
+import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import {
   Form,
   FormControl,
@@ -21,22 +21,24 @@ import { z } from "zod";
 import { LocalizedFormField } from "@/components/ui/improved/localized";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Language } from "@/types";
+import { CurrentUser, Language } from "@/types";
 import { CheckBoxToggle } from "@/components/common/toggles";
-import { Lock } from "lucide-react";
+import { Lock, Minus, Plus, Search } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 
 import { Button } from "@/components/ui/button";
 import { DateRangeSelect } from "@/components/common/selects";
+import { UserCard } from "@/components/modules/common/cards";
 
 type Props = {
   languages?: Language[];
   planned?: boolean;
+  user: CurrentUser;
 };
 
-export const ExpeditionCreateForm = ({ languages, planned }: Props) => {
+export const ExpeditionCreateForm = ({ languages, planned, user }: Props) => {
   const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -127,6 +129,25 @@ export const ExpeditionCreateForm = ({ languages, planned }: Props) => {
               )}
             />
           </TabsContent>
+          <TabsContent value="participants" className="flex w-full flex-col gap-4">
+            <div className="flex flex-row gap-2">
+              <Input />
+              <Button variant="outline">
+                <Search />
+              </Button>
+            </div>
+            <UserCard
+              role="creator"
+              user={user}
+              // action={<Minus className="hover:bg-accent rounded text-red-500" />}
+            />
+            <UserCard
+              role="participant"
+              user={user}
+              action={<Minus className="hover:bg-accent rounded text-red-500" />}
+            />
+          </TabsContent>
+          <TabsContent value="route" className="flex flex-col gap-4"></TabsContent>
           <TabsContent value="report" className="flex flex-col gap-4">
             <LocalizedFormField
               languages={languageCodes}

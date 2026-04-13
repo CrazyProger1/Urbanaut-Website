@@ -9,15 +9,16 @@ import {
 } from "@/components/ui/dialog";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { ExpeditionCreateForm } from "@/components/modules/expeditions/forms";
-import { Language } from "@/types";
+import { CurrentUser, Language } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
 
 type Props = {
   languages?: Language[];
+  user: CurrentUser;
 };
 
-export const ExpeditionCreateModal = ({ languages }: Props) => {
+export const ExpeditionCreateModal = ({ languages, user }: Props) => {
   const t = useTranslations("Modules");
   const [isPlanned, setIsPlanned] = useState(false);
 
@@ -48,7 +49,7 @@ export const ExpeditionCreateModal = ({ languages }: Props) => {
             <TabsTrigger value="finished">{t(PLACEHOLDERS.LABEL_COMPLETED)}</TabsTrigger>
           </TabsList>
         </Tabs>
-        <ExpeditionCreateForm languages={languages} planned={isPlanned} />
+        <ExpeditionCreateForm languages={languages} planned={isPlanned} user={user} />
       </DialogContent>
     </Modal>
   );

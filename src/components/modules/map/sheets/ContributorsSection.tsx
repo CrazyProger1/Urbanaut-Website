@@ -9,6 +9,7 @@ import { Link } from "@/i18n";
 import { PAGES, PLACEHOLDERS, SITE_URL } from "@/config";
 import { getRankShadowClass } from "@/utils/classes";
 import { CopyToast } from "@/components/common/toasts";
+import { UserCard } from "@/components/modules/common/cards";
 
 type Props = {
   creator?: UserCreator;
@@ -26,33 +27,7 @@ export const ContributorsSection = ({ creator }: Props) => {
       <div>
         {creator && (
           <Link href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}>
-            <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg">
-              <div className="text-muted-foreground absolute top-1 right-2 text-xs">
-                {t(PLACEHOLDERS.ROLE_CREATOR)}
-              </div>
-              <Avatar className="h-18 w-18 p-1 rounded-lg">
-                <AvatarImage
-                  className={getRankShadowClass(creator?.rank)}
-                  src={"/web-app-manifest-192x192.png"}
-                  alt={creator?.first_name}
-                />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
-              <div className="flex flex-col leading-tight">
-                <span className={`truncate font-bold ${getRankShadowClass(creator?.rank)}`}>
-                  {creator?.first_name} {creator?.last_name}
-                </span>
-                <div className="text-muted-foreground flex flex-col text-sm">
-                  {creator?.usernames?.map((username) => (
-                    <CopyToast key={username} clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
-                      <div className="cursor-pointer select-none hover:underline" key={username}>
-                        @{username}
-                      </div>
-                    </CopyToast>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <UserCard user={creator} role={t(PLACEHOLDERS.ROLE_CREATOR)}/>
           </Link>
         )}
       </div>
