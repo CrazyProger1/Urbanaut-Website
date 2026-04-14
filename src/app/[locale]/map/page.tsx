@@ -82,7 +82,7 @@ const Page = async ({ searchParams }: Props) => {
         onSearchCityAction={searchCity}
         user={session?.user}
       />
-      {currentPlace && <PlaceSheet place={currentPlace} />}
+      {currentPlace && <PlaceSheet place={currentPlace} user={session?.user} />}
       {currentArea && <AreaSheet area={currentArea} />}
     </div>
   );

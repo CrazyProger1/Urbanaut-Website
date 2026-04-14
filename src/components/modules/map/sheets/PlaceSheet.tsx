@@ -9,7 +9,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useTranslations } from "next-intl";
-import { PlaceDetail } from "@/types";
+import { CurrentUser, PlaceDetail } from "@/types";
 import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
@@ -32,10 +32,11 @@ import { ExploreSection } from "@/components/modules/map/sheets/SourcesSection";
 import { Eye, Heart } from "lucide-react";
 
 type Props = {
+  user?: CurrentUser;
   place: PlaceDetail;
 };
 
-export const PlaceSheet = ({ place }: Props) => {
+export const PlaceSheet = ({ place, user }: Props) => {
   const t = useTranslations("Modules");
   const router = useRouter();
   const {
@@ -152,7 +153,10 @@ export const PlaceSheet = ({ place }: Props) => {
             shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`}
             editLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`}
             complainLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_COMPLAIN}=true`}
-            planExpeditionLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_EXPEDITION}=true`}
+            planExpeditionLink={
+              user &&
+              `${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_EXPEDITION}=true`
+            }
             isFavorite={is_favorite}
             toggleFavoriteAction={togglePlaceFavoriteStatus}
           />
