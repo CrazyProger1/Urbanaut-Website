@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Link, useRouter } from "@/i18n";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
+import { PLACEHOLDERS, QUERIES } from "@/config";
 import {
   Form,
   FormControl,
