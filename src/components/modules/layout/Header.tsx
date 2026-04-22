@@ -2,6 +2,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { UserNavBar } from "@/components/modules/layout/UserNavBar";
 import { NotificationBar } from "@/components/modules/layout/NotificationBar";
+import { BalanceBar } from "@/components/modules/layout/BalanceBar";
 import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
@@ -31,6 +32,7 @@ export const Header = async ({ user, websocketToken, notifications }: Props) => 
       <div className="flex-1" />
 
       <div className="flex items-center gap-2">
+        {user?.balance && <BalanceBar balance={user.balance} />}
         {websocketToken && (
           <NotificationBar websocketToken={websocketToken} notifications={notifications || []} />
         )}

@@ -39,6 +39,7 @@
     "HINT_COORDINATES_TOOL": "Нажмите на любую точку на карте, чтобы увидеть её координаты.",
     "TOOLTIP_TOGGLE_SIDEBAR": "Боковая панель",
     "TOOLTIP_NOTIFICATIONS": "Уведомления",
+    "TOOLTIP_BALANCE": "Баланс",
     "TOOLTIP_EDIT_PLACE": "Редактировать место",
     "TOOLTIP_EDIT_PROFILE": "Редактировать профиль",
     "TOOLTIP_OPEN_SETTINGS": "Настройки",

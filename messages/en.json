@@ -39,6 +39,7 @@
     "HINT_COORDINATES_TOOL": "Tap any point on the map to see its coordinates.",
     "TOOLTIP_TOGGLE_SIDEBAR": "Sidebar",
     "TOOLTIP_NOTIFICATIONS": "Notifications",
+    "TOOLTIP_BALANCE": "Balance",
     "TOOLTIP_EDIT_PLACE": "Edit Place",
     "TOOLTIP_EDIT_PROFILE": "Edit Profile",
     "TOOLTIP_OPEN_SETTINGS": "Settings",
