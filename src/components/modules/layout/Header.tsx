@@ -32,7 +32,7 @@ export const Header = async ({ user, websocketToken, notifications }: Props) => 
       <div className="flex-1" />
 
       <div className="flex items-center gap-2">
-        {user?.balance && <BalanceBar balance={user.balance} />}
+        <BalanceBar balance={user?.balance || 0} />
         {websocketToken && (
           <NotificationBar websocketToken={websocketToken} notifications={notifications || []} />
         )}
