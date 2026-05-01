@@ -49,7 +49,19 @@ export const ExpeditionCreateModal = ({ languages, user }: Props) => {
             <TabsTrigger value="finished">{t(PLACEHOLDERS.LABEL_COMPLETED)}</TabsTrigger>
           </TabsList>
         </Tabs>
-        <ExpeditionCreateForm languages={languages} planned={isPlanned} user={user} />
+        <ExpeditionCreateForm
+          languages={languages}
+          planned={isPlanned}
+          user={user}
+          onSearchUsersAction={() => [
+            {
+              id: "test1",
+              usernames: ["crazy"],
+              first_name: "Nikolay",
+              last_name: "Hetman",
+            },
+          ]}
+        />
       </DialogContent>
     </Modal>
   );

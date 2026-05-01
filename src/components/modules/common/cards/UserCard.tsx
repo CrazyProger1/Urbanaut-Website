@@ -10,11 +10,15 @@ type Props = {
   href?: string;
   action?: ReactNode;
   role?: string;
+  onClick?: () => void;
 };
 
-export const UserCard = ({ user, href, action, role }: Props) => {
+export const UserCard = ({ user, href, action, role, onClick }: Props) => {
   return (
-    <div className="bg-card text-card-foreground drop-shadow-volume relative flex w-full cursor-pointer flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]">
+    <div
+      onClick={onClick}
+      className="bg-card text-card-foreground drop-shadow-volume relative flex w-full cursor-pointer flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]"
+    >
       {role && <div className="text-muted-foreground absolute top-1 right-2 text-xs">{role}</div>}
       <Avatar className="h-18 w-18 rounded-lg p-1">
         <AvatarImage

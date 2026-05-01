@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Link, useRouter } from "@/i18n";
@@ -21,7 +21,7 @@ import { z } from "zod";
 import { LocalizedFormField } from "@/components/ui/improved/localized";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { CurrentUser, Language } from "@/types";
+import { CurrentUser, Language, User } from "@/types";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { Lock, Minus, Plus, Search } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -31,18 +31,22 @@ import { usePreservedParamsLink } from "@/hooks";
 import { Button } from "@/components/ui/button";
 import { DateRangeSelect } from "@/components/common/selects";
 import { UserCard } from "@/components/modules/common/cards";
+import { UserSelect } from "@/components/modules/common/selects";
 
 type Props = {
   languages?: Language[];
   planned?: boolean;
   user: CurrentUser;
+  onSearchUsersAction?: (query: string) => User[];
 };
 
-export const ExpeditionCreateForm = ({ languages, planned, user }: Props) => {
+export const ExpeditionCreateForm = ({ languages, planned, user, onSearchUsersAction }: Props) => {
   const t = useTranslations("Modules");
   const searchParams = useSearchParams();
   const router = useRouter();
   const closeModalLink = usePreservedParamsLink({ [QUERIES.MODAL_CREATE_EXPEDITION]: false });
+  const [foundUsers, setFoundUsers] = useState<User[]>([]);
+  const [participants, setParticipants] = useState<User[]>([]);
 
   const form = useForm<z.infer<typeof expeditionFormSchema>>({
     resolver: zodResolver(expeditionFormSchema),
@@ -130,22 +134,28 @@ export const ExpeditionCreateForm = ({ languages, planned, user }: Props) => {
             />
           </TabsContent>
           <TabsContent value="participants" className="flex w-full flex-col gap-4">
-            <div className="flex flex-row gap-2">
-              <Input />
-              <Button variant="outline">
-                <Search />
-              </Button>
-            </div>
+            <UserSelect
+              users={foundUsers}
+              onSearchUsersAction={async (query) => {
+                setFoundUsers(onSearchUsersAction?.(query) || []);
+              }}
+              onSelectUserAction={(user) => {
+                setParticipants([...participants, user]);
+                console.log("PARTICIPANTS", user);
+              }}
+            />
             <UserCard
               role="creator"
               user={user}
               // action={<Minus className="hover:bg-accent rounded text-red-500" />}
             />
-            <UserCard
-              role="participant"
-              user={user}
-              action={<Minus className="hover:bg-accent rounded text-red-500" />}
-            />
+            {participants.map((participant) => (
+              <UserCard
+                role="participant"
+                user={participant}
+                action={<Minus className="hover:bg-accent rounded text-red-500" />}
+              />
+            ))}
           </TabsContent>
           <TabsContent value="route" className="flex flex-col gap-4"></TabsContent>
           <TabsContent value="report" className="flex flex-col gap-4">
