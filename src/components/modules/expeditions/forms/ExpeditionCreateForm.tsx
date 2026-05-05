@@ -157,7 +157,9 @@ export const ExpeditionCreateForm = ({ languages, planned, user, onSearchUsersAc
               />
             ))}
           </TabsContent>
-          <TabsContent value="route" className="flex flex-col gap-4"></TabsContent>
+          <TabsContent value="route" className="flex flex-col gap-4">
+            {/* Timeline */}
+          </TabsContent>
           <TabsContent value="report" className="flex flex-col gap-4">
             <LocalizedFormField
               languages={languageCodes}
