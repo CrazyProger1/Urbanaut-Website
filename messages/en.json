@@ -283,6 +283,7 @@
     "LABEL_MOTTO": "Motto",
     "TOOLTIP_CREATE_TEAM": "Create Team",
     "TOAST_TEAM_CREATE_SUCCESS": "Team created successfully!",
-    "TOAST_TEAM_CREATE_FAIL": "Failed to create team."
+    "TOAST_TEAM_CREATE_FAIL": "Failed to create team.",
+    "LABEL_TEAMS": "Teams"
   }
 }

@@ -283,6 +283,7 @@
     "LABEL_MOTTO": "Девіз",
     "TOOLTIP_CREATE_TEAM": "Створити команду",
     "TOAST_TEAM_CREATE_SUCCESS": "Команду успішно створено!",
-    "TOAST_TEAM_CREATE_FAIL": "Не вдалось створити команду."
+    "TOAST_TEAM_CREATE_FAIL": "Не вдалось створити команду.",
+    "LABEL_TEAMS": "Команди"
   }
 }

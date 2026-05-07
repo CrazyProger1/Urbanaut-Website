@@ -21,8 +21,8 @@ export const UserActivitySection = ({ user }: Props) => {
         <TabsTrigger value="places" className="w-full">
           {t(PLACEHOLDERS.LABEL_PLACES)}
         </TabsTrigger>
-        <TabsTrigger value="achivements" className="w-full">
-          {t(PLACEHOLDERS.LABEL_ACHIEVEMENTS)}
+        <TabsTrigger value="teams" className="w-full">
+          {t(PLACEHOLDERS.LABEL_TEAMS)}
         </TabsTrigger>
         <TabsTrigger value="friends" className="w-full">
           {t(PLACEHOLDERS.LABEL_FRIENDS)}
