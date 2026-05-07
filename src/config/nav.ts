@@ -25,18 +25,19 @@ export const URLS = {
 };
 
 export const QUERIES = {
-  MODAL_CREATE_AREA: "addarea",
-  MODAL_CREATE_PLACE: "addplace",
+  MODAL_CREATE_AREA: "create-area",
+  MODAL_CREATE_PLACE: "create-place",
   MODAL_CREATE_FEEDBACK: "feedback",
-  MODAL_EDIT_PROFILE: "edit",
+  MODAL_EDIT_PROFILE: "edit-profile",
   MODAL_REFERRAL_PROFILE: "referral",
   MODAL_SIGNIN: "signin",
   MODAL_SIGNUP: "signup",
   MODAL_MAP_FILTERS: "filters",
   MODAL_SETTINGS: "settings",
-  MODAL_EDIT_PLACE: "edit",
+  MODAL_EDIT_PLACE: "edit-place",
   MODAL_CREATE_COMPLAIN: "complain",
-  MODAL_CREATE_EXPEDITION: "expedition",
+  MODAL_CREATE_EXPEDITION: "create-expedition",
+  MODAL_CREATE_TEAM: "create-team",
 
   SHEET_AREA: "area",
   SHEET_PLACE: "place",

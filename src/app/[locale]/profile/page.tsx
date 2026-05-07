@@ -8,6 +8,7 @@ import {
   UserActivitySection,
   EditProfileModal,
   ReferralModal,
+  TeamCreateModal,
 } from "@/components/modules/profile";
 import { getReferralCodes } from "@/services";
 
@@ -34,6 +35,7 @@ const Page = async () => {
     <div className="flex flex-1 flex-col gap-4 p-4">
       <EditProfileModal user={user} />
       {codes && <ReferralModal codes={codes} />}
+      <TeamCreateModal />
       <UserInfoSection user={user} me />
       <UserActivitySection user={user} />
     </div>

@@ -277,6 +277,12 @@
     "TITLE_TOP_TEAMS": "Топ команд",
     "DESCRIPTION_TOP_TEAMS": "Лучшие исследовательские команды",
     "LABEL_MEMBERS": "участников",
-    "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда может быть первой!"
+    "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда может быть первой!",
+    "TITLE_CREATE_TEAM": "Создать команду",
+    "DESCRIPTION_CREATE_TEAM": "Создайте новую команду и исследуйте вместе.",
+    "LABEL_MOTTO": "Девиз",
+    "TOOLTIP_CREATE_TEAM": "Создать команду",
+    "TOAST_TEAM_CREATE_SUCCESS": "Команда успешно создана!",
+    "TOAST_TEAM_CREATE_FAIL": "Не удалось создать команду."
   }
 }

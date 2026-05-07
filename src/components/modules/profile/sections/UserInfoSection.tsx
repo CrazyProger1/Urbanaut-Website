@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Edit, MapPin, Settings, Share2, Users } from "lucide-react";
+import { Calendar, Edit, MapPin, Settings, Share2, Users, UsersRound } from "lucide-react";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { Link } from "@/i18n";
@@ -67,6 +67,14 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
               <Button variant="outline" asChild>
                 <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_REFERRAL_PROFILE}=true`}>
                   <Users />
+                </Link>
+              </Button>
+            </Tooltip>
+
+            <Tooltip content={t(PLACEHOLDERS.TOOLTIP_CREATE_TEAM)}>
+              <Button variant="outline" asChild>
+                <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_CREATE_TEAM}=true`}>
+                  <UsersRound />
                 </Link>
               </Button>
             </Tooltip>

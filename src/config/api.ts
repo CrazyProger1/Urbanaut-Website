@@ -31,4 +31,5 @@ export const API_ENDPOINTS = {
   MAP: "map/",
   STATS: "stats/",
   NEWS: "news/",
+  TEAMS: "teams/",
 };

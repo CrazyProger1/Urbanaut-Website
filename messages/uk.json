@@ -277,6 +277,12 @@
     "TITLE_TOP_TEAMS": "Топ команд",
     "DESCRIPTION_TOP_TEAMS": "Найактивніші дослідницькі команди",
     "LABEL_MEMBERS": "учасників",
-    "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда може бути першою!"
+    "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда може бути першою!",
+    "TITLE_CREATE_TEAM": "Створити команду",
+    "DESCRIPTION_CREATE_TEAM": "Створіть нову команду та досліджуйте разом.",
+    "LABEL_MOTTO": "Девіз",
+    "TOOLTIP_CREATE_TEAM": "Створити команду",
+    "TOAST_TEAM_CREATE_SUCCESS": "Команду успішно створено!",
+    "TOAST_TEAM_CREATE_FAIL": "Не вдалось створити команду."
   }
 }

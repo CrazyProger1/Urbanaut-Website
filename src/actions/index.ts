@@ -5,3 +5,4 @@ export { updateUser, updateCurrentUser, updateSettings } from "./users";
 export { uploadFile } from "./media";
 export { leaveComplaint } from "./complain";
 export { leaveFeedback } from "./feedback";
+export { createTeam } from "./teams";

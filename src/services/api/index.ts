@@ -21,3 +21,4 @@ export { createRequest } from "./requests";
 export { getMap } from "./map";
 export { getGlobalStats } from "./stats";
 export { getLatestNews } from "./news";
+export { createTeam } from "./teams";

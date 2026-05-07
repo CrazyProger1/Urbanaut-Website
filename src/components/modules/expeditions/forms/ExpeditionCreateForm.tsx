@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CurrentUser, Language, User } from "@/types";
 import { CheckBoxToggle } from "@/components/common/toggles";
-import { Lock, Minus, Plus, Search } from "lucide-react";
+import { Check, Lock, Minus, Plus, Search } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
@@ -32,6 +32,7 @@ import { Button } from "@/components/ui/button";
 import { DateRangeSelect } from "@/components/common/selects";
 import { UserCard } from "@/components/modules/common/cards";
 import { UserSelect } from "@/components/modules/common/selects";
+import { Timeline, TimelineItem } from "@/components/ui/shadcn-io/timeline/timeline";
 
 type Props = {
   languages?: Language[];
@@ -158,7 +159,27 @@ export const ExpeditionCreateForm = ({ languages, planned, user, onSearchUsersAc
             ))}
           </TabsContent>
           <TabsContent value="route" className="flex flex-col gap-4">
-            {/* Timeline */}
+            <Timeline>
+              <TimelineItem
+                date={"16:30"}
+                title="Feature Released"
+                description="New timeline component is now available"
+                icon={<Plus />}
+                status="completed"
+              />
+              <TimelineItem
+                date={"18:00"}
+                title="In Progress"
+                description="Working on documentation"
+                status="in-progress"
+              />
+              <TimelineItem
+                date={"21:00"}
+                title="Upcoming"
+                description="Planning future updates"
+                status="pending"
+              />
+            </Timeline>
           </TabsContent>
           <TabsContent value="report" className="flex flex-col gap-4">
             <LocalizedFormField
