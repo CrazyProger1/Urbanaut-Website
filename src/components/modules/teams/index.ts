@@ -1,0 +1,1 @@
+export { TeamInfoSection, TeamMembersSection } from "./sections";

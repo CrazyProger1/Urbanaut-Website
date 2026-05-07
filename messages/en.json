@@ -276,7 +276,7 @@
     "DESCRIPTION_TOP_EXPLORERS": "Highest ranked members this month",
     "TITLE_TOP_TEAMS": "Top Teams",
     "DESCRIPTION_TOP_TEAMS": "Best performing exploration crews",
-    "LABEL_MEMBERS": "members",
+    "LABEL_MEMBERS": "Members",
     "LABEL_TEAM_COULD_BE_FIRST": "Your team could be first!",
     "TITLE_CREATE_TEAM": "Create Team",
     "DESCRIPTION_CREATE_TEAM": "Set up a new team and start exploring together.",
@@ -284,6 +284,9 @@
     "TOOLTIP_CREATE_TEAM": "Create Team",
     "TOAST_TEAM_CREATE_SUCCESS": "Team created successfully!",
     "TOAST_TEAM_CREATE_FAIL": "Failed to create team.",
-    "LABEL_TEAMS": "Teams"
+    "LABEL_TEAMS": "Teams",
+    "ROLE_CAPTAIN": "Captain",
+    "ROLE_MEMBER": "Member",
+    "TOOLTIP_EDIT_TEAM": "Edit Team"
   }
 }

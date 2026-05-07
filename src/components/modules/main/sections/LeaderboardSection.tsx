@@ -96,7 +96,11 @@ export const LeaderboardSection = ({ users, teams = [] }: Props) => {
               {t("LABEL_TEAM_COULD_BE_FIRST")}
             </div>
           ) : (
-            teams.slice(0, 5).map((team) => <TeamCard key={team.id} team={team} />)
+            teams.slice(0, 5).map((team) => (
+              <Link href={`${PAGES.TEAMS}/${team.id}`}>
+                <TeamCard key={team.id} team={team} />
+              </Link>
+            ))
           )}
         </div>
 

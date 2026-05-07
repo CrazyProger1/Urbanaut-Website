@@ -276,7 +276,7 @@
     "DESCRIPTION_TOP_EXPLORERS": "Наивысший рейтинг за этот месяц",
     "TITLE_TOP_TEAMS": "Топ команд",
     "DESCRIPTION_TOP_TEAMS": "Лучшие исследовательские команды",
-    "LABEL_MEMBERS": "участников",
+    "LABEL_MEMBERS": "Участников",
     "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда может быть первой!",
     "TITLE_CREATE_TEAM": "Создать команду",
     "DESCRIPTION_CREATE_TEAM": "Создайте новую команду и исследуйте вместе.",
@@ -284,6 +284,9 @@
     "TOOLTIP_CREATE_TEAM": "Создать команду",
     "TOAST_TEAM_CREATE_SUCCESS": "Команда успешно создана!",
     "TOAST_TEAM_CREATE_FAIL": "Не удалось создать команду.",
-    "LABEL_TEAMS": "Команды"
+    "LABEL_TEAMS": "Команды",
+    "ROLE_CAPTAIN": "Капитан",
+    "ROLE_MEMBER": "Участник",
+    "TOOLTIP_EDIT_TEAM": "Редактировать команду"
   }
 }

@@ -276,7 +276,7 @@
     "DESCRIPTION_TOP_EXPLORERS": "Найвищий рейтинг за цей місяць",
     "TITLE_TOP_TEAMS": "Топ команд",
     "DESCRIPTION_TOP_TEAMS": "Найактивніші дослідницькі команди",
-    "LABEL_MEMBERS": "учасників",
+    "LABEL_MEMBERS": "Учасників",
     "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда може бути першою!",
     "TITLE_CREATE_TEAM": "Створити команду",
     "DESCRIPTION_CREATE_TEAM": "Створіть нову команду та досліджуйте разом.",
@@ -284,6 +284,9 @@
     "TOOLTIP_CREATE_TEAM": "Створити команду",
     "TOAST_TEAM_CREATE_SUCCESS": "Команду успішно створено!",
     "TOAST_TEAM_CREATE_FAIL": "Не вдалось створити команду.",
-    "LABEL_TEAMS": "Команди"
+    "LABEL_TEAMS": "Команди",
+    "ROLE_CAPTAIN": "Капітан",
+    "ROLE_MEMBER": "Учасник",
+    "TOOLTIP_EDIT_TEAM": "Редагувати команду"
   }
 }
