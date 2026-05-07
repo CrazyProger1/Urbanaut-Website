@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Edit, MapPin, Settings, Share2, Users, UsersRound } from "lucide-react";
+import { Calendar, Edit, MapPin, Settings, Share2, UserPlus, UsersRound } from "lucide-react";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { Link } from "@/i18n";
@@ -66,7 +66,7 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
             <Tooltip content={t(PLACEHOLDERS.TOOLTIP_REFERRAL_PROGRAM)}>
               <Button variant="outline" asChild>
                 <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_REFERRAL_PROFILE}=true`}>
-                  <Users />
+                  <UserPlus />
                 </Link>
               </Button>
             </Tooltip>
