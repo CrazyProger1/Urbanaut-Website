@@ -2,11 +2,15 @@
 
 import { fetchAuthenticated } from "./auth";
 import { API_ENDPOINTS } from "@/config";
-import { APICreateTeam } from "@/types";
+import { APICreateTeam, APIListTeam, APIPaginatedResponse } from "@/types";
 
 export const createTeam = async (team: APICreateTeam) => {
   return await fetchAuthenticated(API_ENDPOINTS.TEAMS, {
     method: "POST",
     body: JSON.stringify(team),
   });
+};
+
+export const getTeams = async () => {
+  return await fetchAuthenticated<APIPaginatedResponse<APIListTeam>>(API_ENDPOINTS.TEAMS);
 };

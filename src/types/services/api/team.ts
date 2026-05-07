@@ -4,6 +4,13 @@ export type APICreateTeam = {
   motto?: string;
 };
 
+export type APIListTeam = {
+  id: string;
+  name: string;
+  motto?: string;
+  members_count?: number;
+};
+
 export type APIRetrieveTeam = {
   id: string;
   name: string;
