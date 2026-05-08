@@ -285,8 +285,8 @@
     "TOAST_TEAM_CREATE_SUCCESS": "Команду успішно створено!",
     "TOAST_TEAM_CREATE_FAIL": "Не вдалось створити команду.",
     "LABEL_TEAMS": "Команди",
-    "ROLE_CAPTAIN": "Капітан",
-    "ROLE_MEMBER": "Учасник",
+    "ROLE_CAPTAIN": "капітан",
+    "ROLE_MEMBER": "учасник",
     "TOOLTIP_EDIT_TEAM": "Редагувати команду"
   }
 }

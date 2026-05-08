@@ -285,8 +285,8 @@
     "TOAST_TEAM_CREATE_SUCCESS": "Team created successfully!",
     "TOAST_TEAM_CREATE_FAIL": "Failed to create team.",
     "LABEL_TEAMS": "Teams",
-    "ROLE_CAPTAIN": "Captain",
-    "ROLE_MEMBER": "Member",
+    "ROLE_CAPTAIN": "captain",
+    "ROLE_MEMBER": "member",
     "TOOLTIP_EDIT_TEAM": "Edit Team"
   }
 }

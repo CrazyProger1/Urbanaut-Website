@@ -3,28 +3,24 @@ import { Card } from "@/components/ui/card";
 import { UserCard } from "@/components/modules/common/cards";
 import { PLACEHOLDERS } from "@/config";
 import { getTranslations } from "next-intl/server";
-import { User } from "@/types";
-
-type TeamMember = {
-  user: User;
-  role: "captain" | "member";
-};
+import { Team, TeamMember } from "@/types";
 
 type Props = {
-  members: TeamMember[];
+  team: Team;
 };
 
-export const TeamMembersSection = async ({ members }: Props) => {
+export const TeamMembersSection = async ({ team }: Props) => {
   const t = await getTranslations("Modules");
+  const { members, created_by } = team;
 
-  const roleLabel = (role: TeamMember["role"]) =>
-    role === "captain" ? t(PLACEHOLDERS.ROLE_CAPTAIN) : t(PLACEHOLDERS.ROLE_MEMBER);
+  const roleLabel = (member: TeamMember) =>
+    member.id === created_by ? t(PLACEHOLDERS.ROLE_CAPTAIN) : t(PLACEHOLDERS.ROLE_MEMBER);
 
   return (
     <Card className="drop-shadow-volume flex flex-col gap-4 p-4">
       <div className="flex flex-col gap-3">
-        {members.map(({ user, role }) => (
-          <UserCard key={user.id} user={user} role={roleLabel(role)} />
+        {members.map((member) => (
+          <UserCard key={member.id} user={member} role={roleLabel(member)} />
         ))}
       </div>
     </Card>

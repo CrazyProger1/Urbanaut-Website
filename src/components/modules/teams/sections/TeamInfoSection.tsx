@@ -5,18 +5,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Calendar, Edit, Users } from "lucide-react";
 import { PLACEHOLDERS } from "@/config";
 import { getTranslations, getFormatter } from "next-intl/server";
-
-type MockTeam = {
-  id: string;
-  name: string;
-  motto?: string;
-  description?: string;
-  members_count: number;
-  created_at: string;
-};
+import { Team } from "@/types";
 
 type Props = {
-  team: MockTeam;
+  team: Team;
   isOwner?: boolean;
 };
 
@@ -53,7 +45,7 @@ export const TeamInfoSection = async ({ team, isOwner = false }: Props) => {
           <div className="flex flex-row items-center gap-1">
             <Users size={16} />
             <div>
-              {team.members_count} {t(PLACEHOLDERS.LABEL_MEMBERS)}
+              {team.members.length} {t(PLACEHOLDERS.LABEL_MEMBERS)}
             </div>
           </div>
           <div className="flex flex-row items-center gap-1">
