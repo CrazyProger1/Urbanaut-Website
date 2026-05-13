@@ -44,3 +44,7 @@ export const syncCurrentUser = async () => {
   await setSession(session);
   return session;
 };
+
+export const syncCurrentUserVoid = async () => {
+  await syncCurrentUser();
+};

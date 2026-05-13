@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Notification } from "@/types";
 import useWebSocket from "react-use-websocket";
 import { WEBSOCKET_URL } from "@/config";
+import { syncCurrentUserVoid } from "@/actions";
 
 const deduplicateNotifications = (notifications: Notification[]) => {
   const uniqueIds = new Set<number>();
@@ -39,8 +40,13 @@ export const useListenNotifications = (
     if (!readyState || !lastMessage) return;
     const data = JSON.parse(lastMessage?.data);
     if (data.type === "notification") {
-      setNotifications((prev) => [data.data as Notification, ...prev]);
-      onNotification?.(data.data as Notification);
+      const notification = data.data as Notification;
+      setNotifications((prev) => [notification, ...prev]);
+      onNotification?.(notification);
+
+      if (["ALERT", "SUCCESS"].includes(notification.type)) {
+        syncCurrentUserVoid();
+      }
     }
   }, [lastMessage, readyState]);
 

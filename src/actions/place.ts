@@ -9,7 +9,6 @@ import { syncCurrentUser } from "@/actions/auth";
 
 export const createPlace = async (place: APICreatePlace) => {
   const response = await services.createPlace(place);
-  await syncCurrentUser();
   return convertAPIResponseToActionResult(response);
 };
 
