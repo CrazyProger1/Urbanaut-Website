@@ -40,6 +40,8 @@
     "TOOLTIP_TOGGLE_SIDEBAR": "Sidebar",
     "TOOLTIP_NOTIFICATIONS": "Notifications",
     "TOOLTIP_BALANCE": "Balance",
+    "TOOLTIP_EXPERIENCE": "Experience",
+    "TOOLTIP_KARMA": "Karma",
     "TOOLTIP_EDIT_PLACE": "Edit Place",
     "TOOLTIP_EDIT_PROFILE": "Edit Profile",
     "TOOLTIP_OPEN_SETTINGS": "Settings",

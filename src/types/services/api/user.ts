@@ -43,6 +43,8 @@ export type APICurrentUser = {
   created_at: string;
   rank?: APIRank;
   balance?: number;
+  experience?: number;
+  karma?: number;
 };
 
 export type APIRetrieveUser = {
@@ -56,6 +58,8 @@ export type APIRetrieveUser = {
   bio?: string;
   created_at: string;
   rank?: APIRank;
+  experience?: number;
+  karma?: number;
 };
 
 export type APIListUser = {

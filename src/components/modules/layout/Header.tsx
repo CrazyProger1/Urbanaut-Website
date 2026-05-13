@@ -3,6 +3,8 @@ import { Separator } from "@radix-ui/react-separator";
 import { UserNavBar } from "@/components/modules/layout/UserNavBar";
 import { NotificationBar } from "@/components/modules/layout/NotificationBar";
 import { BalanceBar } from "@/components/modules/layout/BalanceBar";
+import { KarmaBar } from "@/components/modules/layout/KarmaBar";
+import { ExperienceBar } from "@/components/modules/layout/ExperienceBar";
 import { SessionUser } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
@@ -32,6 +34,8 @@ export const Header = async ({ user, websocketToken, notifications }: Props) => 
       <div className="flex-1" />
 
       <div className="flex items-center gap-2">
+        {user && <ExperienceBar experience={user?.experience || 0} />}
+        {user && <KarmaBar karma={user?.karma || 0} />}
         {user && <BalanceBar balance={user?.balance || 0} />}
         {websocketToken && (
           <NotificationBar websocketToken={websocketToken} notifications={notifications || []} />
