@@ -93,6 +93,7 @@
     "overrides": {
       "@types/react": "19.2.10",
       "@types/react-dom": "19.2.3"
-    }
+    },
+    "onlyBuiltDependencies": ["@parcel/watcher", "@swc/core", "sharp", "unrs-resolver"]
   }
 }
