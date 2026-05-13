@@ -5,9 +5,11 @@ import * as services from "@/services";
 import { convertAPIResponseToActionResult } from "@/utils/actions";
 import { PAGES, QUERIES } from "@/config";
 import { updatePlace } from "@/services/api";
+import { syncCurrentUser } from "@/actions/auth";
 
 export const createPlace = async (place: APICreatePlace) => {
   const response = await services.createPlace(place);
+  await syncCurrentUser();
   return convertAPIResponseToActionResult(response);
 };
 
