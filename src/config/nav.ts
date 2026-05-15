@@ -39,6 +39,7 @@ export const QUERIES = {
   MODAL_CREATE_COMPLAIN: "complain",
   MODAL_CREATE_EXPEDITION: "create-expedition",
   MODAL_CREATE_TEAM: "create-team",
+  MODAL_ACHIEVEMENT: "achievement",
 
   SHEET_AREA: "area",
   SHEET_PLACE: "place",

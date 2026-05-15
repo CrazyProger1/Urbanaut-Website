@@ -13,4 +13,9 @@ export type APIRetrieveAchievement = {
   weight: number;
   icon: IconName;
   significance: APIAchievementSignificance;
+  slug: string;
+  description?: string;
+  karma: number;
+  experience: number;
+  money: number;
 };

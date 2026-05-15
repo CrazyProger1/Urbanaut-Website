@@ -1,7 +1,10 @@
+"use client";
+
 import { PLACEHOLDERS } from "@/config";
 import { Tooltip } from "@/components/ui/next/tooltip";
-import { getTranslations } from "next-intl/server";
+
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 type Props = {
   balance: number;
@@ -29,8 +32,8 @@ const GasMaskIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export const BalanceBar = async ({ balance }: Props) => {
-  const t = await getTranslations("Modules");
+export const BalanceBar = ({ balance }: Props) => {
+  const t = useTranslations("Modules");
   return (
     <Tooltip content={t(PLACEHOLDERS.TOOLTIP_BALANCE)} asChild>
       <Button variant="ghost" className="hover:bg-accent relative transition-colors" asChild>
