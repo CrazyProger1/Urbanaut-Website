@@ -15,7 +15,7 @@ const Page = async ({}: Props) => {
   const session = await getSession();
   const stats = await getGlobalStats();
   const news = await getLatestNews();
-  const users = await getUsers();
+  const users = await getUsers({ ordering: "-score" });
   const teams = await getTeams();
 
   return (
@@ -25,10 +25,7 @@ const Page = async ({}: Props) => {
       {stats.success && <StatsSection stats={stats} />}
 
       {users.success && users.results.length > 0 && (
-        <LeaderboardSection
-          users={users.results}
-          teams={teams.results}
-        />
+        <LeaderboardSection users={users.results} teams={teams.results} />
       )}
 
       {news.success && news.results.length > 0 && <NewsSection news={news.results} />}

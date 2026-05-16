@@ -25,18 +25,7 @@ export type APIPaginatedResponse<T> = {
   results: T[];
 } & APISuccessfulResponse;
 
-export type {
-  APICurrentUser,
-  APIUpdateUser,
-  APIRetrieveUser,
-  APICreateUser,
-  APIRetrieveSettings,
-  APIUpdateSettings,
-  APIRetrieveCurrentUserSettings,
-  APITheme,
-  APIRank,
-  APIListUser,
-} from "./user";
+export type * from "./user";
 export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
 export type { APITokens, APIAccessToken, APITokenPayload, APIObtainWebsocketToken } from "./token";

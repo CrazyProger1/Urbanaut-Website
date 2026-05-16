@@ -13,9 +13,18 @@ import {
 } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS, CACHE_TAGS } from "@/config";
+import { buildURLSearchParams } from "@/utils/api";
+import { APIUserFilters } from "@/types";
 
-export const getUsers = async () => {
-  return await fetchAuthenticated<APIPaginatedResponse<APIListUser>>(API_ENDPOINTS.USERS);
+type GetUsersOptions = {
+  ordering?: string;
+};
+
+export const getUsers = async (options?: GetUsersOptions) => {
+  const params = buildURLSearchParams<APIUserFilters>(options, ["ordering"]);
+  return await fetchAuthenticated<APIPaginatedResponse<APIListUser>>(
+    `${API_ENDPOINTS.USERS}?${params}`,
+  );
 };
 
 export const updateUser = async (

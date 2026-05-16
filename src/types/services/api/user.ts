@@ -90,3 +90,6 @@ export type APICreateUser = {
   born_at?: string;
 };
 
+export type APIUserFilters = {
+  ordering?: string;
+};
