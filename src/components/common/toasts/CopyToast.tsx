@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 import { setClipboard } from "@/utils/clipboard";
 import { cn } from "@/lib/utils";
 import { PLACEHOLDERS } from "@/config";
@@ -28,7 +28,7 @@ export const CopyToast = ({
       onClick={(event) => {
         event.stopPropagation();
         event.preventDefault();
-        toast.success(resolvedMessage);
+        showToast(resolvedMessage, "success");
         if (clipboard) {
           setClipboard(clipboard);
         }

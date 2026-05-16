@@ -1,5 +1,5 @@
 import { APIError, APIErrorResponse, APISuccessfulResponse } from "@/types";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 
 export const validateResponse = (
   response: APIErrorResponse | APISuccessfulResponse,
@@ -16,7 +16,7 @@ export const validateResponse = (
     });
     if (items.length) {
       if (items.length > 1) {
-        toast.error(message, {
+        showToast(message, "error", {
           description: (
             <ul className="list-disc pl-4">
               {items.map((item, i) => (
@@ -26,7 +26,7 @@ export const validateResponse = (
           ),
         });
       } else {
-        toast.error(message, { description: items[0] });
+        showToast(message, "error", { description: items[0] });
       }
     }
   }

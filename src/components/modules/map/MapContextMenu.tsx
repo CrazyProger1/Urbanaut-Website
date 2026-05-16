@@ -10,7 +10,7 @@ import { Binoculars, Earth, Hash, Map, Plus } from "lucide-react";
 import { useMapStore } from "@/stores";
 import { PLACEHOLDERS } from "@/config";
 import { useTranslations } from "next-intl";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 import { setClipboard } from "@/utils/clipboard";
 import { Link } from "@/i18n";
 import { useMapProviderLinks } from "@/hooks";
@@ -20,7 +20,7 @@ const MapContextMenu = () => {
   const { toggleChoosingPlace, addTooltip, lastRightClickCoordinates, currentMapZoom } = useMapStore();
 
   const handleCopyCoordinates = useCallback(async () => {
-    toast.success(t(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD));
+    showToast(t(PLACEHOLDERS.TOAST_COPIED_INTO_CLIPBOARD), "success");
     if (lastRightClickCoordinates) {
       await setClipboard(`${lastRightClickCoordinates?.lat}, ${lastRightClickCoordinates?.lng}`);
     }

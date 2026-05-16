@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 import { setClipboard } from "@/utils/clipboard";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export const ClickToast = ({ className, children, message = "Clicked!", passthro
           event.stopPropagation();
           event.preventDefault();
         }
-        toast.success(message);
+        showToast(message, "success");
       }}
     >
       {children}

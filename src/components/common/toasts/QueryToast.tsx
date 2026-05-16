@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 
 type Props = {
   query: string;
@@ -38,7 +38,7 @@ export const QueryToast = ({ query, content, onClose, onOpen }: Props) => {
       params.delete(query);
       router.replace(`${pathname}?${params}`);
       onOpen?.();
-      toast.success(content, { onAutoClose: handleClose, onDismiss: handleClose });
+      showToast(content as string, "success", { onAutoClose: handleClose, onDismiss: handleClose });
     }
     return () => {
       setIsShown(false);

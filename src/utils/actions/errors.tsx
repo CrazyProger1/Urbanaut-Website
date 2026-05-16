@@ -5,7 +5,8 @@ import {
   APIErrorResponse,
   APISuccessfulResponse,
 } from "@/types";
-import { ExternalToast, toast } from "sonner";
+import { ExternalToast } from "sonner";
+import { showToast } from "@/utils/toasts";
 import { FieldValues, UseFormSetError, Path } from "react-hook-form";
 
 type Options<T extends FieldValues> = {
@@ -22,7 +23,7 @@ export const validateActionResult = <T extends FieldValues>(
 ): boolean => {
   if (result.success) {
     if (options?.successToastMessage) {
-      toast.success(options.successToastMessage, options.successToastOptions);
+      showToast(options.successToastMessage, "success", options.successToastOptions);
     }
     return true;
   } else {
@@ -46,7 +47,7 @@ export const validateActionResult = <T extends FieldValues>(
         ),
       };
 
-      toast.error(options.failToastMessage, options.failToastOptions || toastOptions);
+      showToast(options.failToastMessage, "error", options.failToastOptions || toastOptions);
     }
     return false;
   }

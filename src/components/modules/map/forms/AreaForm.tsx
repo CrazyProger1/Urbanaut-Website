@@ -22,7 +22,7 @@ import { createArea } from "@/actions";
 import { Point, Tag } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { TagsSelect } from "./TagsSelect";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { Lock } from "lucide-react";
@@ -82,7 +82,7 @@ export const AreaForm = ({ tags }: Props) => {
       });
 
       await createArea({ ...values, polygon });
-      toast.success(t(PLACEHOLDERS.TOAST_AREA_ADDITION_SUCCESS));
+      showToast(t(PLACEHOLDERS.TOAST_AREA_ADDITION_SUCCESS), "success");
       params.delete("points");
       params.delete("addarea");
       router.push(`?${params}`);

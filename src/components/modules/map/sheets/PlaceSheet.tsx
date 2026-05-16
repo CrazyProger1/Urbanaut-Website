@@ -23,7 +23,7 @@ import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
 import { togglePlaceFavorite } from "@/actions";
 import { validateActionResult } from "@/utils/actions";
-import { toast } from "sonner";
+import { showToast } from "@/utils/toasts";
 import { Link, useRouter } from "@/i18n";
 import { usePreservedParamsLink } from "@/hooks";
 import { Badge } from "@/components/ui/badge";
@@ -71,9 +71,9 @@ export const PlaceSheet = ({ place, user }: Props) => {
     }
 
     if (result.is_favorite) {
-      toast.success(t(PLACEHOLDERS.TOAST_PLACE_FAVORITE));
+      showToast(t(PLACEHOLDERS.TOAST_PLACE_FAVORITE), "success");
     } else {
-      toast.success(t(PLACEHOLDERS.TOAST_PLACE_NOT_FAVORITE));
+      showToast(t(PLACEHOLDERS.TOAST_PLACE_NOT_FAVORITE), "success");
     }
     router.push(updatePageLink);
   };
