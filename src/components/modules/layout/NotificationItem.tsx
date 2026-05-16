@@ -15,7 +15,7 @@ export const NotificationItem = ({ notification }: Props) => {
   return (
     <Link
       href={`?${QUERIES.MODAL_NOTIFICATION}=${notification.id}`}
-      className={`${getNotificationColorClass(type)} block border-l-4 px-4 py-3 transition-opacity last:border-b hover:opacity-80`}
+      className={`${getNotificationColorClass(type)} block border-l-4 px-4 py-3 transition-colors last:border-b`}
     >
       <div className="flex flex-row items-center gap-3">
         <div>{getNotificationIcon(notification.type, getNotificationIconColorClass(type))}</div>

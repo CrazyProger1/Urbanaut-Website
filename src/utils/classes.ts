@@ -65,19 +65,19 @@ export const getPreservationColorClass = (preservation?: APIPreservationLevel) =
 export const getNotificationColorClass = (type: string) => {
   switch (type) {
     case "UPDATE":
-      return "bg-notification-update-bg! border-notification-update-border!";
+      return "bg-notification-update-bg! border-notification-update-border! hover:bg-notification-update-hover!";
     case "SUCCESS":
-      return "bg-notification-success-bg! border-notification-success-border!";
+      return "bg-notification-success-bg! border-notification-success-border! hover:bg-notification-success-hover!";
     case "REMINDER":
-      return "bg-notification-reminder-bg! border-notification-reminder-border!";
+      return "bg-notification-reminder-bg! border-notification-reminder-border! hover:bg-notification-reminder-hover!";
     case "SYSTEM":
-      return "bg-notification-system-bg! border-notification-system-border!";
+      return "bg-notification-system-bg! border-notification-system-border! hover:bg-notification-system-hover!";
     case "SOCIAL":
-      return "bg-notification-social-bg! border-notification-social-border!";
+      return "bg-notification-social-bg! border-notification-social-border! hover:bg-notification-social-hover!";
     case "ALERT":
-      return "bg-notification-alert-bg! border-notification-alert-border!";
+      return "bg-notification-alert-bg! border-notification-alert-border! hover:bg-notification-alert-hover!";
     default:
-      return "bg-notification-default-bg! border-notification-default-border!";
+      return "bg-notification-default-bg! border-notification-default-border! hover:bg-notification-default-hover!";
   }
 };
 

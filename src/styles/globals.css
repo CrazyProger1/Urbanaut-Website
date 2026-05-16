@@ -87,6 +87,14 @@
     --color-notification-default-icon: rgba(var(--color-base-medium), 0.8);
     --color-notification-default-border: rgba(var(--color-base-medium), 0.3);
 
+    --color-notification-update-hover: rgba(30, 144, 255, 0.2);
+    --color-notification-success-hover: rgba(var(--color-base-easy), 0.2);
+    --color-notification-reminder-hover: rgba(var(--color-base-impossible), 0.2);
+    --color-notification-system-hover: rgba(var(--color-base-none), 0.1);
+    --color-notification-social-hover: rgba(var(--color-base-medium), 0.2);
+    --color-notification-alert-hover: rgba(var(--color-base-hard), 0.2);
+    --color-notification-default-hover: rgba(var(--color-base-medium), 0.2);
+
 
     /* Base Colors */
     --color-base-none: 255, 255, 255;
@@ -359,6 +367,14 @@
     --color-notification-default-bg: var(--color-notification-default-bg);
     --color-notification-default-icon: var(--color-notification-default-icon);
     --color-notification-default-border: var(--color-notification-default-border);
+
+    --color-notification-update-hover: var(--color-notification-update-hover);
+    --color-notification-success-hover: var(--color-notification-success-hover);
+    --color-notification-reminder-hover: var(--color-notification-reminder-hover);
+    --color-notification-system-hover: var(--color-notification-system-hover);
+    --color-notification-social-hover: var(--color-notification-social-hover);
+    --color-notification-alert-hover: var(--color-notification-alert-hover);
+    --color-notification-default-hover: var(--color-notification-default-hover);
 }
 
 @layer base {
