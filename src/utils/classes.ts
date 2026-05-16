@@ -1,59 +1,20 @@
 import {
+  BaseColor,
+  getBadgeClass,
+  getCardClass,
+  getIconClass,
+  getShadowClass,
+} from "@/utils/colors";
+import {
   APIRank,
   APIAchievementSignificance,
   APISecurityLevel,
   APIPreservationLevel,
 } from "@/types";
 
-export type Color = "red" | "green" | "yellow" | "blue" | "purple" | "white";
-
 export type ToastType = "success" | "error" | "warning" | "info" | "default";
 
-const CARD_CLASSES: Record<Color, string> = {
-  red: "bg-red-bg! border-red-border! hover:bg-red-hover!",
-  green: "bg-green-bg! border-green-border! hover:bg-green-hover!",
-  yellow: "bg-yellow-bg! border-yellow-border! hover:bg-yellow-hover!",
-  blue: "bg-blue-bg! border-blue-border! hover:bg-blue-hover!",
-  purple: "bg-purple-bg! border-purple-border! hover:bg-purple-hover!",
-  white: "bg-white-bg! border-white-border! hover:bg-white-hover!",
-};
-
-const BADGE_CLASSES: Record<Color, string> = {
-  red: "bg-red-solid! border-red-border! text-foreground hover:bg-red-solid-hover!",
-  green: "bg-green-solid! border-green-border! text-foreground hover:bg-green-solid-hover!",
-  yellow: "bg-yellow-solid! border-yellow-border! text-foreground hover:bg-yellow-solid-hover!",
-  blue: "bg-blue-solid! border-blue-border! text-foreground hover:bg-blue-solid-hover!",
-  purple: "bg-purple-solid! border-purple-border! text-foreground hover:bg-purple-solid-hover!",
-  white: "bg-white-solid! border-white-border! text-foreground hover:bg-white-solid-hover!",
-};
-
-const ICON_CLASSES: Record<Color, string> = {
-  red: "text-red-icon",
-  green: "text-green-icon",
-  yellow: "text-yellow-icon",
-  blue: "text-blue-icon",
-  purple: "text-purple-icon",
-  white: "text-white-icon",
-};
-
-const SHADOW_CLASSES: Record<Color, string> = {
-  red: "drop-shadow-red-shadow",
-  green: "drop-shadow-green-shadow",
-  yellow: "drop-shadow-yellow-shadow",
-  blue: "drop-shadow-blue-shadow",
-  purple: "drop-shadow-purple-shadow",
-  white: "drop-shadow-white-shadow",
-};
-
-export const getCardClass = (color: Color) => CARD_CLASSES[color];
-
-export const getBadgeClass = (color: Color) => BADGE_CLASSES[color];
-
-export const getIconClass = (color: Color) => ICON_CLASSES[color];
-
-export const getShadowClass = (color: Color) => SHADOW_CLASSES[color];
-
-export const getNotificationColor = (type: string): Color => {
+export const getNotificationColor = (type: string): BaseColor => {
   switch (type) {
     case "UPDATE":
       return "blue";
@@ -72,7 +33,7 @@ export const getNotificationColor = (type: string): Color => {
   }
 };
 
-export const getAchievementColor = (significance?: APIAchievementSignificance): Color => {
+export const getAchievementColor = (significance?: APIAchievementSignificance): BaseColor => {
   switch (significance) {
     case "GROWTH":
       return "green";
@@ -88,7 +49,7 @@ export const getAchievementColor = (significance?: APIAchievementSignificance): 
   }
 };
 
-export const getSecurityColor = (security?: APISecurityLevel): Color => {
+export const getSecurityColor = (security?: APISecurityLevel): BaseColor => {
   switch (security) {
     case "EASY":
       return "green";
@@ -104,7 +65,7 @@ export const getSecurityColor = (security?: APISecurityLevel): Color => {
   }
 };
 
-export const getPreservationColor = (preservation?: APIPreservationLevel): Color => {
+export const getPreservationColor = (preservation?: APIPreservationLevel): BaseColor => {
   switch (preservation) {
     case "LOW":
       return "red";
@@ -120,23 +81,7 @@ export const getPreservationColor = (preservation?: APIPreservationLevel): Color
   }
 };
 
-export const getToastColor = (type: ToastType): Color => {
-  switch (type) {
-    case "success":
-      return "green";
-    case "error":
-      return "red";
-    case "warning":
-      return "yellow";
-    case "info":
-      return "blue";
-    case "default":
-    default:
-      return "white";
-  }
-};
-
-export const getRankColor = (rank?: APIRank): Color => {
+export const getRankColor = (rank?: APIRank): BaseColor => {
   switch (rank) {
     case "AMATEUR":
       return "green";
@@ -152,21 +97,38 @@ export const getRankColor = (rank?: APIRank): Color => {
   }
 };
 
-export const getRankShadowClass = (rank?: APIRank) => SHADOW_CLASSES[getRankColor(rank)];
+export const getToastColor = (type: ToastType): BaseColor => {
+  switch (type) {
+    case "success":
+      return "green";
+    case "error":
+      return "red";
+    case "warning":
+      return "yellow";
+    case "info":
+      return "blue";
+    case "default":
+    default:
+      return "white";
+  }
+};
+
+export const getNotificationColorClass = (type: string) => getCardClass(getNotificationColor(type));
+
+export const getNotificationIconColorClass = (type: string) =>
+  getIconClass(getNotificationColor(type));
 
 export const getAchievementColorClass = (significance?: APIAchievementSignificance) =>
-  CARD_CLASSES[getAchievementColor(significance)];
+  getCardClass(getAchievementColor(significance));
 
 export const getSecurityColorClass = (security?: APISecurityLevel) =>
-  BADGE_CLASSES[getSecurityColor(security)];
+  getBadgeClass(getSecurityColor(security));
 
 export const getPreservationColorClass = (preservation?: APIPreservationLevel) =>
-  BADGE_CLASSES[getPreservationColor(preservation)];
+  getBadgeClass(getPreservationColor(preservation));
 
-export const getNotificationColorClass = (type: string) => CARD_CLASSES[getNotificationColor(type)];
+export const getRankShadowClass = (rank?: APIRank) => getShadowClass(getRankColor(rank));
 
-export const getNotificationIconColorClass = (type: string) => ICON_CLASSES[getNotificationColor(type)];
+export const getToastColorClass = (type: ToastType) => getCardClass(getToastColor(type));
 
-export const getToastColorClass = (type: ToastType) => CARD_CLASSES[getToastColor(type)];
-
-export const getToastIconColorClass = (type: ToastType) => ICON_CLASSES[getToastColor(type)];
+export const getToastIconColorClass = (type: ToastType) => getIconClass(getToastColor(type));

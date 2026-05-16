@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Tooltip } from "@/components/ui/next/tooltip";
 import { Link } from "@/i18n";
 import { cn } from "@/lib/utils";
-import { Color, getBadgeClass } from "@/utils/classes";
+import { BaseColor, getBadgeClass } from "@/utils/colors";
 
 type Props = {
   icon?: React.ReactNode;
   children: React.ReactNode;
   tooltip?: string;
   href?: string;
-  color?: Color;
+  color?: BaseColor;
   className?: string;
 };
 
