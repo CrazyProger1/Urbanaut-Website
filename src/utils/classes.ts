@@ -7,6 +7,8 @@ import {
 
 export type Color = "red" | "green" | "yellow" | "blue" | "purple" | "white";
 
+export type ToastType = "success" | "error" | "warning" | "info" | "default";
+
 const CARD_CLASSES: Record<Color, string> = {
   red: "bg-red-bg! border-red-border! hover:bg-red-hover!",
   green: "bg-green-bg! border-green-border! hover:bg-green-hover!",
@@ -110,6 +112,22 @@ const getPreservationColor = (preservation?: APIPreservationLevel): Color => {
   }
 };
 
+const getToastColor = (type: ToastType): Color => {
+  switch (type) {
+    case "success":
+      return "green";
+    case "error":
+      return "red";
+    case "warning":
+      return "yellow";
+    case "info":
+      return "blue";
+    case "default":
+    default:
+      return "white";
+  }
+};
+
 const getRankColor = (rank?: APIRank): Color => {
   switch (rank) {
     case "AMATEUR":
@@ -140,3 +158,7 @@ export const getPreservationColorClass = (preservation?: APIPreservationLevel) =
 export const getNotificationColorClass = (type: string) => CARD_CLASSES[getNotificationColor(type)];
 
 export const getNotificationIconColorClass = (type: string) => ICON_CLASSES[getNotificationColor(type)];
+
+export const getToastColorClass = (type: ToastType) => CARD_CLASSES[getToastColor(type)];
+
+export const getToastIconColorClass = (type: ToastType) => ICON_CLASSES[getToastColor(type)];
