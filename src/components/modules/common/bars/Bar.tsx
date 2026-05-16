@@ -32,7 +32,7 @@ export const Bar = ({ icon, children, tooltip, href, color, className }: Props) 
   const bar = (
     <Button
       variant="ghost"
-      className={cn(colorClass, "transition-colors", className)}
+      className={cn(color && "border", colorClass, "transition-colors", className)}
       asChild
     >
       {href ? (

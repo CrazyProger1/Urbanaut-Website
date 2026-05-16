@@ -2,7 +2,8 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Edit, MapPin, Settings, Share2, UserPlus, UsersRound } from "lucide-react";
+import { AtSign, Calendar, Edit, MapPin, Settings, Share2, UserPlus, UsersRound } from "lucide-react";
+import { Bar } from "@/components/modules/common/bars";
 import { AchievementTable } from "@/components/modules/profile";
 import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { Link } from "@/i18n";
@@ -29,8 +30,8 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
 
   const rankClass = getRankShadowClass(user?.rank);
   return (
-    <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 select-none lg:flex-row">
-      <div className="flex min-w-64 flex-col items-center">
+    <Card className="drop-shadow-volume flex flex-col items-center gap-4 p-4 select-none lg:flex-row lg:items-stretch">
+      <div className="flex min-w-64 flex-col items-center gap-4">
         <Image
           className={rankClass}
           src="/web-app-manifest-192x192.png"
@@ -38,8 +39,11 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
           height={192}
           alt="Profile"
         />
+        <div className={`text-lg font-bold ${rankClass}`}>
+          {user?.first_name} {user?.last_name}
+        </div>
         {me && (
-          <div className="flex flex-row gap-1">
+          <div className="flex flex-row gap-1 lg:mt-auto">
             <Tooltip content={t(PLACEHOLDERS.TOOLTIP_EDIT_PROFILE)}>
               <Button variant="outline" asChild>
                 <Link href={`${PAGES.PROFILE}?${QUERIES.MODAL_EDIT_PROFILE}=true`}>
@@ -81,41 +85,34 @@ export const UserInfoSection = async ({ user, me = false }: Props) => {
           </div>
         )}
       </div>
-      <div className="flex flex-col items-center gap-4 py-4 text-center lg:items-start lg:text-left">
-        <div className={`text-lg font-bold ${rankClass}`}>
-          {user?.first_name} {user?.last_name}
-        </div>
-        <div className="text-muted-foreground flex flex-col text-sm">
-          {user?.usernames?.map((username) => (
-            <CopyToast key={username} clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
-              <div className="cursor-pointer select-none hover:underline" key={username}>
-                @{username}
-              </div>
-            </CopyToast>
-          ))}
-        </div>
+      <div className="flex flex-col items-center gap-4 text-center lg:items-start lg:justify-between lg:text-left">
         <div className="select-text">{user?.bio}</div>
-        <div className="text-muted-foreground flex flex-row gap-4 text-sm font-medium">
-          <div className="flex flex-row items-center gap-1">
-            <Calendar size={16} />
-            <div>
-              {t(PLACEHOLDERS.LABEL_JOINED)}{" "}
+        <div className="flex flex-col items-center gap-4 lg:items-start">
+          <div className="flex flex-row flex-wrap gap-1">
+            {user?.usernames?.map((username) => (
+              <CopyToast key={username} clipboard={`${SITE_URL}${PAGES.PROFILE}/${username}`}>
+                <Bar icon={<AtSign className="text-primary h-5 w-5" />}>{username}</Bar>
+              </CopyToast>
+            ))}
+          </div>
+          <div className="flex flex-row flex-wrap gap-1">
+            <Bar
+              icon={<Calendar className="text-primary h-5 w-5" />}
+              tooltip={t(PLACEHOLDERS.LABEL_JOINED)}
+            >
               {format.dateTime(joinedAt, {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
               })}
-            </div>
+            </Bar>
+            {country && (
+              <Bar icon={<MapPin className="text-primary h-5 w-5" />}>{country.name}</Bar>
+            )}
           </div>
-          {country && (
-            <div className="flex flex-row items-center gap-1">
-              <MapPin size={16} />
-              <div>{country.name}</div>
-            </div>
-          )}
+          <MetricsTable user={user} />
+          <AchievementTable user={user} />
         </div>
-        <MetricsTable user={user} />
-        <AchievementTable user={user} />
       </div>
     </Card>
   );

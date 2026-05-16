@@ -292,6 +292,7 @@
     "TOAST_TEAM_CREATE_SUCCESS": "Team created successfully!",
     "TOAST_TEAM_CREATE_FAIL": "Failed to create team.",
     "LABEL_TEAMS": "Teams",
+    "LABEL_REFERRALS": "Referrals",
     "ROLE_CAPTAIN": "captain",
     "ROLE_MEMBER": "member",
     "TOOLTIP_EDIT_TEAM": "Edit Team"

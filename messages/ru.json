@@ -292,6 +292,7 @@
     "TOAST_TEAM_CREATE_SUCCESS": "Команда успешно создана!",
     "TOAST_TEAM_CREATE_FAIL": "Не удалось создать команду.",
     "LABEL_TEAMS": "Команды",
+    "LABEL_REFERRALS": "Рефералы",
     "ROLE_CAPTAIN": "капитан",
     "ROLE_MEMBER": "участник",
     "TOOLTIP_EDIT_TEAM": "Редактировать команду"
