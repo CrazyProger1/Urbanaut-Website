@@ -40,6 +40,7 @@ export const QUERIES = {
   MODAL_CREATE_EXPEDITION: "create-expedition",
   MODAL_CREATE_TEAM: "create-team",
   MODAL_ACHIEVEMENT: "achievement",
+  MODAL_NOTIFICATION: "notification",
 
   SHEET_AREA: "area",
   SHEET_PLACE: "place",

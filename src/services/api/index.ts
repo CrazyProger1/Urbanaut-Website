@@ -14,7 +14,7 @@ export {
 export { createFeedback } from "./feedbacks";
 export { getReferralCodes } from "./referrals";
 export { getCities, getCountries } from "./geo";
-export { getNotifications } from "./notifications";
+export { getNotifications, getNotification } from "./notifications";
 export { uploadFile } from "./media";
 export { getLanguages } from "./i18n";
 export { createRequest } from "./requests";

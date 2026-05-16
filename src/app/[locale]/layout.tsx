@@ -14,7 +14,7 @@ import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins, Russo_One } from "next/font/google";
 import { ComplainCreateModal, FeedbackCreateModal } from "@/components/modules/feedback/modals";
-import { SettingsModal, AchievementModal } from "@/components/modules/profile/modals";
+import { SettingsModal, AchievementModal, NotificationModal } from "@/components/modules/layout/modals";
 import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
@@ -120,6 +120,7 @@ const RootLayout = async ({ children, params }: Props) => {
                 {user && <ExpeditionCreateModal languages={languages} user={user} />}
                 {user && languages && <SettingsModal user={user} languages={languages} />}
                 <AchievementModal />
+                <NotificationModal />
               </NextIntlClientProvider>
               <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
             </SidebarProvider>

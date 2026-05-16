@@ -36,7 +36,6 @@ export type {
   APITheme,
   APIRank,
   APIListUser,
-  APIRetrieveNotification,
 } from "./user";
 export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
@@ -68,3 +67,8 @@ export type { APIListLanguage } from "./i18n";
 export type { APIRetrieveGlobalStats } from "./stats";
 export type { APINewsType, APIRetrieveNews, APIListNews } from "./news";
 export type { APICreateTeam, APIListTeam, APIRetrieveTeam } from "./team";
+export type {
+  APIRetrieveNotification,
+  APIListNotification,
+  APINotificationType,
+} from "./notification";

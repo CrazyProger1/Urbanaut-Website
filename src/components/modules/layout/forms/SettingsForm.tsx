@@ -13,7 +13,7 @@ import { CurrentUser, Language } from "@/types";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
 import { Globe, Bell, Mail, Pointer } from "lucide-react";
-import { LanguageSelect } from "./LanguageSelect";
+import { LanguageSelect } from "../../profile/forms/LanguageSelect";
 import { SwitchToggle } from "@/components/common/toggles";
 import { updateSettings } from "@/actions";
 import { Locale } from "@/i18n";

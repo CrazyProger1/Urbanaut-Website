@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
   SETTINGS: "settings/",
   WEBSOCKET_TOKENS: "ws/tokens/",
   NOTIFICATIONS: "notifications/",
+  NOTIFICATION: "notifications/[id]/",
   FILE: "files/[id]/",
   FILES: "files/",
   LANGUAGES: "languages/",
