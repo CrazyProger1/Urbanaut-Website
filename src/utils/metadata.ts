@@ -4,7 +4,6 @@ import { PLACEHOLDERS, SITE_URL } from "@/config";
 import { routing } from "@/i18n/routing";
 
 const SITE_NAME = "Urbanaut-Club";
-const TWITTER_HANDLE = "@UrbanautOfficial";
 const DEFAULT_OG_IMAGE = {
   url: "/web-app-manifest-512x512.png",
   width: 512,
@@ -119,7 +118,7 @@ export const buildMetadata = async ({
     metadataBase: new URL(SITE_URL),
     title: {
       default: resolvedTitle,
-      template: `%s — ${SITE_NAME}`,
+      template: `%s - ${SITE_NAME}`,
     },
     description: resolvedDescription,
     keywords: extraKeywords ? [...KEYWORDS, ...extraKeywords] : KEYWORDS,
@@ -144,14 +143,6 @@ export const buildMetadata = async ({
         .filter((l) => l !== locale)
         .map((l) => OG_LOCALES[l] ?? l),
       images: [ogImage],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: resolvedTitle,
-      description: resolvedDescription,
-      images: [ogImage.url],
-      site: TWITTER_HANDLE,
-      creator: TWITTER_HANDLE,
     },
     icons: {
       icon: [
