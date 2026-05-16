@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Hourglass, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { DateBar } from "@/components/modules/common/bars";
 import { PLACEHOLDERS } from "@/config";
 
@@ -24,19 +24,16 @@ export const TimelineSection = ({ builtAt, abandonedAt, createdAt }: Props) => {
   if (!entries.length) return null;
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-row gap-1">
-        <Hourglass />
-        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_TIMELINE)}</div>
-      </div>
+    <div className="flex w-full flex-col gap-2">
+      <div className="font-semibold">{t(PLACEHOLDERS.SECTION_TIMELINE)}</div>
       <div className="flex flex-col items-center">
         {entries.map((entry, index) => (
-          <React.Fragment key={entry.label}>
+          <div key={entry.label} className="flex w-fit flex-col items-center">
             <DateBar date={entry.date} label={entry.label} />
             {index < entries.length - 1 && (
               <ArrowDown className="text-muted-foreground size-4 my-0.5 shrink-0" />
             )}
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>

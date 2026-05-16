@@ -8,3 +8,6 @@ export { LikesBar } from "./LikesBar";
 export { CoordinatesBar } from "./CoordinatesBar";
 export { PreservationBar } from "./PreservationBar";
 export { TagBar } from "./TagBar";
+export { SupposedBar } from "./SupposedBar";
+export { PrivateBar } from "./PrivateBar";
+export { SecurityBar } from "./SecurityBar";

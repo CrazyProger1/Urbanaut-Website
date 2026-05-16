@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Backpack, FlagTriangleRight, Heart, Pencil, Play, Share2, SquarePen } from "lucide-react";
+import { Backpack, FlagTriangleRight, Heart, Share2, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { CopyToast } from "@/components/common/toasts";
@@ -30,11 +30,8 @@ export const ActionsSection = ({
   const t = useTranslations("Modules");
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-row gap-1">
-        <Play />
-        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_ACTIONS)}</div>
-      </div>
+    <div className="flex w-full flex-col gap-2">
+      <div className="font-semibold">{t(PLACEHOLDERS.SECTION_ACTIONS)}</div>
       <div className="flex flex-row gap-1">
         {editLink && (
           <Tooltip content={t(PLACEHOLDERS.TOOLTIP_EDIT_PLACE)} asChild>

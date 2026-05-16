@@ -14,14 +14,14 @@ import { cn } from "@/lib/utils";
 const showStyledToast = (
   title: string,
   icon: React.ReactNode,
-  colorClass: string,
+  className: string,
   options?: ExternalToast,
 ) => {
   toast(title, {
     ...options,
     icon,
     classNames: {
-      toast: cn(colorClass, "backdrop-blur-md backdrop-brightness-50! shadow-volume!"),
+      toast: cn(className, "backdrop-blur-md backdrop-brightness-50! shadow-volume!"),
       title: "text-foreground! text-sm font-semibold!",
       description: "text-xs",
     },

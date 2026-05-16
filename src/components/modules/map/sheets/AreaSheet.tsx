@@ -14,7 +14,6 @@ import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
 import { TimelineSection } from "./TimelineSection";
-import { StateSection } from "./StateSection";
 import { Button } from "@/components/ui/button";
 import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
 import { Sheet } from "@/components/ui/next/sheet";
@@ -42,7 +41,6 @@ export const AreaSheet = ({ area }: Props) => {
           {description && <DescriptionSection description={description} />}
           {tags && <TagsSection tags={tags} />}
           <TimelineSection />
-          <StateSection />
           {created_by && <ContributorsSection creator={created_by} />}
           <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_AREA}=${id}`} />
         </div>

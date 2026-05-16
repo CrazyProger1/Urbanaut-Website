@@ -14,7 +14,6 @@ import GallerySection from "./GallerySection";
 import { DescriptionSection } from "./DescriptionSection";
 import { TagsSection } from "./TagsSection";
 import { TimelineSection } from "./TimelineSection";
-import { StateSection } from "./StateSection";
 import { LocationSection } from "./LocationSection";
 import { ContributorsSection } from "./ContributorsSection";
 import { Button } from "@/components/ui/button";
@@ -24,9 +23,8 @@ import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
 import { togglePlaceFavorite } from "@/actions";
 import { validateActionResult } from "@/utils/actions";
 import { showToast } from "@/utils/toasts";
-import { Link, useRouter } from "@/i18n";
+import { useRouter } from "@/i18n";
 import { usePreservedParamsLink } from "@/hooks";
-import { Badge } from "@/components/ui/badge";
 import { ExploreSection } from "@/components/modules/map/sheets/SourcesSection";
 import { ViewsBar, LikesBar } from "@/components/modules/common/bars";
 
@@ -83,32 +81,10 @@ export const PlaceSheet = ({ place, user }: Props) => {
       <SheetContent className="w-full! overflow-y-auto select-none sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
-          <SheetDescription className="flex flex-row items-center gap-1">
-            {t(PLACEHOLDERS.TITLE_PLACE)}
-            {is_supposed && (
-              <Link href={`${PAGES.MAP}?${QUERIES.FILTER_IS_SUPPOSED}=true`}>
-                <Badge
-                  variant="destructive"
-                  className="border-red-border bg-red-solid! hover:bg-red-solid-hover!"
-                >
-                  {t(PLACEHOLDERS.LABEL_SUPPOSED)}
-                </Badge>
-              </Link>
-            )}
-            {is_private && (
-              <Link href={`${PAGES.MAP}?${QUERIES.FILTER_IS_PRIVATE}=true`}>
-                <Badge
-                  variant="destructive"
-                  className="border-red-border bg-red-solid! hover:bg-red-solid-hover!"
-                >
-                  {t(PLACEHOLDERS.LABEL_PRIVATE)}
-                </Badge>
-              </Link>
-            )}
-          </SheetDescription>
+          <SheetDescription>{t(PLACEHOLDERS.TITLE_PLACE)}</SheetDescription>
         </SheetHeader>
 
-        <div className="flex flex-col gap-4 p-4">
+        <div className="flex flex-col gap-8 p-4">
           {!!photos?.length && <GallerySection photos={photos} />}
 
           <div className="flex flex-wrap justify-center gap-1">
@@ -117,14 +93,25 @@ export const PlaceSheet = ({ place, user }: Props) => {
           </div>
 
           {description && <DescriptionSection description={description} />}
-          {!!tags?.length && <TagsSection tags={tags} />}
+          {(!!tags?.length ||
+            is_supposed ||
+            is_private ||
+            security?.has_security ||
+            preservation) && (
+            <TagsSection
+              tags={tags ?? []}
+              isSupposed={is_supposed}
+              isPrivate={is_private}
+              hasSecurity={security?.has_security}
+              preservation={preservation}
+            />
+          )}
 
           <TimelineSection
             createdAt={created_at ? new Date(created_at) : undefined}
             builtAt={built_at ? new Date(built_at) : undefined}
             abandonedAt={abandoned_at ? new Date(abandoned_at) : undefined}
           />
-          <StateSection security={security} preservation={preservation} />
           <LocationSection point={point} />
 
           {created_by && <ContributorsSection creator={created_by} />}

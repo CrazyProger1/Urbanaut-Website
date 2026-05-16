@@ -3,7 +3,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { UserCreator, UserEditor } from "@/types";
-import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/i18n";
 import { PAGES, PLACEHOLDERS, SITE_URL } from "@/config";
@@ -19,11 +18,8 @@ type Props = {
 export const ContributorsSection = ({ creator }: Props) => {
   const t = useTranslations("Modules");
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-row gap-1">
-        <User />
-        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_CONTRIBUTORS)}</div>
-      </div>
+    <div className="flex w-full flex-col gap-2">
+      <div className="font-semibold">{t(PLACEHOLDERS.SECTION_CONTRIBUTORS)}</div>
       <div>
         {creator && (
           <Link href={`${PAGES.PROFILE}/${creator?.usernames[0]}`}>

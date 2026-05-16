@@ -1,4 +1,4 @@
-import { Telescope, Map, Earth, Binoculars } from "lucide-react";
+import { Map, Earth, Binoculars } from "lucide-react";
 import React from "react";
 import { useTranslations } from "next-intl";
 import { PLACEHOLDERS } from "@/config";
@@ -19,11 +19,8 @@ export const ExploreSection = ({ point }: Props) => {
   const providers = useMapProviderLinks(point, currentMapZoom);
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-row gap-1">
-        <Telescope />
-        <div className="font-semibold">{t(PLACEHOLDERS.SECTION_EXPLORE)}</div>
-      </div>
+    <div className="flex w-full flex-col gap-2">
+      <div className="font-semibold">{t(PLACEHOLDERS.SECTION_EXPLORE)}</div>
       <div className="flex flex-col gap-2">
         {providers.map(({ type, name, link }) => (
           <SidebarButton asChild key={link}>
