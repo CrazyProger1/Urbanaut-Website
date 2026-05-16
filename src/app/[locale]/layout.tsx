@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import React from "react";
 import "../../styles";
 import { NextIntlClientProvider } from "next-intl";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { GOOGLE_ANALYTICS_ID, ONESIGNAL_APP_ID, SITE_URL } from "@/config";
+import { GOOGLE_ANALYTICS_ID, ONESIGNAL_APP_ID } from "@/config";
 import { ModalProvider } from "@/components/common/modals";
 import { SigninModal, SignupModal } from "@/components/modules/login/modals";
 import { Header, Footer, Sidebar, OauthProvider } from "@/components/modules/layout";
@@ -11,6 +11,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getSession } from "@/utils/session";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { buildRootMetadata, rootViewport } from "@/utils/metadata";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins, Russo_One } from "next/font/google";
 import { ComplainCreateModal, FeedbackCreateModal } from "@/components/modules/feedback/modals";
@@ -22,29 +23,12 @@ import { OneSignalProvider } from "@/components/lib/onesignal";
 import { getLanguages } from "@/services/api";
 import { ExpeditionCreateModal } from "@/components/modules/expeditions/modals";
 
-export const metadata: Metadata = {
-  title: "Urbanaut-Club",
-  description: "Social platform for urban explorers, diggers, and extreme tourism enthusiasts.",
-  keywords: [
-    "urbex",
-    "urban",
-    "urbanaut",
-    "club",
-    "urbanaut club",
-    "exploration",
-    "diggers",
-    "stalkers",
-    "urban exploration",
-    "urbex community",
-    "abandoned places",
-    "urban explorers",
-    "extreme tourism",
-    "underground exploration",
-    "urban adventure",
-    "industrial ruins",
-  ],
-  metadataBase: new URL(SITE_URL),
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { locale } = await params;
+  return buildRootMetadata(locale);
 };
+
+export const viewport: Viewport = rootViewport;
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],

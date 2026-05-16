@@ -178,6 +178,8 @@
     "LABEL_HAS_SECURITY": "Security",
     "DESCRIPTION_HAS_SECURITY": "The place has security.",
     "TOOLTIP_PLACE_SECURITY": "Place has active security (cameras, sensors, or guards)",
+    "META_TITLE": "Urbanaut-Club — Urban Exploration Community",
+    "META_DESCRIPTION": "Urbanaut-Club is a social platform for urban explorers, diggers, stalkers and extreme tourism enthusiasts. Discover abandoned places, plan expeditions, share photos, and connect with the urbex community worldwide.",
     "LABEL_HAS_DOGS": "Dogs",
     "DESCRIPTION_HAS_DOGS": "The place has guard dogs.",
     "LABEL_HAS_WEAPONS": "Weapons",
