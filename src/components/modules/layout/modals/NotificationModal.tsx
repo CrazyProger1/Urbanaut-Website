@@ -2,15 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useFormatter } from "next-intl";
-import { Calendar } from "lucide-react";
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { DateBar } from "@/components/modules/common/bars";
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES } from "@/config";
 import { Notification } from "@/types";
@@ -20,11 +18,9 @@ import { getNotificationIcon } from "@/utils/icons";
 
 export const NotificationModal = () => {
   const searchParams = useSearchParams();
-  const formatter = useFormatter();
   const [notification, setNotification] = useState<Notification | null>(null);
   const [colorClass, setColorClass] = useState<string>("");
   const [iconColorClass, setIconColorClass] = useState<string>("");
-  const [formattedDate, setFormattedDate] = useState<string>("");
 
   useEffect(() => {
     const notificationId = searchParams.get(QUERIES.MODAL_NOTIFICATION);
@@ -35,13 +31,6 @@ export const NotificationModal = () => {
           setNotification(result);
           setColorClass(getNotificationColorClass(result.type));
           setIconColorClass(getNotificationIconColorClass(result.type));
-          setFormattedDate(
-            formatter.dateTime(new Date(result.triggered_at), {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            }),
-          );
         } else {
           setNotification(null);
         }
@@ -49,7 +38,7 @@ export const NotificationModal = () => {
     } else {
       setNotification(null);
     }
-  }, [searchParams, formatter]);
+  }, [searchParams]);
 
   return (
     <Modal visible={!!notification} query={QUERIES.MODAL_NOTIFICATION}>
@@ -71,12 +60,7 @@ export const NotificationModal = () => {
           </p>
         )}
         <div className="flex justify-center gap-2 px-6 pb-6 pt-2">
-          <Button variant="ghost" className="hover:bg-accent transition-colors" asChild>
-            <div className="text-foreground flex h-9 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium select-none">
-              <Calendar className="text-primary h-5 w-5" />
-              <span>{formattedDate}</span>
-            </div>
-          </Button>
+          {notification && <DateBar date={new Date(notification.triggered_at)} />}
         </div>
       </DialogContent>
     </Modal>
