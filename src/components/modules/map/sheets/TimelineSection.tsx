@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { useTranslations, useFormatter } from "next-intl";
-import { Hourglass } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
+import { Hourglass, ArrowDown } from "lucide-react";
+import { DateBar } from "@/components/modules/common/bars";
 import { PLACEHOLDERS } from "@/config";
 
 type Props = {
@@ -14,9 +14,14 @@ type Props = {
 
 export const TimelineSection = ({ builtAt, abandonedAt, createdAt }: Props) => {
   const t = useTranslations("Modules");
-  const format = useFormatter();
-  const formatDate = (date: Date) =>
-    format.dateTime(date, { year: "numeric", month: "short", day: "numeric" });
+
+  const entries = [
+    builtAt && { date: builtAt, label: t(PLACEHOLDERS.LABEL_BUILT) },
+    abandonedAt && { date: abandonedAt, label: t(PLACEHOLDERS.LABEL_ABANDONED) },
+    createdAt && { date: createdAt, label: t(PLACEHOLDERS.LABEL_ADDED) },
+  ].filter(Boolean) as { date: Date; label: string }[];
+
+  if (!entries.length) return null;
 
   return (
     <div className="flex flex-col gap-2">
@@ -24,22 +29,15 @@ export const TimelineSection = ({ builtAt, abandonedAt, createdAt }: Props) => {
         <Hourglass />
         <div className="font-semibold">{t(PLACEHOLDERS.SECTION_TIMELINE)}</div>
       </div>
-      <div className="flex flex-col gap-1 text-sm">
-        {builtAt && (
-          <div className="flex cursor-pointer flex-row items-center gap-1">
-            <p>{t(PLACEHOLDERS.LABEL_BUILT)}:</p> <Badge variant="tertiary">{formatDate(builtAt)}</Badge>
-          </div>
-        )}
-        {abandonedAt && (
-          <div className="flex cursor-pointer flex-row items-center gap-1">
-            <p>{t(PLACEHOLDERS.LABEL_ABANDONED)}:</p> <Badge variant="tertiary">{formatDate(abandonedAt)}</Badge>
-          </div>
-        )}
-        {createdAt && (
-          <div className="flex cursor-pointer flex-row items-center gap-1">
-            <p>{t(PLACEHOLDERS.LABEL_ADDED)}:</p> <Badge variant="tertiary">{formatDate(createdAt)}</Badge>
-          </div>
-        )}
+      <div className="flex flex-col items-center">
+        {entries.map((entry, index) => (
+          <React.Fragment key={entry.label}>
+            <DateBar date={entry.date} label={entry.label} />
+            {index < entries.length - 1 && (
+              <ArrowDown className="text-muted-foreground size-4 my-0.5 shrink-0" />
+            )}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

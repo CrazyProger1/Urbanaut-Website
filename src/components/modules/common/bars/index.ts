@@ -2,3 +2,8 @@ export { ExperienceBar } from "./ExperienceBar";
 export { BalanceBar } from "./BalanceBar";
 export { KarmaBar } from "./KarmaBar";
 export { DateBar } from "./DateBar";
+export { ViewsBar } from "./ViewsBar";
+export { LikesBar } from "./LikesBar";
+export { CoordinatesBar } from "./CoordinatesBar";
+export { PreservationBar } from "./PreservationBar";
+export { TagBar } from "./TagBar";

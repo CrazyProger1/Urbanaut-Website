@@ -16,11 +16,10 @@ import { TagsSection } from "./TagsSection";
 import { TimelineSection } from "./TimelineSection";
 import { StateSection } from "./StateSection";
 import { LocationSection } from "./LocationSection";
+import { ContributorsSection } from "./ContributorsSection";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/next/sheet";
 import { PAGES, PLACEHOLDERS, QUERIES, SITE_URL } from "@/config";
-import { ContributorsSection } from "./ContributorsSection";
-
 import { ActionsSection } from "@/components/modules/map/sheets/ActionsSection";
 import { togglePlaceFavorite } from "@/actions";
 import { validateActionResult } from "@/utils/actions";
@@ -29,7 +28,7 @@ import { Link, useRouter } from "@/i18n";
 import { usePreservedParamsLink } from "@/hooks";
 import { Badge } from "@/components/ui/badge";
 import { ExploreSection } from "@/components/modules/map/sheets/SourcesSection";
-import { Eye, Heart } from "lucide-react";
+import { ViewsBar, LikesBar } from "@/components/modules/common/bars";
 
 type Props = {
   user?: CurrentUser;
@@ -108,33 +107,17 @@ export const PlaceSheet = ({ place, user }: Props) => {
             )}
           </SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col gap-4 p-4">
-          {!!photos?.length && (
-            <>
-              <GallerySection photos={photos} />
-            </>
-          )}
 
-          <div className="text-muted-foreground flex flex-row justify-center gap-4 text-sm">
-            <div className="flex flex-row items-center gap-2">
-              <Eye size="16" /> <p>{views_count}</p>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              <Heart size="16" /> <p>{favorites_count}</p>
-            </div>
+        <div className="flex flex-col gap-4 p-4">
+          {!!photos?.length && <GallerySection photos={photos} />}
+
+          <div className="flex flex-wrap justify-center gap-1">
+            {views_count !== undefined && <ViewsBar views={views_count} />}
+            {favorites_count !== undefined && <LikesBar likes={favorites_count} />}
           </div>
 
-          {description && (
-            <>
-              <DescriptionSection description={description} />
-            </>
-          )}
-
-          {!!tags?.length && (
-            <>
-              <TagsSection tags={tags} />
-            </>
-          )}
+          {description && <DescriptionSection description={description} />}
+          {!!tags?.length && <TagsSection tags={tags} />}
 
           <TimelineSection
             createdAt={created_at ? new Date(created_at) : undefined}
@@ -144,11 +127,7 @@ export const PlaceSheet = ({ place, user }: Props) => {
           <StateSection security={security} preservation={preservation} />
           <LocationSection point={point} />
 
-          {created_by && (
-            <>
-              <ContributorsSection creator={created_by} />
-            </>
-          )}
+          {created_by && <ContributorsSection creator={created_by} />}
           <ActionsSection
             shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`}
             editLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`}
@@ -162,6 +141,7 @@ export const PlaceSheet = ({ place, user }: Props) => {
           />
           <ExploreSection point={place.point} />
         </div>
+
         <SheetFooter>
           <SheetClose asChild>
             <Button variant="outline">{t(PLACEHOLDERS.BUTTON_CLOSE)}</Button>
