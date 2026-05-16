@@ -161,6 +161,69 @@
     --color-preservation-medium-hover: rgba(var(--color-base-medium), 0.4);
     --color-preservation-high-hover: rgba(var(--color-base-easy), 0.4);
     --color-preservation-awesome-hover: rgba(var(--color-base-impossible), 0.4);
+
+    /* === Abstract Color Palette === */
+    /* RGB tuples — internal helpers, not Tailwind utilities */
+    --color-red: 255, 0, 0;
+    --color-green: 0, 255, 0;
+    --color-yellow: 255, 255, 0;
+    --color-blue: 30, 144, 255;
+    --color-purple: 157, 0, 255;
+    --color-white: 255, 255, 255;
+
+    /* red variants */
+    --color-red-bg: rgba(var(--color-red), 0.1);
+    --color-red-hover: rgba(var(--color-red), 0.2);
+    --color-red-border: rgba(var(--color-red), 0.3);
+    --color-red-icon: rgba(var(--color-red), 0.8);
+    --color-red-solid: rgba(var(--color-red), 0.3);
+    --color-red-solid-hover: rgba(var(--color-red), 0.4);
+    --drop-shadow-red-shadow: 3px 3px 5px rgba(var(--color-red), 0.3);
+
+    /* green variants */
+    --color-green-bg: rgba(var(--color-green), 0.1);
+    --color-green-hover: rgba(var(--color-green), 0.2);
+    --color-green-border: rgba(var(--color-green), 0.3);
+    --color-green-icon: rgba(var(--color-green), 0.8);
+    --color-green-solid: rgba(var(--color-green), 0.3);
+    --color-green-solid-hover: rgba(var(--color-green), 0.4);
+    --drop-shadow-green-shadow: 3px 3px 5px rgba(var(--color-green), 0.3);
+
+    /* yellow variants */
+    --color-yellow-bg: rgba(var(--color-yellow), 0.1);
+    --color-yellow-hover: rgba(var(--color-yellow), 0.2);
+    --color-yellow-border: rgba(var(--color-yellow), 0.3);
+    --color-yellow-icon: rgba(var(--color-yellow), 0.8);
+    --color-yellow-solid: rgba(var(--color-yellow), 0.3);
+    --color-yellow-solid-hover: rgba(var(--color-yellow), 0.4);
+    --drop-shadow-yellow-shadow: 3px 3px 5px rgba(var(--color-yellow), 0.3);
+
+    /* blue variants */
+    --color-blue-bg: rgba(var(--color-blue), 0.1);
+    --color-blue-hover: rgba(var(--color-blue), 0.2);
+    --color-blue-border: rgba(var(--color-blue), 0.3);
+    --color-blue-icon: rgba(var(--color-blue), 0.8);
+    --color-blue-solid: rgba(var(--color-blue), 0.3);
+    --color-blue-solid-hover: rgba(var(--color-blue), 0.4);
+    --drop-shadow-blue-shadow: 3px 3px 5px rgba(var(--color-blue), 0.3);
+
+    /* purple variants */
+    --color-purple-bg: rgba(var(--color-purple), 0.1);
+    --color-purple-hover: rgba(var(--color-purple), 0.2);
+    --color-purple-border: rgba(var(--color-purple), 0.3);
+    --color-purple-icon: rgba(var(--color-purple), 0.8);
+    --color-purple-solid: rgba(var(--color-purple), 0.3);
+    --color-purple-solid-hover: rgba(var(--color-purple), 0.4);
+    --drop-shadow-purple-shadow: 3px 3px 5px rgba(var(--color-purple), 0.3);
+
+    /* white variants */
+    --color-white-bg: rgba(var(--color-white), 0.1);
+    --color-white-hover: rgba(var(--color-white), 0.2);
+    --color-white-border: rgba(var(--color-white), 0.3);
+    --color-white-icon: rgba(var(--color-white), 0.8);
+    --color-white-solid: rgba(var(--color-white), 0.3);
+    --color-white-solid-hover: rgba(var(--color-white), 0.4);
+    --drop-shadow-white-shadow: 3px 3px 5px rgba(var(--color-white), 0.3);
 }
 
 .dark {
@@ -375,6 +438,55 @@
     --color-notification-social-hover: var(--color-notification-social-hover);
     --color-notification-alert-hover: var(--color-notification-alert-hover);
     --color-notification-default-hover: var(--color-notification-default-hover);
+
+    /* === Abstract Color Palette === */
+    --color-red-bg: var(--color-red-bg);
+    --color-red-hover: var(--color-red-hover);
+    --color-red-border: var(--color-red-border);
+    --color-red-icon: var(--color-red-icon);
+    --color-red-solid: var(--color-red-solid);
+    --color-red-solid-hover: var(--color-red-solid-hover);
+    --drop-shadow-red-shadow: var(--drop-shadow-red-shadow);
+
+    --color-green-bg: var(--color-green-bg);
+    --color-green-hover: var(--color-green-hover);
+    --color-green-border: var(--color-green-border);
+    --color-green-icon: var(--color-green-icon);
+    --color-green-solid: var(--color-green-solid);
+    --color-green-solid-hover: var(--color-green-solid-hover);
+    --drop-shadow-green-shadow: var(--drop-shadow-green-shadow);
+
+    --color-yellow-bg: var(--color-yellow-bg);
+    --color-yellow-hover: var(--color-yellow-hover);
+    --color-yellow-border: var(--color-yellow-border);
+    --color-yellow-icon: var(--color-yellow-icon);
+    --color-yellow-solid: var(--color-yellow-solid);
+    --color-yellow-solid-hover: var(--color-yellow-solid-hover);
+    --drop-shadow-yellow-shadow: var(--drop-shadow-yellow-shadow);
+
+    --color-blue-bg: var(--color-blue-bg);
+    --color-blue-hover: var(--color-blue-hover);
+    --color-blue-border: var(--color-blue-border);
+    --color-blue-icon: var(--color-blue-icon);
+    --color-blue-solid: var(--color-blue-solid);
+    --color-blue-solid-hover: var(--color-blue-solid-hover);
+    --drop-shadow-blue-shadow: var(--drop-shadow-blue-shadow);
+
+    --color-purple-bg: var(--color-purple-bg);
+    --color-purple-hover: var(--color-purple-hover);
+    --color-purple-border: var(--color-purple-border);
+    --color-purple-icon: var(--color-purple-icon);
+    --color-purple-solid: var(--color-purple-solid);
+    --color-purple-solid-hover: var(--color-purple-solid-hover);
+    --drop-shadow-purple-shadow: var(--drop-shadow-purple-shadow);
+
+    --color-white-bg: var(--color-white-bg);
+    --color-white-hover: var(--color-white-hover);
+    --color-white-border: var(--color-white-border);
+    --color-white-icon: var(--color-white-icon);
+    --color-white-solid: var(--color-white-solid);
+    --color-white-solid-hover: var(--color-white-solid-hover);
+    --drop-shadow-white-shadow: var(--drop-shadow-white-shadow);
 }
 
 @layer base {
