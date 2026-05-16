@@ -14,6 +14,7 @@ export const TagBar = ({ tag }: Props) => {
     <Bar
       icon={<Tag className="text-primary h-5 w-5" />}
       href={`${PAGES.MAP}?${QUERIES.FILTER_TAGS}=${tag}`}
+      color="white"
     >
       {tag}
     </Bar>
