@@ -89,7 +89,7 @@ export const PlaceSheet = ({ place, user }: Props) => {
               <Link href={`${PAGES.MAP}?${QUERIES.FILTER_IS_SUPPOSED}=true`}>
                 <Badge
                   variant="destructive"
-                  className="border-base-hard bg-base-hard! hover:bg-base-hard-hover!"
+                  className="border-red-border bg-red-solid! hover:bg-red-solid-hover!"
                 >
                   {t(PLACEHOLDERS.LABEL_SUPPOSED)}
                 </Badge>
@@ -99,7 +99,7 @@ export const PlaceSheet = ({ place, user }: Props) => {
               <Link href={`${PAGES.MAP}?${QUERIES.FILTER_IS_PRIVATE}=true`}>
                 <Badge
                   variant="destructive"
-                  className="border-base-hard bg-base-hard! hover:bg-base-hard-hover!"
+                  className="border-red-border bg-red-solid! hover:bg-red-solid-hover!"
                 >
                   {t(PLACEHOLDERS.LABEL_PRIVATE)}
                 </Badge>

@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import {
   APIRank,
   APIAchievementSignificance,
@@ -6,97 +5,138 @@ import {
   APIPreservationLevel,
 } from "@/types";
 
-export const getRankShadowClass = (rank?: APIRank) => {
-  return cn(
-    rank === "ROOKIE" && "drop-shadow-rank-rookie",
-    rank === "AMATEUR" && "drop-shadow-rank-amateur",
-    rank === "PROFI" && "drop-shadow-rank-profi",
-    rank === "STALKER" && "drop-shadow-rank-stalker",
-    rank === "LEGEND" && "drop-shadow-rank-legend",
-    !rank && "drop-shadow-rank-rookie",
-  );
+export type Color = "red" | "green" | "yellow" | "blue" | "purple" | "white";
+
+const CARD_CLASSES: Record<Color, string> = {
+  red: "bg-red-bg! border-red-border! hover:bg-red-hover!",
+  green: "bg-green-bg! border-green-border! hover:bg-green-hover!",
+  yellow: "bg-yellow-bg! border-yellow-border! hover:bg-yellow-hover!",
+  blue: "bg-blue-bg! border-blue-border! hover:bg-blue-hover!",
+  purple: "bg-purple-bg! border-purple-border! hover:bg-purple-hover!",
+  white: "bg-white-bg! border-white-border! hover:bg-white-hover!",
 };
 
-export const getAchievementColorClass = (significance?: APIAchievementSignificance) => {
-  return cn(
-    significance === "INITIATION" && "bg-achievement-initiation border-achievement-initiation hover:bg-achievement-initiation-hover",
-    significance === "GROWTH" && "bg-achievement-growth border-achievement-growth hover:bg-achievement-growth-hover",
-    significance === "MASTERY" && "bg-achievement-mastery border-achievement-mastery hover:bg-achievement-mastery-hover",
-    significance === "VALOR" && "bg-achievement-valor border-achievement-valor hover:bg-achievement-valor-hover",
-    significance === "TRANSCENDENCE" &&
-      "bg-achievement-transcendence border-achievement-transcendence hover:bg-achievement-transcendence-hover",
-    !significance && "bg-achievement-initiation border-achievement-initiation hover:bg-achievement-initiation-hover",
-  );
+const BADGE_CLASSES: Record<Color, string> = {
+  red: "bg-red-solid! border-red-border! text-foreground hover:bg-red-solid-hover!",
+  green: "bg-green-solid! border-green-border! text-foreground hover:bg-green-solid-hover!",
+  yellow: "bg-yellow-solid! border-yellow-border! text-foreground hover:bg-yellow-solid-hover!",
+  blue: "bg-blue-solid! border-blue-border! text-foreground hover:bg-blue-solid-hover!",
+  purple: "bg-purple-solid! border-purple-border! text-foreground hover:bg-purple-solid-hover!",
+  white: "bg-white-solid! border-white-border! text-foreground hover:bg-white-solid-hover!",
 };
 
-export const getSecurityColorClass = (security?: APISecurityLevel) => {
+const ICON_CLASSES: Record<Color, string> = {
+  red: "text-red-icon",
+  green: "text-green-icon",
+  yellow: "text-yellow-icon",
+  blue: "text-blue-icon",
+  purple: "text-purple-icon",
+  white: "text-white-icon",
+};
+
+const SHADOW_CLASSES: Record<Color, string> = {
+  red: "drop-shadow-red-shadow",
+  green: "drop-shadow-green-shadow",
+  yellow: "drop-shadow-yellow-shadow",
+  blue: "drop-shadow-blue-shadow",
+  purple: "drop-shadow-purple-shadow",
+  white: "drop-shadow-white-shadow",
+};
+
+const getNotificationColor = (type: string): Color => {
+  switch (type) {
+    case "UPDATE":
+      return "blue";
+    case "SUCCESS":
+      return "green";
+    case "REMINDER":
+      return "purple";
+    case "SYSTEM":
+      return "white";
+    case "SOCIAL":
+      return "yellow";
+    case "ALERT":
+      return "red";
+    default:
+      return "yellow";
+  }
+};
+
+const getAchievementColor = (significance?: APIAchievementSignificance): Color => {
+  switch (significance) {
+    case "GROWTH":
+      return "green";
+    case "MASTERY":
+      return "yellow";
+    case "VALOR":
+      return "red";
+    case "TRANSCENDENCE":
+      return "purple";
+    case "INITIATION":
+    default:
+      return "white";
+  }
+};
+
+const getSecurityColor = (security?: APISecurityLevel): Color => {
   switch (security) {
-    case "NONE":
-      return "bg-security-none border-security-none text-foreground hover:bg-security-none-hover dark:bg-security-none dark:hover:bg-security-none-hover";
     case "EASY":
-      return "bg-security-easy border-security-easy text-foreground hover:bg-security-easy-hover dark:bg-security-easy dark:hover:bg-security-easy-hover";
+      return "green";
     case "MEDIUM":
-      return "bg-security-medium border-security-medium text-foreground hover:bg-security-medium-hover dark:bg-security-medium dark:hover:bg-security-medium-hover";
+      return "yellow";
     case "HARD":
-      return "bg-security-hard border-security-hard text-foreground hover:bg-security-hard-hover dark:bg-security-hard dark:hover:bg-security-hard-hover";
+      return "red";
     case "IMPOSSIBLE":
-      return "bg-security-impossible border-security-impossible text-foreground hover:bg-security-impossible-hover dark:bg-security-impossible dark:hover:bg-security-impossible-hover";
-    default:
-      return "bg-security-none border-security-none text-foreground hover:bg-security-none-hover dark:bg-security-none dark:hover:bg-security-none-hover";
-  }
-};
-export const getPreservationColorClass = (preservation?: APIPreservationLevel) => {
-  switch (preservation) {
+      return "purple";
     case "NONE":
-      return "bg-preservation-none border-preservation-none text-foreground hover:bg-preservation-none-hover dark:bg-preservation-none dark:hover:bg-preservation-none-hover";
+    default:
+      return "white";
+  }
+};
+
+const getPreservationColor = (preservation?: APIPreservationLevel): Color => {
+  switch (preservation) {
     case "LOW":
-      return "bg-preservation-low border-preservation-low text-foreground hover:bg-preservation-low-hover dark:bg-preservation-low dark:hover:bg-preservation-low-hover";
+      return "red";
     case "MEDIUM":
-      return "bg-preservation-medium border-preservation-medium text-foreground hover:bg-preservation-medium-hover dark:bg-preservation-medium dark:hover:bg-preservation-medium-hover";
+      return "yellow";
     case "HIGH":
-      return "bg-preservation-high border-preservation-high text-foreground hover:bg-preservation-high-hover dark:bg-preservation-high dark:hover:bg-preservation-high-hover";
+      return "green";
     case "AWESOME":
-      return "bg-preservation-awesome border-preservation-awesome text-foreground hover:bg-preservation-awesome-hover dark:bg-preservation-awesome dark:hover:bg-preservation-awesome-hover";
+      return "purple";
+    case "NONE":
     default:
-      return "bg-preservation-none border-preservation-none text-foreground hover:bg-preservation-none-hover dark:bg-preservation-none dark:hover:bg-preservation-none-hover";
+      return "white";
   }
 };
 
-export const getNotificationColorClass = (type: string) => {
-  switch (type) {
-    case "UPDATE":
-      return "bg-notification-update-bg! border-notification-update-border! hover:bg-notification-update-hover!";
-    case "SUCCESS":
-      return "bg-notification-success-bg! border-notification-success-border! hover:bg-notification-success-hover!";
-    case "REMINDER":
-      return "bg-notification-reminder-bg! border-notification-reminder-border! hover:bg-notification-reminder-hover!";
-    case "SYSTEM":
-      return "bg-notification-system-bg! border-notification-system-border! hover:bg-notification-system-hover!";
-    case "SOCIAL":
-      return "bg-notification-social-bg! border-notification-social-border! hover:bg-notification-social-hover!";
-    case "ALERT":
-      return "bg-notification-alert-bg! border-notification-alert-border! hover:bg-notification-alert-hover!";
+const getRankColor = (rank?: APIRank): Color => {
+  switch (rank) {
+    case "AMATEUR":
+      return "green";
+    case "PROFI":
+      return "yellow";
+    case "STALKER":
+      return "red";
+    case "LEGEND":
+      return "purple";
+    case "ROOKIE":
     default:
-      return "bg-notification-default-bg! border-notification-default-border! hover:bg-notification-default-hover!";
+      return "white";
   }
 };
 
-export const getNotificationIconColorClass = (type: string) => {
-  switch (type) {
-    case "UPDATE":
-      return "text-notification-update-icon";
-    case "SUCCESS":
-      return "text-notification-success-icon";
-    case "REMINDER":
-      return "text-notification-reminder-icon";
-    case "SYSTEM":
-      return "text-notification-system-icon";
-    case "SOCIAL":
-      return "text-notification-social-icon";
-    case "ALERT":
-      return "text-notification-alert-icon";
-    default:
-      return "text-notification-default-icon";
-  }
-};
+export const getRankShadowClass = (rank?: APIRank) => SHADOW_CLASSES[getRankColor(rank)];
 
+export const getAchievementColorClass = (significance?: APIAchievementSignificance) =>
+  CARD_CLASSES[getAchievementColor(significance)];
+
+export const getSecurityColorClass = (security?: APISecurityLevel) =>
+  BADGE_CLASSES[getSecurityColor(security)];
+
+export const getPreservationColorClass = (preservation?: APIPreservationLevel) =>
+  BADGE_CLASSES[getPreservationColor(preservation)];
+
+export const getNotificationColorClass = (type: string) => CARD_CLASSES[getNotificationColor(type)];
+
+export const getNotificationIconColorClass = (type: string) => ICON_CLASSES[getNotificationColor(type)];
