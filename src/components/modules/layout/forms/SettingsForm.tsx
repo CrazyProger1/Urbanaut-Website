@@ -120,21 +120,21 @@ export const SettingsForm = ({ user, languages }: Props) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="is_interactive_mode_enabled"
-          render={({ field }) => (
-            <FormItem>
-              <SwitchToggle
-                title={t(PLACEHOLDERS.LABEL_INTERACTIVE_MODE)}
-                description={t(PLACEHOLDERS.DESCRIPTION_INTERACTIVE_MODE)}
-                icon={<Pointer className="h-4 w-4" />}
-                checked={field.value}
-                onCheckedChange={field.onChange}
-              />
-            </FormItem>
-          )}
-        />
+        {/*<FormField*/}
+        {/*  control={form.control}*/}
+        {/*  name="is_interactive_mode_enabled"*/}
+        {/*  render={({ field }) => (*/}
+        {/*    <FormItem>*/}
+        {/*      <SwitchToggle*/}
+        {/*        title={t(PLACEHOLDERS.LABEL_INTERACTIVE_MODE)}*/}
+        {/*        description={t(PLACEHOLDERS.DESCRIPTION_INTERACTIVE_MODE)}*/}
+        {/*        icon={<Pointer className="h-4 w-4" />}*/}
+        {/*        checked={field.value}*/}
+        {/*        onCheckedChange={field.onChange}*/}
+        {/*      />*/}
+        {/*    </FormItem>*/}
+        {/*  )}*/}
+        {/*/>*/}
         <Field className="flex flex-col">
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
             {t(PLACEHOLDERS.BUTTON_APPLY)} {formState.isSubmitting && <Spinner />}
