@@ -45,7 +45,15 @@ const SHADOW_CLASSES: Record<Color, string> = {
   white: "drop-shadow-white-shadow",
 };
 
-const getNotificationColor = (type: string): Color => {
+export const getCardClass = (color: Color) => CARD_CLASSES[color];
+
+export const getBadgeClass = (color: Color) => BADGE_CLASSES[color];
+
+export const getIconClass = (color: Color) => ICON_CLASSES[color];
+
+export const getShadowClass = (color: Color) => SHADOW_CLASSES[color];
+
+export const getNotificationColor = (type: string): Color => {
   switch (type) {
     case "UPDATE":
       return "blue";
@@ -64,7 +72,7 @@ const getNotificationColor = (type: string): Color => {
   }
 };
 
-const getAchievementColor = (significance?: APIAchievementSignificance): Color => {
+export const getAchievementColor = (significance?: APIAchievementSignificance): Color => {
   switch (significance) {
     case "GROWTH":
       return "green";
@@ -80,7 +88,7 @@ const getAchievementColor = (significance?: APIAchievementSignificance): Color =
   }
 };
 
-const getSecurityColor = (security?: APISecurityLevel): Color => {
+export const getSecurityColor = (security?: APISecurityLevel): Color => {
   switch (security) {
     case "EASY":
       return "green";
@@ -96,7 +104,7 @@ const getSecurityColor = (security?: APISecurityLevel): Color => {
   }
 };
 
-const getPreservationColor = (preservation?: APIPreservationLevel): Color => {
+export const getPreservationColor = (preservation?: APIPreservationLevel): Color => {
   switch (preservation) {
     case "LOW":
       return "red";
@@ -112,7 +120,7 @@ const getPreservationColor = (preservation?: APIPreservationLevel): Color => {
   }
 };
 
-const getToastColor = (type: ToastType): Color => {
+export const getToastColor = (type: ToastType): Color => {
   switch (type) {
     case "success":
       return "green";
@@ -128,7 +136,7 @@ const getToastColor = (type: ToastType): Color => {
   }
 };
 
-const getRankColor = (rank?: APIRank): Color => {
+export const getRankColor = (rank?: APIRank): Color => {
   switch (rank) {
     case "AMATEUR":
       return "green";
