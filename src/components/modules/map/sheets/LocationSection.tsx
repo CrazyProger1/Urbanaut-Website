@@ -17,7 +17,7 @@ export const LocationSection = ({ point }: Props) => {
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="font-semibold">{t(PLACEHOLDERS.SECTION_LOCATION)}</div>
-      <div className="flex flex-wrap gap-1">
+      <div className="flex flex-wrap justify-center gap-1">
         {point && <CoordinatesBar point={point} />}
       </div>
     </div>

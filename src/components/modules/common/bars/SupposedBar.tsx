@@ -14,6 +14,7 @@ export const SupposedBar = () => {
       icon={<HelpCircle className="h-5 w-5" />}
       tooltip={t(PLACEHOLDERS.TOOLTIP_PLACE_SUPPOSED)}
       href={`${PAGES.MAP}?${QUERIES.FILTER_IS_SUPPOSED}=true`}
+      className="lowercase"
     >
       {t(PLACEHOLDERS.LABEL_SUPPOSED)}
     </Bar>

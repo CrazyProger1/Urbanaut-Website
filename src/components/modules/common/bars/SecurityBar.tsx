@@ -14,6 +14,7 @@ export const SecurityBar = () => {
       icon={<ShieldAlert className="h-5 w-5" />}
       tooltip={t(PLACEHOLDERS.TOOLTIP_PLACE_SECURITY)}
       href={`${PAGES.MAP}?${QUERIES.FILTER_HAS_SECURITY}=true`}
+      className="lowercase"
     >
       {t(PLACEHOLDERS.LABEL_HAS_SECURITY)}
     </Bar>

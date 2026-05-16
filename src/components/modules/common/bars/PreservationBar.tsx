@@ -26,6 +26,7 @@ export const PreservationBar = ({ preservation }: Props) => {
       color={getPreservationColor(preservation.level)}
       icon={<Wrench className="h-5 w-5" />}
       tooltip={tooltip || t(PLACEHOLDERS.LABEL_PRESERVATION)}
+      className="lowercase"
     >
       {label}
     </Bar>
