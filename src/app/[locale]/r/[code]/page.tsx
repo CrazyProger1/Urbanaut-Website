@@ -33,7 +33,7 @@ const Page = async ({ params }: Props) => {
   }
 
   searchParams.append(QUERIES.MODAL_SIGNUP, "true");
-  searchParams.append("code", code);
+  searchParams.append(QUERIES.AUTH_CODE, code);
 
   return (
     <div className="from-primary/5 via-background to-primary/10 flex flex-1 items-center justify-center bg-linear-to-br p-4 select-none">
@@ -56,9 +56,7 @@ const Page = async ({ params }: Props) => {
 
         <CardContent className="space-y-6">
           <div className="space-y-4 text-center">
-            <p className="text-muted-foreground">
-              {t(PLACEHOLDERS.LABEL_REFERRAL_INVITED_TEXT)}
-            </p>
+            <p className="text-muted-foreground">{t(PLACEHOLDERS.LABEL_REFERRAL_INVITED_TEXT)}</p>
 
             <div className="flex flex-col items-center gap-2">
               <span className="text-muted-foreground text-sm font-medium">
@@ -78,7 +76,9 @@ const Page = async ({ params }: Props) => {
           <Separator />
 
           <div className="space-y-4">
-            <h3 className="text-center text-lg font-semibold">{t(PLACEHOLDERS.LABEL_REFERRAL_BENEFITS)}</h3>
+            <h3 className="text-center text-lg font-semibold">
+              {t(PLACEHOLDERS.LABEL_REFERRAL_BENEFITS)}
+            </h3>
             <div className="grid gap-4 md:grid-cols-3">
               <div className="bg-muted/50 flex flex-col items-center gap-2 rounded-lg p-4 text-center">
                 <Gift className="text-primary h-8 w-8" />

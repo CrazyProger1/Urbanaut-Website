@@ -6,6 +6,8 @@ import { clearSession, getSession, setSession } from "@/utils/session";
 import { ActionResult, APICreateUser, CurrentUser } from "@/types";
 import { convertAPIResponseToActionResult } from "@/utils/actions";
 import { Locale } from "@/i18n";
+import { getGoogleOAuthRedirectUri } from "@/services/api/auth";
+import { redirect } from "next/navigation";
 
 export const login = async (
   email: string,
@@ -31,6 +33,14 @@ export const login = async (
 export const register = async (user: APICreateUser): Promise<ActionResult> => {
   const response = await services.register(user);
   return convertAPIResponseToActionResult(response);
+};
+
+export const oauthViaGoogle = async (code?: string) => {
+  const response = await getGoogleOAuthRedirectUri({ code });
+
+  if (response.success) {
+    redirect(response.redirect_uri);
+  }
 };
 
 export const logout = async () => {

@@ -18,14 +18,14 @@ import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/actions";
+import { login, oauthViaGoogle } from "@/actions";
 import { Field, FieldDescription } from "@/components/ui/field";
-import { toast } from "sonner";
 import { QUERIES, PLACEHOLDERS } from "@/config";
-import OneSignal from "react-onesignal";
 import { loginOneSignal } from "@/services/lib/onesignal";
 import { validateActionResult } from "@/utils/actions";
 import { useTranslations } from "next-intl";
+import { GoogleAuthButton } from "@/components/modules/login/google";
+import { useAuthCode } from "@/hooks";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -39,15 +39,12 @@ const formSchema = z.object({
     .regex(/[!@#$%^&*()_\-+=<>?]/, "Password must contain a special character"),
 });
 
-type Props = {
-  otherProviders?: React.ReactNode[];
-};
-
-export const SigninForm = ({ otherProviders }: Props) => {
+export const SigninForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const t = useTranslations("Modules");
+  const authCode = useAuthCode();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -124,9 +121,7 @@ export const SigninForm = ({ otherProviders }: Props) => {
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
             {t(PLACEHOLDERS.BUTTON_SIGNIN)} {formState.isSubmitting && <Spinner />}
           </Button>
-          {otherProviders?.map((provider, i) => (
-            <React.Fragment key={i}>{provider}</React.Fragment>
-          ))}
+          <GoogleAuthButton authCode={authCode} />
           <FieldDescription className="text-center">
             {t(PLACEHOLDERS.LABEL_NO_ACCOUNT)}{" "}
             <Link href={`?${QUERIES.MODAL_SIGNUP}=true`}>{t(PLACEHOLDERS.BUTTON_SIGNUP)}</Link>

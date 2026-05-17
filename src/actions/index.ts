@@ -1,6 +1,7 @@
 export {
   login,
   register,
+  oauthViaGoogle,
   logout,
   syncCurrentUser,
   syncCurrentUserVoid,

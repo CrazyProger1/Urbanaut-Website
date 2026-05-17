@@ -19,11 +19,9 @@ export const SigninModal = async () => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_SIGNIN)}</DialogTitle>
-          <DialogDescription>
-            {t(PLACEHOLDERS.DESCRIPTION_SIGNIN)}
-          </DialogDescription>
+          <DialogDescription>{t(PLACEHOLDERS.DESCRIPTION_SIGNIN)}</DialogDescription>
         </DialogHeader>
-        <SigninForm otherProviders={[<GoogleAuthButton key="google" />]} />
+        <SigninForm />
       </DialogContent>
     </Modal>
   );

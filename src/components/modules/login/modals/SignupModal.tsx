@@ -8,7 +8,6 @@ import {
 import { Modal } from "@/components/ui/next/modal";
 import { QUERIES, PLACEHOLDERS } from "@/config";
 import { SignupForm } from "../forms";
-import { GoogleAuthButton } from "../google";
 import { Country } from "@/types";
 import { getTranslations } from "next-intl/server";
 
@@ -24,11 +23,9 @@ export const SignupModal = async ({ countries }: Props) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t(PLACEHOLDERS.TITLE_SIGNUP)}</DialogTitle>
-          <DialogDescription>
-            {t(PLACEHOLDERS.DESCRIPTION_SIGNUP)}
-          </DialogDescription>
+          <DialogDescription>{t(PLACEHOLDERS.DESCRIPTION_SIGNUP)}</DialogDescription>
         </DialogHeader>
-        <SignupForm otherProviders={[<GoogleAuthButton key="google" />]} countries={countries} />
+        <SignupForm countries={countries} />
       </DialogContent>
     </Modal>
   );

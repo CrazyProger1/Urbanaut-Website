@@ -27,6 +27,8 @@ import { BirthDateSelect } from "./BirthDateSelect";
 import { loginOneSignal } from "@/services/lib/onesignal";
 import { validateActionResult } from "@/utils/actions";
 import { useTranslations } from "next-intl";
+import { GoogleAuthButton } from "@/components/modules/login/google";
+import { useAuthCode } from "@/hooks";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -60,14 +62,14 @@ const formSchema = z.object({
 
 type Props = {
   countries?: Country[];
-  otherProviders?: React.ReactNode[];
 };
 
-export const SignupForm = ({ otherProviders, countries }: Props) => {
+export const SignupForm = ({ countries }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const t = useTranslations("Modules");
+  const authCode = useAuthCode();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -84,11 +86,10 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
   const { formState, setError } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const code = searchParams.get("code") ?? undefined;
     const registrationResult = await register({
       ...values,
       born_at: values.born_at?.toISOString().split("T")[0],
-      code,
+      code: authCode,
     });
 
     const validationOptions = {
@@ -218,9 +219,7 @@ export const SignupForm = ({ otherProviders, countries }: Props) => {
           <Button className="w-full" type="submit" disabled={formState.isSubmitting}>
             {t(PLACEHOLDERS.BUTTON_SIGNUP)} {formState.isSubmitting && <Spinner />}
           </Button>
-          {otherProviders?.map((provider, i) => (
-            <React.Fragment key={i}>{provider}</React.Fragment>
-          ))}
+          <GoogleAuthButton authCode={authCode} />
           <FieldDescription className="text-center">
             {t(PLACEHOLDERS.LABEL_HAVE_ACCOUNT)}{" "}
             <Link href={`?${QUERIES.MODAL_SIGNIN}=true`}>{t(PLACEHOLDERS.BUTTON_SIGNIN)}</Link>

@@ -40,8 +40,13 @@ export const register = async (user: APICreateUser) => {
   });
 };
 
-export const getGoogleOAuthRedirectUri = async () => {
+type GetGoogleOAuthRedirectURIOptions = {
+  code?: string;
+};
+
+export const getGoogleOAuthRedirectUri = async (options?: GetGoogleOAuthRedirectURIOptions) => {
   return await fetchAuthenticated<APIGoogleOauthRedirectURIResponse>(
     API_ENDPOINTS.GOOGLE_OAUTH_REDIRECT_URI,
+    { method: "POST", body: JSON.stringify(options) },
   );
 };

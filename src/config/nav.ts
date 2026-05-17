@@ -65,6 +65,8 @@ export const QUERIES = {
 
   SEARCH: "query",
   SEARCH_AI: "ai_query",
+
+  AUTH_CODE: "auth_code",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
