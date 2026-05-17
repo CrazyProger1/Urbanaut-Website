@@ -15,7 +15,11 @@ import { buildRootMetadata, rootViewport } from "@/utils/metadata";
 import { ToastProvider } from "@/components/common/toasts";
 import { Poppins, Russo_One } from "next/font/google";
 import { ComplainCreateModal, FeedbackCreateModal } from "@/components/modules/feedback/modals";
-import { SettingsModal, AchievementModal, NotificationModal } from "@/components/modules/layout/modals";
+import {
+  SettingsModal,
+  AchievementModal,
+  NotificationModal,
+} from "@/components/modules/layout/modals";
 import { getCountries } from "@/services/api/geo";
 import { getNotifications, obtainWebsocketToken } from "@/services";
 import { CookieConsent } from "@/components/ui/cookie-consent";
@@ -57,7 +61,7 @@ const RootLayout = async ({ children, params }: Props) => {
 
   const user = session?.user;
 
-  setRequestLocale(locale); // user?.settings.language || locale
+  setRequestLocale(user?.settings.language || locale);
 
   const theme = user?.settings?.theme || "DARK";
 
