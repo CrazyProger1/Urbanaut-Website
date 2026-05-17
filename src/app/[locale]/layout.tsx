@@ -61,7 +61,7 @@ const RootLayout = async ({ children, params }: Props) => {
 
   const user = session?.user;
 
-  setRequestLocale(user?.settings.language || locale);
+  setRequestLocale(locale);
 
   const theme = user?.settings?.theme || "DARK";
 
