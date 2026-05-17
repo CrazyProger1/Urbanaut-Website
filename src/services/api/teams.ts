@@ -11,9 +11,7 @@ import {
 } from "@/types";
 import { buildURLSearchParams } from "@/utils/api";
 
-type GetTeamsOptions = {
-  ordering?: string;
-};
+type GetTeamsOptions = APITeamFilters;
 
 export const createTeam = async (team: APICreateTeam) => {
   return await fetchAuthenticated(API_ENDPOINTS.TEAMS, {

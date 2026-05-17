@@ -10,15 +10,14 @@ import {
   APIObtainWebsocketToken,
   APIPaginatedResponse,
   APIListUser,
+  APITeamFilters,
 } from "@/types";
 import { fetchAuthenticated } from "@/services";
 import { API_ENDPOINTS, CACHE_TAGS } from "@/config";
 import { buildURLSearchParams } from "@/utils/api";
 import { APIUserFilters } from "@/types";
 
-type GetUsersOptions = {
-  ordering?: string;
-};
+type GetUsersOptions = APITeamFilters;
 
 export const getUsers = async (options?: GetUsersOptions) => {
   const params = buildURLSearchParams<APIUserFilters>(options, ["ordering"]);

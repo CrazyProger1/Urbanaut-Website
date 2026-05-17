@@ -1,30 +1,4 @@
-export type APIResponse = {
-  success: boolean;
-};
-
-export type APISuccessfulResponse = {
-  success: true;
-} & APIResponse;
-
-export type APIError = {
-  code?: string;
-  detail?: string;
-  attr?: string;
-};
-
-export type APIErrorResponse = {
-  success: false;
-  message?: string;
-  errors: APIError[];
-} & APIResponse;
-
-export type APIPaginatedResponse<T> = {
-  next?: string;
-  previous?: string;
-  count: number;
-  results: T[];
-} & APISuccessfulResponse;
-
+export type * from "./api";
 export type * from "./user";
 export type { APIRetrieveMetric } from "./metric";
 export type { APIRetrieveAchievement, APIAchievementSignificance } from "./achivement";
@@ -54,8 +28,8 @@ export type { APIListReferralCode } from "./referrals";
 export type { APIListFile, APIFileType } from "./media";
 export type { APIListLanguage } from "./i18n";
 export type { APIRetrieveGlobalStats } from "./stats";
-export type { APINewsType, APIRetrieveNews, APIListNews } from "./news";
-export type { APICreateTeam, APIListTeam, APIRetrieveTeam, APITeamFilters } from "./team";
+export type * from "./news";
+export type * from "./team";
 export type {
   APIRetrieveNotification,
   APIListNotification,

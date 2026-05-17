@@ -2,6 +2,7 @@ import { Locale } from "@/i18n";
 import { APIRetrieveMetric } from "@/types/services/api/metric";
 import { APIRetrieveAchievement } from "@/types/services/api/achivement";
 import { APIRetrieveCountry } from "@/types/services/api/geo";
+import { APIOrderingParams, APIPaginationParams } from "@/types";
 
 export type APITheme = "DARK" | "LIGHT";
 
@@ -90,6 +91,4 @@ export type APICreateUser = {
   born_at?: string;
 };
 
-export type APIUserFilters = {
-  ordering?: string;
-};
+export type APIUserFilters = APIOrderingParams & APIPaginationParams;

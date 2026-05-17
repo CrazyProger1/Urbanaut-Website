@@ -20,6 +20,6 @@ export { getLanguages } from "./i18n";
 export { createRequest } from "./requests";
 export { getMap } from "./map";
 export { getGlobalStats } from "./stats";
-export { getLatestNews } from "./news";
+export { getNews } from "./news";
 export { createTeam, getTeams, getTeam } from "./teams";
 export { getAchievement } from "./achievements";

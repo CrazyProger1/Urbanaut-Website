@@ -1,3 +1,5 @@
+import { APIOrderingParams, APIPaginationParams } from "@/types/services/api/api";
+
 export type APINewsType = "UPDATE" | "REMINDER" | "ALERT" | "SYSTEM" | "SOCIAL" | "SUCCESS";
 
 export type APIListNews = {
@@ -13,3 +15,5 @@ export type APIListNews = {
 export type APIRetrieveNews = APIListNews & {
   content?: string;
 };
+
+export type APINewsFilters = APIPaginationParams & APIOrderingParams;

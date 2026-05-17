@@ -30,7 +30,7 @@ export const NewsSection = ({ news }: Props) => {
           ))}
         </div>
         <Button variant="ghost" size="sm" className="mt-6 self-start" asChild>
-          <Link href={PAGES.BLOG}>
+          <Link href={PAGES.NEWS}>
             {t("BUTTON_VIEW_ALL")} <ChevronRight className="size-4" />
           </Link>
         </Button>

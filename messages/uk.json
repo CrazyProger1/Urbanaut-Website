@@ -306,6 +306,7 @@
     "LABEL_ORDER_BY_KARMA": "Карма",
     "LABEL_ORDER_BY_SCORE": "Рахунок",
     "LABEL_NO_USERS_YET": "Користувачів поки немає.",
-    "LABEL_NO_TEAMS_YET": "Команд поки немає."
+    "LABEL_NO_TEAMS_YET": "Команд поки немає.",
+    "LABEL_NO_NEWS_YET": "Новин поки немає."
   }
 }

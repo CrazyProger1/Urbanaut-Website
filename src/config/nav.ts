@@ -13,6 +13,7 @@ export const PAGES = {
   REFERRAL: "/r",
   TEAMS: "/teams",
   LEADERBOARD: "/leaderboard",
+  NEWS: "/news",
 };
 
 export const SITE_URL = process.env.SITE_URL || "https://urbanaut.club";

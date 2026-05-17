@@ -5,7 +5,7 @@ import {
   StatsSection,
 } from "@/components/modules/main";
 import { getSession } from "@/utils/session";
-import { getGlobalStats, getLatestNews, getTeams, getUsers } from "@/services";
+import { getGlobalStats, getNews, getTeams, getUsers } from "@/services";
 
 type Props = {
   searchParams: Promise<Record<string, string>>;
@@ -14,9 +14,9 @@ type Props = {
 const Page = async ({}: Props) => {
   const session = await getSession();
   const stats = await getGlobalStats();
-  const news = await getLatestNews();
+  const news = await getNews({ ordering: "-published_at" });
   const users = await getUsers({ ordering: "-score" });
-  const teams = await getTeams();
+  const teams = await getTeams({ ordering: "-score" });
 
   return (
     <main className="flex-1 overflow-x-hidden">

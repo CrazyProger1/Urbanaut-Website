@@ -1,4 +1,4 @@
-import { APIListUser } from "@/types";
+import { APIListUser, APIOrderingParams, APIPaginationParams } from "@/types";
 
 export type APITeamMember = APIListUser;
 
@@ -25,6 +25,4 @@ export type APIRetrieveTeam = {
   created_at: string;
 };
 
-export type APITeamFilters = {
-  ordering?: string;
-};
+export type APITeamFilters = APIOrderingParams & APIPaginationParams;
