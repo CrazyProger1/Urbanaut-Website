@@ -1,5 +1,5 @@
 import { APIPoint } from "./geo";
-import { APIPreservationLevel } from "@/types";
+import { APIOrderingParams, APIPaginationParams, APIPreservationLevel } from "@/types";
 import { APIMapBounds } from "@/types/services/api/map";
 import { APIListUser } from "@/types/services/api/user";
 import { APIListFile } from "@/types/services/api/media";
@@ -59,7 +59,8 @@ export type APIPlaceFilters = APIMapBounds & {
   area?: number;
   tags?: string;
   query?: string;
-};
+} & APIOrderingParams &
+  APIPaginationParams;
 
 export type APIPlaceCreatePreservation = {
   has_windows?: boolean;

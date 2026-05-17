@@ -29,11 +29,13 @@ export const NewsSection = ({ news }: Props) => {
             <NewsCard key={n.id} news={n} />
           ))}
         </div>
-        <Button variant="ghost" size="sm" className="mt-6 self-start" asChild>
-          <Link href={PAGES.NEWS}>
-            {t("BUTTON_VIEW_ALL")} <ChevronRight className="size-4" />
-          </Link>
-        </Button>
+        {news.length > 3 && (
+          <Button variant="ghost" size="sm" className="mt-6 self-start" asChild>
+            <Link href={PAGES.NEWS}>
+              {t("BUTTON_VIEW_ALL")} <ChevronRight className="size-4" />
+            </Link>
+          </Button>
+        )}
       </div>
     </section>
   );

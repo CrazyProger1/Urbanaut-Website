@@ -13,10 +13,19 @@ import {
 import { APIPlaceFilters } from "@/types/services/api";
 import { buildURLSearchParams } from "@/utils/api";
 
+type GetPlaceOptions = APIPlaceFilters;
+
 export const getPlaces = async (
-  filters?: APIPlaceFilters,
+  options?: GetPlaceOptions,
 ): Promise<APIPaginatedResponse<APIListPlace> | APIErrorResponse> => {
-  const params = buildURLSearchParams<APIPlaceFilters>(filters, ["area", "name", "tags"]);
+  const params = buildURLSearchParams<APIPlaceFilters>(options, [
+    "area",
+    "name",
+    "tags",
+    "ordering",
+    "limit",
+    "offset",
+  ]);
   return fetchAuthenticated(`${API_ENDPOINTS.PLACES}?${params}`);
 };
 
