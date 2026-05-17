@@ -12,6 +12,7 @@ export const PAGES = {
   CALENDAR: "/calendar",
   REFERRAL: "/r",
   TEAMS: "/teams",
+  LEADERBOARD: "/leaderboard",
 };
 
 export const SITE_URL = process.env.SITE_URL || "https://urbanaut.club";

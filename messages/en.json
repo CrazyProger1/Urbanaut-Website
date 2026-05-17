@@ -297,6 +297,15 @@
     "LABEL_REFERRALS": "Referrals",
     "ROLE_CAPTAIN": "captain",
     "ROLE_MEMBER": "member",
-    "TOOLTIP_EDIT_TEAM": "Edit Team"
+    "TOOLTIP_EDIT_TEAM": "Edit Team",
+    "TITLE_LEADERBOARD": "Leaderboard",
+    "DESCRIPTION_LEADERBOARD": "The most active explorers and teams on Urbanaut.",
+    "TAB_USERS": "Users",
+    "TAB_TEAMS": "Teams",
+    "LABEL_ORDER_BY_EXPERIENCE": "Experience",
+    "LABEL_ORDER_BY_KARMA": "Karma",
+    "LABEL_ORDER_BY_SCORE": "Score",
+    "LABEL_NO_USERS_YET": "No users yet.",
+    "LABEL_NO_TEAMS_YET": "No teams yet."
   }
 }

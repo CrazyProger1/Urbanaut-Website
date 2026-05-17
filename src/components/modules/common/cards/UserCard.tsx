@@ -4,6 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CopyToast } from "@/components/common/toasts";
 import { PAGES, PLACEHOLDERS, SITE_URL } from "@/config";
 import { getRankShadowClass } from "@/utils/classes";
+import { shortifyNumber } from "@/utils/string";
+import { Heart, Zap } from "lucide-react";
+import { OptionalLink } from "@/components/common/utils";
 
 type Props = {
   user: User;
@@ -11,11 +14,14 @@ type Props = {
   action?: ReactNode;
   role?: string;
   onClick?: () => void;
+  metrics?: boolean;
+  score?: number;
 };
 
-export const UserCard = ({ user, href, action, role, onClick }: Props) => {
+export const UserCard = ({ user, href, action, role, onClick, metrics, score }: Props) => {
   return (
-    <div
+    <OptionalLink
+      href={href}
       onClick={onClick}
       className="bg-card text-card-foreground drop-shadow-volume relative flex w-full cursor-pointer flex-row items-center gap-2 rounded-2xl px-2 py-1 shadow-lg transition-transform duration-200 hover:scale-[1.02]"
     >
@@ -42,7 +48,28 @@ export const UserCard = ({ user, href, action, role, onClick }: Props) => {
           ))}
         </div>
       </div>
-      {action && <div className="flex w-full flex-row justify-end pr-2">{action}</div>}
-    </div>
+      <div className="flex w-full flex-row justify-end pr-2">
+        <div className="flex flex-row gap-2">
+          {metrics && (
+            <div className="text-muted-foreground flex items-center justify-end gap-3 text-xs">
+              <span className="flex items-center gap-1">
+                <Zap className="size-3" />
+                {shortifyNumber(user.experience || 0)} exp
+              </span>
+              <span className="flex items-center gap-1">
+                <Heart className="size-3" />
+                {shortifyNumber(user.karma || 0)} kar
+              </span>
+            </div>
+          )}
+          {score && (
+            <span className="bg-muted text-foreground flex size-7 items-center justify-center rounded-full text-xs font-bold">
+              {score}
+            </span>
+          )}
+          {action}
+        </div>
+      </div>
+    </OptionalLink>
   );
 };

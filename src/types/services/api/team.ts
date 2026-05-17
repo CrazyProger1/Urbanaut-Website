@@ -2,7 +2,6 @@ import { APIListUser } from "@/types";
 
 export type APITeamMember = APIListUser;
 
-
 export type APICreateTeam = {
   name: string;
   description?: string;
@@ -24,4 +23,8 @@ export type APIRetrieveTeam = {
   members: APITeamMember[];
   created_by?: string;
   created_at: string;
+};
+
+export type APITeamFilters = {
+  ordering?: string;
 };

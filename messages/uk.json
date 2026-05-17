@@ -297,6 +297,15 @@
     "LABEL_REFERRALS": "Реферали",
     "ROLE_CAPTAIN": "капітан",
     "ROLE_MEMBER": "учасник",
-    "TOOLTIP_EDIT_TEAM": "Редагувати команду"
+    "TOOLTIP_EDIT_TEAM": "Редагувати команду",
+    "TITLE_LEADERBOARD": "Рейтинг",
+    "DESCRIPTION_LEADERBOARD": "Найактивніші дослідники та команди Urbanaut.",
+    "TAB_USERS": "Користувачі",
+    "TAB_TEAMS": "Команди",
+    "LABEL_ORDER_BY_EXPERIENCE": "Досвід",
+    "LABEL_ORDER_BY_KARMA": "Карма",
+    "LABEL_ORDER_BY_SCORE": "Очки",
+    "LABEL_NO_USERS_YET": "Користувачів поки немає.",
+    "LABEL_NO_TEAMS_YET": "Команд поки немає."
   }
 }

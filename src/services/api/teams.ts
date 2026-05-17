@@ -2,7 +2,18 @@
 
 import { fetchAuthenticated } from "./auth";
 import { API_ENDPOINTS } from "@/config";
-import { APICreateTeam, APIListTeam, APIPaginatedResponse, APIRetrieveTeam } from "@/types";
+import {
+  APICreateTeam,
+  APIListTeam,
+  APIPaginatedResponse,
+  APIRetrieveTeam,
+  APITeamFilters,
+} from "@/types";
+import { buildURLSearchParams } from "@/utils/api";
+
+type GetTeamsOptions = {
+  ordering?: string;
+};
 
 export const createTeam = async (team: APICreateTeam) => {
   return await fetchAuthenticated(API_ENDPOINTS.TEAMS, {
@@ -11,12 +22,13 @@ export const createTeam = async (team: APICreateTeam) => {
   });
 };
 
-export const getTeams = async () => {
-  return await fetchAuthenticated<APIPaginatedResponse<APIListTeam>>(API_ENDPOINTS.TEAMS);
+export const getTeams = async (options?: GetTeamsOptions) => {
+  const params = buildURLSearchParams<APITeamFilters>(options, ["ordering"]);
+  return await fetchAuthenticated<APIPaginatedResponse<APIListTeam>>(
+    `${API_ENDPOINTS.TEAMS}?${params}`,
+  );
 };
 
 export const getTeam = async (id: string) => {
-  return await fetchAuthenticated<APIRetrieveTeam>(
-    API_ENDPOINTS.TEAM.replace("[id]", id),
-  );
+  return await fetchAuthenticated<APIRetrieveTeam>(API_ENDPOINTS.TEAM.replace("[id]", id));
 };
