@@ -12,10 +12,10 @@ import { QUERIES, PLACEHOLDERS } from "@/config";
 import { CurrentUser, Language } from "@/types";
 import { Field } from "@/components/ui/field";
 import { usePreservedParamsLink } from "@/hooks";
-import { Globe, Bell, Mail, Pointer } from "lucide-react";
+import { Globe, Bell, Mail } from "lucide-react";
 import { LanguageSelect } from "../../profile/forms/LanguageSelect";
 import { SwitchToggle } from "@/components/common/toggles";
-import { updateSettings } from "@/actions";
+import { updateSessionLanguage, updateSettings } from "@/actions";
 import { Locale } from "@/i18n";
 import { Separator } from "@/components/ui/separator";
 import { validateActionResult } from "@/utils/actions";
@@ -48,6 +48,7 @@ export const SettingsForm = ({ user, languages }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof settingsFormSchema>) => {
     const languageCode = languages.find(({ name }) => values.language === name)?.code || "en";
+    await updateSessionLanguage(languageCode as Locale);
     const result = await updateSettings({
       ...values,
       language: languageCode as Locale,

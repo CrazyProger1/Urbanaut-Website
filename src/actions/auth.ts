@@ -5,6 +5,7 @@ import { getMe } from "@/services";
 import { clearSession, getSession, setSession } from "@/utils/session";
 import { ActionResult, APICreateUser, CurrentUser } from "@/types";
 import { convertAPIResponseToActionResult } from "@/utils/actions";
+import { Locale } from "@/i18n";
 
 export const login = async (
   email: string,
@@ -43,6 +44,15 @@ export const syncCurrentUser = async () => {
   session.user = userResponse.success ? userResponse : undefined;
   await setSession(session);
   return session;
+};
+
+export const updateSessionLanguage = async (language: Locale) => {
+  const session = await getSession();
+  if (!session?.user?.settings) return;
+  if (session.user.settings.language !== language) {
+    session.user.settings.language = language;
+  }
+  await setSession(session);
 };
 
 export const syncCurrentUserVoid = async () => {
