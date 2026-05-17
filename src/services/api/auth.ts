@@ -45,7 +45,7 @@ type GetGoogleOAuthRedirectURIOptions = {
 };
 
 export const getGoogleOAuthRedirectUri = async (options?: GetGoogleOAuthRedirectURIOptions) => {
-  return await fetchAuthenticated<APIGoogleOauthRedirectURIResponse>(
+  return await fetchAPI<APIGoogleOauthRedirectURIResponse>(
     API_ENDPOINTS.GOOGLE_OAUTH_REDIRECT_URI,
     { method: "POST", body: JSON.stringify(options) },
   );
