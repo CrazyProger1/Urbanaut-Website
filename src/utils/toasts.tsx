@@ -10,8 +10,8 @@ import {
   ToastType,
 } from "@/utils/classes";
 import { cn } from "@/lib/utils";
-import { OptionalLink } from "@/components/common/utils";
 import { QUERIES } from "@/config";
+import Link from "next/link";
 
 type StyledToastArgs = {
   title: string;
@@ -23,15 +23,21 @@ type StyledToastArgs = {
 };
 
 const showStyledToast = ({ title, icon, className, onClick, options, href }: StyledToastArgs) => {
+  const overlay = href ? (
+    <Link
+      href={href}
+      onClick={onClick}
+      aria-label={title}
+      className="absolute inset-0 z-10 cursor-pointer"
+    />
+  ) : (
+    <div onClick={onClick} aria-label={title} className="absolute inset-0 z-10 cursor-pointer" />
+  );
+
   toast(
     <>
       <span>{title}</span>
-      <OptionalLink
-        href={href}
-        onClick={onClick}
-        aria-label={title}
-        className="absolute inset-0 z-10 cursor-pointer"
-      />
+      {overlay}
     </>,
     {
       ...options,
