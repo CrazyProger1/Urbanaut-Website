@@ -14,8 +14,10 @@ export const GoogleAuthButton = ({ authCode }: Props) => {
   const t = useTranslations("Modules");
   return (
     <Button asChild variant="outline" onClick={async () => await oauthViaGoogle(authCode)}>
-      <FaGoogle />
-      <p>{t(PLACEHOLDERS.BUTTON_GOOGLE_AUTH)}</p>
+      <div>
+        <FaGoogle />
+        <p>{t(PLACEHOLDERS.BUTTON_GOOGLE_AUTH)}</p>
+      </div>
     </Button>
   );
 };
