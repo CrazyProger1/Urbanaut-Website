@@ -5,7 +5,7 @@ export const requireRefresh = (response: APIErrorResponse | APISuccessfulRespons
 };
 
 export const buildURLSearchParams = <T>(
-  params?: Record<string, string | number | string[] | number[] | undefined | null>,
+  params?: Record<string, string | number | string[] | number[] | undefined | null | boolean>,
   keys?: (keyof T)[],
 ) => {
   let searchParams = new URLSearchParams();
@@ -25,4 +25,3 @@ export const buildURLSearchParams = <T>(
   });
   return searchParams;
 };
-

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
-import { Loader2, Trophy, Users } from "lucide-react";
+import { ArrowDown, ArrowUp, Loader2, Trophy, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
@@ -11,43 +11,57 @@ import { getTeams, getUsers } from "@/services";
 import { PAGES, PLACEHOLDERS } from "@/config";
 import { cn } from "@/lib/utils";
 
-type LeaderboardOrdering = "-experience" | "-karma" | "-score";
+type OrderField = "experience" | "karma" | "score";
 
 type LeaderboardTab = "users" | "teams";
 
 type Props = {
   initialUsers: User[];
   initialTeams: APIListTeam[];
-  initialOrdering: LeaderboardOrdering;
+  initialOrdering: string;
 };
 
-const ORDERINGS: LeaderboardOrdering[] = ["-experience", "-karma", "-score"];
+const ORDER_FIELDS: OrderField[] = ["experience", "karma", "score"];
 
-const orderingLabel: Record<LeaderboardOrdering, string> = {
-  "-experience": PLACEHOLDERS.LABEL_ORDER_BY_EXPERIENCE,
-  "-karma": PLACEHOLDERS.LABEL_ORDER_BY_KARMA,
-  "-score": PLACEHOLDERS.LABEL_ORDER_BY_SCORE,
+const fieldLabel: Record<OrderField, string> = {
+  experience: PLACEHOLDERS.LABEL_ORDER_BY_EXPERIENCE,
+  karma: PLACEHOLDERS.LABEL_ORDER_BY_KARMA,
+  score: PLACEHOLDERS.LABEL_ORDER_BY_SCORE,
 };
 
 export const LeaderboardSection = ({ initialUsers, initialTeams, initialOrdering }: Props) => {
   const t = useTranslations("Modules");
   const [users, setUsers] = useState(initialUsers);
   const [teams, setTeams] = useState(initialTeams);
-  const [ordering, setOrdering] = useState<LeaderboardOrdering>(initialOrdering);
+  const [orderField, setOrderField] = useState<OrderField>(
+    (initialOrdering.replace("-", "") as OrderField) ?? "experience",
+  );
+  const [isDescending, setIsDescending] = useState(initialOrdering.startsWith("-"));
   const [activeTab, setActiveTab] = useState<LeaderboardTab>("users");
   const [isPending, startTransition] = useTransition();
 
-  const handleOrderingChange = (next: string) => {
-    const nextOrdering = next as LeaderboardOrdering;
-    setOrdering(nextOrdering);
+  const load = (field: OrderField, desc: boolean) => {
+    const ordering = desc ? `-${field}` : field;
     startTransition(async () => {
       const [usersResponse, teamsResponse] = await Promise.all([
-        getUsers({ ordering: nextOrdering }),
-        getTeams({ ordering: nextOrdering }),
+        getUsers({ ordering }),
+        getTeams({ ordering }),
       ]);
       if (usersResponse.success) setUsers(usersResponse.results);
       if (teamsResponse.success) setTeams(teamsResponse.results);
     });
+  };
+
+  const handleFieldChange = (next: string) => {
+    const nextField = next as OrderField;
+    setOrderField(nextField);
+    load(nextField, isDescending);
+  };
+
+  const handleDirectionToggle = () => {
+    const nextDesc = !isDescending;
+    setIsDescending(nextDesc);
+    load(orderField, nextDesc);
   };
 
   return (
@@ -81,13 +95,19 @@ export const LeaderboardSection = ({ initialUsers, initialTeams, initialOrdering
             </TabsTrigger>
           </TabsList>
 
-          <Tabs value={ordering} onValueChange={handleOrderingChange}>
+          <Tabs value={orderField} onValueChange={handleFieldChange}>
             <TabsList>
-              {ORDERINGS.map((value) => (
-                <TabsTrigger key={value} value={value}>
-                  {t(orderingLabel[value])}
+              {ORDER_FIELDS.map((field) => (
+                <TabsTrigger key={field} value={field}>
+                  {t(fieldLabel[field])}
                 </TabsTrigger>
               ))}
+              <button
+                onClick={handleDirectionToggle}
+                className="text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] items-center justify-center rounded-md border border-transparent px-2 py-1 transition-[color,box-shadow]"
+              >
+                {isDescending ? <ArrowDown className="size-4" /> : <ArrowUp className="size-4" />}
+              </button>
             </TabsList>
           </Tabs>
         </div>

@@ -21,7 +21,13 @@ export const createTeam = async (team: APICreateTeam) => {
 };
 
 export const getTeams = async (options?: GetTeamsOptions) => {
-  const params = buildURLSearchParams<APITeamFilters>(options, ["ordering"]);
+  const params = buildURLSearchParams<APITeamFilters>(options, [
+    "ordering",
+    "offset",
+    "limit",
+    "is_member",
+    "search",
+  ]);
   return await fetchAuthenticated<APIPaginatedResponse<APIListTeam>>(
     `${API_ENDPOINTS.TEAMS}?${params}`,
   );

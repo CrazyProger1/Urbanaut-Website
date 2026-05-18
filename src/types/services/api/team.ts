@@ -25,4 +25,4 @@ export type APIRetrieveTeam = {
   created_at: string;
 };
 
-export type APITeamFilters = APIOrderingParams & APIPaginationParams;
+export type APITeamFilters = { is_member?: boolean; search?: string } & APIOrderingParams & APIPaginationParams;

@@ -7,6 +7,7 @@ import { Lock } from "lucide-react";
 import { PLACEHOLDERS, QUERIES } from "@/config";
 import { useTranslations } from "next-intl";
 import { TABS } from "@/config/nav";
+import { TeamsTab } from "@/components/modules/profile/tabs";
 
 type Props = {
   user: UserDetail;
@@ -49,10 +50,8 @@ export const UserActivitySection = ({ user }: Props) => {
           <Lock size="64" />
         </Card>
       </TabsContent>
-      <TabsContent value="friends" className="drop-shadow-volume flex flex-1 flex-col">
-        <Card className="disabled flex flex-1 flex-col items-center justify-center p-4">
-          <Lock size="64" />
-        </Card>
+      <TabsContent value={TABS.PROFILE_TEAMS} className="drop-shadow-volume flex flex-1 flex-col">
+        <TeamsTab />
       </TabsContent>
     </Tabs>
   );
