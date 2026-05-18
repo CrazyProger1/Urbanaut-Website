@@ -91,4 +91,4 @@ export type APICreateUser = {
   born_at?: string;
 };
 
-export type APIUserFilters = APIOrderingParams & APIPaginationParams;
+export type APIUserFilters = { query?: string } & APIOrderingParams & APIPaginationParams;
