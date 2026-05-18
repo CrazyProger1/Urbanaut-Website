@@ -19,7 +19,7 @@ export const API_ENDPOINTS = {
   FEEDBACKS: "feedbacks/",
   REQUESTS: "requests/",
   REFERRAL_CODES: "referral-codes/",
-  APPLY_REFERRAL_CODE: "referral-codes/[code]/apply/",
+  REFERRALS: "referrals/",
   COUNTRIES: "countries/",
   CITIES: "cities/",
   SETTINGS: "settings/",

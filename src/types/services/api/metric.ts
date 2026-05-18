@@ -1,4 +1,4 @@
 export type APIRetrieveMetric = {
-  name: string;
+  key: string;
   value: number;
 };
