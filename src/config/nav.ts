@@ -67,6 +67,15 @@ export const QUERIES = {
   SEARCH_AI: "ai_query",
 
   AUTH_CODE: "auth_code",
+
+  TAB_PROFILE: "tab",
+};
+
+export const TABS = {
+  PROFILE_FRIENDS: "friends",
+  PROFILE_TEAMS: "teams",
+  PROFILE_PLACES: "places",
+  PROFILE_EXPEDITIONS: "expeditions",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

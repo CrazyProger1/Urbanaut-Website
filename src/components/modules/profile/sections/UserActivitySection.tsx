@@ -1,10 +1,12 @@
 import React from "react";
 import { UserDetail } from "@/types";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs } from "@/components/ui/next/tabs";
 import { Card } from "@/components/ui/card";
 import { Lock } from "lucide-react";
-import { PLACEHOLDERS } from "@/config";
+import { PLACEHOLDERS, QUERIES } from "@/config";
 import { useTranslations } from "next-intl";
+import { TABS } from "@/config/nav";
 
 type Props = {
   user: UserDetail;
@@ -13,19 +15,23 @@ type Props = {
 export const UserActivitySection = ({ user }: Props) => {
   const t = useTranslations("Modules");
   return (
-    <Tabs defaultValue="reports" className="flex flex-1 flex-col gap-4 select-none">
+    <Tabs
+      query={QUERIES.TAB_PROFILE}
+      defaultValue="reports"
+      className="flex flex-1 flex-col gap-4 select-none"
+    >
       <TabsList className="w-full">
-        <TabsTrigger value="reports" className="w-full">
+        <TabsTrigger value={TABS.PROFILE_EXPEDITIONS} className="w-full">
           {t(PLACEHOLDERS.LABEL_REPORTS)}
         </TabsTrigger>
-        <TabsTrigger value="places" className="w-full">
+        <TabsTrigger value={TABS.PROFILE_PLACES} className="w-full">
           {t(PLACEHOLDERS.LABEL_PLACES)}
         </TabsTrigger>
-        <TabsTrigger value="teams" className="w-full">
-          {t(PLACEHOLDERS.LABEL_TEAMS)}
-        </TabsTrigger>
-        <TabsTrigger value="friends" className="w-full">
+        <TabsTrigger value={TABS.PROFILE_FRIENDS} className="w-full">
           {t(PLACEHOLDERS.LABEL_FRIENDS)}
+        </TabsTrigger>
+        <TabsTrigger value={TABS.PROFILE_TEAMS} className="w-full">
+          {t(PLACEHOLDERS.LABEL_TEAMS)}
         </TabsTrigger>
       </TabsList>
       <TabsContent value="reports" className="drop-shadow-volume flex flex-1 flex-col">
