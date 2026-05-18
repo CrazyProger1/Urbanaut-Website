@@ -26,7 +26,7 @@ export const getTeams = async (options?: GetTeamsOptions) => {
     "offset",
     "limit",
     "is_member",
-    "search",
+    "query",
   ]);
   return await fetchAuthenticated<APIPaginatedResponse<APIListTeam>>(
     `${API_ENDPOINTS.TEAMS}?${params}`,

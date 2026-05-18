@@ -27,37 +27,37 @@ export const TeamsTab = () => {
   const [teams, setTeams] = useState<APIListTeam[]>([]);
   const [orderField, setOrderField] = useState<OrderField>("experience");
   const [isDescending, setIsDescending] = useState(true);
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const loadTeams = (field: OrderField, desc: boolean, query: string) => {
+  const loadTeams = (field: OrderField, desc: boolean, nextQuery: string) => {
     const ordering = desc ? `-${field}` : field;
     startTransition(async () => {
-      const response = await getTeams({ is_member: true, ordering, search: query });
+      const response = await getTeams({ is_member: true, ordering, query: nextQuery });
       if (response?.results) setTeams(response.results);
     });
   };
 
   useEffect(() => {
-    loadTeams(orderField, isDescending, search);
+    loadTeams(orderField, isDescending, query);
   }, []);
 
   const handleFieldChange = (value: string) => {
     const nextField = value as OrderField;
     setOrderField(nextField);
-    loadTeams(nextField, isDescending, search);
+    loadTeams(nextField, isDescending, query);
   };
 
   const handleDirectionToggle = () => {
     const nextDesc = !isDescending;
     setIsDescending(nextDesc);
-    loadTeams(orderField, nextDesc, search);
+    loadTeams(orderField, nextDesc, query);
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const nextSearch = event.target.value;
-    setSearch(nextSearch);
-    loadTeams(orderField, isDescending, nextSearch);
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextQuery = event.target.value;
+    setQuery(nextQuery);
+    loadTeams(orderField, isDescending, nextQuery);
   };
 
   return (
@@ -77,8 +77,8 @@ export const TeamsTab = () => {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Input
             placeholder={t(PLACEHOLDERS.LABEL_SEARCH_TEAMS)}
-            value={search}
-            onChange={handleSearchChange}
+            value={query}
+            onChange={handleQueryChange}
             className="sm:max-w-xs"
           />
           <Tabs value={orderField} onValueChange={handleFieldChange}>
