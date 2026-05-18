@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUp, Loader2, Trophy, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { TeamCard, UserCard } from "@/components/modules/common/cards";
 import { APIListTeam, User } from "@/types";
 import { getTeams, getUsers } from "@/services";
@@ -38,30 +39,61 @@ export const LeaderboardSection = ({ initialUsers, initialTeams, initialOrdering
   );
   const [isDescending, setIsDescending] = useState(initialOrdering.startsWith("-"));
   const [activeTab, setActiveTab] = useState<LeaderboardTab>("users");
+  const [query, setQuery] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const load = (field: OrderField, desc: boolean) => {
+  const loadUsers = (field: OrderField, desc: boolean, nextQuery: string) => {
+    const ordering = desc ? `-${field}` : field;
+    startTransition(async () => {
+      const response = await getUsers({ ordering, query: nextQuery });
+      if (response.success) setUsers(response.results);
+    });
+  };
+
+  const loadTeams = (field: OrderField, desc: boolean, nextQuery: string) => {
+    const ordering = desc ? `-${field}` : field;
+    startTransition(async () => {
+      const response = await getTeams({ ordering, query: nextQuery });
+      if (response.success) setTeams(response.results);
+    });
+  };
+
+  const loadBoth = (field: OrderField, desc: boolean, nextQuery: string) => {
     const ordering = desc ? `-${field}` : field;
     startTransition(async () => {
       const [usersResponse, teamsResponse] = await Promise.all([
-        getUsers({ ordering }),
-        getTeams({ ordering }),
+        getUsers({ ordering, query: nextQuery }),
+        getTeams({ ordering, query: nextQuery }),
       ]);
       if (usersResponse.success) setUsers(usersResponse.results);
       if (teamsResponse.success) setTeams(teamsResponse.results);
     });
   };
 
+  const handleTabChange = (value: string) => {
+    const nextTab = value as LeaderboardTab;
+    setActiveTab(nextTab);
+    if (nextTab === "users") loadUsers(orderField, isDescending, query);
+    else loadTeams(orderField, isDescending, query);
+  };
+
   const handleFieldChange = (next: string) => {
     const nextField = next as OrderField;
     setOrderField(nextField);
-    load(nextField, isDescending);
+    loadBoth(nextField, isDescending, query);
   };
 
   const handleDirectionToggle = () => {
     const nextDesc = !isDescending;
     setIsDescending(nextDesc);
-    load(orderField, nextDesc);
+    loadBoth(orderField, nextDesc, query);
+  };
+
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextQuery = event.target.value;
+    setQuery(nextQuery);
+    if (activeTab === "users") loadUsers(orderField, isDescending, nextQuery);
+    else loadTeams(orderField, isDescending, nextQuery);
   };
 
   return (
@@ -80,22 +112,31 @@ export const LeaderboardSection = ({ initialUsers, initialTeams, initialOrdering
 
       <Tabs
         value={activeTab}
-        onValueChange={(value) => setActiveTab(value as LeaderboardTab)}
+        onValueChange={handleTabChange}
         className="flex flex-1 flex-col gap-4"
       >
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <TabsList>
-            <TabsTrigger value="users" className="gap-1.5">
-              <Users className="size-4" />
-              {t(PLACEHOLDERS.TAB_USERS)}
-            </TabsTrigger>
-            <TabsTrigger value="teams" className="gap-1.5">
-              <Trophy className="size-4" />
-              {t(PLACEHOLDERS.TAB_TEAMS)}
-            </TabsTrigger>
-          </TabsList>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <TabsList>
+              <TabsTrigger value="users" className="gap-1.5">
+                <Users className="size-4" />
+                {t(PLACEHOLDERS.TAB_USERS)}
+              </TabsTrigger>
+              <TabsTrigger value="teams" className="gap-1.5">
+                <Trophy className="size-4" />
+                {t(PLACEHOLDERS.TAB_TEAMS)}
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-          <Tabs value={orderField} onValueChange={handleFieldChange}>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <Input
+              placeholder={t(activeTab === "users" ? PLACEHOLDERS.LABEL_SEARCH_USERS : PLACEHOLDERS.LABEL_SEARCH_TEAMS)}
+              value={query}
+              onChange={handleQueryChange}
+              className="sm:max-w-xs"
+            />
+            <Tabs value={orderField} onValueChange={handleFieldChange}>
             <TabsList>
               {ORDER_FIELDS.map((field) => (
                 <TabsTrigger key={field} value={field}>
@@ -109,7 +150,8 @@ export const LeaderboardSection = ({ initialUsers, initialTeams, initialOrdering
                 {isDescending ? <ArrowDown className="size-4" /> : <ArrowUp className="size-4" />}
               </button>
             </TabsList>
-          </Tabs>
+            </Tabs>
+          </div>
         </div>
 
         <TabsContent value="users" className={cn("flex flex-col gap-3", isPending && "opacity-60")}>

@@ -209,6 +209,7 @@
     "LABEL_SEARCH_TAG": "Search tag...",
     "LABEL_SEARCH_COUNTRY": "Search country...",
     "LABEL_SEARCH_TEAMS": "Search teams...",
+    "LABEL_SEARCH_USERS": "Search users...",
     "LABEL_NO_COUNTRY_FOUND": "No country found.",
     "LABEL_PRESERVATION_NONE": "No preservation",
     "LABEL_PRESERVATION_LOW": "Low",
