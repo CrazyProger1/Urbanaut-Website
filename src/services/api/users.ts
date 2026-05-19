@@ -24,6 +24,7 @@ export const getUsers = async (options?: GetUsersOptions) => {
     "limit",
     "offset",
     "query",
+    "team",
   ]);
   return await fetchAuthenticated<APIPaginatedResponse<APIListUser>>(
     `${API_ENDPOINTS.USERS}?${params}`,

@@ -8,6 +8,8 @@ import {
   APIPaginatedResponse,
   APIRetrieveTeam,
   APITeamFilters,
+  APITeamMember,
+  APITeamMemberFilters,
 } from "@/types";
 import { buildURLSearchParams } from "@/utils/api";
 
@@ -35,4 +37,11 @@ export const getTeams = async (options?: GetTeamsOptions) => {
 
 export const getTeam = async (id: string) => {
   return await fetchAuthenticated<APIRetrieveTeam>(API_ENDPOINTS.TEAM.replace("[id]", id));
+};
+
+type GetTeamMembersOptions = APITeamMemberFilters;
+
+export const getTeamMembers = async (options?: GetTeamMembersOptions) => {
+  const params = buildURLSearchParams(options, ["limit", "offset", "team", "ordering", "query"]);
+  return await fetchAuthenticated<APIPaginatedResponse<APITeamMember>>(`${API_ENDPOINTS.MEMBERS}?${params}`);
 };

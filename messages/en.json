@@ -289,6 +289,8 @@
     "DESCRIPTION_TOP_TEAMS": "Best performing exploration crews",
     "TITLE_MY_TEAMS": "My Teams",
     "DESCRIPTION_MY_TEAMS": "Teams you are a member of",
+    "TITLE_TEAM_MEMBERS": "Members",
+    "DESCRIPTION_TEAM_MEMBERS": "Explorers in this crew",
     "LABEL_MEMBERS": "Members",
     "LABEL_TEAM_COULD_BE_FIRST": "Your team could be first!",
     "TITLE_CREATE_TEAM": "Create Team",

@@ -289,6 +289,8 @@
     "DESCRIPTION_TOP_TEAMS": "Лучшие исследовательские команды",
     "TITLE_MY_TEAMS": "Мои команды",
     "DESCRIPTION_MY_TEAMS": "Команды, в которых вы состоите",
+    "TITLE_TEAM_MEMBERS": "Участники",
+    "DESCRIPTION_TEAM_MEMBERS": "Исследователи этой команды",
     "LABEL_MEMBERS": "Участников",
     "LABEL_TEAM_COULD_BE_FIRST": "Ваша команда может быть первой!",
     "TITLE_CREATE_TEAM": "Создать команду",

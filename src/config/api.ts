@@ -34,5 +34,6 @@ export const API_ENDPOINTS = {
   NEWS: "news/",
   TEAMS: "teams/",
   TEAM: "teams/[id]/",
+  MEMBERS: "members/",
   ACHIEVEMENT: "achievements/[slug]/",
 };
