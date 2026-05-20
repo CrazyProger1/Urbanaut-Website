@@ -19,12 +19,12 @@ export const MetricsTable = ({ user }: Props) => {
   return (
     <div className="flex flex-row flex-wrap gap-1">
       <MetricItem
-        href={`?${QUERIES.TAB_PROFILE}=${TABS.PROFILE_FRIENDS}`}
+        href={`?${QUERIES.PROFILE_TAB}=${TABS.PROFILE_FRIENDS}`}
         value={get("friends")}
         label={t(PLACEHOLDERS.LABEL_FRIENDS)}
       />
       <MetricItem
-        href={`?${QUERIES.TAB_PROFILE}=${TABS.PROFILE_TEAMS}`}
+        href={`?${QUERIES.PROFILE_TAB}=${TABS.PROFILE_TEAMS}`}
         value={get("teams")}
         label={t(PLACEHOLDERS.LABEL_TEAMS)}
       />

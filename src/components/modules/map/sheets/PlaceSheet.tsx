@@ -77,7 +77,7 @@ export const PlaceSheet = ({ place, user }: Props) => {
   };
 
   return (
-    <Sheet open={true} query={QUERIES.SHEET_PLACE}>
+    <Sheet open={true} query={QUERIES.MAP_SHEET_PLACE}>
       <SheetContent className="w-full! overflow-y-auto select-none sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
@@ -116,12 +116,12 @@ export const PlaceSheet = ({ place, user }: Props) => {
 
           {created_by && <ContributorsSection creator={created_by} />}
           <ActionsSection
-            shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}`}
-            editLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`}
-            complainLink={`${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_COMPLAIN}=true`}
+            shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.MAP_SHEET_PLACE}=${id}`}
+            editLink={`${PAGES.MAP}?${QUERIES.MAP_SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`}
+            complainLink={`${PAGES.MAP}?${QUERIES.MAP_SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_COMPLAIN}=true`}
             planExpeditionLink={
               user &&
-              `${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_EXPEDITION}=true`
+              `${PAGES.MAP}?${QUERIES.MAP_SHEET_PLACE}=${id}&${QUERIES.MODAL_CREATE_EXPEDITION}=true`
             }
             isFavorite={is_favorite}
             toggleFavoriteAction={togglePlaceFavoriteStatus}

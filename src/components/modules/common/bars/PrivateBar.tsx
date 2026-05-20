@@ -13,7 +13,7 @@ export const PrivateBar = () => {
       color="red"
       icon={<Lock className="h-5 w-5" />}
       tooltip={t(PLACEHOLDERS.TOOLTIP_PLACE_PRIVATE)}
-      href={`${PAGES.MAP}?${QUERIES.FILTER_IS_PRIVATE}=true`}
+      href={`${PAGES.MAP}?${QUERIES.MAP_FILTER_IS_PRIVATE}=true`}
       className="lowercase"
     >
       {t(PLACEHOLDERS.LABEL_PRIVATE)}

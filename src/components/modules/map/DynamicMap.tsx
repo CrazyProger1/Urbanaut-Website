@@ -103,7 +103,7 @@ const DynamicMap = ({
     if (!map) {
       return;
     }
-    if (searchParams.get(QUERIES.FILTER_SELECTED_POINT)) {
+    if (searchParams.get(QUERIES.MAP_FILTER_SELECTED_POINT)) {
       return;
     }
 
@@ -164,7 +164,7 @@ const DynamicMap = ({
     navigator?.geolocation.getCurrentPosition((position) => {
       const params = new URLSearchParams(searchParams);
       params.set(
-        QUERIES.FILTER_SELECTED_POINT,
+        QUERIES.MAP_FILTER_SELECTED_POINT,
         `${position.coords.latitude},${position.coords.longitude}`,
       );
       router.push(`?${params}`);
@@ -188,7 +188,7 @@ const DynamicMap = ({
 
       if (point) {
         params.set(QUERIES.MODAL_CREATE_PLACE, "true");
-        params.set(QUERIES.FILTER_SELECTED_POINT, `${point.lat},${point.lng}`);
+        params.set(QUERIES.MAP_FILTER_SELECTED_POINT, `${point.lat},${point.lng}`);
 
         router.push(`?${params}`, { scroll: false });
       }
@@ -212,7 +212,7 @@ const DynamicMap = ({
   const handlePlaceSelect = useCallback(
     (id: number) => {
       const params = buildParamsFromRecord(
-        { [QUERIES.SHEET_PLACE]: String(id), point: "" },
+        { [QUERIES.MAP_SHEET_PLACE]: String(id), point: "" },
         searchParams,
       );
 
@@ -224,7 +224,7 @@ const DynamicMap = ({
   const handleAreaSelect = useCallback(
     (id: number) => {
       const params = buildParamsFromRecord(
-        { [QUERIES.SHEET_AREA]: String(id), point: "" },
+        { [QUERIES.MAP_SHEET_AREA]: String(id), point: "" },
         searchParams,
       );
       router.push(`${PAGES.MAP}?${params}`, { scroll: false });

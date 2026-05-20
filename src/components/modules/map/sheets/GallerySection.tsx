@@ -20,7 +20,7 @@ const GallerySection = ({ photos }: Props) => {
     return (
       photos?.map(({ src, id }) => {
         const params = new URLSearchParams(searchParams);
-        params.set(QUERIES.VIEWER_PHOTO, id);
+        params.set(QUERIES.MAP_VIEWER_PHOTO, id);
 
         return {
           key: id,
@@ -35,7 +35,7 @@ const GallerySection = ({ photos }: Props) => {
   return (
     <>
       <Carousel images={images} />
-      <Viewer query={QUERIES.VIEWER_PHOTO} images={images} />
+      <Viewer query={QUERIES.MAP_VIEWER_PHOTO} images={images} />
     </>
   );
 };

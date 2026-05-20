@@ -1,9 +1,9 @@
 import React from "react";
 import { TeamMembersClient } from "./TeamMembersClient";
-import { Team } from "@/types";
+import { TeamDetail } from "@/types";
 
 type Props = {
-  team: Team;
+  team: TeamDetail;
 };
 
 export const TeamMembersSection = ({ team }: Props) => {

@@ -74,7 +74,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
   const closeModalLink = usePreservedParamsLink({
     [QUERIES.MODAL_CREATE_PLACE]: false,
     [QUERIES.MODAL_EDIT_PLACE]: false,
-    [QUERIES.FILTER_SELECTED_POINT]: false,
+    [QUERIES.MAP_FILTER_SELECTED_POINT]: false,
   });
 
   const form = useForm<z.infer<typeof placeFormSchema>>({
@@ -143,7 +143,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
       abandoned_at,
       ...rest
     } = values;
-    const point = searchParams.get(QUERIES.FILTER_SELECTED_POINT);
+    const point = searchParams.get(QUERIES.MAP_FILTER_SELECTED_POINT);
 
     const body = {
       ...rest,

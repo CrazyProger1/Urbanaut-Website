@@ -44,31 +44,32 @@ export const QUERIES = {
   MODAL_ACHIEVEMENT: "achievement",
   MODAL_NOTIFICATION: "notification",
 
-  SHEET_AREA: "area",
-  SHEET_PLACE: "place",
-
+  AUTH_CODE: "auth_code",
   OAUTH_SUCCESS: "oauth-success",
   OAUTH_USER: "oauth-user",
 
-  FILTER_SELECTED_POINT: "point",
-  FILTER_PRESERVATION_LEVEL: "preservation",
-  FILTER_SECURITY_LEVEL: "security",
-  FILTER_TAGS: "tags",
-  FILTER_COUNTRY: "country",
-  FILTER_CITY: "city",
-  FILTER_IS_FAVORITE: "is_favorite",
-  FILTER_IS_PRIVATE: "is_private",
-  FILTER_IS_SUPPOSED: "is_supposed",
-  FILTER_HAS_SECURITY: "has_security",
+  MAP_SHEET_AREA: "area",
+  MAP_SHEET_PLACE: "place",
+  MAP_FILTER_SELECTED_POINT: "point",
+  MAP_FILTER_PRESERVATION_LEVEL: "preservation",
+  MAP_FILTER_SECURITY_LEVEL: "security",
+  MAP_FILTER_TAGS: "tags",
+  MAP_FILTER_COUNTRY: "country",
+  MAP_FILTER_CITY: "city",
+  MAP_FILTER_IS_FAVORITE: "is_favorite",
+  MAP_FILTER_IS_PRIVATE: "is_private",
+  MAP_FILTER_IS_SUPPOSED: "is_supposed",
+  MAP_FILTER_HAS_SECURITY: "has_security",
+  MAP_VIEWER_PHOTO: "photo",
+  MAP_SEARCH: "query",
+  MAP_SEARCH_AI: "ai_query",
 
-  VIEWER_PHOTO: "photo",
+  PROFILE_TAB: "tab",
+  PROFILE_SEARCH: "query",
 
-  SEARCH: "query",
-  SEARCH_AI: "ai_query",
-
-  AUTH_CODE: "auth_code",
-
-  TAB_PROFILE: "tab",
+  LEADERBOARD_TAB: "tab",
+  LEADERBOARD_SEARCH: "query",
+  LEADERBOARD_ORDERING: "ordering",
 };
 
 export const TABS = {
@@ -76,6 +77,9 @@ export const TABS = {
   PROFILE_TEAMS: "teams",
   PROFILE_PLACES: "places",
   PROFILE_EXPEDITIONS: "expeditions",
+
+  LEADERBOARD_USERS: "users",
+  LEADERBOARD_TEAMS: "teams",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [

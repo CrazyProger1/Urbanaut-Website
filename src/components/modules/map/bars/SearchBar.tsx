@@ -21,14 +21,14 @@ import { ClickToast } from "@/components/common/toasts";
 import { useTranslations } from "next-intl";
 
 const FILTER_PARAMS = new Set([
-  QUERIES.FILTER_PRESERVATION_LEVEL,
-  QUERIES.FILTER_HAS_SECURITY,
-  QUERIES.FILTER_TAGS,
-  QUERIES.FILTER_COUNTRY,
-  QUERIES.FILTER_IS_PRIVATE,
-  QUERIES.FILTER_IS_FAVORITE,
-  QUERIES.FILTER_IS_SUPPOSED,
-  QUERIES.FILTER_CITY,
+  QUERIES.MAP_FILTER_PRESERVATION_LEVEL,
+  QUERIES.MAP_FILTER_HAS_SECURITY,
+  QUERIES.MAP_FILTER_TAGS,
+  QUERIES.MAP_FILTER_COUNTRY,
+  QUERIES.MAP_FILTER_IS_PRIVATE,
+  QUERIES.MAP_FILTER_IS_FAVORITE,
+  QUERIES.MAP_FILTER_IS_SUPPOSED,
+  QUERIES.MAP_FILTER_CITY,
 ]);
 
 type Props = {
@@ -53,9 +53,9 @@ export const SearchBar = ({ onSearchByCoordinates }: Props) => {
 
     if (!query) {
       const term =
-        params.get(QUERIES.SEARCH) ||
-        params.get(QUERIES.SEARCH_AI) ||
-        params.get(QUERIES.FILTER_SELECTED_POINT) ||
+        params.get(QUERIES.MAP_SEARCH) ||
+        params.get(QUERIES.MAP_SEARCH_AI) ||
+        params.get(QUERIES.MAP_FILTER_SELECTED_POINT) ||
         loadLastSearchTerm();
       setQuery(term || "");
     }

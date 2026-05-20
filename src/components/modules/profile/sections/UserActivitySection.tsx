@@ -17,7 +17,7 @@ export const UserActivitySection = ({ user }: Props) => {
   const t = useTranslations("Modules");
   return (
     <Tabs
-      query={QUERIES.TAB_PROFILE}
+      query={QUERIES.PROFILE_TAB}
       defaultValue="reports"
       className="flex flex-1 flex-col gap-4 select-none"
     >

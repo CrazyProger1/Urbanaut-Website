@@ -5,10 +5,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Calendar, Edit, Users } from "lucide-react";
 import { PLACEHOLDERS } from "@/config";
 import { getTranslations, getFormatter } from "next-intl/server";
-import { Team } from "@/types";
+import { TeamDetail } from "@/types";
 
 type Props = {
-  team: Team;
+  team: TeamDetail;
   isOwner?: boolean;
 };
 

@@ -33,7 +33,7 @@ export const editPlace = async (
     response = await services.createRequest({
       context: place,
       type: "CORRECTION",
-      path: `${PAGES.MAP}?${QUERIES.SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`,
+      path: `${PAGES.MAP}?${QUERIES.MAP_SHEET_PLACE}=${id}&${QUERIES.MODAL_EDIT_PLACE}=true`,
     });
   }
 

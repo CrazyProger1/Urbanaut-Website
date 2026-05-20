@@ -29,7 +29,7 @@ export const AreaSheet = ({ area }: Props) => {
   const { id, description, name, tags, created_by } = area;
 
   return (
-    <Sheet open={true} query={QUERIES.SHEET_AREA}>
+    <Sheet open={true} query={QUERIES.MAP_SHEET_AREA}>
       <SheetContent className="w-full! overflow-y-auto sm:w-3/4!">
         <SheetHeader>
           <SheetTitle>{name}</SheetTitle>
@@ -42,7 +42,7 @@ export const AreaSheet = ({ area }: Props) => {
           {tags && <TagsSection tags={tags} />}
           <TimelineSection />
           {created_by && <ContributorsSection creator={created_by} />}
-          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.SHEET_AREA}=${id}`} />
+          <ActionsSection shareLink={`${SITE_URL}${PAGES.MAP}?${QUERIES.MAP_SHEET_AREA}=${id}`} />
         </div>
         <SheetFooter>
           <SheetClose asChild>

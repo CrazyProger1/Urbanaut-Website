@@ -60,14 +60,14 @@ export const FiltersForm = ({
     resolver: zodResolver(filtersFormSchema),
     defaultValues: {
       preservation:
-        (params.get(QUERIES.FILTER_PRESERVATION_LEVEL) as APIPreservationLevel) || undefined,
-      has_security: params.get(QUERIES.FILTER_HAS_SECURITY) === "true" || undefined,
-      tags: params.getAll(QUERIES.FILTER_TAGS),
-      country: params.get(QUERIES.FILTER_COUNTRY) || undefined,
-      city: params.get(QUERIES.FILTER_CITY) || undefined,
-      is_favorite: params.get(QUERIES.FILTER_IS_FAVORITE) === "true" || undefined,
-      is_private: params.get(QUERIES.FILTER_IS_PRIVATE) === "true" || undefined,
-      is_supposed: params.get(QUERIES.FILTER_IS_SUPPOSED) === "true" || undefined,
+        (params.get(QUERIES.MAP_FILTER_PRESERVATION_LEVEL) as APIPreservationLevel) || undefined,
+      has_security: params.get(QUERIES.MAP_FILTER_HAS_SECURITY) === "true" || undefined,
+      tags: params.getAll(QUERIES.MAP_FILTER_TAGS),
+      country: params.get(QUERIES.MAP_FILTER_COUNTRY) || undefined,
+      city: params.get(QUERIES.MAP_FILTER_CITY) || undefined,
+      is_favorite: params.get(QUERIES.MAP_FILTER_IS_FAVORITE) === "true" || undefined,
+      is_private: params.get(QUERIES.MAP_FILTER_IS_PRIVATE) === "true" || undefined,
+      is_supposed: params.get(QUERIES.MAP_FILTER_IS_SUPPOSED) === "true" || undefined,
     },
     mode: "onSubmit",
   });

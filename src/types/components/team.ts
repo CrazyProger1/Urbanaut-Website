@@ -1,5 +1,7 @@
-import { APIRetrieveTeam, APITeamMember } from "@/types/services/api/team";
+import { APIListTeam, APIRetrieveTeam, APITeamMember } from "@/types";
 
-export type Team = APIRetrieveTeam;
+
+export type Team = APIListTeam;
+export type TeamDetail = APIRetrieveTeam;
 
 export type TeamMember = APITeamMember;
