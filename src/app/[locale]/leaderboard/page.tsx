@@ -14,7 +14,7 @@ const Page = async ({ searchParams }: Props) => {
   const users = usersResponse.success ? usersResponse.results : [];
   const teams = teamsResponse.success ? teamsResponse.results : [];
 
-  return <LeaderboardSection tab={tab} users={users} teams={teams} />;
+  return <LeaderboardSection tab={tab} ordering={params.ordering} users={users} teams={teams} />;
 };
 
 export default Page;

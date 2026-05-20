@@ -10,27 +10,30 @@ export type OrderingColumn = {
 };
 
 type Props = {
-  defaultKey?: string;
-  defaultOrdering?: "asc" | "desc";
+  defaultOrdering?: string;
   columns: OrderingColumn[];
   query?: string;
-  descPrefix?: string;
-  ascPrefix?: string;
 };
 
-export const OrderingControl = ({
-  query,
-  columns,
-  defaultKey,
-  defaultOrdering,
-  descPrefix = "-",
-  ascPrefix = "",
-}: Props) => {
-  const [isDescending, setIsDescending] = useState(defaultOrdering === "desc");
-  const [order, setOrder] = useState<string | undefined>(defaultKey);
+const DESC_PREFIX = "-";
+
+export const OrderingControl = ({ query, columns, defaultOrdering }: Props) => {
+  const [isDescending, setIsDescending] = useState(false);
+  const [order, setOrder] = useState<string>();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (!defaultOrdering) {
+      return;
+    }
+
+    if (defaultOrdering.startsWith(DESC_PREFIX)) {
+      setIsDescending(defaultOrdering[0] === DESC_PREFIX);
+      setOrder(defaultOrdering.slice(1));
+    }
+  }, [defaultOrdering]);
 
   useEffect(() => {
     if (!query) {
@@ -39,7 +42,7 @@ export const OrderingControl = ({
 
     const params = new URLSearchParams(searchParams);
 
-    const prefix = isDescending ? descPrefix : ascPrefix;
+    const prefix = isDescending ? DESC_PREFIX : "";
 
     if (order) {
       params.set(query, `${prefix}${order}`);

@@ -16,11 +16,12 @@ import { TABS } from "@/config/nav";
 
 type Props = {
   tab?: string;
+  ordering?: string;
   users: User[];
   teams: Team[];
 };
 
-export const LeaderboardSection = ({ tab, users, teams }: Props) => {
+export const LeaderboardSection = ({ tab, ordering, users, teams }: Props) => {
   const t = useTranslations("Modules");
 
   return (
@@ -37,7 +38,7 @@ export const LeaderboardSection = ({ tab, users, teams }: Props) => {
         </div>
       </header>
 
-      <Tabs defaultValue="users" query={QUERIES.LEADERBOARD_TAB}>
+      <Tabs defaultValue={tab} query={QUERIES.LEADERBOARD_TAB}>
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <TabsList>
@@ -55,11 +56,16 @@ export const LeaderboardSection = ({ tab, users, teams }: Props) => {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <Input
               query={QUERIES.LEADERBOARD_SEARCH}
-              placeholder={t(tab === TABS.LEADERBOARD_TEAMS ? PLACEHOLDERS.LABEL_SEARCH_TEAMS : PLACEHOLDERS.LABEL_SEARCH_USERS)}
+              placeholder={t(
+                tab === TABS.LEADERBOARD_TEAMS
+                  ? PLACEHOLDERS.LABEL_SEARCH_TEAMS
+                  : PLACEHOLDERS.LABEL_SEARCH_USERS,
+              )}
               className="sm:max-w-xs"
             />
             <OrderingControl
               query={QUERIES.LEADERBOARD_ORDERING}
+              defaultOrdering={ordering}
               columns={[
                 {
                   name: t(PLACEHOLDERS.LABEL_ORDER_BY_KARMA),
