@@ -93,18 +93,6 @@ export const SIDEBAR_MAIN: SidebarItem[] = [
     url: PAGES.MAP,
     icon: Map,
   },
-  {
-    title: PLACEHOLDERS.BUTTON_BLOG,
-    url: PAGES.BLOG,
-    icon: Newspaper,
-    disabled: true,
-  },
-  {
-    title: PLACEHOLDERS.BUTTON_CALENDAR,
-    url: PAGES.CALENDAR,
-    icon: Calendar,
-    disabled: true,
-  },
 ];
 export const SIDEBAR_PLATFORMS: SidebarItem[] = [
   {
