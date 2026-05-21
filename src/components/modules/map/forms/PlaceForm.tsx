@@ -57,6 +57,7 @@ import { editPlace } from "@/actions/place";
 import { placeFormSchema } from "@/schemas";
 import { FilePreview } from "./FilePreview";
 import { LocalizedFormField } from "@/components/ui/improved/localized";
+import { TABS } from "@/config/nav";
 
 type Props = {
   tags?: Tag[];
@@ -229,6 +230,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
         <Tabs defaultValue="general" className="gap-4 py-4">
           <TabsList className="w-full">
             <TabsTrigger value="general">{t(PLACEHOLDERS.TAB_GENERAL)}</TabsTrigger>
+            <TabsTrigger value={TABS.PLACE_MODAL_ACCESS}>{t(PLACEHOLDERS.TAB_ACCESS)}</TabsTrigger>
             <TabsTrigger value="dates">{t(PLACEHOLDERS.TAB_DATES)}</TabsTrigger>
             <TabsTrigger value="preservation">{t(PLACEHOLDERS.LABEL_PRESERVATION)}</TabsTrigger>
             <TabsTrigger value="media" disabled={edit}>
@@ -280,6 +282,27 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="has_security"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckBoxToggle
+                      icon={<ShieldUser className="h-4 w-4" />}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      title={t(PLACEHOLDERS.LABEL_HAS_SECURITY)}
+                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_SECURITY)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </TabsContent>
+          <TabsContent value={TABS.PLACE_MODAL_ACCESS} className="flex flex-col gap-4">
             <FormField
               control={form.control}
               name="is_private"
@@ -311,24 +334,6 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
                       onCheckedChange={field.onChange}
                       title={t(PLACEHOLDERS.LABEL_SUPPOSED)}
                       description={t(PLACEHOLDERS.DESCRIPTION_PLACE_SUPPOSED)}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="has_security"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <CheckBoxToggle
-                      icon={<ShieldUser className="h-4 w-4" />}
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      title={t(PLACEHOLDERS.LABEL_HAS_SECURITY)}
-                      description={t(PLACEHOLDERS.DESCRIPTION_HAS_SECURITY)}
                     />
                   </FormControl>
                   <FormMessage />

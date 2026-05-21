@@ -80,6 +80,8 @@ export const TABS = {
 
   LEADERBOARD_USERS: "users",
   LEADERBOARD_TEAMS: "teams",
+
+  PLACE_MODAL_ACCESS: "access",
 };
 
 export const SIDEBAR_MAIN: SidebarItem[] = [
