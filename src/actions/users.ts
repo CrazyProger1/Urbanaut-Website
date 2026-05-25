@@ -23,6 +23,10 @@ export const updateCurrentUser = async (user: APIUpdateUser) => {
   return result;
 };
 
+export const searchUsers = async (query: string) => {
+  return await services.getUsers({ query, limit: 10 });
+};
+
 export const updateSettings = async (settings: APIUpdateSettings) => {
   const response = await services.updateSettings(settings);
 

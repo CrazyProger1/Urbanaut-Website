@@ -4,7 +4,7 @@ import { APIMapBounds } from "@/types/services/api/map";
 import { APIListUser } from "@/types/services/api/user";
 import { APIListFile } from "@/types/services/api/media";
 import { APIOptionalLocalized } from "@/types/services/api/i18n";
-import { APIPermissions } from "@/types/services/api/permissions";
+import { APICreatePermissions, APIUpdatePermissions, APIRetrievePermissions } from "@/types/services/api/permissions";
 
 export type APIListPlaceFile = APIListFile;
 
@@ -35,7 +35,7 @@ export type APIRetrievePlace = APIOptionalLocalized<"name"> &
     is_favorite: boolean;
     views_count?: number;
     favorites_count?: number;
-    permissions?: APIPermissions;
+    permissions?: APIRetrievePermissions;
   };
 
 export type APIUpdatePlace = APIOptionalLocalized<"name"> &
@@ -49,12 +49,13 @@ export type APIUpdatePlace = APIOptionalLocalized<"name"> &
     preservation?: APIPlaceCreatePreservation;
     security?: APIPlaceCreateSecurity;
     files?: string[];
-    permissions?: APIPermissions;
+    permissions?: APIUpdatePermissions;
   };
 
 export type APICreatePlace = APIUpdatePlace & {
   point: APIPoint;
   tags: string[];
+  permissions?: APICreatePermissions;
 };
 
 export type APIPlaceFilters = APIMapBounds & {

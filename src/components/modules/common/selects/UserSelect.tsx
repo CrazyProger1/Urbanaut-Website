@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Combobox,
-  ComboboxBackdrop,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
@@ -20,12 +19,17 @@ type Props = {
 };
 
 export const UserSelect = ({ users, onSearchUsersAction, onSelectUserAction }: Props) => {
+  const [value, setValue] = useState<User | null>(null);
+
   return (
     <Combobox
       items={users}
-      modal
-      onValueChange={(value) => {
-        if (value) onSelectUserAction?.(value as User);
+      value={value}
+      onValueChange={(selected) => {
+        if (selected) {
+          onSelectUserAction?.(selected as User);
+          setValue(null);
+        }
       }}
     >
       <ComboboxInput
@@ -34,12 +38,11 @@ export const UserSelect = ({ users, onSearchUsersAction, onSelectUserAction }: P
           onSearchUsersAction?.(event.target.value);
         }}
       />
-      <ComboboxBackdrop />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(user: User) => (
-            <ComboboxItem key={user.id} value={user} className="p-0">
+            <ComboboxItem key={user.id} value={user} className="p-1 data-highlighted:bg-transparent data-highlighted:text-foreground [&>[data-slot=combobox-item-indicator]]:hidden">
               <UserCard user={user} />
             </ComboboxItem>
           )}

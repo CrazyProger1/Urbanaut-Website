@@ -24,6 +24,7 @@ import { CurrentUser, Language, PlaceDetail, Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
+import { PlaceShareSection } from "@/components/modules/map/forms/PlaceShareSection";
 import {
   PLACE_PHOTO_ACCEPT_FILETYPES,
   PLACE_PHOTO_MAX_FILE_SIZE,
@@ -98,6 +99,12 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
       description_ru: place?.description_ru || "",
       is_private: place?.is_private ?? false,
       is_supposed: place?.is_supposed ?? false,
+      permissions: {
+        view: {
+          users: place?.permissions?.view?.users?.map((u) => u.id) ?? [],
+          teams: place?.permissions?.view?.teams?.map((t) => t.id) ?? [],
+        },
+      },
       tags: place?.tags || [],
       abandoned_at: place?.abandoned_at ? new Date(place?.abandoned_at) : undefined,
       built_at: place?.built_at ? new Date(place?.built_at) : undefined,
@@ -107,6 +114,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
 
   const selected = form.watch("tags");
   const isSupposed = form.watch("is_supposed");
+  const isPrivate = form.watch("is_private");
 
   useEffect(() => {
     if (isSupposed) {
@@ -340,6 +348,25 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
                 </FormItem>
               )}
             />
+            {isPrivate && (
+              <FormField
+                control={form.control}
+                name="permissions"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label>{t(PLACEHOLDERS.LABEL_SHARE_WITH)}</Label>
+                    <FormControl>
+                      <PlaceShareSection
+                        initialUsers={edit ? (place?.permissions?.view?.users ?? []) : undefined}
+                        initialTeams={edit ? (place?.permissions?.view?.teams ?? []) : undefined}
+                        onChange={(value) => field.onChange({ view: value })}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           </TabsContent>
           <TabsContent value="dates" className="flex flex-col gap-4">
             <FormField

@@ -314,6 +314,8 @@
     "LABEL_ORDER_BY_SCORE": "Очки",
     "LABEL_NO_USERS_YET": "Пользователей пока нет.",
     "LABEL_NO_TEAMS_YET": "Команд пока нет.",
-    "LABEL_NO_NEWS_YET": "Новостей пока нет."
+    "LABEL_NO_NEWS_YET": "Новостей пока нет.",
+    "LABEL_SHARE_WITH": "Поделиться с",
+    "LABEL_USERS": "Пользователи"
   }
 }

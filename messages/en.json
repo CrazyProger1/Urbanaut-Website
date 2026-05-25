@@ -314,6 +314,8 @@
     "LABEL_ORDER_BY_SCORE": "Score",
     "LABEL_NO_USERS_YET": "No users yet.",
     "LABEL_NO_TEAMS_YET": "No teams yet.",
-    "LABEL_NO_NEWS_YET": "No news yet."
+    "LABEL_NO_NEWS_YET": "No news yet.",
+    "LABEL_SHARE_WITH": "Share with",
+    "LABEL_USERS": "Users"
   }
 }

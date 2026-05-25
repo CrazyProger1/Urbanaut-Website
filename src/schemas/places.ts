@@ -25,4 +25,12 @@ export const placeFormSchema = z.object({
   has_internal_ceilings: z.boolean().optional(),
   built_at: z.date().optional(),
   abandoned_at: z.date().optional(),
+  permissions: z
+    .object({
+      view: z.object({
+        users: z.array(z.string()),
+        teams: z.array(z.string()),
+      }),
+    })
+    .optional(),
 });
