@@ -29,7 +29,7 @@ export const placeFormSchema = z.object({
     .object({
       view: z.object({
         users: z.array(z.string()),
-        teams: z.array(z.coerce.string()),
+        teams: z.array(z.string()),
       }),
     })
     .optional(),
