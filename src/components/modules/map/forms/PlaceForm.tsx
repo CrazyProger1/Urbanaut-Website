@@ -102,7 +102,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
       permissions: {
         view: {
           users: place?.permissions?.view?.users?.map((u) => u.id) ?? [],
-          teams: place?.permissions?.view?.teams?.map((t) => t.id) ?? [],
+          teams: place?.permissions?.view?.teams?.map((t) => String(t.id)) ?? [],
         },
       },
       tags: place?.tags || [],

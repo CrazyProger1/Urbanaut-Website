@@ -41,13 +41,13 @@ export const PlaceShareSection = ({ initialUsers, initialTeams, onChange }: Prop
     if (selectedTeams.find((t) => t.id === team.id)) return;
     const next = [...selectedTeams, team];
     setSelectedTeams(next);
-    onChange({ users: selectedUsers.map((u) => u.id), teams: next.map((t) => t.id) });
+    onChange({ users: selectedUsers.map((u) => u.id), teams: next.map((t) => String(t.id)) });
   };
 
   const handleRemoveTeam = (id: string) => {
     const next = selectedTeams.filter((t) => t.id !== id);
     setSelectedTeams(next);
-    onChange({ users: selectedUsers.map((u) => u.id), teams: next.map((t) => t.id) });
+    onChange({ users: selectedUsers.map((u) => u.id), teams: next.map((t) => String(t.id)) });
   };
 
   return (
