@@ -18,9 +18,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { createPlace, uploadFile } from "@/actions";
+import { createPlace } from "@/actions";
+import { uploadFile } from "@/services/internal";
 import { Textarea } from "@/components/ui/textarea";
-import { CurrentUser, Language, PlaceDetail, Tag } from "@/types";
+import { CurrentUser, Language, PlaceDetail, PlaceFile, Tag } from "@/types";
 import { Label } from "@/components/ui/label";
 import { CheckBoxToggle } from "@/components/common/toggles";
 import { TagsSelect } from "@/components/modules/map/forms/TagsSelect";
@@ -57,6 +58,7 @@ import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 import { editPlace } from "@/actions/place";
 import { placeFormSchema } from "@/schemas";
 import { FilePreview } from "./FilePreview";
+import { ExistingFilePreview } from "./ExistingFilePreview";
 import { LocalizedFormField } from "@/components/ui/improved/localized";
 import { TABS } from "@/config/nav";
 
@@ -182,7 +184,20 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
 
     if (edit && place) {
       const isOwner = user?.id === place?.created_by?.id;
-      const result = await editPlace(place.id, getDiff(place, body), isOwner);
+
+      const uploads = await Promise.all(files.map((file) => uploadFile(file)));
+      uploads.forEach((result) =>
+        validateActionResult(result, {
+          failToastMessage: t(PLACEHOLDERS.TOAST_PLACE_FILE_UPLOADING_FAIL),
+        }),
+      );
+      const uploadedFileIds = uploads
+        .filter((upload) => upload.success)
+        .map((upload) => upload?.id)
+        .filter((id): id is string => !!id);
+
+      const editBody = uploadedFileIds.length > 0 ? { ...body, files: uploadedFileIds } : body;
+      const result = await editPlace(place.id, getDiff(place, editBody), isOwner);
 
       const validationOptions = {
         successToastMessage: isOwner
@@ -202,8 +217,8 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
       const uploads = await Promise.all(files.map((file) => uploadFile(file)));
       const fileIds = uploads
         .filter((upload) => upload.success)
-        .map((file) => file?.id)
-        .filter((id) => !!id);
+        .map((upload) => upload?.id)
+        .filter((id): id is string => !!id);
 
       uploads.map((result) =>
         validateActionResult(result, {
@@ -241,9 +256,7 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
             <TabsTrigger value={TABS.PLACE_MODAL_ACCESS}>{t(PLACEHOLDERS.TAB_ACCESS)}</TabsTrigger>
             <TabsTrigger value="dates">{t(PLACEHOLDERS.TAB_DATES)}</TabsTrigger>
             <TabsTrigger value="preservation">{t(PLACEHOLDERS.LABEL_PRESERVATION)}</TabsTrigger>
-            <TabsTrigger value="media" disabled={edit}>
-              {t(PLACEHOLDERS.TAB_MEDIA)}
-            </TabsTrigger>
+            <TabsTrigger value="media">{t(PLACEHOLDERS.TAB_MEDIA)}</TabsTrigger>
           </TabsList>
           <TabsContent value="general" className="flex flex-col gap-4">
             <LocalizedFormField
@@ -627,6 +640,13 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
           {/*  </>*/}
           {/*)}*/}
           <TabsContent value="media" className="flex flex-col gap-4">
+            {edit && !!place?.photos?.length && (
+              <div className="flex flex-row flex-wrap gap-2">
+                {place.photos.map((photo: PlaceFile) => (
+                  <ExistingFilePreview key={photo.id} file={photo} />
+                ))}
+              </div>
+            )}
             <Dropzone
               src={files.length ? files : undefined}
               accept={{ "image/*": PLACE_PHOTO_ACCEPT_FILETYPES }}
@@ -639,7 +659,11 @@ export const PlaceForm = ({ tags, place, edit, user, languages }: Props) => {
               <DropzoneContent>
                 <div className="flex flex-row flex-wrap justify-center gap-2">
                   {files.map((file, index) => (
-                    <FilePreview key={file.name + index} file={file} />
+                    <FilePreview
+                      key={file.name + index}
+                      file={file}
+                      onRemove={() => setFiles((prev) => prev.filter((_, i) => i !== index))}
+                    />
                   ))}
                 </div>
                 <span

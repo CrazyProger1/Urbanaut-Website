@@ -1,5 +1,6 @@
 import {
   APIListPlace,
+  APIListPlaceFile,
   APIRetrievePlace,
   APISecurityLevel,
   APIPreservationLevel,
@@ -8,6 +9,7 @@ import {
 } from "@/types/services/api";
 
 export type Place = APIListPlace;
+export type PlaceFile = APIListPlaceFile;
 
 export type PlaceDetail = APIRetrievePlace;
 export type SecurityLevel = APISecurityLevel;
