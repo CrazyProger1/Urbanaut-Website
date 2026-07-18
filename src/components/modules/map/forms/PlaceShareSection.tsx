@@ -14,10 +14,12 @@ import { PLACEHOLDERS } from "@/config";
 type Props = {
   initialUsers?: APIListUser[];
   initialTeams?: APIListTeam[];
+  searchUsersAction?: (query: string) => Promise<APIListUser[]>;
+  searchTeamsAction?: (query: string) => Promise<APIListTeam[]>;
   onChange: (value: { users: string[]; teams: string[] }) => void;
 };
 
-export const PlaceShareSection = ({ initialUsers, initialTeams, onChange }: Props) => {
+export const PlaceShareSection = ({ initialUsers, initialTeams, searchUsersAction, searchTeamsAction, onChange }: Props) => {
   const t = useTranslations("Modules");
   const [foundUsers, setFoundUsers] = useState<APIListUser[]>([]);
   const [foundTeams, setFoundTeams] = useState<APIListTeam[]>([]);
@@ -67,7 +69,7 @@ export const PlaceShareSection = ({ initialUsers, initialTeams, onChange }: Prop
         <UserSelect
           users={foundUsers}
           onSearchUsersAction={async (query) => {
-            const res = await searchUsers(query);
+            const res = await (searchUsersAction ? searchUsersAction(query) : searchUsers(query));
             setFoundUsers(res?.results ?? []);
           }}
           onSelectUserAction={handleSelectUser}
@@ -90,7 +92,7 @@ export const PlaceShareSection = ({ initialUsers, initialTeams, onChange }: Prop
         <TeamSelect
           teams={foundTeams}
           onSearchTeamsAction={async (query) => {
-            const res = await searchTeams(query);
+            const res = await (searchTeamsAction ? searchTeamsAction(query) : searchTeams(query));
             setFoundTeams(res?.results ?? []);
           }}
           onSelectTeamAction={handleSelectTeam}
